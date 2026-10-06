@@ -12,6 +12,19 @@ func _ready() -> void:
 	subtitle_label.visible = false
 	if MissionManager:
 		MissionManager.objective_updated.connect(_on_objective_updated)
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		bind_player(player)
+
+func bind_player(player: Node) -> void:
+	if player.has_signal("health_changed"):
+		player.health_changed.connect(update_health)
+	if player.has_signal("stamina_changed"):
+		player.stamina_changed.connect(update_stamina)
+	if player.has_signal("interactable_detected"):
+		player.interactable_detected.connect(show_prompt)
+	if player.has_signal("interactable_lost"):
+		player.interactable_lost.connect(hide_prompt)
 
 func update_health(val: float, max_val: float) -> void:
 	health_bar.max_value = max_val

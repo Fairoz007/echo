@@ -1,0 +1,133 @@
+[gd_scene load_steps=15 format=3 uid="uid://k79s2u4qm8x11"]
+
+[ext_resource type="Script" path="res://levels/Chapter9.gd" id="1_c09"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
+[ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="4_hud"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="StandardMaterial3D" id="Mat_Mara"]
+albedo_color = Color(0.25, 0.45, 0.35, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(140, 1, 140)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
+size = Vector3(8, 4, 8)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rock"]
+radius = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_rock"]
+radius = 1.5
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_Basalt"]
+albedo_color = Color(0.15, 0.16, 0.18, 1)
+
+[sub_resource type="Environment" id="Environment_c09"]
+background_mode = 1
+background_color = Color(0.02, 0.015, 0.02, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.16, 0.12, 0.14, 1)
+fog_enabled = true
+fog_light_color = Color(0.08, 0.05, 0.07, 1)
+fog_density = 0.02
+
+[node name="Chapter9" type="Node3D"]
+script = ExtResource("1_c09")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c09")
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"] node_paths=PackedStringArray("camera_pivot", "spring_arm", "visual_mesh", "flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 30)
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("2_player")
+camera_pivot = NodePath("../CameraController")
+spring_arm = NodePath("../CameraController/SpringArm3D")
+visual_mesh = NodePath("VisualMesh")
+flashlight = NodePath("Flashlight")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Mat_Mara")
+
+[node name="Flashlight" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
+light_color = Color(0.95, 0.98, 1, 1)
+light_energy = 3.5
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 30)
+script = ExtResource("3_cam")
+target = NodePath("../Player")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
+spring_length = 3.5
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
+current = true
+
+[node name="Terrain" type="StaticBody3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="MeshInstance3D" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(140, 1, 140)
+material = SubResource("Mat_Basalt")
+
+[node name="CollapsingRoute" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="TremorTrigger" type="Area3D" parent="CollapsingRoute"]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollapsingRoute/TremorTrigger"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="FallingRock1" type="RigidBody3D" parent="CollapsingRoute"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -8)
+collision_layer = 2
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollapsingRoute/FallingRock1"]
+shape = SubResource("SphereShape3D_rock")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollapsingRoute/FallingRock1"]
+mesh = SubResource("SphereMesh_rock")
+surface_material_override/0 = SubResource("Mat_Basalt")
+
+[node name="VaultThreshold" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+
+[node name="VaultGateTrigger" type="Area3D" parent="VaultThreshold"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VaultThreshold/VaultGateTrigger"]
+shape = SubResource("BoxShape3D_trigger")

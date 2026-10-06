@@ -1,0 +1,180 @@
+[gd_scene load_steps=12 format=3 uid="uid://m91u4w6qm0x12"]
+
+[ext_resource type="Script" path="res://levels/Chapter10.gd" id="1_c10"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
+[ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
+[ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="StandardMaterial3D" id="Mat_Mara"]
+albedo_color = Color(0.25, 0.45, 0.35, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(160, 1, 160)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
+size = Vector3(6, 4, 6)
+
+[sub_resource type="Environment" id="Environment_c10"]
+background_mode = 1
+background_color = Color(0.015, 0.01, 0.02, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.1, 0.25, 1)
+fog_enabled = true
+fog_light_color = Color(0.12, 0.06, 0.15, 1)
+fog_density = 0.015
+
+[node name="Chapter10" type="Node3D"]
+script = ExtResource("1_c10")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c10")
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"] node_paths=PackedStringArray("camera_pivot", "spring_arm", "visual_mesh", "flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 35)
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("2_player")
+camera_pivot = NodePath("../CameraController")
+spring_arm = NodePath("../CameraController/SpringArm3D")
+visual_mesh = NodePath("VisualMesh")
+flashlight = NodePath("Flashlight")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Mat_Mara")
+
+[node name="Flashlight" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
+light_color = Color(0.95, 0.98, 1, 1)
+light_energy = 3.5
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 35)
+script = ExtResource("3_cam")
+target = NodePath("../Player")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
+spring_length = 3.5
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
+current = true
+
+[node name="ChamberFloor" type="StaticBody3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChamberFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="MeshInstance3D" type="CSGBox3D" parent="ChamberFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(160, 1, 160)
+
+[node name="CentralPlatform" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="PillarCore" type="CSGCylinder3D" parent="CentralPlatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+radius = 3.0
+height = 12.0
+
+[node name="DrakeTrigger" type="Area3D" parent="CentralPlatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 12)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CentralPlatform/DrakeTrigger"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="EscapeTrigger" type="Area3D" parent="CentralPlatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -30)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CentralPlatform/EscapeTrigger"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="ResonanceChamber" type="Node3D" parent="."]
+
+[node name="NodeNorth" type="StaticBody3D" parent="ResonanceChamber"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -18)
+collision_layer = 2
+
+[node name="Mesh" type="CSGCylinder3D" parent="ResonanceChamber/NodeNorth"]
+radius = 0.8
+height = 2.0
+
+[node name="Interactable3D" type="Area3D" parent="ResonanceChamber/NodeNorth"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Deactivate North Resonance Node"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ResonanceChamber/NodeNorth/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="NodeSouth" type="StaticBody3D" parent="ResonanceChamber"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 18)
+collision_layer = 2
+
+[node name="Mesh" type="CSGCylinder3D" parent="ResonanceChamber/NodeSouth"]
+radius = 0.8
+height = 2.0
+
+[node name="Interactable3D" type="Area3D" parent="ResonanceChamber/NodeSouth"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Deactivate South Resonance Node"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ResonanceChamber/NodeSouth/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="NodeEast" type="StaticBody3D" parent="ResonanceChamber"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, 0)
+collision_layer = 2
+
+[node name="Mesh" type="CSGCylinder3D" parent="ResonanceChamber/NodeEast"]
+radius = 0.8
+height = 2.0
+
+[node name="Interactable3D" type="Area3D" parent="ResonanceChamber/NodeEast"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Deactivate East Resonance Node"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ResonanceChamber/NodeEast/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="NodeWest" type="StaticBody3D" parent="ResonanceChamber"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1, 0)
+collision_layer = 2
+
+[node name="Mesh" type="CSGCylinder3D" parent="ResonanceChamber/NodeWest"]
+radius = 0.8
+height = 2.0
+
+[node name="Interactable3D" type="Area3D" parent="ResonanceChamber/NodeWest"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Deactivate West Resonance Node"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ResonanceChamber/NodeWest/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")

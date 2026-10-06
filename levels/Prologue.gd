@@ -11,9 +11,7 @@ func _ready() -> void:
 	# Register Prologue Objective
 	MissionManager.register_objective("obj_prologue_explore", "Navigate the collapsed subterranean tunnel")
 	
-	if hud and player:
-		player.health_changed.connect(hud.update_health)
-		player.stamina_changed.connect(hud.update_stamina)
+	# HUD binds automatically via 'player' group
 		
 	# Hook up interaction
 	if resonant_artifact_interactable:

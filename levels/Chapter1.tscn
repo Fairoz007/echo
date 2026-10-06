@@ -1,0 +1,192 @@
+[gd_scene load_steps=18 format=3 uid="uid://b82c1p4km9x02"]
+
+[ext_resource type="Script" path="res://levels/Chapter1.gd" id="1_c01"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
+[ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
+[ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://assets/models/prop_expedition_tent.glb" id="6_tent"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="StandardMaterial3D" id="Mat_Mara"]
+albedo_color = Color(0.25, 0.45, 0.35, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_Elias"]
+albedo_color = Color(0.65, 0.5, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Nadiya"]
+albedo_color = Color(0.2, 0.35, 0.6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(250, 1, 250)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
+size = Vector3(8, 6, 4)
+
+[sub_resource type="Environment" id="Environment_c01"]
+background_mode = 2
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.48, 0.52, 1)
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.6, 0.7, 0.75, 1)
+fog_density = 0.008
+
+[node name="Chapter1" type="Node3D"]
+script = ExtResource("1_c01")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c01")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.353, 0.353, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 50, 0)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.6
+shadow_enabled = true
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"] node_paths=PackedStringArray("camera_pivot", "spring_arm", "visual_mesh", "flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("2_player")
+camera_pivot = NodePath("../CameraController")
+spring_arm = NodePath("../CameraController/SpringArm3D")
+visual_mesh = NodePath("VisualMesh")
+flashlight = NodePath("Flashlight")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Mat_Mara")
+
+[node name="Flashlight" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
+light_color = Color(0.95, 0.98, 1, 1)
+light_energy = 3.5
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 20)
+script = ExtResource("3_cam")
+target = NodePath("../Player")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
+spring_length = 3.5
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
+current = true
+
+[node name="ValleyTerrain" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="ValleyTerrain"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ValleyTerrain/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="FloorMesh" type="CSGBox3D" parent="ValleyTerrain/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(250, 1, 250)
+
+[node name="CampArea" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="Tent" parent="CampArea" instance=ExtResource("6_tent")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -6, 0, 0)
+
+[node name="Tent2" parent="CampArea" instance=ExtResource("6_tent")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 6, 0, 2)
+
+[node name="SurveyTable" type="StaticBody3D" parent="CampArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+collision_layer = 2
+
+[node name="TableMesh" type="CSGBox3D" parent="CampArea/SurveyTable"]
+size = Vector3(2.4, 0.9, 1.4)
+
+[node name="Interactable3D" type="Area3D" parent="CampArea/SurveyTable"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Examine Topographical Survey Table"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CampArea/SurveyTable/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="EliasNPC" type="StaticBody3D" parent="CampArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.87, 0)
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CampArea/EliasNPC"]
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Mat_Elias")
+
+[node name="Interactable3D" type="Area3D" parent="CampArea/EliasNPC"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Talk to Dr. Elias Voss"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CampArea/EliasNPC/Interactable3D"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="NadiyaNPC" type="StaticBody3D" parent="CampArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.87, 4)
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CampArea/NadiyaNPC"]
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Mat_Nadiya")
+
+[node name="Interactable3D" type="Area3D" parent="CampArea/NadiyaNPC"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Talk to Nadiya Rahman"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CampArea/NadiyaNPC/Interactable3D"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="RidgeArea" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+
+[node name="CliffWall" type="CSGBox3D" parent="RidgeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -15)
+size = Vector3(80, 24, 8)
+
+[node name="SealedPortal" type="StaticBody3D" parent="RidgeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -11)
+collision_layer = 2
+
+[node name="DoorMesh" type="CSGBox3D" parent="RidgeArea/SealedPortal"]
+size = Vector3(6, 6, 1)
+
+[node name="Interactable3D" type="Area3D" parent="RidgeArea/SealedPortal"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Inspect Carved Stone Portal"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RidgeArea/SealedPortal/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="ChapterEndTrigger" type="Area3D" parent="RidgeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RidgeArea/ChapterEndTrigger"]
+shape = SubResource("BoxShape3D_trigger")

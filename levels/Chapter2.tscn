@@ -1,0 +1,169 @@
+[gd_scene load_steps=18 format=3 uid="uid://d91m3k8qm1x03"]
+
+[ext_resource type="Script" path="res://levels/Chapter2.gd" id="1_c02"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
+[ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
+[ext_resource type="Script" path="res://scripts/PuzzleMaster.gd" id="5_master"]
+[ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="6_hud"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="StandardMaterial3D" id="Mat_Mara"]
+albedo_color = Color(0.25, 0.45, 0.35, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(150, 1, 150)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
+size = Vector3(4, 4, 4)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Water"]
+albedo_color = Color(0.1, 0.4, 0.6, 0.8)
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="Mat_Ruin"]
+albedo_color = Color(0.35, 0.36, 0.38, 1)
+
+[sub_resource type="Environment" id="Environment_c02"]
+background_mode = 1
+background_color = Color(0.04, 0.05, 0.07, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.15, 0.18, 0.22, 1)
+fog_enabled = true
+fog_light_color = Color(0.08, 0.1, 0.12, 1)
+fog_density = 0.015
+
+[node name="Chapter2" type="Node3D"]
+script = ExtResource("1_c02")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c02")
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
+
+[node name="PuzzleMaster" type="Node3D" parent="."]
+script = ExtResource("5_master")
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"] node_paths=PackedStringArray("camera_pivot", "spring_arm", "visual_mesh", "flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("2_player")
+camera_pivot = NodePath("../CameraController")
+spring_arm = NodePath("../CameraController/SpringArm3D")
+visual_mesh = NodePath("VisualMesh")
+flashlight = NodePath("Flashlight")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Mat_Mara")
+
+[node name="Flashlight" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
+light_color = Color(0.95, 0.98, 1, 1)
+light_energy = 3.5
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 15)
+script = ExtResource("3_cam")
+target = NodePath("../Player")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
+spring_length = 3.5
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
+current = true
+
+[node name="DungeonStructure" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="DungeonStructure"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DungeonStructure/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="FloorMesh" type="CSGBox3D" parent="DungeonStructure/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(150, 1, 150)
+material = SubResource("Mat_Ruin")
+
+[node name="HydraulicPuzzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="SluiceLever" type="StaticBody3D" parent="HydraulicPuzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 5)
+collision_layer = 2
+
+[node name="LeverMesh" type="CSGCylinder3D" parent="HydraulicPuzzle/SluiceLever"]
+radius = 0.15
+height = 1.0
+
+[node name="Interactable3D" type="Area3D" parent="HydraulicPuzzle/SluiceLever"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Pull Hydraulic Sluice Lever"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HydraulicPuzzle/SluiceLever/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="WaterFlowMesh" type="CSGBox3D" parent="HydraulicPuzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
+size = Vector3(4, 0.2, 20)
+material = SubResource("Mat_Water")
+
+[node name="Counterweight" type="Node3D" parent="HydraulicPuzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -4)
+
+[node name="StoneBlock" type="CSGBox3D" parent="HydraulicPuzzle/Counterweight"]
+size = Vector3(2.5, 3, 2.5)
+material = SubResource("Mat_Ruin")
+
+[node name="SanctuaryGate" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
+
+[node name="GateMesh" type="CSGBox3D" parent="SanctuaryGate"]
+size = Vector3(8, 6, 1)
+material = SubResource("Mat_Ruin")
+
+[node name="Sanctuary" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
+
+[node name="InscriptionTablet" type="StaticBody3D" parent="Sanctuary"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+collision_layer = 2
+
+[node name="TabletMesh" type="CSGBox3D" parent="Sanctuary/InscriptionTablet"]
+size = Vector3(1.5, 2.2, 0.4)
+
+[node name="Interactable3D" type="Area3D" parent="Sanctuary/InscriptionTablet"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Decipher Vaelor Tablet"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sanctuary/InscriptionTablet/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="AbyssTrigger" type="Area3D" parent="Sanctuary"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sanctuary/AbyssTrigger"]
+shape = SubResource("BoxShape3D_trigger")

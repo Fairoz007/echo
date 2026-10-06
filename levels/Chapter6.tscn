@@ -1,0 +1,144 @@
+[gd_scene load_steps=15 format=3 uid="uid://h46p9r1qm5x08"]
+
+[ext_resource type="Script" path="res://levels/Chapter6.gd" id="1_c06"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
+[ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
+[ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.74
+
+[sub_resource type="StandardMaterial3D" id="Mat_Mara"]
+albedo_color = Color(0.25, 0.45, 0.35, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(140, 1, 140)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
+size = Vector3(6, 4, 6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Water"]
+albedo_color = Color(0.12, 0.45, 0.65, 0.8)
+roughness = 0.05
+
+[sub_resource type="StandardMaterial3D" id="Mat_Temple"]
+albedo_color = Color(0.28, 0.32, 0.36, 1)
+
+[sub_resource type="Environment" id="Environment_c06"]
+background_mode = 1
+background_color = Color(0.015, 0.03, 0.04, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.1, 0.16, 0.22, 1)
+fog_enabled = true
+fog_light_color = Color(0.05, 0.1, 0.14, 1)
+fog_density = 0.02
+
+[node name="Chapter6" type="Node3D"]
+script = ExtResource("1_c06")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c06")
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"] node_paths=PackedStringArray("camera_pivot", "spring_arm", "visual_mesh", "flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("2_player")
+camera_pivot = NodePath("../CameraController")
+spring_arm = NodePath("../CameraController/SpringArm3D")
+visual_mesh = NodePath("VisualMesh")
+flashlight = NodePath("Flashlight")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Mat_Mara")
+
+[node name="Flashlight" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
+light_color = Color(0.95, 0.98, 1, 1)
+light_energy = 3.5
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 20)
+script = ExtResource("3_cam")
+target = NodePath("../Player")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
+spring_length = 3.5
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
+current = true
+
+[node name="TempleStructure" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="TempleStructure"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TempleStructure/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="MeshInstance3D" type="CSGBox3D" parent="TempleStructure/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(140, 1, 140)
+material = SubResource("Mat_Temple")
+
+[node name="FloodedBasin" type="Node3D" parent="."]
+
+[node name="WaterPlane" type="CSGBox3D" parent="FloodedBasin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+size = Vector3(80, 0.8, 80)
+material = SubResource("Mat_Water")
+
+[node name="TempleMechanisms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="SluiceWheel" type="StaticBody3D" parent="TempleMechanisms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+collision_layer = 2
+
+[node name="WheelMesh" type="CSGCylinder3D" parent="TempleMechanisms/SluiceWheel"]
+radius = 0.8
+height = 0.3
+
+[node name="Interactable3D" type="Area3D" parent="TempleMechanisms/SluiceWheel"]
+collision_layer = 4
+script = ExtResource("4_interact")
+prompt_message = "[E] Rotate Sluice Drainage Wheel"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TempleMechanisms/SluiceWheel/Interactable3D"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="TempleSanctum" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
+
+[node name="SunkenGate" type="Node3D" parent="TempleSanctum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="GateMesh" type="CSGBox3D" parent="TempleSanctum/SunkenGate"]
+size = Vector3(8, 6, 1)
+material = SubResource("Mat_Temple")
+
+[node name="ExitTrigger" type="Area3D" parent="TempleSanctum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -8)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TempleSanctum/ExitTrigger"]
+shape = SubResource("BoxShape3D_trigger")

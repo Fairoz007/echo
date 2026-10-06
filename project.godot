@@ -20,6 +20,7 @@ GameManager="*res://systems/GameManager.gd"
 SaveManager="*res://systems/SaveManager.gd"
 MissionManager="*res://systems/MissionManager.gd"
 AudioManager="*res://systems/AudioManager.gd"
+SkillManager="*res://systems/SkillManager.gd"
 
 [display]
 
