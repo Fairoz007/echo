@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://o13w6y8qm2x14"]
+[gd_scene format=3 uid="uid://dgvcfthyxhcrt"]
 
 [ext_resource type="Script" path="res://levels/Epilogue.gd" id="1_epi"]
 

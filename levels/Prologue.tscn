@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c54p1b8km0x01"]
+[gd_scene format=3 uid="uid://c54p1b8km0x01"]
 
 [ext_resource type="Script" path="res://levels/Prologue.gd" id="1_prologue"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
