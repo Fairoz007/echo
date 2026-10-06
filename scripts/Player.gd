@@ -1,0 +1,130 @@
+extends CharacterBody3D
+class_name Player
+
+## Third-Person Character Controller for Mara Vale
+@export_group("Locomotion Speeds")
+@export var walk_speed: float = 2.2
+@export var run_speed: float = 4.8
+@export var sprint_speed: float = 7.2
+@export var crouch_speed: float = 1.5
+@export var jump_velocity: float = 5.0
+@export var rotation_speed: float = 12.0
+
+@export_group("Vitals")
+@export var max_health: float = 100.0
+@export var max_stamina: float = 100.0
+var current_health: float = 100.0
+var current_stamina: float = 100.0
+
+@export_group("Nodes")
+@export var camera_pivot: Node3D
+@export var spring_arm: SpringArm3D
+@export var visual_mesh: Node3D
+@export var flashlight: SpotLight3D
+@export var ledge_ray: RayCast3D
+@export var wall_ray: RayCast3D
+
+enum State {
+	IDLE,
+	WALK,
+	RUN,
+	SPRINT,
+	CROUCH,
+	JUMP,
+	FALL,
+	VAULT,
+	MANTLE,
+	LEDGE_HANG
+}
+
+var current_state: State = State.IDLE
+var is_flashlight_on: bool = false
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
+
+signal health_changed(new_health: float, max_h: float)
+signal stamina_changed(new_stamina: float, max_s: float)
+
+func _ready() -> void:
+	current_health = max_health
+	current_stamina = max_stamina
+	if flashlight:
+		flashlight.visible = is_flashlight_on
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("flashlight"):
+		toggle_flashlight()
+
+func toggle_flashlight() -> void:
+	is_flashlight_on = not is_flashlight_on
+	if flashlight:
+		flashlight.visible = is_flashlight_on
+	print("[PLAYER] Flashlight toggled:", is_flashlight_on)
+
+func _physics_process(delta: float) -> void:
+	# Handle Gravity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		if velocity.y < 0 and current_state != State.FALL:
+			current_state = State.FALL
+			
+	# Read Player Inputs
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var is_sprinting = Input.is_action_pressed("sprint") and current_stamina > 5.0
+	var is_crouching = Input.is_action_pressed("crouch")
+	
+	# Determine Target Speed
+	var target_speed = run_speed
+	if is_crouching:
+		target_speed = crouch_speed
+		current_state = State.CROUCH
+	elif is_sprinting and input_dir.length() > 0.1:
+		target_speed = sprint_speed
+		current_state = State.SPRINT
+		current_stamina = max(0.0, current_stamina - 15.0 * delta)
+		stamina_changed.emit(current_stamina, max_stamina)
+	elif input_dir.length() > 0.1:
+		target_speed = run_speed
+		current_state = State.RUN
+		current_stamina = min(max_stamina, current_stamina + 10.0 * delta)
+		stamina_changed.emit(current_stamina, max_stamina)
+	else:
+		target_speed = 0.0
+		if is_on_floor():
+			current_state = State.IDLE
+		current_stamina = min(max_stamina, current_stamina + 20.0 * delta)
+		stamina_changed.emit(current_stamina, max_stamina)
+
+	# Transform input relative to camera orientation
+	var cam_basis = camera_pivot.global_transform.basis if camera_pivot else Basis.IDENTITY
+	var direction = (cam_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction.y = 0.0
+	direction = direction.normalized()
+	
+	if direction.length() > 0.1:
+		velocity.x = direction.x * target_speed
+		velocity.z = direction.z * target_speed
+		# Orient visual mesh towards moving direction
+		if visual_mesh:
+			var target_rot = atan2(-direction.x, -direction.z)
+			visual_mesh.rotation.y = lerp_angle(visual_mesh.rotation.y, target_rot, rotation_speed * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, run_speed * delta * 5.0)
+		velocity.z = move_toward(velocity.z, 0, run_speed * delta * 5.0)
+
+	# Jump Logic
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
+		current_state = State.JUMP
+
+	move_and_slide()
+
+func take_damage(amount: float) -> void:
+	current_health = max(0.0, current_health - amount)
+	health_changed.emit(current_health, max_health)
+	print("[PLAYER] Took damage:", amount, "Remaining HP:", current_health)
+	if current_health <= 0:
+		die()
+
+func die() -> void:
+	print("[PLAYER] Protagonist perished. Restarting from checkpoint...")
+	GameManager.change_state(GameManager.GameState.GAME_OVER)
