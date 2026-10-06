@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://assets/models/prop_expedition_tent.glb" id="6_tent"]
+[ext_resource type="PackedScene" path="res://assets/models/prop_meridian_crate.glb" id="7_crate"]
+[ext_resource type="PackedScene" path="res://assets/models/env_boulder_moss.glb" id="8_boulder"]
+[ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="9_portal"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -161,19 +164,41 @@ prompt_message = "[E] Talk to Nadiya Rahman"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CampArea/NadiyaNPC/Interactable3D"]
 shape = SubResource("CapsuleShape3D_player")
 
+[node name="CampCrates" type="Node3D" parent="CampArea"]
+
+[node name="Crate1" parent="CampArea/CampCrates" instance=ExtResource("7_crate")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -4, 0, 2)
+
+[node name="Crate2" parent="CampArea/CampCrates" instance=ExtResource("7_crate")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -3.5, 0, 0.8)
+
+[node name="Crate3" parent="CampArea/CampCrates" instance=ExtResource("7_crate")]
+transform = Transform3D(1.0, 0, 0, 0, 1.0, 0, 0, 0, 1.0, 4.5, 0, -1)
+
 [node name="RidgeArea" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+
+[node name="TrailBoulders" type="Node3D" parent="RidgeArea"]
+
+[node name="BoulderA" parent="RidgeArea/TrailBoulders" instance=ExtResource("8_boulder")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -8, 0, 15)
+
+[node name="BoulderB" parent="RidgeArea/TrailBoulders" instance=ExtResource("8_boulder")]
+transform = Transform3D(3.0, 0, 0, 0, 3.0, 0, 0, 0, 3.0, 10, 0, 8)
+
+[node name="BoulderC" parent="RidgeArea/TrailBoulders" instance=ExtResource("8_boulder")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, -6, 0, -4)
 
 [node name="CliffWall" type="CSGBox3D" parent="RidgeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -15)
 size = Vector3(80, 24, 8)
 
+[node name="ArchPortal3D" parent="RidgeArea" instance=ExtResource("9_portal")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, -11)
+
 [node name="SealedPortal" type="StaticBody3D" parent="RidgeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -11)
 collision_layer = 2
-
-[node name="DoorMesh" type="CSGBox3D" parent="RidgeArea/SealedPortal"]
-size = Vector3(6, 6, 1)
 
 [node name="Interactable3D" type="Area3D" parent="RidgeArea/SealedPortal"]
 collision_layer = 4

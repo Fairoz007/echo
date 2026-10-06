@@ -5,6 +5,9 @@
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://assets/models/ruin_pillar_vaelor.glb" id="6_pillar"]
+[ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="7_portal"]
+[ext_resource type="PackedScene" path="res://assets/models/env_boulder_moss.glb" id="8_boulder"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -97,6 +100,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 radius = 2.0
 height = 8.0
 
+[node name="PillarNW" parent="CentralPlaza" instance=ExtResource("6_pillar")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, -8, 0, -8)
+
+[node name="PillarNE" parent="CentralPlaza" instance=ExtResource("6_pillar")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 8, 0, -8)
+
+[node name="PillarSW" parent="CentralPlaza" instance=ExtResource("6_pillar")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, -8, 0, 8)
+
+[node name="PillarSE" parent="CentralPlaza" instance=ExtResource("6_pillar")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 8, 0, 8)
+
 [node name="HistoryMural" type="StaticBody3D" parent="CentralPlaza"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4)
 collision_layer = 2
@@ -115,6 +130,9 @@ shape = SubResource("BoxShape3D_trigger")
 [node name="OptionalTomb" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 10)
 
+[node name="TombBoulder" parent="OptionalTomb" instance=ExtResource("8_boulder")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0, 0)
+
 [node name="TombTrigger" type="Area3D" parent="OptionalTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 collision_layer = 0
@@ -126,6 +144,9 @@ shape = SubResource("BoxShape3D_trigger")
 [node name="RoyalCauseway" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -45)
 
+[node name="CausewayPortal" parent="RoyalCauseway" instance=ExtResource("7_portal")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 0)
+
 [node name="CausewayExitTrigger" type="Area3D" parent="RoyalCauseway"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 collision_layer = 0
@@ -133,3 +154,4 @@ collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RoyalCauseway/CausewayExitTrigger"]
 shape = SubResource("BoxShape3D_trigger")
+

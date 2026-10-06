@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://assets/models/prop_vaelor_key.glb" id="6_key"]
+[ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="7_arch"]
+[ext_resource type="PackedScene" path="res://assets/models/env_stalagmite_cluster.glb" id="8_stalag"]
+[ext_resource type="PackedScene" path="res://assets/models/env_boulder_moss.glb" id="9_boulder"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -123,9 +126,22 @@ prompt_message = "[E] Inspect Resonant Relic"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="MonolithicDoor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -30)
-size = Vector3(7, 8, 2)
+[node name="CaveDecorations" type="Node3D" parent="."]
+
+[node name="Stalagmite1" parent="CaveDecorations" instance=ExtResource("8_stalag")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.8, 0, -6)
+
+[node name="Stalagmite2" parent="CaveDecorations" instance=ExtResource("8_stalag")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 2.6, 0, -18)
+
+[node name="Boulder1" parent="CaveDecorations" instance=ExtResource("9_boulder")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 2.4, 0, -8)
+
+[node name="Boulder2" parent="CaveDecorations" instance=ExtResource("9_boulder")]
+transform = Transform3D(2.0, 0, 0, 0, 2.0, 0, 0, 0, 2.0, -2.5, 0, -20)
+
+[node name="ArchPortalModel" parent="." instance=ExtResource("7_arch")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, -28)
 
 [node name="ExitTrigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -26)

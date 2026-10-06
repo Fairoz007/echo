@@ -1,0 +1,44 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dvovoblk8ha5r"
+path.s3tc="res://.godot/imported/ruin_pillar_vaelor_NormalGL_f299f018-ef50-4f2a-830b-34e6a2a2bba3.png-075d019f7c67b0b5d5f37956c9bae0d5.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "b0bbcaf08132481620033b38faa523da"
+}
+
+[deps]
+
+source_file="res://assets/models/ruin_pillar_vaelor_NormalGL_f299f018-ef50-4f2a-830b-34e6a2a2bba3.png"
+dest_files=["res://.godot/imported/ruin_pillar_vaelor_NormalGL_f299f018-ef50-4f2a-830b-34e6a2a2bba3.png-075d019f7c67b0b5d5f37956c9bae0d5.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://assets/models/ruin_pillar_vaelor_NormalGL_f299f018-ef50-4f2a-830b-34e6a2a2bba3.png"
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

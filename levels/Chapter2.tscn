@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="Script" path="res://scripts/PuzzleMaster.gd" id="5_master"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://assets/models/ruin_pillar_vaelor.glb" id="7_pillar"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -144,6 +145,20 @@ material = SubResource("Mat_Ruin")
 
 [node name="Sanctuary" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
+
+[node name="SanctuaryColumns" type="Node3D" parent="Sanctuary"]
+
+[node name="PillarLeft" parent="Sanctuary/SanctuaryColumns" instance=ExtResource("7_pillar")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -5, 0, 6)
+
+[node name="PillarRight" parent="Sanctuary/SanctuaryColumns" instance=ExtResource("7_pillar")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 5, 0, 6)
+
+[node name="PillarInnerLeft" parent="Sanctuary/SanctuaryColumns" instance=ExtResource("7_pillar")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -5, 0, -2)
+
+[node name="PillarInnerRight" parent="Sanctuary/SanctuaryColumns" instance=ExtResource("7_pillar")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 5, 0, -2)
 
 [node name="InscriptionTablet" type="StaticBody3D" parent="Sanctuary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)

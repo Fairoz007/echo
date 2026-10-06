@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="4_hud"]
 [ext_resource type="PackedScene" path="res://scenes/EnemyMercenary.tscn" id="5_enemy"]
+[ext_resource type="PackedScene" path="res://assets/models/prop_meridian_crate.glb" id="6_crate"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -91,13 +92,14 @@ size = Vector3(140, 1, 140)
 
 [node name="CoverObstacles" type="Node3D" parent="."]
 
-[node name="Cover1" type="CSGBox3D" parent="CoverObstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, 12)
-size = Vector3(3, 1.2, 0.8)
+[node name="CrateBarricadeLeft" parent="CoverObstacles" instance=ExtResource("6_crate")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -4, 0, 12)
 
-[node name="Cover2" type="CSGBox3D" parent="CoverObstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.6, 6)
-size = Vector3(3, 1.2, 0.8)
+[node name="CrateBarricadeRight" parent="CoverObstacles" instance=ExtResource("6_crate")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 4, 0, 6)
+
+[node name="CrateStack" parent="CoverObstacles" instance=ExtResource("6_crate")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -3.2, 0, 10.5)
 
 [node name="Enemies" type="Node3D" parent="."]
 

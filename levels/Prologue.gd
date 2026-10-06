@@ -3,7 +3,7 @@ extends Node3D
 ## Prologue Level Controller
 @onready var player: Player = $Player
 @onready var hud: CanvasLayer = $HUD
-@onready var monolithic_door: Node3D = $MonolithicDoor
+@onready var monolithic_door: Node3D = $ArchPortalModel
 @onready var resonant_artifact_interactable: Interactable3D = $ResonantArtifact/Interactable3D
 @onready var exit_trigger: Area3D = $ExitTrigger
 
