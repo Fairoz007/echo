@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="5_mara"]
+[ext_resource type="PackedScene" path="res://assets/models/arch_bridge_span.glb" id="6_bridge"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -62,10 +64,10 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+
+[node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("5_mara")]
+
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
@@ -109,9 +111,8 @@ freeze = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BridgeStructure/BridgeSection1"]
 shape = SubResource("BoxShape3D_bridge")
 
-[node name="MeshInstance3D" type="CSGBox3D" parent="BridgeStructure/BridgeSection1"]
-size = Vector3(6, 1, 14)
-material = SubResource("Mat_Stone")
+[node name="BridgeModel1" parent="BridgeStructure/BridgeSection1" instance=ExtResource("6_bridge")]
+transform = Transform3D(2.2, 0, 0, 0, 1.5, 0, 0, 0, 1.8, 0, 0, 0)
 
 [node name="BridgeSection2" type="RigidBody3D" parent="BridgeStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -16)
@@ -121,9 +122,9 @@ freeze = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BridgeStructure/BridgeSection2"]
 shape = SubResource("BoxShape3D_bridge")
 
-[node name="MeshInstance3D" type="CSGBox3D" parent="BridgeStructure/BridgeSection2"]
-size = Vector3(6, 1, 14)
-material = SubResource("Mat_Stone")
+[node name="BridgeModel2" parent="BridgeStructure/BridgeSection2" instance=ExtResource("6_bridge")]
+transform = Transform3D(2.2, 0, 0, 0, 1.5, 0, 0, 0, 1.8, 0, 0, 0)
+
 
 [node name="CollapseTrigger" type="Area3D" parent="BridgeStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)

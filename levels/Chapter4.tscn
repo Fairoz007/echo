@@ -5,6 +5,9 @@
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="6_mara"]
+[ext_resource type="PackedScene" path="res://assets/models/prop_expedition_radio_station.glb" id="7_radio"]
+[ext_resource type="PackedScene" path="res://assets/models/prop_meridian_crate.glb" id="8_crate"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -58,10 +61,10 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+
+[node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("6_mara")]
+
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
@@ -99,16 +102,16 @@ material = SubResource("Mat_Cave")
 [node name="AbandonedCamp" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="CampCrate" type="CSGBox3D" parent="AbandonedCamp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-size = Vector3(1.2, 1.0, 1.2)
+[node name="CampCrate" parent="AbandonedCamp" instance=ExtResource("8_crate")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 
 [node name="FieldRadio" type="StaticBody3D" parent="AbandonedCamp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 collision_layer = 2
 
-[node name="RadioMesh" type="CSGBox3D" parent="AbandonedCamp/FieldRadio"]
-size = Vector3(0.6, 0.4, 0.4)
+[node name="RadioStationModel" parent="AbandonedCamp/FieldRadio" instance=ExtResource("7_radio")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
 
 [node name="Interactable3D" type="Area3D" parent="AbandonedCamp/FieldRadio"]
 collision_layer = 4
