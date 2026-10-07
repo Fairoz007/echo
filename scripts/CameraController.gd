@@ -11,12 +11,18 @@ class_name CameraController
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
 
-var pitch: float = -15.0
+var pitch: float = deg_to_rad(-12.0)
 var yaw: float = 0.0
 
 func _ready() -> void:
 	top_level = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if spring_arm:
+		spring_arm.rotation.x = pitch
+		if camera:
+			camera.position = Vector3(0, 0, spring_arm.spring_length)
+
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
