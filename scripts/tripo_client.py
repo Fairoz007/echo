@@ -57,7 +57,7 @@ def make_request(endpoint, method="GET", data=None):
         except urllib.error.HTTPError as e:
             err_body = e.read().decode("utf-8")
             print(f"[TRIPO HTTP {e.code}] {err_body}")
-            if e.code in [401, 402, 429]:
+            if e.code in [401, 402, 403, 429]:
                 if rotate_key():
                     continue
             raise
@@ -74,12 +74,14 @@ def check_all_balances():
         except Exception as e:
             print(f"Key #{i+1} Failed: {e}")
 
-def generate_text_to_3d(prompt, output_filename, model_version="v2.5-20250123"):
+def generate_text_to_3d(prompt, output_filename, model_version=None):
     payload = {
         "type": "text_to_model",
-        "prompt": prompt,
-        "model_version": model_version
+        "prompt": prompt
     }
+    if model_version:
+        payload["model_version"] = model_version
+
     print(f"[TRIPO] Submitting generation prompt: {prompt[:60]}...")
     res = make_request("/task", method="POST", data=payload)
     if res.get("code") != 0:

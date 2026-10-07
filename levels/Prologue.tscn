@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="7_arch"]
 [ext_resource type="PackedScene" path="res://assets/models/env_stalagmite_cluster.glb" id="8_stalag"]
 [ext_resource type="PackedScene" path="res://assets/models/env_boulder_moss.glb" id="9_boulder"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="10_mara"]
+[ext_resource type="PackedScene" path="res://assets/models/arch_wall_vaelor.glb" id="11_wall"]
+[ext_resource type="PackedScene" path="res://assets/models/arch_floor_stone.glb" id="12_floor"]
+[ext_resource type="PackedScene" path="res://assets/models/arch_glass_barrier.glb" id="13_glass"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -59,10 +63,10 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+
+[node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("10_mara")]
+
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
@@ -95,13 +99,31 @@ shape = SubResource("BoxShape3D_ground")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(100, 1, 100)
 
+[node name="StoneFloorModular1" parent="CaveTunnel/Floor" instance=ExtResource("12_floor")]
+transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0.05, -10)
+
+[node name="StoneFloorModular2" parent="CaveTunnel/Floor" instance=ExtResource("12_floor")]
+transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0.05, -22)
+
 [node name="LeftWall" type="CSGBox3D" parent="CaveTunnel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -15)
 size = Vector3(1, 8, 40)
 
+[node name="ModularWallLeft1" parent="CaveTunnel" instance=ExtResource("11_wall")]
+transform = Transform3D(0, 0, 1.8, 0, 1.8, 0, -1.8, 0, 0, -3.4, 0, -8)
+
+[node name="ModularWallLeft2" parent="CaveTunnel" instance=ExtResource("11_wall")]
+transform = Transform3D(0, 0, 1.8, 0, 1.8, 0, -1.8, 0, 0, -3.4, 0, -18)
+
 [node name="RightWall" type="CSGBox3D" parent="CaveTunnel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -15)
 size = Vector3(1, 8, 40)
+
+[node name="ModularWallRight1" parent="CaveTunnel" instance=ExtResource("11_wall")]
+transform = Transform3D(0, 0, -1.8, 0, 1.8, 0, 1.8, 0, 0, 3.4, 0, -8)
+
+[node name="ModularWallRight2" parent="CaveTunnel" instance=ExtResource("11_wall")]
+transform = Transform3D(0, 0, -1.8, 0, 1.8, 0, 1.8, 0, 0, 3.4, 0, -18)
 
 [node name="Ceiling" type="CSGBox3D" parent="CaveTunnel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -15)
@@ -110,8 +132,12 @@ size = Vector3(9, 1, 40)
 [node name="ResonantArtifact" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -12)
 
+[node name="GlassProtectiveBarrier" parent="ResonantArtifact" instance=ExtResource("13_glass")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.5, -1.8)
+
 [node name="Model" parent="ResonantArtifact" instance=ExtResource("6_key")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.4, 0)
+
 
 [node name="Pedestal" type="CSGCylinder3D" parent="ResonantArtifact"]
 radius = 0.5

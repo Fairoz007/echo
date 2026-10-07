@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/prop_meridian_crate.glb" id="7_crate"]
 [ext_resource type="PackedScene" path="res://assets/models/env_boulder_moss.glb" id="8_boulder"]
 [ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="9_portal"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="10_mara"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -71,10 +72,10 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+
+[node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("10_mara")]
+
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)

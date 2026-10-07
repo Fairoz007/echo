@@ -19,12 +19,18 @@ var current_health: float = 100.0
 var current_stamina: float = 100.0
 var current_oxygen: float = 30.0
 
-@export_group("Nodes")
 @export var camera_pivot: Node3D
 @export var spring_arm: SpringArm3D
 @export var visual_mesh: Node3D
 @export var flashlight: SpotLight3D
 @export var interaction_detector: Area3D
+@export var anim_player: AnimationPlayer
+
+# Kinematic Locomotion & Gait Simulation
+var gait_phase: float = 0.0
+var step_timer: float = 0.0
+var visual_base_y: float = 0.0
+
 
 enum State {
 	IDLE,
@@ -62,7 +68,12 @@ func _ready() -> void:
 	current_oxygen = max_oxygen
 	if flashlight:
 		flashlight.visible = is_flashlight_on
+	if visual_mesh:
+		visual_base_y = visual_mesh.position.y
+		if not anim_player:
+			anim_player = visual_mesh.find_child("AnimationPlayer", true, false)
 	_setup_interaction_detector()
+
 
 func _setup_interaction_detector() -> void:
 	if not interaction_detector:
@@ -162,7 +173,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, run_speed * delta * 5.0)
 		velocity.z = move_toward(velocity.z, 0, run_speed * delta * 5.0)
 
+	# Realistic Kinematic Gait Simulation (Walking, Running, Breathing, Leaning)
+	_apply_gait_animation(delta, input_dir.length(), target_speed)
+
 	# Traversal: Ledge / Mantle Probe
+
 	if (is_on_wall() or not is_on_floor()) and Input.is_action_just_pressed("jump"):
 		if _check_and_trigger_mantle(direction):
 			return
@@ -173,6 +188,53 @@ func _physics_process(delta: float) -> void:
 		current_state = State.JUMP
 
 	move_and_slide()
+
+func _apply_gait_animation(delta: float, input_magnitude: float, target_speed: float) -> void:
+	if not visual_mesh:
+		return
+		
+	# Check if native AnimationPlayer with 'walk' clip exists
+	if anim_player and anim_player.has_animation("walk"):
+		if input_magnitude > 0.1 and is_on_floor():
+			if not anim_player.is_playing() or anim_player.current_animation != "walk":
+				anim_player.play("walk")
+			anim_player.speed_scale = target_speed / walk_speed
+		else:
+			if anim_player.is_playing() and anim_player.current_animation == "walk":
+				anim_player.stop()
+		return
+
+	# Secondary Procedural Kinematic Gait (eliminates rigid or floaty gliding)
+	if is_on_floor() and input_magnitude > 0.1:
+		var cadence = 9.0 if current_state == State.SPRINT else (7.2 if current_state == State.RUN else 5.2)
+		gait_phase += delta * cadence
+		
+		# Vertical hip bounce (bobbing down on heel contact, pushing up on stride)
+		var bob_height = 0.055 if current_state == State.RUN else 0.035
+		var target_y = visual_base_y + abs(sin(gait_phase)) * bob_height
+		visual_mesh.position.y = lerp(visual_mesh.position.y, target_y, delta * 18.0)
+		
+		# Lateral pelvic sway / weight shift (shifting weight over the supporting foot)
+		var sway_angle = 0.065 if current_state == State.RUN else 0.04
+		visual_mesh.rotation.z = lerp(visual_mesh.rotation.z, sin(gait_phase * 0.5) * sway_angle, delta * 14.0)
+		
+		# Torso forward pitch/lean proportional to speed
+		var forward_pitch = 0.14 if current_state == State.SPRINT else (0.09 if current_state == State.RUN else 0.04)
+		visual_mesh.rotation.x = lerp(visual_mesh.rotation.x, forward_pitch, delta * 12.0)
+		
+		# Cadence footstep sound trigger
+		step_timer += delta * (cadence / PI)
+		if step_timer >= 1.0:
+			step_timer = 0.0
+			AudioManager.play_sfx("footstep_stone", global_position)
+	else:
+		# Idle resting & breathing cycle
+		gait_phase += delta * 2.2
+		var breathing_bob = sin(gait_phase) * 0.008
+		visual_mesh.position.y = lerp(visual_mesh.position.y, visual_base_y + breathing_bob, delta * 8.0)
+		visual_mesh.rotation.z = lerp(visual_mesh.rotation.z, 0.0, delta * 10.0)
+		visual_mesh.rotation.x = lerp(visual_mesh.rotation.x, 0.0, delta * 10.0)
+
 
 func _check_and_trigger_mantle(forward_dir: Vector3) -> bool:
 	var space_state = get_world_3d().direct_space_state
