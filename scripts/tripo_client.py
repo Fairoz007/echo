@@ -4,7 +4,7 @@ Features:
 - Multi-key auto failover
 - Asynchronous task submission & polling
 - Automatic GLB download & placement in Godot asset tree
-- Verification and metadata registration
+- Bounded polling (asset quality verification is a separate production stage)
 """
 
 import os
@@ -14,11 +14,9 @@ import json
 import urllib.request
 import urllib.error
 
-API_KEYS = [
-    "tsk_YeVEJCZ8gdewbRDRSlAgYG0uMu-QuR_W3R4nCc61E2j",
-    "tsk_-QGbzwixVswcZoYGw3lMf2j9D1Zqu_bCg6AsaZjwYPu",
-    "tsk_W5L8HeukUnv-AGCkjOFTL55gD1X4nU-vWpdLjnx5vbC"
-]
+from production_credentials import get_secret
+
+API_KEYS = [key.strip() for key in get_secret("TRIPO_API_KEYS").split(",") if key.strip()]
 
 BASE_URL = "https://api.tripo3d.ai/v2/openapi"
 
@@ -55,21 +53,20 @@ def make_request(endpoint, method="GET", data=None):
                 res_body = resp.read().decode("utf-8")
                 return json.loads(res_body)
         except urllib.error.HTTPError as e:
-            err_body = e.read().decode("utf-8")
-            print(f"[TRIPO HTTP {e.code}] {err_body}")
+            print(f"[TRIPO HTTP {e.code}] Request rejected")
             if e.code in [401, 402, 403, 429]:
                 if rotate_key():
                     continue
             raise
-        except Exception as e:
-            print(f"[TRIPO EXCEPTION] {e}")
+        except Exception:
+            print("[TRIPO EXCEPTION] Request failed; inspect task state before retrying")
             raise
 
 def check_all_balances():
     for i, k in enumerate(API_KEYS):
         req = urllib.request.Request(f"{BASE_URL}/user/balance", headers={"Authorization": f"Bearer {k}"})
         try:
-            with urllib.request.urlopen(req) as resp:
+            with urllib.request.urlopen(req, timeout=30) as resp:
                 print(f"Key #{i+1}: {resp.read().decode('utf-8')}")
         except Exception as e:
             print(f"Key #{i+1} Failed: {e}")
@@ -91,7 +88,8 @@ def generate_text_to_3d(prompt, output_filename, model_version=None):
     print(f"[TRIPO] Task submitted successfully. Task ID: {task_id}")
     
     # Poll for completion
-    while True:
+    deadline = time.monotonic() + 1800
+    while time.monotonic() < deadline:
         time.sleep(5)
         status_res = make_request(f"/task/{task_id}")
         data = status_res.get("data", {})
@@ -107,14 +105,16 @@ def generate_text_to_3d(prompt, output_filename, model_version=None):
                     if isinstance(v, str) and (v.endswith(".glb") or "glb" in v):
                         output_model = v
                         break
-            print(f"[TRIPO] Success! Model URL: {output_model}")
+            if not output_model:
+                raise RuntimeError(f"Task {task_id} returned no downloadable model")
             # Download file
-            os.makedirs(os.path.dirname(output_filename), exist_ok=True)
+            os.makedirs(os.path.dirname(os.path.abspath(output_filename)), exist_ok=True)
             urllib.request.urlretrieve(output_model, output_filename)
             print(f"[TRIPO] Saved model to {output_filename} (Size: {os.path.getsize(output_filename)} bytes)")
             return output_filename
         elif status in ["failed", "cancelled"]:
             raise RuntimeError(f"Task {task_id} failed with status: {status}")
+    raise TimeoutError(f"Task {task_id} exceeded 30 minutes; inspect before resubmitting")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "balance":

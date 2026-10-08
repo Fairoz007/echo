@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WaterPreset" format=3]
+
+[ext_resource type="Script" path="res://systems/water/WaterPreset.gd" id="1_lciru"]
+
+[resource]
+script = ExtResource("1_lciru")
+preset_name = "UNDERGROUND_STREAM"
+waves = Array[Vector4]([Vector4(1, 0.1, 0.03, 1.8), Vector4(0.8, 0.6, 0.015, 0.9), Vector4(1, -0.5, 0.01, 0.6), Vector4(0.3, 1, 0.005, 0.4)])
+flow_velocity = Vector2(1.4, 0)
+shallow_color = Color(0.14, 0.38, 0.36, 1)
+deep_color = Color(0.01, 0.05, 0.06, 1)
+normal_strength = 0.9
+roughness_base = 0.08
+foam_width = 0.8
+foam_amount = 1.0
+crest_foam = 0.25
+linear_drag = 4.0

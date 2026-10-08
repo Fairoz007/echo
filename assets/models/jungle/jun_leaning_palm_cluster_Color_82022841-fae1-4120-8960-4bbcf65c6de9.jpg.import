@@ -1,0 +1,44 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://c3gc2ksq0mnjn"
+path.s3tc="res://.godot/imported/jun_leaning_palm_cluster_Color_82022841-fae1-4120-8960-4bbcf65c6de9.jpg-6ec2b3a5f49ec0f246da4ffc68600ba8.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "73d68843c1bd9a4bf98b8f6a621977b6"
+}
+
+[deps]
+
+source_file="res://assets/models/jungle/jun_leaning_palm_cluster_Color_82022841-fae1-4120-8960-4bbcf65c6de9.jpg"
+dest_files=["res://.godot/imported/jun_leaning_palm_cluster_Color_82022841-fae1-4120-8960-4bbcf65c6de9.jpg-6ec2b3a5f49ec0f246da4ffc68600ba8.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

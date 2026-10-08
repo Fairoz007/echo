@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dd74edxej1q7b"
-path="res://.godot/imported/prop_vaelor_turbine_wheel_ORM_53d2a571-26fc-474f-be46-1b7faa536caf.jpg-48d823b68412d1628302f04d4c3426ef.ctex"
+path.s3tc="res://.godot/imported/prop_vaelor_turbine_wheel_ORM_53d2a571-26fc-474f-be46-1b7faa536caf.jpg-48d823b68412d1628302f04d4c3426ef.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "fb1bac81b9177791af2dd270ff853503"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/prop_vaelor_turbine_wheel_ORM_53d2a571-26fc-474f-be46-1b7faa536caf.jpg"
-dest_files=["res://.godot/imported/prop_vaelor_turbine_wheel_ORM_53d2a571-26fc-474f-be46-1b7faa536caf.jpg-48d823b68412d1628302f04d4c3426ef.ctex"]
+dest_files=["res://.godot/imported/prop_vaelor_turbine_wheel_ORM_53d2a571-26fc-474f-be46-1b7faa536caf.jpg-48d823b68412d1628302f04d4c3426ef.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

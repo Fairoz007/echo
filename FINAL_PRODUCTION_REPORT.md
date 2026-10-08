@@ -1,3 +1,5 @@
+> SUPERSEDED BY THE 2026-10-07 REVALIDATION. The release and 100% verified claims below are historical and unsupported by gameplay evidence. See FINAL_GAME_PRODUCTION_REPORT.md for current status. Scene boot tests are not campaign playthroughs.
+
 # FINAL PRODUCTION REPORT: ECHOES BENEATH
 
 **Project:** ECHOES BENEATH  

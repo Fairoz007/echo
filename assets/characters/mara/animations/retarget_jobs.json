@@ -1,0 +1,66 @@
+[
+  {
+    "preset": "preset:run",
+    "rig": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+    "key_slot": 3,
+    "task_id": "93cb830e-f98f-432d-91ce-6660cc69307f",
+    "output": "assets/characters/mara/animations/anim_run.glb",
+    "status": "success"
+  },
+  {
+    "preset": "preset:jump",
+    "rig": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+    "key_slot": 3,
+    "task_id": "cfa97576-fb9a-47f0-a86c-ed5e4ab61fcc",
+    "output": "assets/characters/mara/animations/anim_jump.glb",
+    "status": "success"
+  },
+  {
+    "preset": "preset:climb",
+    "rig": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+    "key_slot": 3,
+    "task_id": "f0513c8f-038b-4eb3-ac9c-21247ccebd36",
+    "output": "assets/characters/mara/animations/anim_climb.glb",
+    "status": "success"
+  },
+  {
+    "preset": "preset:fall",
+    "rig": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+    "key_slot": 3,
+    "task_id": "c3f115eb-6934-446c-a4ba-68df58f43761",
+    "output": "assets/characters/mara/animations/anim_fall.glb",
+    "status": "success"
+  },
+  {
+    "preset": "preset:dive",
+    "rig": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+    "key_slot": 3,
+    "task_id": "35d29af8-03a9-47d8-9be4-ae9d321a0d18",
+    "output": "assets/characters/mara/animations/anim_dive.glb",
+    "status": "success"
+  },
+  {
+    "preset": "preset:shoot",
+    "rig": "dcf78562-87d9-4139-b670-6d5292aae3e4",
+    "key_slot": 2,
+    "task_id": "d94b9b2c-c386-4374-b317-28ac071eb4d6",
+    "output": "assets/characters/meridian/animations/anim_shoot.glb",
+    "status": "success"
+  },
+  {
+    "preset": "preset:hurt",
+    "rig": "dcf78562-87d9-4139-b670-6d5292aae3e4",
+    "key_slot": 2,
+    "task_id": "04524c26-a2fa-47ee-8559-17f523b97b7c",
+    "output": "assets/characters/meridian/animations/anim_hurt.glb",
+    "status": "success"
+  },
+  {
+    "preset": "preset:slash",
+    "rig": "dcf78562-87d9-4139-b670-6d5292aae3e4",
+    "key_slot": 2,
+    "task_id": "8da2448f-353b-4946-b753-93d00890bebd",
+    "output": "assets/characters/meridian/animations/anim_slash.glb",
+    "status": "success"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "scope": "static staged camera; water-region screenshot difference, not realism acceptance",
+  "roi": [
+    30,
+    300,
+    1250,
+    560
+  ],
+  "image_size": [
+    1280,
+    720
+  ],
+  "mean_absolute_rgb_delta_0_255": [
+    0.2065952080706179,
+    0.7037452711223203,
+    0.7509174022698613
+  ],
+  "nonzero_bounds": [
+    0,
+    0,
+    1220,
+    260
+  ]
+}

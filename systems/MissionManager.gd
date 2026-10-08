@@ -29,3 +29,4 @@ func set_checkpoint(checkpoint_id: String, xform: Transform3D) -> void:
 	print("[MISSION] Checkpoint stored:", checkpoint_id)
 	if SaveManager:
 		SaveManager.save_game(0)
+		SaveManager.save_game(1)

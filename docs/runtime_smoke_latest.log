@@ -1,0 +1,105 @@
+==================================================
+STARTING ECHOES BENEATH RUNTIME SMOKE TEST SUITE
+==================================================
+
+[TEST SUITE] 1. Godot Editor Headless Filesystem & Global Class Scan
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (2 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+[PASS] Step passed.
+
+[TEST SUITE] 2. Autoload Singletons & Persistence Integration Check
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+--- VERIFYING AUTOLOAD SINGLETONS IN RUNTIME ---
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+GameManager node:GameManager:<Node#31088182738>
+SaveManager node:SaveManager:<Node#31155291604>
+MissionManager node:MissionManager:<Node#31222400470>
+AudioManager node:AudioManager:<Node#31289509335>
+SkillManager node:SkillManager:<Node#31356618200>
+SUCCESS: ALL 5 AUTOLOADS RESOLVED CLEANLY IN SCENETREE!
+Testing GameManager state change...
+Testing MissionManager objective registration...
+[MISSION] New Objective:test_obj->Testing verification script
+Testing SaveManager data structure...
+[SAVE] Successfully saved game slot99touser://save_slot_99.json
+[SAVE] Loaded game slot99
+Save/Load slot 99 successful:true
+--- ALL RUNTIME CHECKS PASSED ---
+
+[PASS] Step passed.
+
+[TEST SUITE] 3. Main Scene Startup & Clean Boot Test
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+
+[PASS] Step passed.
+
+[TEST SUITE] 4. Prologue Scripted Interaction/Transition Integration (teleports; not gameplay QA)
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+--- BEGINNING SCRIPTED TELEPORT/INTERACTION INTEGRATION: PROLOGUE ---
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_smoke/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_smoke/save_slot_1.json
+Player located:true
+HUD located:true
+Relic interactable located:true
+Exit trigger located:true
+Step 1: Teleporting Mara to acoustic relic for integration check...
+Step 2: Pressing interact on Vaelor Acoustic Key...
+[INTERACTION] Triggered on:Interactable3D
+[PROLOGUE] Player examined the Vaelor Acoustic Relic!
+[MISSION] Completed Objective:obj_prologue_explore
+[MISSION] New Objective:obj_prologue_exit->Examine the vibrating monolithic portal
+Objective 'obj_prologue_explore' completed:true
+Objective 'obj_prologue_exit' active:true
+Step 3: Moving Mara to monolithic door threshold...
+Step 4: Awaiting chapter transition into Chapter 1...
+[PROLOGUE] Reached monolithic portal threshold! Transitioning to Chapter 1.
+[MISSION] Completed Objective:obj_prologue_exit
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[MISSION] Checkpoint stored:chapter_01_start
+[SAVE] Successfully saved game slot0touser://qa_smoke/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_smoke/save_slot_1.json
+Current chapter registered in GameManager:1
+--- PROLOGUE SCRIPTED INTERACTION/TRANSITION INTEGRATION PASSED ---
+[GAME_MANAGER] State changed to:MENU
+
+[PASS] Step passed.
+
+==================================================
+ALL RUNTIME SMOKE TESTS PASSED CLEANLY (4/4)
+NO ENGINE ERRORS DETECTED IN THESE CHECKS; PHYSICAL GAMEPLAY AND VISUAL QA STILL REQUIRED
+==================================================

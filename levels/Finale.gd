@@ -6,7 +6,14 @@ extends Node3D
 
 @onready var daylight_exit_trigger: Area3D = $DaylightRidge/DaylightExitTrigger
 
+var transition_started := false
+
 func _ready() -> void:
+	preload("res://systems/environment/EnvironmentCollision.gd").attach(self)
+	preload("res://systems/environment/BlockoutDresser.gd").apply(self)
+	var campaign_dialogue := preload("res://systems/CampaignDialogue.gd").new()
+	add_child(campaign_dialogue)
+	campaign_dialogue.configure("FIN", hud)
 	MissionManager.register_objective("obj_finale_escape", "Sprint through the collapsing shafts toward daylight")
 	
 	if daylight_exit_trigger:
@@ -14,16 +21,19 @@ func _ready() -> void:
 		
 	await get_tree().create_timer(1.0).timeout
 	if hud:
-		hud.show_subtitle("Mara", "I see daylight! Tomas, Nadiya, I'm almost through the eastern fissure!", 4.0)
+		AudioManager.play_story_line("Mara", "I see daylight! Tomas, Nadiya, I'm almost through the eastern fissure!", 4.0)
 
 func _on_daylight_reached(body: Node) -> void:
-	if body is Player:
+	if body is Player and not transition_started:
+		transition_started = true
 		print("[FINALE] Daylight reached! Mountain sealed behind Mara. Transitioning to Epilogue & Credits.")
 		MissionManager.complete_objective("obj_finale_escape")
+		var duration := 3.5
 		if hud:
-			hud.show_subtitle("Tomas", "\"Tomas: Mara! Grab my hand! I've got you!\"", 3.5)
-			await get_tree().create_timer(3.5).timeout
-			hud.show_subtitle("Mara", "\"Never again...\"", 3.0)
+			duration = AudioManager.play_story_line("Tomas", "\"Tomas: Mara! Grab my hand! I've got you!\"", 3.5)
+			await get_tree().create_timer(duration).timeout
+			await $CampaignDialogue.play_event("rescue")
+			duration = AudioManager.play_story_line("Mara", "\"Never again...\"", 3.0)
 			
-		await get_tree().create_timer(4.0).timeout
+		await get_tree().create_timer(duration).timeout
 		GameManager.load_chapter(12, "res://levels/Epilogue.tscn")

@@ -1,0 +1,35 @@
+contract surface_height=-0.2933 level=-0.300 underwater(-1)=true underwater(+1)=false flow_river=(0.0, 0.0, 1.8)
+buoyancy crate0 y=-0.218 surface=-0.317 draft=0.301 expected_draft~0.250 vel=0.370 submerged=0.41
+buoyancy crate1 y=-0.186 surface=-0.283 draft=0.303 expected_draft~0.250 vel=0.216 submerged=0.43
+buoyancy crate2 y=-0.164 surface=-0.349 draft=0.214 expected_draft~0.250 vel=0.717 submerged=0.39
+buoyancy crate3 y=-0.092 surface=-0.285 draft=0.207 expected_draft~0.250 vel=0.263 submerged=0.35
+screenshot pool_close.png
+screenshot pool_grazing.png
+screenshot waterfall.png
+screenshot river.png
+screenshot grass_trees.png
+screenshot markers_side.png
+screenshot waterfall_close.png
+screenshot overview.png
+perf high_overview frame_ms=2.32 render_cpu_ms=0.23 render_gpu_ms=1.80
+perf high_pool_close frame_ms=1.94 render_cpu_ms=0.18 render_gpu_ms=1.44
+screenshot pool_close_LOW.png
+perf low_pool_close frame_ms=1.84 render_cpu_ms=0.20 render_gpu_ms=1.35
+screenshot waterfall_LOW.png
+river crate moved (0.0, 0.063233, 3.79299) in ~4.0s (flow (0.0, 1.8))
+rise level=-0.200 signals={ "rise_started": 1, "level_changed": 121, "level_target_reached": 1 }
+screenshot pool_raised.png
+screenshot pool_draining.png
+drain level=-1.900 signals={ "drain_started": 1, "level_changed": 181, "level_target_reached": 1 } wet_targets=5
+after drain crate0 y=-1.738
+after drain crate1 y=-1.806
+after drain crate2 y=-1.739
+after drain crate3 y=-1.781
+screenshot pool_drained_wet.png
+screenshot pool_drained_wet_OFF.png
+screenshot pool_drained_wet_grazing.png
+screenshot splash.png
+grass { "candidates": 6000, "accepted": 5511, "no_hit": 0, "slope": 150, "underwater": 292, "overlap": 36, "no_grass": 0, "dynamic": 11, "chunks": 100 }
+grass instances above 2.2m: 0
+screenshot grass_trees_strong_wind.png
+perf grass_trees frame_ms=2.26 render_cpu_ms=0.23 render_gpu_ms=1.74

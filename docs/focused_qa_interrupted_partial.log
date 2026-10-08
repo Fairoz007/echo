@@ -1,0 +1,226 @@
+=== qa_hud_timers.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+QA PASS: subtitle and objective timer ownership
+
+=== qa_progression.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[SKILL] Skill point earned! Total available:1
+[SKILL] Unlocked skill:hunter_silent_step
+[SKILL] Skill point earned! Total available:1
+QA PASS: all 13 Continue chapter destinations and spent skill point accounting
+
+=== qa_save_restore.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_save_restore/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_save_restore/save_slot_1.json
+[PROLOGUE] Player examined the Vaelor Acoustic Relic!
+[MISSION] Completed Objective:obj_prologue_explore
+[MISSION] New Objective:obj_prologue_exit->Examine the vibrating monolithic portal
+[MISSION] New Objective:qa_save_objective->Saved objective
+[SKILL] Skill point earned! Total available:1
+[SKILL] Unlocked skill:hunter_silent_step
+[SAVE] Successfully saved game slot98touser://qa_save_restore/save_slot_98.json
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_save_restore/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_save_restore/save_slot_1.json
+[SAVE] Loaded game slot98
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[SAVE] Successfully saved game slot98touser://qa_save_restore/save_slot_98.json
+[SAVE] Loaded game slot98
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[PROLOGUE] Reached monolithic portal threshold! Transitioning to Chapter 1.
+[MISSION] Completed Objective:obj_prologue_exit
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[MISSION] Checkpoint stored:chapter_01_start
+[SAVE] Successfully saved game slot0touser://qa_save_restore/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_save_restore/save_slot_1.json
+QA PASS: live player, objectives, spent skills, new-game reset, save validation and reload inside Prologue exit
+
+=== qa_audio_references.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+QA PASS: 105 Godot-imported runtime audio resources; listening/mix QA remains required
+
+=== qa_menu.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+QA PASS: Settings/Credits button callbacks and popup control construction; visual QA required
+
+=== qa_prologue_input.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_prologue/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_prologue/save_slot_1.json
+QA movement distance: 10.0533285140991
+[INTERACTION] Triggered on:Interactable3D
+[PROLOGUE] Player examined the Vaelor Acoustic Relic!
+[MISSION] Completed Objective:obj_prologue_explore
+[MISSION] New Objective:obj_prologue_exit->Examine the vibrating monolithic portal
+[PROLOGUE] Reached monolithic portal threshold! Transitioning to Chapter 1.
+[MISSION] Completed Objective:obj_prologue_exit
+QA PASS: New Game, physical forward movement, interaction input and natural exit transition
+
+=== qa_mara_motion.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_mara/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_mara/save_slot_1.json
+MARA skeleton origin=(0.0, 0.000864, 0.0) player=(0.0, 0.000859, 0.0)
+idle position track Armature/Skeleton3D:Hip first=(0.021638, -0.001032, 0.533834) last=(0.021638, -0.001032, 0.533834)
+walk position track Armature/Skeleton3D:Hip first=(0.021638, -0.001032, 0.533834) last=(0.021638, -0.001032, 0.533839)
+MARA walk skeleton origin=(-0.0, 0.000864, -9.519994) player=(0.0, 0.000859, -9.519994) root pose=(0.061713, -0.000003, -0.00907)
+QA PASS: Mara walk Hip translation remains in-place at every key
+
+=== qa_checkpoint_flow.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_checkpoint/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_checkpoint/save_slot_1.json
+[GAME_MANAGER] State changed to:PAUSED
+[SAVE] Successfully saved game slot0touser://qa_checkpoint/save_slot_0.json
+[GAME_MANAGER] State changed to:GAMEPLAY
+[SAVE] Loaded game slot0
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[PLAYER] Took damage:1000.0Remaining HP:0.0
+[PLAYER] Protagonist perished. Restarting from checkpoint...
+[GAME_MANAGER] State changed to:GAME_OVER
+[SAVE] Loaded game slot1
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+QA PASS: automatic checkpoint, pause/manual save, Continue preservation, death/restart
+[GAME_MANAGER] State changed to:MENU
+
+=== qa_combat_cover.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_c05_neutralize_patrol->Infiltrate the Meridian checkpoint using stealth or combat
+[MISSION] Checkpoint stored:chapter_05_start
+[SAVE] Successfully saved game slot0touser://qa_combat/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_combat/save_slot_1.json
+[AI] Mercenary hit! Remaining HP:30.0
+[AI] Mercenary hit! Remaining HP:0.0
+[CHAPTER 5] Enemy neutralized. Remaining:1
+[AI] Mercenary defeated.
+[SAVE] Successfully saved game slot97touser://qa_combat/save_slot_97.json
+[SAVE] Loaded game slot97
+[MISSION] New Objective:obj_c05_neutralize_patrol->Infiltrate the Meridian checkpoint using stealth or combat
+QA PASS: fire/reload input, actual raycast hit, player/enemy cover occlusion, patrol death and save persistence
+[GAME_MANAGER] State changed to:MENU
+
+=== qa_water_input.gd: PASS ===
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[MISSION] Checkpoint stored:chapter_06_start
+[SAVE] Successfully saved game slot0touser://qa_water/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_water/save_slot_1.json
+[PLAYER] Entered water body.
+[PLAYER] Took damage:0.2Remaining HP:99.8
+[PLAYER] Took damage:0.2Remaining HP:99.6
+[PLAYER] Took damage:0.2Remaining HP:99.4
+[PLAYER] Took damage:0.2Remaining HP:99.2
+[PLAYER] Took damage:0.2Remaining HP:99.0
+[PLAYER] Took damage:0.2Remaining HP:98.8
+[PLAYER] Took damage:0.2Remaining HP:98.6
+[PLAYER] Took damage:0.2Remaining HP:98.4
+[PLAYER] Took damage:0.2Remaining HP:98.2
+[PLAYER] Took damage:0.2Remaining HP:98.0
+[PLAYER] Took damage:0.2Remaining HP:97.8
+[PLAYER] Took damage:0.2Remaining HP:97.6
+[PLAYER] Took damage:0.2Remaining HP:97.4
+[PLAYER] Took damage:0.2Remaining HP:97.2
+[PLAYER] Took damage:0.2Remaining HP:97.0
+[PLAYER] Took damage:0.2Remaining HP:96.8
+[PLAYER] Took damage:0.2Remaining HP:96.6
+[PLAYER] Took damage:0.2Remaining HP:96.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:96.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:89.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.5999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.5999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.5999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:85.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  

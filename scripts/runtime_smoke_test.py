@@ -4,12 +4,13 @@ Validates:
 1. Clean engine parse (0 errors)
 2. All 5 Autoload singletons instantiated and interconnected
 3. Main Scene boot (MainMenu.tscn)
-4. Full playable interaction & mission progression in Prologue -> Chapter 1
+4. Scripted interaction & mission progression in Prologue -> Chapter 1
 5. Save/Load persistence serialization
 """
 
 import subprocess
 import sys
+import re
 
 GODOT_BIN = r"C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe"
 
@@ -19,8 +20,8 @@ def run_step(desc, cmd, timeout=20):
     try:
         out, _ = proc.communicate(timeout=timeout)
         print(out)
-        if proc.returncode != 0:
-            print(f"[FAIL] Step failed with return code {proc.returncode}")
+        if proc.returncode != 0 or re.search(r"(?m)(?:SCRIPT ERROR:|ERROR:|Parse Error:)", out):
+            print(f"[FAIL] Step failed (exit {proc.returncode}; engine error output also checked)")
             return False, out
         print("[PASS] Step passed.")
         return True, out
@@ -58,9 +59,9 @@ def main():
     if not ok3:
         sys.exit(1)
         
-    # 4. Human-Style Prologue Gameplay & Chapter 1 Transition Test
+    # 4. Scripted integration check; teleports do not validate physical gameplay.
     ok4, out4 = run_step(
-        "4. Prologue Full Playthrough & Seamless Chapter 1 Transition",
+        "4. Prologue Scripted Interaction/Transition Integration (teleports; not gameplay QA)",
         [GODOT_BIN, "--headless", "-s", "res://scripts/test_prologue_playthrough.gd"],
         timeout=30
     )
@@ -69,7 +70,7 @@ def main():
         
     print("\n==================================================")
     print("ALL RUNTIME SMOKE TESTS PASSED CLEANLY (4/4)")
-    print("PROJECT IS AT 0 PARSER ERRORS AND FULL RUNTIME INTEGRITY")
+    print("NO ENGINE ERRORS DETECTED IN THESE CHECKS; PHYSICAL GAMEPLAY AND VISUAL QA STILL REQUIRED")
     print("==================================================")
 
 if __name__ == "__main__":

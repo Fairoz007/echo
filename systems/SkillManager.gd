@@ -24,12 +24,15 @@ signal skill_unlocked(skill_id: String)
 signal skill_points_changed(points: int)
 
 func add_xp(amount: int) -> void:
+	if amount <= 0:
+		return
+	var previous_threshold = int(current_xp / 100)
 	current_xp += amount
 	xp_gained.emit(amount, current_xp)
 	# Check for point thresholds
 	var target_points = int(current_xp / 100)
-	if target_points > available_skill_points:
-		available_skill_points = target_points
+	if target_points > previous_threshold:
+		available_skill_points += target_points - previous_threshold
 		skill_points_changed.emit(available_skill_points)
 		print("[SKILL] Skill point earned! Total available:", available_skill_points)
 

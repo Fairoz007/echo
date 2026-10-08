@@ -1,0 +1,29 @@
+{
+  "spoken_lines": 68,
+  "story_calls": 43,
+  "missing_aliases": [],
+  "missing_files": [],
+  "text_mismatches": [],
+  "water": [
+    "Player.enter_water splash",
+    "C06 moving SWIM state cadence 0.9seconds",
+    "C06 scene spatial water ambience"
+  ],
+  "collapse": [
+    "C03 bridge trigger existing",
+    "C09 tremor trigger existing",
+    "C10 fourth harmonic node overload helper",
+    "FIN initial escape helper"
+  ],
+  "repeat_protection": [
+    "CampaignDialogue.configure once",
+    "journal once per chapter via CampaignExploration",
+    "splash 0.75s cooldown",
+    "swim 0.6s cooldown",
+    "collapse 6s cooldown",
+    "scene change resets cooldown"
+  ],
+  "runtime_test": "NOT_RUN; root isolated route active",
+  "generation_requests": 0,
+  "license": "free tier; noncommercial prototype; commercial release rights unresolved"
+}

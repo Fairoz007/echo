@@ -1,0 +1,49 @@
+{
+	"log": [
+		"renderer=gl_compatibility driver=opengl3 adapter=NVIDIA GeForce RTX 2060 preset=0",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/01_main_menu.png",
+		"New Game click -> Prologue loaded",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/02_prologue_opening.png",
+		"idle: pos=(0.0, 0.0, 0.0) vel=0.00 floor=true state=0 anim=idle",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/03_mara_idle.png",
+		"PERF {\"avg_fps\":30.6,\"draw_calls\":50.0,\"label\":\"prologue_idle\",\"primitives\":333810.0,\"ram_mb\":515.0,\"vram_mb\":581.1,\"worst_ms\":34.7}",
+		"forward: pos=(-0.72, 0.0, -12.51) vel=4.43 floor=true state=2 anim=walk",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/04_mara_move_forward.png",
+		"sprint: pos=(-2.15, 0.0, -13.86) vel=7.20 floor=true state=3 anim=walk",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/05_mara_sprint.png",
+		"jump: pos=(-2.26, 0.97, -15.41) vel=5.70 floor=false state=5 anim=idle",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/06_mara_jump.png",
+		"PERF {\"avg_fps\":30.6,\"draw_calls\":31.0,\"label\":\"prologue_moving\",\"primitives\":271202.0,\"ram_mb\":514.9,\"vram_mb\":581.1,\"worst_ms\":55.1}",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/07_artifact_prompt.png",
+		"interact pressed, objective complete=true pos=(-1.65, 0.0, -13.83) vel=7.20 floor=true state=3 anim=walk",
+		"t=4.0 pos=(0.38, 0.0, -24.51) vel=7.20 floor=true state=3 anim=walk",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/08_prologue_walk_01.png",
+		"prologue end: chapter=1 interacted=true pos=(0.0, 0.9, 19.04) vel=7.32 floor=false state=6 anim=idle",
+		"scene after prologue drive: res://levels/Chapter1.tscn",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/09_after_prologue.png",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/10_look_0.png",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/10_look_1.png",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/10_look_2.png",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\gl_default/10_look_3.png"
+	],
+	"perf": [
+		{
+			"avg_fps": 30.6,
+			"draw_calls": 50.0,
+			"label": "prologue_idle",
+			"primitives": 333810.0,
+			"ram_mb": 515.0,
+			"vram_mb": 581.1,
+			"worst_ms": 34.7
+		},
+		{
+			"avg_fps": 30.6,
+			"draw_calls": 31.0,
+			"label": "prologue_moving",
+			"primitives": 271202.0,
+			"ram_mb": 514.9,
+			"vram_mb": 581.1,
+			"worst_ms": 55.1
+		}
+	]
+}

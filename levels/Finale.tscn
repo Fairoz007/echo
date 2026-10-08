@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="99_mara_production"]
+[ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -57,10 +59,11 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+scale = Vector3(1.7, 1.7, 1.7)
+
+[node name="CHR_Mara_Production" parent="Player/VisualMesh" instance=ExtResource("99_mara_production")]
+rotation = Vector3(0, 1.5707963, 0)
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
@@ -102,3 +105,20 @@ collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DaylightRidge/DaylightExitTrigger"]
 shape = SubResource("BoxShape3D_trigger")
+
+[node name="LevelCave" type="Node3D" parent="."]
+script = ExtResource("90_levelcave")
+soundscape_key = "FIN"
+hall_reverb = "tunnel"
+profile_z = PackedFloat32Array(36, 26, 16, 4, -8, -20, -30, -40)
+profile_w = PackedFloat32Array(6, 8, 5, 9, 6, 10, 8, 6)
+profile_h = PackedFloat32Array(6, 9, 5, 11, 7, 12, 9, 7)
+seed_value = 11011
+daylight_exit = true
+stalactites = 90
+stalagmites = 30
+pebbles = 1500
+rock_masses = Array[Vector4]([Vector4(-4, 12, 1.6, 3), Vector4(5, -4, 1.8, 3), Vector4(-5, -18, 1.6, 3)])
+lamps = PackedVector3Array(2, 0, 30, -2.5, 0, 14, 3, 0, -2)
+ambient_color = Color(0.14, 0.15, 0.17, 1)
+hide_paths = Array[NodePath]([NodePath("RidgeGround/MeshInstance3D")])

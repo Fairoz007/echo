@@ -1,0 +1,31 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[MISSION] Checkpoint stored:chapter_01_start
+[SAVE] Successfully saved game slot0touser://qa_graphics_visual/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_graphics_visual/save_slot_1.json
+VISUAL CAPTURE graphics_C1_Low fps=30.0
+VISUAL CAPTURE graphics_C1_Balanced fps=57.0
+VISUAL CAPTURE graphics_C1_High fps=60.0
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[MISSION] Checkpoint stored:chapter_06_start
+[SAVE] Successfully saved game slot0touser://qa_graphics_visual/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_graphics_visual/save_slot_1.json
+[PLAYER] Entered water body.
+VISUAL CAPTURE graphics_C6_Low fps=30.0
+VISUAL CAPTURE graphics_C6_Balanced fps=60.0
+VISUAL CAPTURE graphics_C6_Balanced_wave_b fps=56.0
+VISUAL CAPTURE graphics_C6_High fps=60.0
+[CHAPTER 6] Temple sluice wheel turned! Water draining.
+[MISSION] Completed Objective:obj_c06_drain_temple
+[MISSION] New Objective:obj_c06_reach_city_passage->Proceed through the drained gateway into the subterranean expanse
+[PLAYER] Exited water body.
+[PLAYER] Entered water body.
+VISUAL CAPTURE graphics_C6_High_drained fps=60.0
+[GAME_MANAGER] State changed to:MENU
+[PLAYER] Exited water body.
+QA PASS: Compatibility water/wind/ground shader compilation and captures

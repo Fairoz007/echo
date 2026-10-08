@@ -46,6 +46,9 @@ grow_vertical = 2
 
 [node name="PromptLabel" type="Label" parent="CenterContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 20
 text = "[E] Interact"
 horizontal_alignment = 1
@@ -62,9 +65,14 @@ theme_override_constants/margin_right = 32
 
 [node name="ObjectiveLabel" type="Label" parent="TopRightMargin"]
 layout_mode = 2
+custom_minimum_size = Vector2(418, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 18
 text = "OBJECTIVE: Investigate the Subterranean Tunnel"
 horizontal_alignment = 2
+autowrap_mode = 3
 
 [node name="BottomMargin" type="MarginContainer" parent="."]
 anchors_preset = 7
@@ -81,7 +89,12 @@ grow_vertical = 0
 
 [node name="SubtitleLabel" type="Label" parent="BottomMargin"]
 layout_mode = 2
+custom_minimum_size = Vector2(800, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
 theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
 theme_override_font_sizes/font_size = 22
 text = "Mara: \"What did we find?\""
 horizontal_alignment = 1
+autowrap_mode = 3

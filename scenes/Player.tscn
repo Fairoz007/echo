@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://b6w1wed50wb1u"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_player"]
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="2_mara_mesh"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Game_LOD0.glb" id="2_mara_mesh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
-radius = 0.4
-height = 1.74
+radius = 0.3
+height = 1.72
 
 [node name="Player" type="CharacterBody3D" groups=["player"] node_paths=PackedStringArray("visual_mesh", "flashlight")]
 collision_layer = 1
@@ -15,12 +15,15 @@ visual_mesh = NodePath("VisualRoot")
 flashlight = NodePath("Flashlight")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86, 0)
 shape = SubResource("CapsuleShape3D_player")
 
 [node name="VisualRoot" type="Node3D" parent="."]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
 
-[node name="CHR_Mara_Optimized" parent="VisualRoot" instance=ExtResource("2_mara_mesh")]
+[node name="CHR_Mara_Game_LOD0" parent="VisualRoot" instance=ExtResource("2_mara_mesh")]
+rotation = Vector3(0, 1.5707963, 0)
+
 
 [node name="Flashlight" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)

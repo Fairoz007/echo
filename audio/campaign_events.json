@@ -1,0 +1,294 @@
+{
+  "events": {
+    "PRO": {
+      "opening": [
+        "PRO_MARA_001",
+        "PRO_MARA_002"
+      ],
+      "glyph": [
+        "PRO_MARA_003"
+      ],
+      "exit": [
+        "PRO_MARA_004"
+      ]
+    },
+    "C01": {
+      "opening": [
+        "C01_MARA_001"
+      ],
+      "nadiya_talk": [
+        "C01_NADIYA_001",
+        "C01_NADIYA_002"
+      ],
+      "elias_talk": [
+        "C01_ELIAS_001",
+        "C01_ELIAS_002"
+      ],
+      "survey_table_examined": [
+        "C01_MARA_002"
+      ],
+      "sealed_gate_examined": [
+        "C01_MARA_003",
+        "C01_ELIAS_003"
+      ],
+      "chapter_end_entered": [
+        "C01_MARA_004"
+      ],
+      "journal": [
+        "C01_MARA_005"
+      ],
+      "team": [
+        "C01_TOMAS_001",
+        "C01_ADRIAN_001"
+      ]
+    },
+    "C10": {
+      "opening": [
+        "C10_MARA_001"
+      ],
+      "drake_encounter": [
+        "C10_DRAKE_001"
+      ],
+      "_disable_node": [
+        "C10_MARA_002",
+        "C10_DRAKE_002",
+        "C10_MARA_003"
+      ],
+      "journal": [
+        "C10_MARA_004"
+      ],
+      "warning": [
+        "C10_MARA_005",
+        "C10_DRAKE_003"
+      ]
+    },
+    "C02": {
+      "opening": [
+        "C02_MARA_001"
+      ],
+      "sluice_lever_pulled": [
+        "C02_MARA_002"
+      ],
+      "inscription_examined": [
+        "C02_MARA_003"
+      ],
+      "abyss_entered": [
+        "C02_TOMAS_001"
+      ],
+      "journal": [
+        "C02_MARA_004"
+      ]
+    },
+    "C03": {
+      "opening": [
+        "C03_ELIAS_001"
+      ],
+      "bridge_collapse_entered": [
+        "C03_MARA_001"
+      ],
+      "fissure_fell": [
+        "C03_MARA_002"
+      ],
+      "journal": [
+        "C03_MARA_003"
+      ]
+    },
+    "C04": {
+      "opening": [
+        "C04_MARA_001"
+      ],
+      "radio_repaired": [
+        "C04_NADIYA_001"
+      ],
+      "subterranean_exit": [
+        "C04_MARA_002"
+      ],
+      "journal": [
+        "C04_MARA_003"
+      ]
+    },
+    "C05": {
+      "opening": [
+        "C05_MARA_001"
+      ],
+      "drake_observed": [
+        "C05_DRAKE_001"
+      ],
+      "chapter_end": [
+        "C05_MARA_002"
+      ],
+      "journal": [
+        "C05_MARA_003"
+      ],
+      "patrol": [
+        "C05_MERIDIAN_001"
+      ]
+    },
+    "C06": {
+      "opening": [
+        "C06_MARA_001"
+      ],
+      "sluice_wheel_rotated": [
+        "C06_MARA_002"
+      ],
+      "temple_exit": [
+        "C06_MARA_003"
+      ],
+      "journal": [
+        "C06_MARA_004"
+      ]
+    },
+    "C07": {
+      "opening": [
+        "C07_MARA_001"
+      ],
+      "mural_examined": [
+        "C07_MARA_002"
+      ],
+      "optional_tomb_entered": [
+        "C07_MARA_003"
+      ],
+      "causeway_exit": [
+        "C07_TOMAS_001"
+      ],
+      "journal": [
+        "C07_MARA_004"
+      ]
+    },
+    "C08": {
+      "opening": [
+        "C08_MARA_001"
+      ],
+      "elias_spoke": [
+        "C08_ELIAS_001"
+      ],
+      "adrian_confrontation": [
+        "C08_ADRIAN_001"
+      ],
+      "journal": [
+        "C08_MARA_002"
+      ],
+      "aftermath": [
+        "C08_MARA_003",
+        "C08_ELIAS_002"
+      ]
+    },
+    "C09": {
+      "opening": [
+        "C09_MARA_001"
+      ],
+      "tremor_triggered": [
+        "C09_MARA_002"
+      ],
+      "vault_gate_reached": [
+        "C09_MARA_003"
+      ],
+      "journal": [
+        "C09_MARA_004"
+      ]
+    },
+    "FIN": {
+      "opening": [
+        "FIN_MARA_001"
+      ],
+      "daylight_reached": [
+        "FIN_TOMAS_001",
+        "FIN_MARA_002"
+      ],
+      "rescue": [
+        "FIN_NADIYA_001"
+      ]
+    },
+    "EPI": {
+      "ending": [
+        "EPI_ELIAS_001",
+        "EPI_MARA_001",
+        "EPI_MARA_002"
+      ]
+    }
+  },
+  "aliases": {
+    "Ugh... Still breathing. Radio... Nadiya? Elias? Anyone?": "PRO_MARA_001",
+    "Right. Up. One step at a time.": "PRO_MARA_002",
+    "This stone... it's vibrating. Not from seismic tremors. It's humming.": "PRO_MARA_003",
+    "What did we find?": "PRO_MARA_004",
+    "Made it through the ridge. The expedition camp is just ahead.": "C01_MARA_001",
+    "Three days late, Mara! Elias is over by the survey table waiting for you.": "C01_NADIYA_001",
+    "Get moving, Mara. The satellite pass was clear, but clouds are gathering.": "C01_NADIYA_002",
+    "Mara! Look at the satellite telemetry on the table. We found a sub-ridge anomaly.": "C01_ELIAS_001",
+    "Head up the eastern trail toward the waterfall gorge. Be careful on the rock ledges.": "C01_ELIAS_002",
+    "Symmetrical subterranean chambers... That's not a natural fault. I'll check the eastern ridge.": "C01_MARA_002",
+    "Elias... I found it. A massive sealed stone doorway carved right into the mountain cliff.": "C01_MARA_003",
+    "Incredible! Don't touch anything yet. I'm bringing Tomas and the equipment.": "C01_ELIAS_003",
+    "The carvings match the Vaelor texts... This is where it begins.": "C01_MARA_004",
+    "The Heart Vault... The resonance in this chamber is deafening. There's Drake.": "C10_MARA_001",
+    "\"Do you know what this is, Vale? A machine capable of transmitting tectonic kinetic energy across continents!\"": "C10_DRAKE_001",
+    "Node deactivated! Resonance dampening.": "C10_MARA_002",
+    "\"No! What did you do?! The feedback is tearing the platform apart!\"": "C10_DRAKE_002",
+    "Drake, get out! It's over! RUN!": "C10_MARA_003",
+    "The gate is locked by an ancient hydraulic counterweight. The water channel is blocked.": "C02_MARA_001",
+    "Water's diverted into the conduit! The counterweight is filling.": "C02_MARA_002",
+    "\"The Voice Below...\" It refers to a subterranean harmonic nexus deep in the mountain core.": "C02_MARA_003",
+    "Mara, Elias is bringing the bridge rig across now!": "C02_TOMAS_001",
+    "Mara, take the center line! The stone anchors look brittle.": "C03_ELIAS_001",
+    "The anchors are giving way! JUMP!": "C03_MARA_001",
+    "ELIAS!...": "C03_MARA_002",
+    "Underground... Water broke my fall. I need to find high ground and radio contact.": "C04_MARA_001",
+    "Mara?! Thank God! Be careful\u2014armed contractors are breaching the valley!": "C04_NADIYA_001",
+    "Voices ahead... Flashlights in the darkness. Meridian is here.": "C04_MARA_002",
+    "Meridian mercenaries ahead. Stay low, use cover, or take them down quietly.": "C05_MARA_001",
+    "\"Vale's team found the door. Secure the subterranean aqueduct immediately.\"": "C05_DRAKE_001",
+    "Water's rushing into the temple basin. Time to dive.": "C05_MARA_002",
+    "The temple is half-submerged. I need to drain the central basin to reach the inner sanctum.": "C06_MARA_001",
+    "The aqueduct is flushing out! The lower gate is emerging from the water.": "C06_MARA_002",
+    "Nadiya... I found a city. A colossal subterranean metropolis.": "C06_MARA_003",
+    "The City of Echoes... Cyclopean towers stretching into the shadows. The Heart Vault is ahead.": "C07_MARA_001",
+    "\"They knew the Vault was unstable... but they kept using it because it worked. Until it didn't.\"": "C07_MARA_002",
+    "An optional challenge chamber: The Tomb of Weights. Ancient counterweight engineering.": "C07_MARA_003",
+    "Mara, we're holding position at the forward camp! Hurry!": "C07_TOMAS_001",
+    "I see expedition gear ahead! Elias, Nadiya!": "C08_MARA_001",
+    "Mara... Adrian took the Vaelor Key. He's been transmitting coordinates to Meridian all along.": "C08_ELIAS_001",
+    "\"I'm sorry Mara. They offered a life beyond research grants. But Drake brought guns...\"": "C08_ADRIAN_001",
+    "The entire mountain is trembling. Meridian's blasting destabilized the resonance conduits.": "C09_MARA_001",
+    "Ceiling collapse! Keep moving!": "C09_MARA_002",
+    "This is it. The threshold of the Heart Vault. Drake is inside.": "C09_MARA_003",
+    "I see daylight! Tomas, Nadiya, I'm almost through the eastern fissure!": "FIN_MARA_001",
+    "\"Tomas: Mara! Grab my hand! I've got you!\"": "FIN_TOMAS_001",
+    "\"Never again...\"": "FIN_MARA_002",
+    "Field note. Waterfall chambers match the Vaelor survey. We document before we disturb.": "C01_MARA_005",
+    "The inscription says the stone listens. These chambers carry sound like roads carry people.": "C02_MARA_004",
+    "The bridge was built to move with the mountain. Someone cut its safety anchors.": "C03_MARA_003",
+    "An old survey camp. They found this passage a century ago, then turned back.": "C04_MARA_003",
+    "Meridian crates. This was planned before we opened the portal. Someone gave them our route.": "C05_MARA_003",
+    "The temple's water channels regulate pressure. The flood is damage, not a trap.": "C06_MARA_004",
+    "They left the warning where everyone could see it. We should listen to the people who lived here.": "C07_MARA_004",
+    "Elias trusted Adrian's survey. So did I. Trust is not proof; the transmission log is.": "C08_MARA_002",
+    "The Heart Road carries the city's resonance. Every blast travels farther than they know.": "C09_MARA_004",
+    "Four nodes hold the network in balance. Break the feedback, and Drake loses the core.": "C10_MARA_004",
+    "Climbing kit is checked. If the weather turns, we come back together.": "C01_TOMAS_001",
+    "The eastern contour is verified. I will keep the survey beacon running.": "C01_ADRIAN_001",
+    "Hold the lower passage. No one enters without clearance.": "C05_MERIDIAN_001",
+    "You gave him the way in. Help us get everyone out.": "C08_MARA_003",
+    "The Key opens the Vault, Mara. The four outer nodes can still stop it.": "C08_ELIAS_002",
+    "The Vaelor sealed this place for a reason. You are repeating their mistake.": "C10_MARA_005",
+    "They lacked control. We have the instruments to finish what they began.": "C10_DRAKE_003",
+    "Elias is clear. Tomas, get her away from the edge!": "FIN_NADIYA_001",
+    "We came looking for a discovery. You reminded us what we owe it.": "EPI_ELIAS_001",
+    "The survey will prove the site exists. Its location stays protected.": "EPI_MARA_001",
+    "Some stories survive because we leave them where they belong.": "EPI_MARA_002"
+  },
+  "recaps": {
+    "PRO": "REC_PRO",
+    "C01": "REC_C01",
+    "C02": "REC_C02",
+    "C03": "REC_C03",
+    "C04": "REC_C04",
+    "C05": "REC_C05",
+    "C06": "REC_C06",
+    "C07": "REC_C07",
+    "C08": "REC_C08",
+    "C09": "REC_C09",
+    "C10": "REC_C10",
+    "FIN": "REC_FIN"
+  }
+}

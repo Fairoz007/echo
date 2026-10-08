@@ -1,0 +1,2239 @@
+{
+  "PRO_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_PRO_MARA_001.ogg",
+    "text": "Ugh... Still breathing. Radio... Nadiya? Elias? Anyone?",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.802,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.5,
+    "take": "V2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.72,
+        "text": "Ugh..."
+      },
+      {
+        "start": 0.72,
+        "end": 1.89,
+        "text": "Still breathing."
+      },
+      {
+        "start": 1.89,
+        "end": 2.63,
+        "text": "Radio..."
+      },
+      {
+        "start": 2.63,
+        "end": 3.32,
+        "text": "Nadiya?"
+      },
+      {
+        "start": 3.32,
+        "end": 3.96,
+        "text": "Elias?"
+      },
+      {
+        "start": 3.96,
+        "end": 4.65,
+        "text": "Anyone?"
+      }
+    ]
+  },
+  "PRO_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_PRO_MARA_002.ogg",
+    "text": "Right. Up. One step at a time.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 2.059,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.56,
+        "text": "Right."
+      },
+      {
+        "start": 0.56,
+        "end": 0.91,
+        "text": "Up."
+      },
+      {
+        "start": 0.91,
+        "end": 1.91,
+        "text": "One step at a time."
+      }
+    ]
+  },
+  "PRO_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_PRO_MARA_003.ogg",
+    "text": "This stone... it's vibrating. Not from seismic tremors. It's humming.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.969,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.08,
+        "text": "This stone..."
+      },
+      {
+        "start": 1.08,
+        "end": 2.19,
+        "text": "it's vibrating."
+      },
+      {
+        "start": 2.19,
+        "end": 3.82,
+        "text": "Not from seismic tremors."
+      },
+      {
+        "start": 3.82,
+        "end": 4.82,
+        "text": "It's humming."
+      }
+    ]
+  },
+  "PRO_MARA_004": {
+    "path": "res://audio/dialogue/mara/VO_PRO_MARA_004.ogg",
+    "text": "What did we find?",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 1.115,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.96,
+        "text": "What did we find?"
+      }
+    ]
+  },
+  "C01_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C01_MARA_001.ogg",
+    "text": "Made it through the ridge. The expedition camp is just ahead.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.576,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.57,
+        "text": "Made it through the ridge."
+      },
+      {
+        "start": 1.57,
+        "end": 3.43,
+        "text": "The expedition camp is just ahead."
+      }
+    ]
+  },
+  "C01_NADIYA_001": {
+    "path": "res://audio/dialogue/nadiya/VO_C01_NADIYA_001.ogg",
+    "text": "You made it, Mara. Elias is waiting by the survey table.",
+    "speaker": "Nadiya",
+    "radio": false,
+    "voice_id": "XrExE9yKIg1WjnnlVkGX",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.349,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.2,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.2,
+        "text": "You made it, Mara."
+      },
+      {
+        "start": 1.2,
+        "end": 3.2,
+        "text": "Elias is waiting by the survey table."
+      }
+    ]
+  },
+  "C01_NADIYA_002": {
+    "path": "res://audio/dialogue/nadiya/VO_C01_NADIYA_002.ogg",
+    "text": "Get moving, Mara. The satellite pass was clear, but clouds are gathering.",
+    "speaker": "Nadiya",
+    "radio": false,
+    "voice_id": "XrExE9yKIg1WjnnlVkGX",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.568,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.8,
+    "true_peak_db": -1.0,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.27,
+        "text": "Get moving, Mara."
+      },
+      {
+        "start": 1.27,
+        "end": 4.42,
+        "text": "The satellite pass was clear, but clouds are gathering."
+      }
+    ]
+  },
+  "C01_ELIAS_001": {
+    "path": "res://audio/dialogue/elias/VO_C01_ELIAS_001.ogg",
+    "text": "Mara! Look at the satellite telemetry on the table. We found a sub-ridge anomaly.",
+    "speaker": "Elias",
+    "radio": false,
+    "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.87,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.4,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.61,
+        "text": "Mara!"
+      },
+      {
+        "start": 0.61,
+        "end": 3.05,
+        "text": "Look at the satellite telemetry on the table."
+      },
+      {
+        "start": 3.05,
+        "end": 4.72,
+        "text": "We found a sub-ridge anomaly."
+      }
+    ]
+  },
+  "C01_ELIAS_002": {
+    "path": "res://audio/dialogue/elias/VO_C01_ELIAS_002.ogg",
+    "text": "Head up the eastern trail toward the waterfall gorge. Be careful on the rock ledges.",
+    "speaker": "Elias",
+    "radio": false,
+    "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.12,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.3,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 3.12,
+        "text": "Head up the eastern trail toward the waterfall gorge."
+      },
+      {
+        "start": 3.12,
+        "end": 4.97,
+        "text": "Be careful on the rock ledges."
+      }
+    ]
+  },
+  "C01_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C01_MARA_002.ogg",
+    "text": "Symmetrical subterranean chambers... That's not a natural fault. I'll check the eastern ridge.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 6.088,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.32,
+        "text": "Symmetrical subterranean chambers..."
+      },
+      {
+        "start": 2.32,
+        "end": 4.07,
+        "text": "That's not a natural fault."
+      },
+      {
+        "start": 4.07,
+        "end": 5.94,
+        "text": "I'll check the eastern ridge."
+      }
+    ]
+  },
+  "C01_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C01_MARA_003.ogg",
+    "text": "Elias... I found it. A massive sealed stone doorway carved right into the mountain cliff.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.991,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -15.9,
+    "true_peak_db": -1.8,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.85,
+        "text": "Elias..."
+      },
+      {
+        "start": 0.85,
+        "end": 1.78,
+        "text": "I found it."
+      },
+      {
+        "start": 1.78,
+        "end": 5.84,
+        "text": "A massive sealed stone doorway carved right into the mountain cliff."
+      }
+    ]
+  },
+  "C01_ELIAS_003": {
+    "path": "res://audio/dialogue/elias/VO_C01_ELIAS_003.ogg",
+    "text": "Incredible! Don't touch anything yet. I'm bringing Tomas and the equipment.",
+    "speaker": "Elias",
+    "radio": true,
+    "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.725,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -17.1,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.92,
+        "text": "Incredible!"
+      },
+      {
+        "start": 0.92,
+        "end": 2.45,
+        "text": "Don't touch anything yet."
+      },
+      {
+        "start": 2.45,
+        "end": 4.57,
+        "text": "I'm bringing Tomas and the equipment."
+      }
+    ]
+  },
+  "C01_MARA_004": {
+    "path": "res://audio/dialogue/mara/VO_C01_MARA_004.ogg",
+    "text": "The carvings match the Vaelor texts... This is where it begins.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.933,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.28,
+        "text": "The carvings match the Vaelor texts..."
+      },
+      {
+        "start": 2.28,
+        "end": 3.78,
+        "text": "This is where it begins."
+      }
+    ]
+  },
+  "C01_MARA_005": {
+    "path": "res://audio/dialogue/mara/VO_C01_MARA_005.ogg",
+    "text": "Field note. Waterfall chambers match the Vaelor survey. We document before we disturb.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.48,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.95,
+        "text": "Field note."
+      },
+      {
+        "start": 0.95,
+        "end": 3.48,
+        "text": "Waterfall chambers match the Vaelor survey."
+      },
+      {
+        "start": 3.48,
+        "end": 5.33,
+        "text": "We document before we disturb."
+      }
+    ]
+  },
+  "C01_TOMAS_001": {
+    "path": "res://audio/dialogue/tomas/VO_C01_TOMAS_001.ogg",
+    "text": "Climbing kit is checked. If the weather turns, we come back together.",
+    "speaker": "Tomas",
+    "radio": false,
+    "voice_id": "iP95p4xoKVk53GoZ742B",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.649,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -17.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.36,
+        "text": "Climbing kit is checked."
+      },
+      {
+        "start": 1.36,
+        "end": 3.5,
+        "text": "If the weather turns, we come back together."
+      }
+    ]
+  },
+  "C01_ADRIAN_001": {
+    "path": "res://audio/dialogue/adrian/VO_C01_ADRIAN_001.ogg",
+    "text": "The eastern contour is verified. I will keep the survey beacon running.",
+    "speaker": "Adrian",
+    "radio": false,
+    "voice_id": "cjVigY5qzO86Huf0OWal",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.615,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.5,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.65,
+        "text": "The eastern contour is verified."
+      },
+      {
+        "start": 1.65,
+        "end": 3.46,
+        "text": "I will keep the survey beacon running."
+      }
+    ]
+  },
+  "C02_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C02_MARA_001.ogg",
+    "text": "The gate is locked by an ancient hydraulic counterweight. The water channel is blocked.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.83,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 3.04,
+        "text": "The gate is locked by an ancient hydraulic counterweight."
+      },
+      {
+        "start": 3.04,
+        "end": 4.68,
+        "text": "The water channel is blocked."
+      }
+    ]
+  },
+  "C02_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C02_MARA_002.ogg",
+    "text": "Water's diverted into the conduit! The counterweight is filling.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.669,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.91,
+        "text": "Water's diverted into the conduit!"
+      },
+      {
+        "start": 1.91,
+        "end": 3.52,
+        "text": "The counterweight is filling."
+      }
+    ]
+  },
+  "C02_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C02_MARA_003.ogg",
+    "text": "The Voice Below...\" It refers to a subterranean harmonic nexus deep in the mountain core.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.573,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 5.42,
+        "text": "The Voice Below...\" It refers to a subterranean harmonic nexus deep in the mountain core."
+      }
+    ]
+  },
+  "C02_TOMAS_001": {
+    "path": "res://audio/dialogue/tomas/VO_C02_TOMAS_001.ogg",
+    "text": "Mara, Elias is bringing the bridge rig across now!",
+    "speaker": "Tomas",
+    "radio": true,
+    "voice_id": "iP95p4xoKVk53GoZ742B",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 2.491,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.4,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.34,
+        "text": "Mara, Elias is bringing the bridge rig across now!"
+      }
+    ]
+  },
+  "C02_MARA_004": {
+    "path": "res://audio/dialogue/mara/VO_C02_MARA_004.ogg",
+    "text": "The inscription says the stone listens. These chambers carry sound like roads carry people.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.526,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.42,
+        "text": "The inscription says the stone listens."
+      },
+      {
+        "start": 2.42,
+        "end": 5.38,
+        "text": "These chambers carry sound like roads carry people."
+      }
+    ]
+  },
+  "C03_ELIAS_001": {
+    "path": "res://audio/dialogue/elias/VO_C03_ELIAS_001.ogg",
+    "text": "Mara, take the center line! The stone anchors look brittle.",
+    "speaker": "Elias",
+    "radio": true,
+    "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.396,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.3,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.57,
+        "text": "Mara, take the center line!"
+      },
+      {
+        "start": 1.57,
+        "end": 3.25,
+        "text": "The stone anchors look brittle."
+      }
+    ]
+  },
+  "C03_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C03_MARA_001.ogg",
+    "text": "The anchors are giving way! JUMP!",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 1.904,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -15.9,
+    "true_peak_db": -3.1,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.34,
+        "text": "The anchors are giving way!"
+      },
+      {
+        "start": 1.34,
+        "end": 1.75,
+        "text": "JUMP!"
+      }
+    ]
+  },
+  "C03_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C03_MARA_002.ogg",
+    "text": "ELIAS!...",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 0.88,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.8,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.73,
+        "text": "ELIAS!..."
+      }
+    ]
+  },
+  "C03_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C03_MARA_003.ogg",
+    "text": "The bridge was built to move with the mountain. Someone cut its safety anchors.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.087,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.9,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.35,
+        "text": "The bridge was built to move with the mountain."
+      },
+      {
+        "start": 2.35,
+        "end": 3.94,
+        "text": "Someone cut its safety anchors."
+      }
+    ]
+  },
+  "C04_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C04_MARA_001.ogg",
+    "text": "Underground... Water broke my fall. I need to find high ground and radio contact.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.062,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.08,
+        "text": "Underground..."
+      },
+      {
+        "start": 1.08,
+        "end": 2.37,
+        "text": "Water broke my fall."
+      },
+      {
+        "start": 2.37,
+        "end": 4.91,
+        "text": "I need to find high ground and radio contact."
+      }
+    ]
+  },
+  "C04_NADIYA_001": {
+    "path": "res://audio/dialogue/nadiya/VO_C04_NADIYA_001.ogg",
+    "text": "Mara? Oh, thank God. Listen to me. Meridian contractors are in the valley. Armed.",
+    "speaker": "Nadiya",
+    "radio": true,
+    "voice_id": "XrExE9yKIg1WjnnlVkGX",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 6.024,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.2,
+    "true_peak_db": -1.0,
+    "take": "R2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.68,
+        "text": "Mara?"
+      },
+      {
+        "start": 0.68,
+        "end": 1.76,
+        "text": "Oh, thank God."
+      },
+      {
+        "start": 1.76,
+        "end": 2.79,
+        "text": "Listen to me."
+      },
+      {
+        "start": 2.79,
+        "end": 5.22,
+        "text": "Meridian contractors are in the valley."
+      },
+      {
+        "start": 5.22,
+        "end": 5.87,
+        "text": "Armed."
+      }
+    ]
+  },
+  "C04_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C04_MARA_002.ogg",
+    "text": "Voices ahead... Flashlights in the darkness. Meridian is here.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.994,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.09,
+        "text": "Voices ahead..."
+      },
+      {
+        "start": 1.09,
+        "end": 2.73,
+        "text": "Flashlights in the darkness."
+      },
+      {
+        "start": 2.73,
+        "end": 3.84,
+        "text": "Meridian is here."
+      }
+    ]
+  },
+  "C04_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C04_MARA_003.ogg",
+    "text": "An old survey camp. They found this passage a century ago, then turned back.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.108,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.48,
+        "text": "An old survey camp."
+      },
+      {
+        "start": 1.48,
+        "end": 4.96,
+        "text": "They found this passage a century ago, then turned back."
+      }
+    ]
+  },
+  "C05_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C05_MARA_001.ogg",
+    "text": "Meridian. Armed, and standing between me and the water. Stay low.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.31,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.84,
+        "text": "Meridian."
+      },
+      {
+        "start": 0.84,
+        "end": 3.4,
+        "text": "Armed, and standing between me and the water."
+      },
+      {
+        "start": 3.4,
+        "end": 4.16,
+        "text": "Stay low."
+      }
+    ]
+  },
+  "C05_DRAKE_001": {
+    "path": "res://audio/dialogue/drake/VO_C05_DRAKE_001.ogg",
+    "text": "Vale's team found the door. Secure the subterranean aqueduct immediately.",
+    "speaker": "Drake",
+    "radio": false,
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.87,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.9,
+        "text": "Vale's team found the door."
+      },
+      {
+        "start": 1.9,
+        "end": 4.72,
+        "text": "Secure the subterranean aqueduct immediately."
+      }
+    ]
+  },
+  "C05_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C05_MARA_002.ogg",
+    "text": "Water's rushing into the temple basin. Time to dive.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.065,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.7,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.06,
+        "text": "Water's rushing into the temple basin."
+      },
+      {
+        "start": 2.06,
+        "end": 2.92,
+        "text": "Time to dive."
+      }
+    ]
+  },
+  "C05_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C05_MARA_003.ogg",
+    "text": "Meridian crates. This was planned before we opened the portal. Someone gave them our route.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.201,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.1,
+        "text": "Meridian crates."
+      },
+      {
+        "start": 1.1,
+        "end": 3.47,
+        "text": "This was planned before we opened the portal."
+      },
+      {
+        "start": 3.47,
+        "end": 5.05,
+        "text": "Someone gave them our route."
+      }
+    ]
+  },
+  "C05_MERIDIAN_001": {
+    "path": "res://audio/dialogue/meridian/VO_C05_MERIDIAN_001.ogg",
+    "text": "Hold the lower passage. No one enters without clearance.",
+    "speaker": "Meridian",
+    "radio": false,
+    "voice_id": "CwhRBWXzGAHq8TQ4Fs17",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.147,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.4,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.34,
+        "text": "Hold the lower passage."
+      },
+      {
+        "start": 1.34,
+        "end": 3.0,
+        "text": "No one enters without clearance."
+      }
+    ]
+  },
+  "C06_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C06_MARA_001.ogg",
+    "text": "The temple is half-submerged. I need to drain the central basin to reach the inner sanctum.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.248,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.8,
+        "text": "The temple is half-submerged."
+      },
+      {
+        "start": 1.8,
+        "end": 5.1,
+        "text": "I need to drain the central basin to reach the inner sanctum."
+      }
+    ]
+  },
+  "C06_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C06_MARA_002.ogg",
+    "text": "The aqueduct is flushing out! The lower gate is emerging from the water.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.192,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.75,
+        "text": "The aqueduct is flushing out!"
+      },
+      {
+        "start": 1.75,
+        "end": 4.04,
+        "text": "The lower gate is emerging from the water."
+      }
+    ]
+  },
+  "C06_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C06_MARA_003.ogg",
+    "text": "Nadiya... there's a city down here. An entire city.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.574,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.0,
+    "take": "R2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.83,
+        "text": "Nadiya..."
+      },
+      {
+        "start": 0.83,
+        "end": 2.38,
+        "text": "there's a city down here."
+      },
+      {
+        "start": 2.38,
+        "end": 3.42,
+        "text": "An entire city."
+      }
+    ]
+  },
+  "C06_MARA_004": {
+    "path": "res://audio/dialogue/mara/VO_C06_MARA_004.ogg",
+    "text": "The temple's water channels regulate pressure. The flood is damage, not a trap.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.783,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.71,
+        "text": "The temple's water channels regulate pressure."
+      },
+      {
+        "start": 2.71,
+        "end": 4.63,
+        "text": "The flood is damage, not a trap."
+      }
+    ]
+  },
+  "C07_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C07_MARA_001.ogg",
+    "text": "They built a city under the mountain. And every stone is still listening.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.598,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.4,
+    "take": "R2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.32,
+        "text": "They built a city under the mountain."
+      },
+      {
+        "start": 2.32,
+        "end": 4.45,
+        "text": "And every stone is still listening."
+      }
+    ]
+  },
+  "C07_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C07_MARA_002.ogg",
+    "text": "They knew the Vault was unstable... but they kept using it because it worked. Until it didn't.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.18,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.92,
+        "text": "They knew the Vault was unstable..."
+      },
+      {
+        "start": 1.92,
+        "end": 4.04,
+        "text": "but they kept using it because it worked."
+      },
+      {
+        "start": 4.04,
+        "end": 5.03,
+        "text": "Until it didn't."
+      }
+    ]
+  },
+  "C07_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C07_MARA_003.ogg",
+    "text": "A tomb sealed with counterweights. They engineered even their grief.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.488,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.3,
+    "take": "R2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.24,
+        "text": "A tomb sealed with counterweights."
+      },
+      {
+        "start": 2.24,
+        "end": 4.34,
+        "text": "They engineered even their grief."
+      }
+    ]
+  },
+  "C07_TOMAS_001": {
+    "path": "res://audio/dialogue/tomas/VO_C07_TOMAS_001.ogg",
+    "text": "Mara, we're holding position at the forward camp! Hurry!",
+    "speaker": "Tomas",
+    "radio": true,
+    "voice_id": "iP95p4xoKVk53GoZ742B",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 2.523,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -17.1,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.96,
+        "text": "Mara, we're holding position at the forward camp!"
+      },
+      {
+        "start": 1.96,
+        "end": 2.37,
+        "text": "Hurry!"
+      }
+    ]
+  },
+  "C07_MARA_004": {
+    "path": "res://audio/dialogue/mara/VO_C07_MARA_004.ogg",
+    "text": "They left the warning where everyone could see it. We should listen to the people who lived here.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.644,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.9,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.37,
+        "text": "They left the warning where everyone could see it."
+      },
+      {
+        "start": 2.37,
+        "end": 4.49,
+        "text": "We should listen to the people who lived here."
+      }
+    ]
+  },
+  "C08_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C08_MARA_001.ogg",
+    "text": "I see expedition gear ahead! Elias, Nadiya!",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 2.994,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.6,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.82,
+        "text": "I see expedition gear ahead!"
+      },
+      {
+        "start": 1.82,
+        "end": 2.84,
+        "text": "Elias, Nadiya!"
+      }
+    ]
+  },
+  "C08_ELIAS_001": {
+    "path": "res://audio/dialogue/elias/VO_C08_ELIAS_001.ogg",
+    "text": "Mara... Adrian took the Vaelor Key. He's been transmitting coordinates to Meridian all along.",
+    "speaker": "Elias",
+    "radio": false,
+    "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.487,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.3,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.71,
+        "text": "Mara..."
+      },
+      {
+        "start": 0.71,
+        "end": 2.3,
+        "text": "Adrian took the Vaelor Key."
+      },
+      {
+        "start": 2.3,
+        "end": 5.34,
+        "text": "He's been transmitting coordinates to Meridian all along."
+      }
+    ]
+  },
+  "C08_ADRIAN_001": {
+    "path": "res://audio/dialogue/adrian/VO_C08_ADRIAN_001.ogg",
+    "text": "I'm sorry, Mara. I sold the coordinates, not your lives. Drake took the Key. Use the service road.",
+    "speaker": "Adrian",
+    "radio": true,
+    "voice_id": "cjVigY5qzO86Huf0OWal",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.339,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -17.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.02,
+        "text": "I'm sorry, Mara."
+      },
+      {
+        "start": 1.02,
+        "end": 2.96,
+        "text": "I sold the coordinates, not your lives."
+      },
+      {
+        "start": 2.96,
+        "end": 4.03,
+        "text": "Drake took the Key."
+      },
+      {
+        "start": 4.03,
+        "end": 5.19,
+        "text": "Use the service road."
+      }
+    ]
+  },
+  "C08_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C08_MARA_002.ogg",
+    "text": "Elias trusted Adrian's survey. So did I. Trust is not proof; the transmission log is.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 6.306,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.25,
+        "text": "Elias trusted Adrian's survey."
+      },
+      {
+        "start": 2.25,
+        "end": 3.15,
+        "text": "So did I."
+      },
+      {
+        "start": 3.15,
+        "end": 6.16,
+        "text": "Trust is not proof; the transmission log is."
+      }
+    ]
+  },
+  "C08_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C08_MARA_003.ogg",
+    "text": "You gave him the way in. Help us get everyone out.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.019,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -15.9,
+    "true_peak_db": -1.9,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.45,
+        "text": "You gave him the way in."
+      },
+      {
+        "start": 1.45,
+        "end": 2.87,
+        "text": "Help us get everyone out."
+      }
+    ]
+  },
+  "C08_ELIAS_002": {
+    "path": "res://audio/dialogue/elias/VO_C08_ELIAS_002.ogg",
+    "text": "The Key opens the Vault, Mara. The four outer nodes can still stop it.",
+    "speaker": "Elias",
+    "radio": false,
+    "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.103,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.4,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.8,
+        "text": "The Key opens the Vault, Mara."
+      },
+      {
+        "start": 1.8,
+        "end": 3.95,
+        "text": "The four outer nodes can still stop it."
+      }
+    ]
+  },
+  "C09_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C09_MARA_001.ogg",
+    "text": "Drake's charges are shaking the conduits loose. The whole mountain feels it.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.226,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.7,
+    "take": "R2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.51,
+        "text": "Drake's charges are shaking the conduits loose."
+      },
+      {
+        "start": 2.51,
+        "end": 4.08,
+        "text": "The whole mountain feels it."
+      }
+    ]
+  },
+  "C09_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C09_MARA_002.ogg",
+    "text": "Ceiling collapse! Keep moving!",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 1.768,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.94,
+        "text": "Ceiling collapse!"
+      },
+      {
+        "start": 0.94,
+        "end": 1.62,
+        "text": "Keep moving!"
+      }
+    ]
+  },
+  "C09_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C09_MARA_003.ogg",
+    "text": "This is it. The threshold of the Heart Vault. Drake is inside.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.762,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.85,
+        "text": "This is it."
+      },
+      {
+        "start": 0.85,
+        "end": 2.62,
+        "text": "The threshold of the Heart Vault."
+      },
+      {
+        "start": 2.62,
+        "end": 3.61,
+        "text": "Drake is inside."
+      }
+    ]
+  },
+  "C09_MARA_004": {
+    "path": "res://audio/dialogue/mara/VO_C09_MARA_004.ogg",
+    "text": "The Heart Road carries the city's resonance. Every blast travels farther than they know.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 5.341,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.5,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.66,
+        "text": "The Heart Road carries the city's resonance."
+      },
+      {
+        "start": 2.66,
+        "end": 5.19,
+        "text": "Every blast travels farther than they know."
+      }
+    ]
+  },
+  "C10_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_C10_MARA_001.ogg",
+    "text": "The Heart Vault... The resonance in this chamber is deafening. There's Drake.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.477,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.18,
+        "text": "The Heart Vault..."
+      },
+      {
+        "start": 1.18,
+        "end": 3.41,
+        "text": "The resonance in this chamber is deafening."
+      },
+      {
+        "start": 3.41,
+        "end": 4.33,
+        "text": "There's Drake."
+      }
+    ]
+  },
+  "C10_DRAKE_001": {
+    "path": "res://audio/dialogue/drake/VO_C10_DRAKE_001.ogg",
+    "text": "Hear that, Vale? Every fault line on Earth, waiting for a conductor.",
+    "speaker": "Drake",
+    "radio": false,
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.371,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.3,
+    "take": "R2",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.23,
+        "text": "Hear that, Vale?"
+      },
+      {
+        "start": 1.23,
+        "end": 4.22,
+        "text": "Every fault line on Earth, waiting for a conductor."
+      }
+    ]
+  },
+  "C10_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_C10_MARA_002.ogg",
+    "text": "Node deactivated! Resonance dampening.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 2.322,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.1,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.06,
+        "text": "Node deactivated!"
+      },
+      {
+        "start": 1.06,
+        "end": 2.17,
+        "text": "Resonance dampening."
+      }
+    ]
+  },
+  "C10_DRAKE_002": {
+    "path": "res://audio/dialogue/drake/VO_C10_DRAKE_002.ogg",
+    "text": "No! What did you do?! The feedback is tearing the platform apart!",
+    "speaker": "Drake",
+    "radio": false,
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.404,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.54,
+        "text": "No!"
+      },
+      {
+        "start": 0.54,
+        "end": 1.73,
+        "text": "What did you do?!"
+      },
+      {
+        "start": 1.73,
+        "end": 4.25,
+        "text": "The feedback is tearing the platform apart!"
+      }
+    ]
+  },
+  "C10_MARA_003": {
+    "path": "res://audio/dialogue/mara/VO_C10_MARA_003.ogg",
+    "text": "Drake, get out! It's over! RUN!",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 1.951,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -15.9,
+    "true_peak_db": -2.6,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.85,
+        "text": "Drake, get out!"
+      },
+      {
+        "start": 0.85,
+        "end": 1.43,
+        "text": "It's over!"
+      },
+      {
+        "start": 1.43,
+        "end": 1.8,
+        "text": "RUN!"
+      }
+    ]
+  },
+  "C10_MARA_004": {
+    "path": "res://audio/dialogue/mara/VO_C10_MARA_004.ogg",
+    "text": "Four nodes hold the network in balance. Break the feedback, and Drake loses the core.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.962,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.3,
+        "text": "Four nodes hold the network in balance."
+      },
+      {
+        "start": 2.3,
+        "end": 4.81,
+        "text": "Break the feedback, and Drake loses the core."
+      }
+    ]
+  },
+  "C10_MARA_005": {
+    "path": "res://audio/dialogue/mara/VO_C10_MARA_005.ogg",
+    "text": "The Vaelor sealed this place for a reason. You are repeating their mistake.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.458,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.44,
+        "text": "The Vaelor sealed this place for a reason."
+      },
+      {
+        "start": 2.44,
+        "end": 4.31,
+        "text": "You are repeating their mistake."
+      }
+    ]
+  },
+  "C10_DRAKE_003": {
+    "path": "res://audio/dialogue/drake/VO_C10_DRAKE_003.ogg",
+    "text": "They lacked control. We have the instruments to finish what they began.",
+    "speaker": "Drake",
+    "radio": false,
+    "voice_id": "onwK4e9ZLuTAKqWW03F9",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.971,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.58,
+        "text": "They lacked control."
+      },
+      {
+        "start": 1.58,
+        "end": 4.82,
+        "text": "We have the instruments to finish what they began."
+      }
+    ]
+  },
+  "FIN_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_FIN_MARA_001.ogg",
+    "text": "I see daylight! Tomas, Nadiya, I'm almost through the eastern fissure!",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.438,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.17,
+        "text": "I see daylight!"
+      },
+      {
+        "start": 1.17,
+        "end": 4.29,
+        "text": "Tomas, Nadiya, I'm almost through the eastern fissure!"
+      }
+    ]
+  },
+  "FIN_TOMAS_001": {
+    "path": "res://audio/dialogue/tomas/VO_FIN_TOMAS_001.ogg",
+    "text": "Mara! Grab my hand! I've got you!",
+    "speaker": "Tomas",
+    "radio": false,
+    "voice_id": "iP95p4xoKVk53GoZ742B",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 1.598,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.6,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 0.39,
+        "text": "Mara!"
+      },
+      {
+        "start": 0.39,
+        "end": 0.92,
+        "text": "Grab my hand!"
+      },
+      {
+        "start": 0.92,
+        "end": 1.45,
+        "text": "I've got you!"
+      }
+    ]
+  },
+  "FIN_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_FIN_MARA_002.ogg",
+    "text": "We leave the core here. No one gets to turn their history into a weapon.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.133,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.44,
+        "text": "We leave the core here."
+      },
+      {
+        "start": 1.44,
+        "end": 3.98,
+        "text": "No one gets to turn their history into a weapon."
+      }
+    ]
+  },
+  "FIN_NADIYA_001": {
+    "path": "res://audio/dialogue/nadiya/VO_FIN_NADIYA_001.ogg",
+    "text": "Elias is clear. Tomas, get her away from the edge!",
+    "speaker": "Nadiya",
+    "radio": false,
+    "voice_id": "XrExE9yKIg1WjnnlVkGX",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.221,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.4,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.11,
+        "text": "Elias is clear."
+      },
+      {
+        "start": 1.11,
+        "end": 3.07,
+        "text": "Tomas, get her away from the edge!"
+      }
+    ]
+  },
+  "EPI_ELIAS_001": {
+    "path": "res://audio/dialogue/elias/VO_EPI_ELIAS_001.ogg",
+    "text": "We came looking for a discovery. You reminded us what we owe it.",
+    "speaker": "Elias",
+    "radio": false,
+    "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.628,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.5,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 1.8,
+        "text": "We came looking for a discovery."
+      },
+      {
+        "start": 1.8,
+        "end": 3.48,
+        "text": "You reminded us what we owe it."
+      }
+    ]
+  },
+  "EPI_MARA_001": {
+    "path": "res://audio/dialogue/mara/VO_EPI_MARA_001.ogg",
+    "text": "The survey will prove the site exists. Its location stays protected.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 4.412,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.41,
+        "text": "The survey will prove the site exists."
+      },
+      {
+        "start": 2.41,
+        "end": 4.26,
+        "text": "Its location stays protected."
+      }
+    ]
+  },
+  "EPI_MARA_002": {
+    "path": "res://audio/dialogue/mara/VO_EPI_MARA_002.ogg",
+    "text": "Some stories survive because we leave them where they belong.",
+    "speaker": "Mara",
+    "radio": false,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "qa": "MEASURED_PENDING_LISTENING",
+    "duration": 3.529,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -2.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 3.38,
+        "text": "Some stories survive because we leave them where they belong."
+      }
+    ]
+  },
+  "REC_PRO": {
+    "path": "res://audio/dialogue/recaps/REC_PRO.ogg",
+    "text": "I woke beneath the mountain with a dead radio and a glyph that hummed under my hand. To understand how I got there, I have to go back three days.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 8.199,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -15.9,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 4.68,
+        "text": "I woke beneath the mountain with a dead radio and a glyph that hummed under my hand."
+      },
+      {
+        "start": 4.68,
+        "end": 8.05,
+        "text": "To understand how I got there, I have to go back three days."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C01": {
+    "path": "res://audio/dialogue/recaps/REC_C01.ogg",
+    "text": "We reached camp under gathering cloud. The survey showed chambers too symmetrical to be natural, and on the eastern ridge I found a sealed Vaelor door.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 9.559,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.61,
+        "text": "We reached camp under gathering cloud."
+      },
+      {
+        "start": 2.61,
+        "end": 9.41,
+        "text": "The survey showed chambers too symmetrical to be natural, and on the eastern ridge I found a sealed Vaelor door."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C02": {
+    "path": "res://audio/dialogue/recaps/REC_C02.ogg",
+    "text": "Water opened the first ruin, and its inscription named the Voice Below. This stone was built to carry sound the way roads carry people.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 8.517,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 4.45,
+        "text": "Water opened the first ruin, and its inscription named the Voice Below."
+      },
+      {
+        "start": 4.45,
+        "end": 8.37,
+        "text": "This stone was built to carry sound the way roads carry people."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C03": {
+    "path": "res://audio/dialogue/recaps/REC_C03.ogg",
+    "text": "The bridge gave way, and I fell alone into the fissure. Its anchors hadn't failed. Someone had cut them.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 6.377,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 3.2,
+        "text": "The bridge gave way, and I fell alone into the fissure."
+      },
+      {
+        "start": 3.2,
+        "end": 4.84,
+        "text": "Its anchors hadn't failed."
+      },
+      {
+        "start": 4.84,
+        "end": 6.23,
+        "text": "Someone had cut them."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C04": {
+    "path": "res://audio/dialogue/recaps/REC_C04.ogg",
+    "text": "I followed air and water through the dark and got the radio working. Nadiya's warning came too late. Meridian was already below.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 7.395,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.5,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 3.76,
+        "text": "I followed air and water through the dark and got the radio working."
+      },
+      {
+        "start": 3.76,
+        "end": 5.6,
+        "text": "Nadiya's warning came too late."
+      },
+      {
+        "start": 5.6,
+        "end": 7.24,
+        "text": "Meridian was already below."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C05": {
+    "path": "res://audio/dialogue/recaps/REC_C05.ogg",
+    "text": "I slipped past Lucian Drake's patrols. Their crates proved one thing: someone gave them our route before we ever opened the door.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 7.13,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.25,
+        "text": "I slipped past Lucian Drake's patrols."
+      },
+      {
+        "start": 2.25,
+        "end": 6.98,
+        "text": "Their crates proved one thing: someone gave them our route before we ever opened the door."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C06": {
+    "path": "res://audio/dialogue/recaps/REC_C06.ogg",
+    "text": "I drained the drowned temple, and the lower gate rose out of the water. Beyond it was a city no one had seen in centuries.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 7.105,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.5,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 4.06,
+        "text": "I drained the drowned temple, and the lower gate rose out of the water."
+      },
+      {
+        "start": 4.06,
+        "end": 6.96,
+        "text": "Beyond it was a city no one had seen in centuries."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C07": {
+    "path": "res://audio/dialogue/recaps/REC_C07.ogg",
+    "text": "The City of Echoes left its warning on the walls: the Vault worked, until it didn't. Then Tomas called. The team was waiting.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 7.076,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.4,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 4.45,
+        "text": "The City of Echoes left its warning on the walls: the Vault worked, until it didn't."
+      },
+      {
+        "start": 4.45,
+        "end": 5.62,
+        "text": "Then Tomas called."
+      },
+      {
+        "start": 5.62,
+        "end": 6.93,
+        "text": "The team was waiting."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C08": {
+    "path": "res://audio/dialogue/recaps/REC_C08.ogg",
+    "text": "Elias was hurt, and the Key was gone. Adrian sold our coordinates to Meridian, and now Drake holds the way into the Vault.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 7.338,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.38,
+        "text": "Elias was hurt, and the Key was gone."
+      },
+      {
+        "start": 2.38,
+        "end": 7.19,
+        "text": "Adrian sold our coordinates to Meridian, and now Drake holds the way into the Vault."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C09": {
+    "path": "res://audio/dialogue/recaps/REC_C09.ogg",
+    "text": "Drake's charges tore the Heart Road apart around me. I reached the Vault threshold with the mountain shaking at my back.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 6.78,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.2,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 2.98,
+        "text": "Drake's charges tore the Heart Road apart around me."
+      },
+      {
+        "start": 2.98,
+        "end": 6.63,
+        "text": "I reached the Vault threshold with the mountain shaking at my back."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_C10": {
+    "path": "res://audio/dialogue/recaps/REC_C10.ogg",
+    "text": "I broke the four nodes, and the feedback tore the Vault out of Drake's hands. Then the chamber began to seal, and I ran.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 7.012,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.0,
+    "true_peak_db": -1.6,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 4.38,
+        "text": "I broke the four nodes, and the feedback tore the Vault out of Drake's hands."
+      },
+      {
+        "start": 4.38,
+        "end": 6.86,
+        "text": "Then the chamber began to seal, and I ran."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  },
+  "REC_FIN": {
+    "path": "res://audio/dialogue/recaps/REC_FIN.ogg",
+    "text": "Tomas pulled me onto the ridge as the mountain closed behind us. Everyone made it out. The Vault stays buried.",
+    "speaker": "Mara",
+    "radio": false,
+    "narration": true,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "duration": 6.173,
+    "sample_rate": 44100,
+    "channels": 1,
+    "lufs": -16.1,
+    "true_peak_db": -1.3,
+    "take": "R1",
+    "cues": [
+      {
+        "start": 0.08,
+        "end": 3.38,
+        "text": "Tomas pulled me onto the ridge as the mountain closed behind us."
+      },
+      {
+        "start": 3.38,
+        "end": 4.66,
+        "text": "Everyone made it out."
+      },
+      {
+        "start": 4.66,
+        "end": 6.02,
+        "text": "The Vault stays buried."
+      }
+    ],
+    "qa": "MEASURED_PENDING_LISTENING"
+  }
+}

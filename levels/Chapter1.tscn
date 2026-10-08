@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://b82c1p4knax02"]
 
 [ext_resource type="Script" path="res://levels/Chapter1.gd" id="1_c01"]
+[ext_resource type="Script" path="res://systems/ProductionCharacter.gd" id="80_character"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
-[ext_resource type="PackedScene" path="res://assets/models/prop_expedition_tent.glb" id="6_tent"]
-[ext_resource type="PackedScene" path="res://assets/models/prop_meridian_crate.glb" id="7_crate"]
-[ext_resource type="PackedScene" path="res://assets/models/env_boulder_moss.glb" id="8_boulder"]
-[ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="9_portal"]
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="10_mara"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/prop_expedition_tent_LOD0.glb" id="6_tent"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/prop_meridian_crate_LOD0.glb" id="7_crate"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/env_boulder_moss_LOD0.glb" id="8_boulder"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/ruin_arch_portal_LOD0.glb" id="9_portal"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="10_mara"]
+
+[ext_resource type="PackedScene" path="res://assets/props/camp/survey_fielddesk.glb" id="83_desk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -36,13 +39,15 @@ size = Vector3(250, 1, 250)
 size = Vector3(8, 6, 4)
 
 [sub_resource type="Environment" id="Environment_c01"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.18, 0.28, 0.34, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.4, 0.48, 0.52, 1)
+ambient_light_energy = 0.55
 tonemap_mode = 2
 fog_enabled = true
 fog_light_color = Color(0.6, 0.7, 0.75, 1)
-fog_density = 0.008
+fog_density = 0.002
 
 [node name="Chapter1" type="Node3D"]
 script = ExtResource("1_c01")
@@ -53,7 +58,7 @@ environment = SubResource("Environment_c01")
 [node name="SunLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866, -0.353, 0.353, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 50, 0)
 light_color = Color(1, 0.96, 0.88, 1)
-light_energy = 1.6
+light_energy = 1.0
 shadow_enabled = true
 
 [node name="HUD" parent="." instance=ExtResource("5_hud")]
@@ -73,8 +78,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
 [node name="VisualMesh" type="Node3D" parent="Player"]
+scale = Vector3(1.7, 1.7, 1.7)
 
 [node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("10_mara")]
+rotation = Vector3(0, 1.5707963, 0)
 
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
@@ -106,6 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_ground")
 
 [node name="FloorMesh" type="CSGBox3D" parent="ValleyTerrain/Floor"]
+visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(250, 1, 250)
 
@@ -123,6 +131,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 collision_layer = 2
 
 [node name="TableMesh" type="CSGBox3D" parent="CampArea/SurveyTable"]
+visible = false
 size = Vector3(2.4, 0.9, 1.4)
 
 [node name="Interactable3D" type="Area3D" parent="CampArea/SurveyTable"]
@@ -137,9 +146,11 @@ shape = SubResource("BoxShape3D_trigger")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.87, 0)
 collision_layer = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CampArea/EliasNPC"]
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Elias")
+[node name="MeshInstance3D" type="Node3D" parent="CampArea/EliasNPC"]
+position = Vector3(0, -0.87, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/elias/source/CHR_Elias_Rig.glb"
+character_height = 1.8
 
 [node name="Interactable3D" type="Area3D" parent="CampArea/EliasNPC"]
 collision_layer = 4
@@ -153,9 +164,25 @@ shape = SubResource("CapsuleShape3D_player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.87, 4)
 collision_layer = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CampArea/NadiyaNPC"]
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Nadiya")
+[node name="MeshInstance3D" type="Node3D" parent="CampArea/NadiyaNPC"]
+position = Vector3(0, -0.87, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/nadiya/source/CHR_Nadiya_Rig.glb"
+character_height = 1.67
+
+[node name="TomasPresentation" type="Node3D" parent="CampArea"]
+position = Vector3(4, 0, 4)
+rotation = Vector3(0, 1.1, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/tomas/source/CHR_Tomas_Rig.glb"
+character_height = 1.84
+
+[node name="AdrianPresentation" type="Node3D" parent="CampArea"]
+position = Vector3(-5, 0, -3)
+rotation = Vector3(0, -1.2, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/adrian/source/CHR_Adrian_Rig.glb"
+character_height = 1.78
 
 [node name="Interactable3D" type="Area3D" parent="CampArea/NadiyaNPC"]
 collision_layer = 4
@@ -191,6 +218,7 @@ transform = Transform3D(3.0, 0, 0, 0, 3.0, 0, 0, 0, 3.0, 10, 0, 8)
 transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, -6, 0, -4)
 
 [node name="CliffWall" type="CSGBox3D" parent="RidgeArea"]
+visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -15)
 size = Vector3(80, 24, 8)
 
@@ -216,3 +244,7 @@ collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RidgeArea/ChapterEndTrigger"]
 shape = SubResource("BoxShape3D_trigger")
+
+[node name="SurveyDeskModel" parent="CampArea/SurveyTable" instance=ExtResource("83_desk")]
+rotation = Vector3(0, 1.5707963, 0)
+scale = Vector3(2.178, 1.501, 2.405)

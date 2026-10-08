@@ -1,0 +1,182 @@
+{
+  "assets": [
+    {
+      "asset_id": "SFX_COMBAT_FIRE",
+      "path": "res://audio/combat/SFX_COMBAT_FIRE.wav",
+      "prompt": "One isolated modern semi automatic pistol shot, realistic crisp dry close report, short tail, no multiple shots, voice or music.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_COMBAT_RELOAD",
+      "path": "res://audio/combat/SFX_COMBAT_RELOAD.wav",
+      "prompt": "One short realistic pistol magazine reload: release, insert, slide action, close restrained clean mechanical movement, no firing, voices or music.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 2.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_COMBAT_IMPACT",
+      "path": "res://audio/combat/SFX_COMBAT_IMPACT.wav",
+      "prompt": "One isolated bullet striking thick old stone, short sharp chip and tiny debris, realistic clean game impact, no firing, voices or music.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_COMBAT_TAKEDOWN",
+      "path": "res://audio/combat/SFX_COMBAT_TAKEDOWN.wav",
+      "prompt": "One restrained close combat body shove and fabric impact, realistic blunt contact without gore or exaggerated punch, no words, voices or music.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.48,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_WATER_ENTRY",
+      "path": "res://audio/water/SFX_WATER_ENTRY.wav",
+      "prompt": "One person entering a calm shallow pool, natural medium splash and short water movement, isolated realistic clean event, no voices or music.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 2.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_SWIM_STROKE",
+      "path": "res://audio/water/SFX_SWIM_STROKE.wav",
+      "prompt": "One restrained arm swimming stroke at a calm water surface, close water movement and small splash, isolated clean event, no voices or music.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.48,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_BREATH_RUNNING",
+      "path": "res://audio/movement/FOL_BREATH_RUNNING.wav",
+      "prompt": "A physically exerted adult woman taking two controlled breaths after running, nonverbal grounded restrained effort, no words, theatrical sounds, sexualized sounds or music.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 4.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_ROCK_COLLAPSE",
+      "path": "res://audio/destruction/SFX_ROCK_COLLAPSE.wav",
+      "prompt": "Heavy natural limestone ceiling collapse: initial deep stone crack, falling large rocks and gravel settling, substantial grounded geological weight, isolated event, no voices, music, guns or explosive blast.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 6.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_JUNGLE_STEP_01",
+      "path": "res://audio/footsteps/grass/FOL_JUNGLE_STEP_01.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on damp forest soil with scattered leaves, variant 1, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_JUNGLE_STEP_02",
+      "path": "res://audio/footsteps/grass/FOL_JUNGLE_STEP_02.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on damp forest soil with scattered leaves, variant 2, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_JUNGLE_STEP_03",
+      "path": "res://audio/footsteps/grass/FOL_JUNGLE_STEP_03.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on damp forest soil with scattered leaves, variant 3, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_JUNGLE_STEP_04",
+      "path": "res://audio/footsteps/grass/FOL_JUNGLE_STEP_04.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on damp forest soil with scattered leaves, variant 4, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_STONE_STEP_01",
+      "path": "res://audio/footsteps/stone/FOL_STONE_STEP_01.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on ancient dry rough stone slab, variant 1, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_STONE_STEP_02",
+      "path": "res://audio/footsteps/stone/FOL_STONE_STEP_02.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on ancient dry rough stone slab, variant 2, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_STONE_STEP_03",
+      "path": "res://audio/footsteps/stone/FOL_STONE_STEP_03.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on ancient dry rough stone slab, variant 3, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_STONE_STEP_04",
+      "path": "res://audio/footsteps/stone/FOL_STONE_STEP_04.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on ancient dry rough stone slab, variant 4, short clean isolated contact with natural small surface texture. One step only, no voices, music or multiple footsteps.",
+      "loop": false,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    }
+  ],
+  "errors": [],
+  "qa": "PENDING_LISTENING"
+}

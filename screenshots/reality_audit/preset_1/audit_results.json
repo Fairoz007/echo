@@ -1,0 +1,40 @@
+{
+	"log": [
+		"renderer=gl_compatibility driver=opengl3 adapter=NVIDIA GeForce RTX 2060 preset=1",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\preset_1/sceneload_00_Prologue.png",
+		"PERF {\"avg_fps\":690.9,\"draw_calls\":121.0,\"label\":\"sceneload_Prologue\",\"primitives\":166018.0,\"ram_mb\":100.1,\"vram_mb\":357.5,\"worst_ms\":4.6}",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\preset_1/sceneload_01_Chapter1.png",
+		"PERF {\"avg_fps\":692.2,\"draw_calls\":148.0,\"label\":\"sceneload_Chapter1\",\"primitives\":1310079.0,\"ram_mb\":95.5,\"vram_mb\":728.0,\"worst_ms\":4.2}",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\preset_1/sceneload_06_Chapter6.png",
+		"PERF {\"avg_fps\":1257.3,\"draw_calls\":34.0,\"label\":\"sceneload_Chapter6\",\"primitives\":202332.0,\"ram_mb\":86.2,\"vram_mb\":454.4,\"worst_ms\":3.5}"
+	],
+	"perf": [
+		{
+			"avg_fps": 690.9,
+			"draw_calls": 121.0,
+			"label": "sceneload_Prologue",
+			"primitives": 166018.0,
+			"ram_mb": 100.1,
+			"vram_mb": 357.5,
+			"worst_ms": 4.6
+		},
+		{
+			"avg_fps": 692.2,
+			"draw_calls": 148.0,
+			"label": "sceneload_Chapter1",
+			"primitives": 1310079.0,
+			"ram_mb": 95.5,
+			"vram_mb": 728.0,
+			"worst_ms": 4.2
+		},
+		{
+			"avg_fps": 1257.3,
+			"draw_calls": 34.0,
+			"label": "sceneload_Chapter6",
+			"primitives": 202332.0,
+			"ram_mb": 86.2,
+			"vram_mb": 454.4,
+			"worst_ms": 3.5
+		}
+	]
+}

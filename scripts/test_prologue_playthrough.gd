@@ -5,7 +5,9 @@ func _init():
 	call_deferred("_start_playtest")
 
 func _start_playtest():
-	print("--- BEGINNING FULL HUMAN SIMULATION PLAYTHROUGH: PROLOGUE ---")
+	root.get_node("SaveManager").save_directory = "user://qa_smoke"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("user://qa_smoke"))
+	print("--- BEGINNING SCRIPTED TELEPORT/INTERACTION INTEGRATION: PROLOGUE ---")
 	change_scene_to_file("res://levels/Prologue.tscn")
 	
 	# Wait for scene to load
@@ -26,7 +28,7 @@ func _start_playtest():
 		return
 		
 	# 1. Walk player towards relic (-12 Z)
-	print("Step 1: Walking Mara down tunnel towards acoustic relic...")
+	print("Step 1: Teleporting Mara to acoustic relic for integration check...")
 	player.global_position = Vector3(0, 1.0, -11.5)
 	
 	# 2. Trigger interaction with relic
@@ -59,7 +61,9 @@ func _start_playtest():
 	print("Current chapter registered in GameManager:", cur_chapter)
 	
 	if cur_chapter == 1:
-		print("--- PROLOGUE PLAYTHROUGH SUCCEEDED: SEAMLESS TRANSITION TO CHAPTER 1 ---")
+		print("--- PROLOGUE SCRIPTED INTERACTION/TRANSITION INTEGRATION PASSED ---")
+		gm.return_to_menu()
+		await create_timer(16.0).timeout
 		quit(0)
 	else:
 		printerr("TEST FAILED: Did not transition to Chapter 1! Current chapter:", cur_chapter)

@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://chf1up88is7jh"]
 
 [ext_resource type="Script" path="res://levels/Chapter8.gd" id="1_c08"]
+[ext_resource type="Script" path="res://systems/ProductionCharacter.gd" id="80_character"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
+
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="99_mara_production"]
+
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -19,6 +23,10 @@ albedo_color = Color(0.25, 0.45, 0.35, 1)
 
 [sub_resource type="StandardMaterial3D" id="Mat_Elias"]
 albedo_color = Color(0.65, 0.5, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_SanctuaryGround"]
+albedo_color = Color(0.12, 0.14, 0.16, 1)
+roughness = 0.92
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
 size = Vector3(120, 1, 120)
@@ -57,10 +65,11 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+scale = Vector3(1.7, 1.7, 1.7)
+
+[node name="CHR_Mara_Production" parent="Player/VisualMesh" instance=ExtResource("99_mara_production")]
+rotation = Vector3(0, 1.5707963, 0)
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
@@ -91,6 +100,7 @@ shape = SubResource("BoxShape3D_ground")
 [node name="MeshInstance3D" type="CSGBox3D" parent="SanctuaryGround"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(120, 1, 120)
+material = SubResource("Mat_SanctuaryGround")
 
 [node name="SurvivorCamp" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -99,10 +109,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 2
 
-[node name="EliasMesh" type="MeshInstance3D" parent="SurvivorCamp/InjuredElias"]
-transform = Transform3D(1, 0, 0, 0, 0.2, -0.98, 0, 0.98, 0.2, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Elias")
+[node name="EliasMesh" type="Node3D" parent="SurvivorCamp/InjuredElias"]
+position = Vector3(0, -0.3, 0)
+rotation = Vector3(1.5707963, 0, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/elias/source/CHR_Elias_Rig.glb"
+character_height = 1.8
 
 [node name="Interactable3D" type="Area3D" parent="SurvivorCamp/InjuredElias"]
 collision_layer = 4
@@ -115,6 +127,13 @@ shape = SubResource("BoxShape3D_trigger")
 [node name="Passage" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
 
+[node name="AdrianPresentation" type="Node3D" parent="Passage"]
+position = Vector3(1.5, 0, 0)
+rotation = Vector3(0, 3.1415926, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/adrian/source/CHR_Adrian_Rig.glb"
+character_height = 1.78
+
 [node name="AdrianConfrontationTrigger" type="Area3D" parent="Passage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 collision_layer = 0
@@ -122,3 +141,4 @@ collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Passage/AdrianConfrontationTrigger"]
 shape = SubResource("BoxShape3D_trigger")
+

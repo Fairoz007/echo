@@ -6,8 +6,11 @@
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="6_mara"]
-[ext_resource type="PackedScene" path="res://assets/models/prop_expedition_radio_station.glb" id="7_radio"]
-[ext_resource type="PackedScene" path="res://assets/models/prop_meridian_crate.glb" id="8_crate"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/prop_expedition_radio_station_LOD0.glb" id="7_radio"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/prop_meridian_crate_LOD0.glb" id="8_crate"]
+
+[ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
+[ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -131,3 +134,23 @@ collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitTunnel/ExitTrigger"]
 shape = SubResource("BoxShape3D_trigger")
+
+[node name="CampaignEnvironmentArt" type="Node3D" parent="."]
+script = ExtResource("81_environment")
+chapter_index = 4
+
+[node name="LevelCave" type="Node3D" parent="."]
+script = ExtResource("90_levelcave")
+soundscape_key = "C04"
+hall_reverb = "cave"
+profile_z = PackedFloat32Array(48, 28, 10, -8, -24, -42)
+profile_w = PackedFloat32Array(44, 45, 46, 45, 44, 24)
+profile_h = PackedFloat32Array(9, 12, 14, 11, 12, 7)
+seed_value = 4004
+pit_depth = 0.35
+hole_rects = Array[Rect2]([Rect2(-18, -10, 8, 8), Rect2(11.5, 4.5, 7, 7), Rect2(-11, -27, 6, 6)])
+water_pools = Array[Vector4]([Vector4(-14, -6, 8, -0.12), Vector4(15, 8, 7, -0.12), Vector4(-8, -24, 6, -0.12)])
+rock_masses = Array[Vector4]([Vector4(-6, 12, 3, 10), Vector4(8, -14, 3.5, 12), Vector4(-20, 10, 3, 10), Vector4(20, -22, 3, 12), Vector4(-24, -18, 4, 12), Vector4(10, 26, 3, 10)])
+lamps = PackedVector3Array(1.5, 0, 1.5, -1.5, 0, -1.2, 0, 0, 18, 3, 0, -30)
+vaelor_lights = PackedVector3Array(0, 2.5, -38)
+hide_paths = Array[NodePath]([NodePath("CaveCavern/Floor/MeshInstance3D")])

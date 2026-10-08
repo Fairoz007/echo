@@ -1,11 +1,12 @@
 """
-Automated Playthrough & Regression Verification Suite for ECHOES BENEATH
-Runs headless Godot tests on all levels from Main Menu -> Prologue -> Chapters 1-10 -> Finale -> Epilogue
+Automated scene boot regression suite for ECHOES BENEATH.
+Loads each level independently; does not test routes, player input or campaign progression.
 """
 
 import subprocess
 import sys
 import time
+import re
 
 GODOT_BIN = r"C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe"
 
@@ -28,18 +29,19 @@ SCENES = [
 
 def run_scene_test(name, scene_path):
     print(f"\n==================================================")
-    print(f"RUNNING PLAYTHROUGH TEST: {name} ({scene_path})")
+    print(f"RUNNING SCENE BOOT CHECK: {name} ({scene_path})")
     print(f"==================================================")
     
-    cmd = [GODOT_BIN, "--headless", scene_path, "--quit-after", "120"]
+    cmd = [GODOT_BIN, "--headless", "-s", "res://scripts/qa_scene_boot.gd", "--", scene_path]
+    timeout = 30
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     
     output = []
     try:
-        stdout, _ = proc.communicate(timeout=15)
+        stdout, _ = proc.communicate(timeout=timeout)
         print(stdout)
-        if proc.returncode != 0:
-            print(f"[FAIL] {name} exited with non-zero code: {proc.returncode}")
+        if proc.returncode != 0 or re.search(r"(?m)(?:SCRIPT ERROR:|ERROR:|Parse Error:)", stdout):
+            print(f"[FAIL] {name} failed (exit {proc.returncode}; engine error output also checked)")
             return False
         else:
             print(f"[PASS] {name} initialized and executed without errors.")
@@ -50,7 +52,7 @@ def run_scene_test(name, scene_path):
         return False
 
 def main():
-    print("STARTING COMPLETE CAMPAIGN REGRESSION RUN FOR ECHOES BENEATH...")
+    print("STARTING CAMPAIGN SCENE BOOT REGRESSION (NOT A PLAYTHROUGH)...")
     passed = 0
     failed = 0
     
@@ -65,7 +67,7 @@ def main():
     print(f"TOTAL LEVELS TESTED: {len(SCENES)}")
     print(f"PASSED: {passed}")
     print(f"FAILED: {failed}")
-    print(f"STATUS: {'100% VERIFIED' if failed == 0 else 'REGRESSION DETECTED'}")
+    print(f"STATUS: {'SCENE BOOT CHECKS PASSED; GAMEPLAY UNVERIFIED' if failed == 0 else 'REGRESSION DETECTED'}")
     print(f"==================================================")
     
     if failed > 0:

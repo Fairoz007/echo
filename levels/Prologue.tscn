@@ -5,14 +5,12 @@
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
-[ext_resource type="PackedScene" path="res://assets/models/prop_vaelor_key.glb" id="6_key"]
-[ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="7_arch"]
-[ext_resource type="PackedScene" path="res://assets/models/env_stalagmite_cluster.glb" id="8_stalag"]
-[ext_resource type="PackedScene" path="res://assets/models/env_boulder_moss.glb" id="9_boulder"]
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="10_mara"]
-[ext_resource type="PackedScene" path="res://assets/models/arch_wall_vaelor.glb" id="11_wall"]
-[ext_resource type="PackedScene" path="res://assets/models/arch_floor_stone.glb" id="12_floor"]
-[ext_resource type="PackedScene" path="res://assets/models/arch_glass_barrier.glb" id="13_glass"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/prop_vaelor_key_LOD0.glb" id="6_key"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/ruin_arch_portal_LOD0.glb" id="7_arch"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="10_mara"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/arch_glass_barrier_LOD0.glb" id="13_glass"]
+[ext_resource type="Script" path="res://systems/CavernArt.gd" id="14_cavern"]
+[ext_resource type="Script" path="res://systems/environment/PrologueWater.gd" id="15_water"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -25,6 +23,32 @@ height = 1.74
 [sub_resource type="StandardMaterial3D" id="Mat_Mara"]
 albedo_color = Color(0.25, 0.45, 0.35, 1)
 roughness = 0.8
+
+[sub_resource type="FastNoiseLite" id="Noise_cave"]
+noise_type = 0
+frequency = 0.035
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="Texture_cave_normal"]
+width = 512
+height = 512
+seamless = true
+as_normal_map = true
+bump_strength = 2.0
+noise = SubResource("Noise_cave")
+
+[sub_resource type="StandardMaterial3D" id="Mat_cave_backing"]
+albedo_color = Color(0.13, 0.115, 0.09, 1)
+roughness = 0.94
+normal_enabled = true
+normal_scale = 0.7
+normal_texture = SubResource("Texture_cave_normal")
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_relic"]
+radius = 1.25
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
 size = Vector3(100, 1, 100)
@@ -64,8 +88,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
 [node name="VisualMesh" type="Node3D" parent="Player"]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
 
-[node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("10_mara")]
+[node name="CHR_Mara_Production" parent="Player/VisualMesh" instance=ExtResource("10_mara")]
+rotation = Vector3(0, 1.5707963, 0)
+
 
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
@@ -74,6 +101,13 @@ light_color = Color(0.95, 0.98, 1, 1)
 light_energy = 3.5
 spot_range = 25.0
 spot_angle = 35.0
+
+[node name="FlashlightSpill" type="OmniLight3D" parent="Player"]
+position = Vector3(0, 1.4, 0.25)
+light_color = Color(0.65, 0.71, 0.78, 1)
+light_energy = 0.6
+omni_range = 4.0
+omni_attenuation = 1.5
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -87,53 +121,30 @@ margin = 0.2
 [node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
 current = true
 
+[node name="CaveWetZoneFall" type="Marker3D" parent="." groups=["cave_wet_zone"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, -13)
+metadata/radius = 4.0
+
+[node name="PrologueWater" type="Node3D" parent="."]
+script = ExtResource("15_water")
+
 [node name="CaveTunnel" type="Node3D" parent="."]
+
+[node name="NaturalCavernArt" type="Node3D" parent="."]
+script = ExtResource("14_cavern")
 
 [node name="Floor" type="StaticBody3D" parent="CaveTunnel"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CaveTunnel/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 shape = SubResource("BoxShape3D_ground")
 
-[node name="FloorMesh" type="CSGBox3D" parent="CaveTunnel/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-size = Vector3(100, 1, 100)
-
-[node name="StoneFloorModular1" parent="CaveTunnel/Floor" instance=ExtResource("12_floor")]
-transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0.05, -10)
-
-[node name="StoneFloorModular2" parent="CaveTunnel/Floor" instance=ExtResource("12_floor")]
-transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0.05, -22)
-
-[node name="LeftWall" type="CSGBox3D" parent="CaveTunnel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -15)
-size = Vector3(1, 8, 40)
-
-[node name="ModularWallLeft1" parent="CaveTunnel" instance=ExtResource("11_wall")]
-transform = Transform3D(0, 0, 1.8, 0, 1.8, 0, -1.8, 0, 0, -3.4, 0, -8)
-
-[node name="ModularWallLeft2" parent="CaveTunnel" instance=ExtResource("11_wall")]
-transform = Transform3D(0, 0, 1.8, 0, 1.8, 0, -1.8, 0, 0, -3.4, 0, -18)
-
-[node name="RightWall" type="CSGBox3D" parent="CaveTunnel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -15)
-size = Vector3(1, 8, 40)
-
-[node name="ModularWallRight1" parent="CaveTunnel" instance=ExtResource("11_wall")]
-transform = Transform3D(0, 0, -1.8, 0, 1.8, 0, 1.8, 0, 0, 3.4, 0, -8)
-
-[node name="ModularWallRight2" parent="CaveTunnel" instance=ExtResource("11_wall")]
-transform = Transform3D(0, 0, -1.8, 0, 1.8, 0, 1.8, 0, 0, 3.4, 0, -18)
-
-[node name="Ceiling" type="CSGBox3D" parent="CaveTunnel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -15)
-size = Vector3(9, 1, 40)
-
 [node name="ResonantArtifact" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0.5, -12)
 
 [node name="GlassProtectiveBarrier" parent="ResonantArtifact" instance=ExtResource("13_glass")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.5, -1.8)
+visible = false
+transform = Transform3D(0, 0, -1.2, 0, 1.2, 0, 1.2, 0, 0, 0, -0.076, -1.8)
 
 [node name="Model" parent="ResonantArtifact" instance=ExtResource("6_key")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.4, 0)
@@ -142,6 +153,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.4, 0)
 [node name="Pedestal" type="CSGCylinder3D" parent="ResonantArtifact"]
 radius = 0.5
 height = 0.8
+material = SubResource("Mat_cave_backing")
 
 [node name="Interactable3D" type="Area3D" parent="ResonantArtifact"]
 collision_layer = 4
@@ -150,24 +162,10 @@ prompt_message = "[E] Inspect Resonant Relic"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ResonantArtifact/Interactable3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CapsuleShape3D_player")
-
-[node name="CaveDecorations" type="Node3D" parent="."]
-
-[node name="Stalagmite1" parent="CaveDecorations" instance=ExtResource("8_stalag")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.8, 0, -6)
-
-[node name="Stalagmite2" parent="CaveDecorations" instance=ExtResource("8_stalag")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 2.6, 0, -18)
-
-[node name="Boulder1" parent="CaveDecorations" instance=ExtResource("9_boulder")]
-transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 2.4, 0, -8)
-
-[node name="Boulder2" parent="CaveDecorations" instance=ExtResource("9_boulder")]
-transform = Transform3D(2.0, 0, 0, 0, 2.0, 0, 0, 0, 2.0, -2.5, 0, -20)
+shape = SubResource("SphereShape3D_relic")
 
 [node name="ArchPortalModel" parent="." instance=ExtResource("7_arch")]
-transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, -28)
+transform = Transform3D(0, 0, 6, 0, 5, 0, -2, 0, 0, 0, 2.497158, -28)
 
 [node name="ExitTrigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -26)

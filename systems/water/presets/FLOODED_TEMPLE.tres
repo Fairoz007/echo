@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WaterPreset" format=3]
+
+[ext_resource type="Script" path="res://systems/water/WaterPreset.gd" id="1_f2vab"]
+
+[resource]
+script = ExtResource("1_f2vab")
+preset_name = "FLOODED_TEMPLE"
+waves = Array[Vector4]([Vector4(1, 0.5, 0.02, 4), Vector4(-0.3, 1, 0.01, 2.2), Vector4(0.6, -0.8, 0.005, 1.1), Vector4(-1, -0.1, 0.003, 0.7)])
+shallow_color = Color(0.18, 0.34, 0.24, 1)
+deep_color = Color(0.02, 0.05, 0.035, 1)
+absorption = Vector3(0.7, 0.3, 0.35)
+clarity = 0.55
+normal_strength = 0.4
+foam_amount = 0.4

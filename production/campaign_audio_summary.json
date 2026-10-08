@@ -1,0 +1,9 @@
+{
+  "spoken_lines": 68,
+  "runtime_assets": 105,
+  "dialogue_duration": 289.8314739229025,
+  "historical_generations": 106,
+  "provider_used": 6412,
+  "provider_limit": 10000,
+  "listening_qa": "PENDING"
+}

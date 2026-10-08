@@ -1,0 +1,44 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bh81kptgk5ptx"
+path.s3tc="res://.godot/imported/ch4_meridian_crate_stack_NormalGL_f5c4e4e8-3376-4078-b9fc-911eb14a894c.png-3862b4f57b7f0d9e02918597fe999ac4.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "7bc5ec3006edc1b5d331105c0de03b20"
+}
+
+[deps]
+
+source_file="res://assets/models/hero/ch4/ch4_meridian_crate_stack_NormalGL_f5c4e4e8-3376-4078-b9fc-911eb14a894c.png"
+dest_files=["res://.godot/imported/ch4_meridian_crate_stack_NormalGL_f5c4e4e8-3376-4078-b9fc-911eb14a894c.png-3862b4f57b7f0d9e02918597fe999ac4.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://assets/models/hero/ch4/ch4_meridian_crate_stack_NormalGL_f5c4e4e8-3376-4078-b9fc-911eb14a894c.png"
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

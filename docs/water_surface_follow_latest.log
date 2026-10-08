@@ -1,0 +1,92 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[MISSION] Checkpoint stored:chapter_06_start
+[SAVE] Successfully saved game slot0touser://qa_water/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_water/save_slot_1.json
+[PLAYER] Entered water body.
+[PLAYER] Took damage:0.2Remaining HP:99.8
+[PLAYER] Took damage:0.2Remaining HP:99.6
+[PLAYER] Took damage:0.2Remaining HP:99.4
+[PLAYER] Took damage:0.2Remaining HP:99.2
+[PLAYER] Took damage:0.2Remaining HP:99.0
+[PLAYER] Took damage:0.2Remaining HP:98.8
+[PLAYER] Took damage:0.2Remaining HP:98.6
+[PLAYER] Took damage:0.2Remaining HP:98.4
+[PLAYER] Took damage:0.2Remaining HP:98.2
+[PLAYER] Took damage:0.2Remaining HP:98.0
+[PLAYER] Took damage:0.2Remaining HP:97.8
+[PLAYER] Took damage:0.2Remaining HP:97.6
+[PLAYER] Took damage:0.2Remaining HP:97.4
+[PLAYER] Took damage:0.2Remaining HP:97.2
+[PLAYER] Took damage:0.2Remaining HP:97.0
+[PLAYER] Took damage:0.2Remaining HP:96.8
+[PLAYER] Took damage:0.2Remaining HP:96.6
+[PLAYER] Took damage:0.2Remaining HP:96.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:96.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:95.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:94.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:93.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:92.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:91.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.3999999999999
+[PLAYER] Took damage:0.2Remaining HP:90.1999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.9999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.7999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.5999999999999
+[PLAYER] Took damage:0.2Remaining HP:89.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:89.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.5999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:88.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.5999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:87.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.5999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:86.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:85.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:85.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:85.5999999999998
+[PLAYER] Took damage:0.2Remaining HP:85.3999999999998
+[PLAYER] Took damage:0.2Remaining HP:85.1999999999998
+[PLAYER] Took damage:0.2Remaining HP:84.9999999999998
+[PLAYER] Took damage:0.2Remaining HP:84.7999999999998
+[PLAYER] Took damage:0.2Remaining HP:84.5999999999998
+[PLAYER] Exited water body.
+[PLAYER] Entered water body.
+[PLAYER] Exited water body.
+QA PASS: actual Temple water entry, dive/swim/surface input, oxygen depletion/drowning/recovery
+[GAME_MANAGER] State changed to:MENU

@@ -1,0 +1,49 @@
+{
+  "chapter": "PRO",
+  "requested": 0,
+  "generated": 0,
+  "accepted": 0,
+  "rejected": 0,
+  "listening_qa": "NOT_PERFORMED",
+  "tier": "free",
+  "characters_before": 680,
+  "character_limit": 10000,
+  "license": "prototype_noncommercial",
+  "assets": [
+    {
+      "asset_id": "VO_PRO_MARA_001",
+      "path": "res://audio/dialogue/mara/VO_PRO_MARA_001.wav",
+      "voice_id": "EXAVITQu4vr4xnSDxMaL",
+      "duration": 4.040272108843538,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "VO_PRO_MARA_002",
+      "path": "res://audio/dialogue/mara/VO_PRO_MARA_002.wav",
+      "voice_id": "EXAVITQu4vr4xnSDxMaL",
+      "duration": 2.089795918367347,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "VO_PRO_MARA_003",
+      "path": "res://audio/dialogue/mara/VO_PRO_MARA_003.wav",
+      "voice_id": "EXAVITQu4vr4xnSDxMaL",
+      "duration": 4.96907029478458,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "VO_PRO_MARA_004",
+      "path": "res://audio/dialogue/mara/VO_PRO_MARA_004.wav",
+      "voice_id": "EXAVITQu4vr4xnSDxMaL",
+      "duration": 1.1145578231292517,
+      "sample_rate": 44100,
+      "channels": 1
+    }
+  ],
+  "errors": [],
+  "characters_after": 680,
+  "remaining_characters": 9320
+}

@@ -53,3 +53,9 @@ assets/
 - **Pose Requirement:** Neutral A-pose / standing symmetrical pose, arms separated from torso, 5 fingers per hand, legs separated, straight spine.
 - **Scale:** 1.70 Godot units (meters) high.
 - **Target File:** `assets/characters/mara/source/CHR_Mara_Base.glb`
+
+## Tripo delivery 2026-10-07
+- Mara: `assets/characters/mara/optimized/CHR_Mara_Game_LOD0..3.glb` (60k/30k/12k/5k tris) with idle, walk, run, jump, climb, fall, dive. Full-res: `CHR_Mara_Locomotion.glb`.
+- NPCs: `assets/characters/<name>/source/CHR_<Name>_Animated.glb` (idle, walk).
+- Meridian: `assets/characters/meridian/base/source/CHR_Meridian_Animated.glb` (idle, walk, run, shoot, hurt, slash).
+- All share the 41-bone Tripo legacy skeleton; clips retargeted with `scripts/generate_retargeted_library.py`. Details: TRIPO_DELIVERY_REPORT.md.

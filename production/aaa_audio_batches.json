@@ -1,0 +1,292 @@
+[
+  {
+    "time_utc": "2026-10-07T18:51:02Z",
+    "chapter": "PRO",
+    "assets": [
+      {
+        "asset_id": "REC_PRO",
+        "status": "GENERATED",
+        "est_cost": 145
+      },
+      {
+        "asset_id": "FOL_WADE_STEP_01",
+        "status": "GENERATED",
+        "est_cost": 10
+      },
+      {
+        "asset_id": "FOL_WADE_STEP_02",
+        "status": "GENERATED",
+        "est_cost": 10
+      },
+      {
+        "asset_id": "FOL_WADE_STEP_03",
+        "status": "GENERATED",
+        "est_cost": 10
+      },
+      {
+        "asset_id": "FOL_WADE_STEP_04",
+        "status": "GENERATED",
+        "est_cost": 10
+      }
+    ],
+    "remaining_before": 3588,
+    "remaining_after": 3588,
+    "used": 6412,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:51:30Z",
+    "chapter": "C01",
+    "assets": [
+      {
+        "asset_id": "REC_C01",
+        "status": "GENERATED",
+        "est_cost": 151
+      },
+      {
+        "asset_id": "FOL_MUD_STEP_01",
+        "status": "GENERATED",
+        "est_cost": 10
+      },
+      {
+        "asset_id": "FOL_MUD_STEP_02",
+        "status": "GENERATED",
+        "est_cost": 10
+      },
+      {
+        "asset_id": "FOL_MUD_STEP_03",
+        "status": "GENERATED",
+        "est_cost": 10
+      },
+      {
+        "asset_id": "FOL_MUD_STEP_04",
+        "status": "GENERATED",
+        "est_cost": 10
+      },
+      {
+        "asset_id": "AMB_JUNGLE_BIRDS_INSECTS",
+        "status": "GENERATED",
+        "est_cost": 150
+      }
+    ],
+    "remaining_before": 3588,
+    "remaining_after": 3518,
+    "used": 6482,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:51:36Z",
+    "chapter": "C02",
+    "assets": [
+      {
+        "asset_id": "REC_C02",
+        "status": "GENERATED",
+        "est_cost": 135
+      },
+      {
+        "asset_id": "SFX_STONE_MECHANISM_GRIND",
+        "status": "GENERATED",
+        "est_cost": 40
+      }
+    ],
+    "remaining_before": 3518,
+    "remaining_after": 3222,
+    "used": 6778,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:51:41Z",
+    "chapter": "C03",
+    "assets": [
+      {
+        "asset_id": "REC_C03",
+        "status": "GENERATED",
+        "est_cost": 104
+      }
+    ],
+    "remaining_before": 3222,
+    "remaining_after": 3222,
+    "used": 6778,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:51:47Z",
+    "chapter": "C04",
+    "assets": [
+      {
+        "asset_id": "REC_C04",
+        "status": "GENERATED",
+        "est_cost": 128
+      },
+      {
+        "asset_id": "VO_C04_NADIYA_001_R2",
+        "status": "GENERATED",
+        "est_cost": 81
+      }
+    ],
+    "remaining_before": 3222,
+    "remaining_after": 3222,
+    "used": 6778,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:51:52Z",
+    "chapter": "C05",
+    "assets": [
+      {
+        "asset_id": "REC_C05",
+        "status": "GENERATED",
+        "est_cost": 129
+      },
+      {
+        "asset_id": "VO_C05_MARA_001_R2",
+        "status": "GENERATED",
+        "est_cost": 65
+      }
+    ],
+    "remaining_before": 3222,
+    "remaining_after": 3222,
+    "used": 6778,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:52:16Z",
+    "chapter": "C06",
+    "assets": [
+      {
+        "asset_id": "REC_C06",
+        "status": "GENERATED",
+        "est_cost": 122
+      },
+      {
+        "asset_id": "VO_C06_MARA_003_R2",
+        "status": "GENERATED",
+        "est_cost": 51
+      },
+      {
+        "asset_id": "AMB_WATER_RISING_LOOP",
+        "status": "GENERATED",
+        "est_cost": 80
+      },
+      {
+        "asset_id": "AMB_WATER_DRAINING_LOOP",
+        "status": "GENERATED",
+        "est_cost": 80
+      },
+      {
+        "asset_id": "SFX_WATER_EXIT_SPLASH",
+        "status": "GENERATED",
+        "est_cost": 20
+      }
+    ],
+    "remaining_before": 3222,
+    "remaining_after": 3222,
+    "used": 6778,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:52:27Z",
+    "chapter": "C07",
+    "assets": [
+      {
+        "asset_id": "REC_C07",
+        "status": "GENERATED",
+        "est_cost": 125
+      },
+      {
+        "asset_id": "VO_C07_MARA_001_R2",
+        "status": "GENERATED",
+        "est_cost": 73
+      },
+      {
+        "asset_id": "VO_C07_MARA_003_R2",
+        "status": "GENERATED",
+        "est_cost": 68
+      },
+      {
+        "asset_id": "AMB_WATERFALL_RESONANT_LOOP",
+        "status": "GENERATED",
+        "est_cost": 120
+      }
+    ],
+    "remaining_before": 3222,
+    "remaining_after": 2842,
+    "used": 7158,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:52:31Z",
+    "chapter": "C08",
+    "assets": [
+      {
+        "asset_id": "REC_C08",
+        "status": "GENERATED",
+        "est_cost": 122
+      }
+    ],
+    "remaining_before": 2842,
+    "remaining_after": 2842,
+    "used": 7158,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:52:36Z",
+    "chapter": "C09",
+    "assets": [
+      {
+        "asset_id": "REC_C09",
+        "status": "GENERATED",
+        "est_cost": 120
+      },
+      {
+        "asset_id": "VO_C09_MARA_001_R2",
+        "status": "GENERATED",
+        "est_cost": 76
+      }
+    ],
+    "remaining_before": 1639,
+    "remaining_after": 1639,
+    "used": 8361,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:52:44Z",
+    "chapter": "C10",
+    "assets": [
+      {
+        "asset_id": "REC_C10",
+        "status": "GENERATED",
+        "est_cost": 120
+      },
+      {
+        "asset_id": "VO_C10_DRAKE_001_R2",
+        "status": "GENERATED",
+        "est_cost": 68
+      },
+      {
+        "asset_id": "SFX_HARMONIC_NODE_PULSE",
+        "status": "GENERATED",
+        "est_cost": 30
+      }
+    ],
+    "remaining_before": 1639,
+    "remaining_after": 1639,
+    "used": 8361,
+    "limit": 10000
+  },
+  {
+    "time_utc": "2026-10-07T18:52:47Z",
+    "chapter": "FIN",
+    "assets": [
+      {
+        "asset_id": "REC_FIN",
+        "status": "GENERATED",
+        "est_cost": 110
+      }
+    ],
+    "remaining_before": 1639,
+    "remaining_after": 1639,
+    "used": 8361,
+    "limit": 10000
+  }
+]

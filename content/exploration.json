@@ -1,0 +1,382 @@
+{
+  "1": [
+    {
+      "id": "C01_TOMB_1",
+      "name": "Surveyor's Refuge",
+      "lore": "The survey team marked this hollow before the storm. Elias refused to cut the old vines: their roots trace a buried channel.",
+      "kind": "harmonic",
+      "solution": [
+        1,
+        2,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 2 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C01_TOMB_2",
+      "name": "Eastern Ridge Cache",
+      "lore": "Nadiya's samples show the forest reclaimed a planned settlement. The oldest roots follow the same spacing as the stone foundations.",
+      "kind": "counterweight",
+      "solution": [
+        2,
+        0,
+        1
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 3 marks. The first and second together bear 4. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C01_TOMB_3",
+      "name": "Watchkeeper's Hollow",
+      "lore": "A lookout faced the valley, not the mountains. Its builders feared people arriving from the surface more than anything below.",
+      "kind": "sluice",
+      "solution": [
+        3,
+        2,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 4 marks. The first and second together bear 7. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "2": [
+    {
+      "id": "C02_TOMB_1",
+      "name": "Reservoir Ledger",
+      "lore": "The Vaelor recorded drought seasons in cuts along the cistern wall. Opening every sluice would starve the homes downstream.",
+      "kind": "harmonic",
+      "solution": [
+        2,
+        3,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 3 marks. The first and second together bear 7. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C02_TOMB_2",
+      "name": "Mason's Balance",
+      "lore": "A mason left three unfinished counterweights. Their matching joints reveal that balance, rather than force, moved the sanctuary doors.",
+      "kind": "counterweight",
+      "solution": [
+        3,
+        1,
+        3
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 4 marks. The first and second together bear 6. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C02_TOMB_3",
+      "name": "Hall of Quiet Water",
+      "lore": "The inscription honours those who kept water clean. Power was valuable, but the city survived because someone maintained its channels.",
+      "kind": "sluice",
+      "solution": [
+        0,
+        3,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 1 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "3": [
+    {
+      "id": "C03_TOMB_1",
+      "name": "Anchor Workshop",
+      "lore": "The bridge anchors were designed to yield in sequence. Blasting removed the first restraint and forced the remaining stone to bear the whole span.",
+      "kind": "harmonic",
+      "solution": [
+        3,
+        0,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 4 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C03_TOMB_2",
+      "name": "Rigger's Shelter",
+      "lore": "Tomas found a safe line here before the expedition crossed. His rope markings are fresh; the worn rings beneath them are centuries old.",
+      "kind": "counterweight",
+      "solution": [
+        0,
+        2,
+        1
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 1 marks. The first and second together bear 4. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C03_TOMB_3",
+      "name": "Fracture Archive",
+      "lore": "A repair panel documents earlier bridge failures. The Vaelor rebuilt after each tremor instead of pretending the mountain could be conquered.",
+      "kind": "sluice",
+      "solution": [
+        1,
+        0,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 2 marks. The first and second together bear 3. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "4": [
+    {
+      "id": "C04_TOMB_1",
+      "name": "Abandoned Listening Post",
+      "lore": "A previous expedition heard patterned pulses and mistook them for machinery. Their notes end with a warning: do not answer a signal you cannot interpret.",
+      "kind": "harmonic",
+      "solution": [
+        0,
+        1,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 1 marks. The first and second together bear 3. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C04_TOMB_2",
+      "name": "Mineral Gallery",
+      "lore": "The same mineral appears in the Acoustic Key and the cave walls. The stone carries vibration without needing hidden wires or a source of magic.",
+      "kind": "counterweight",
+      "solution": [
+        1,
+        3,
+        3
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 2 marks. The first and second together bear 6. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C04_TOMB_3",
+      "name": "Radio Refuge",
+      "lore": "Meridian batteries powered this abandoned receiver. Someone was listening to the expedition long before its camp reported trouble.",
+      "kind": "sluice",
+      "solution": [
+        2,
+        1,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 3 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "5": [
+    {
+      "id": "C05_TOMB_1",
+      "name": "Contractor's Cache",
+      "lore": "The supply manifest lists surveying equipment beside ammunition. Meridian prepared for both excavation and resistance.",
+      "kind": "harmonic",
+      "solution": [
+        1,
+        2,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 2 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C05_TOMB_2",
+      "name": "Blind Approach",
+      "lore": "The old service hollow avoids the patrol route. Its walls absorb footsteps; workers used this passage to maintain the conduit without interrupting ceremonies.",
+      "kind": "counterweight",
+      "solution": [
+        2,
+        0,
+        1
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 3 marks. The first and second together bear 4. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C05_TOMB_3",
+      "name": "Field Technician's Vault",
+      "lore": "A technician warned that forcing the resonators could amplify a fracture. Drake crossed out the safety limit and signed the instruction himself.",
+      "kind": "sluice",
+      "solution": [
+        3,
+        2,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 4 marks. The first and second together bear 7. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "6": [
+    {
+      "id": "C06_TOMB_1",
+      "name": "Sunken Archive",
+      "lore": "The archive was intentionally flooded when the city was evacuated. Water protected the tablets from heat and made their removal difficult.",
+      "kind": "harmonic",
+      "solution": [
+        2,
+        3,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 3 marks. The first and second together bear 7. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C06_TOMB_2",
+      "name": "Sluice Keeper's Tomb",
+      "lore": "The keeper chose the city's drinking reservoir over the royal gardens during the last drought. Her memorial records a practical decision, not a heroic death.",
+      "kind": "counterweight",
+      "solution": [
+        3,
+        1,
+        3
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 4 marks. The first and second together bear 6. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C06_TOMB_3",
+      "name": "Diver's Reliquary",
+      "lore": "Air bells once let maintenance workers inspect these channels. The carved route rises toward a dry chamber before returning to the main sluice.",
+      "kind": "sluice",
+      "solution": [
+        0,
+        3,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 1 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "7": [
+    {
+      "id": "C07_TOMB_1",
+      "name": "Tomb of Weights",
+      "lore": "The city's builders considered equilibrium a civic duty. Every household contributed stone to a public counterweight, sharing the cost of opening the aqueduct.",
+      "kind": "harmonic",
+      "solution": [
+        3,
+        0,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 4 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C07_TOMB_2",
+      "name": "Hall of Echoes",
+      "lore": "Messages travelled through stone conduits, but the city also built quiet rooms. Its scholars understood that constant information could overwhelm judgment.",
+      "kind": "counterweight",
+      "solution": [
+        0,
+        2,
+        1
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 1 marks. The first and second together bear 4. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C07_TOMB_3",
+      "name": "Broken Observatory",
+      "lore": "The observatory measured the mountain's response to distant storms. It was an early warning station, not a temple predicting destiny.",
+      "kind": "sluice",
+      "solution": [
+        1,
+        0,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 2 marks. The first and second together bear 3. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "8": [
+    {
+      "id": "C08_TOMB_1",
+      "name": "Expedition Safehouse",
+      "lore": "Adrian copied the team's coordinates here. His final note admits he wanted recognition, then realised Meridian intended to claim the whole discovery.",
+      "kind": "harmonic",
+      "solution": [
+        0,
+        1,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 1 marks. The first and second together bear 3. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C08_TOMB_2",
+      "name": "Scholar's Testament",
+      "lore": "A scholar refused a patron who demanded unrestricted access to the Vault. The sealed correspondence shows that the old city faced the same temptation.",
+      "kind": "counterweight",
+      "solution": [
+        1,
+        3,
+        3
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 2 marks. The first and second together bear 6. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C08_TOMB_3",
+      "name": "Physician's Archive",
+      "lore": "The archive describes injuries caused by resonance experiments. Elias's wounds resemble those accounts; the danger is physical and understood, not a curse.",
+      "kind": "sluice",
+      "solution": [
+        2,
+        1,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 3 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "9": [
+    {
+      "id": "C09_TOMB_1",
+      "name": "Heart Road Shelter",
+      "lore": "Workers built sheltered bays along the conduit road. If a section failed, survivors could wait behind a stone baffle rather than outrun the shock wave.",
+      "kind": "harmonic",
+      "solution": [
+        1,
+        2,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 2 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C09_TOMB_2",
+      "name": "Conduit Survey",
+      "lore": "The four harmonic branches share a foundation. Disabling one lowers the strain locally; stopping the whole system requires all four to be isolated.",
+      "kind": "counterweight",
+      "solution": [
+        2,
+        0,
+        1
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 3 marks. The first and second together bear 4. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C09_TOMB_3",
+      "name": "Last Maintenance Record",
+      "lore": "The final inspection recommends abandoning the Vault. The repair team knew its limit and left a route for anyone who would follow.",
+      "kind": "sluice",
+      "solution": [
+        3,
+        2,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 4 marks. The first and second together bear 7. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    }
+  ],
+  "10": [
+    {
+      "id": "C10_TOMB_1",
+      "name": "First Harmonic Archive",
+      "lore": "The northern resonator carries the primary pulse. Its neighbours correct its drift; together they behave like one coupled system.",
+      "kind": "harmonic",
+      "solution": [
+        2,
+        3,
+        2
+      ],
+      "clue": "Engraving: each dial has four positions. Count ring marks from one to four. The first dial bears 3 marks. The first and second together bear 7. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C10_TOMB_2",
+      "name": "Vault Custodian's Tomb",
+      "lore": "The custodian held the authority to shut the Vault down. This tomb honours the decision to surrender power rather than risk the city.",
+      "kind": "counterweight",
+      "solution": [
+        3,
+        1,
+        3
+      ],
+      "clue": "Engraving: each dial has four positions. Count weight units from one to four. The first dial bears 4 marks. The first and second together bear 6. All three together bear 10. Balance the mechanism, then test the rear archive seal."
+    },
+    {
+      "id": "C10_TOMB_3",
+      "name": "Quiet Heart Chamber",
+      "lore": "The final record says the mountain should be listened to, not commanded. Mara can preserve that knowledge without leaving an active weapon behind.",
+      "kind": "sluice",
+      "solution": [
+        0,
+        3,
+        0
+      ],
+      "clue": "Engraving: each dial has four positions. Count water-channel notches from one to four. The first dial bears 1 marks. The first and second together bear 5. All three together bear 6. Balance the mechanism, then test the rear archive seal."
+    }
+  ]
+}

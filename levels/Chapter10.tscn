@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://botadrfyxfcrr"]
 
 [ext_resource type="Script" path="res://levels/Chapter10.gd" id="1_c10"]
+[ext_resource type="Script" path="res://systems/ProductionCharacter.gd" id="80_character"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
-[ext_resource type="PackedScene" path="res://assets/models/ruin_pillar_vaelor.glb" id="6_pillar"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/ruin_pillar_vaelor_LOD0.glb" id="6_pillar"]
+
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="99_mara_production"]
+
+[ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
+[ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -55,10 +61,11 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+scale = Vector3(1.7, 1.7, 1.7)
+
+[node name="CHR_Mara_Production" parent="Player/VisualMesh" instance=ExtResource("99_mara_production")]
+rotation = Vector3(0, 1.5707963, 0)
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
@@ -115,6 +122,13 @@ collision_mask = 1
 shape = SubResource("BoxShape3D_trigger")
 
 [node name="ResonanceChamber" type="Node3D" parent="."]
+
+[node name="DrakePresentation" type="Node3D" parent="ResonanceChamber"]
+position = Vector3(0, 0, -6)
+rotation = Vector3(0, 3.1415926, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/drake/source/CHR_Drake_Rig.glb"
+character_height = 1.86
 
 [node name="NodeNorth" type="StaticBody3D" parent="ResonanceChamber"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -18)
@@ -186,3 +200,21 @@ prompt_message = "[E] Deactivate West Resonance Node"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ResonanceChamber/NodeWest/Interactable3D"]
 shape = SubResource("BoxShape3D_trigger")
+
+[node name="CampaignEnvironmentArt" type="Node3D" parent="."]
+script = ExtResource("81_environment")
+chapter_index = 10
+
+[node name="LevelCave" type="Node3D" parent="."]
+script = ExtResource("90_levelcave")
+soundscape_key = "C10"
+hall_reverb = "vault"
+profile_z = PackedFloat32Array(48, 30, 15, 0, -15, -30, -40)
+profile_w = PackedFloat32Array(44, 45, 40, 38, 40, 30, 14)
+profile_h = PackedFloat32Array(12, 16, 24, 28, 24, 16, 9)
+seed_value = 10010
+vein_start_z = 25.0
+lamps = PackedVector3Array(2, 0, 32, -2, 0, 26)
+vaelor_lights = PackedVector3Array(0, 10, 0, 0, 2.5, -18, 0, 2.5, 18, 18, 2.5, 0, -18, 2.5, 0, 0, 3, -30)
+ambient_color = Color(0.1, 0.13, 0.17, 1)
+hide_paths = Array[NodePath]([NodePath("ChamberFloor/MeshInstance3D")])

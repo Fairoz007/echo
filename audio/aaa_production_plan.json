@@ -1,0 +1,299 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "chapter": "PRO",
+      "kind": "recap",
+      "asset_id": "REC_PRO",
+      "character": "MARA",
+      "text": "I woke beneath the mountain with a dead radio and a glyph that hummed under my hand. To understand how I got there, I have to go back three days.",
+      "dialogue_id": "REC_PRO"
+    },
+    {
+      "chapter": "C01",
+      "kind": "recap",
+      "asset_id": "REC_C01",
+      "character": "MARA",
+      "text": "We reached camp under gathering cloud. The survey showed chambers too symmetrical to be natural, and on the eastern ridge I found a sealed Vaelor door.",
+      "dialogue_id": "REC_C01"
+    },
+    {
+      "chapter": "C02",
+      "kind": "recap",
+      "asset_id": "REC_C02",
+      "character": "MARA",
+      "text": "Water opened the first ruin, and its inscription named the Voice Below. This stone was built to carry sound the way roads carry people.",
+      "dialogue_id": "REC_C02"
+    },
+    {
+      "chapter": "C03",
+      "kind": "recap",
+      "asset_id": "REC_C03",
+      "character": "MARA",
+      "text": "The bridge gave way, and I fell alone into the fissure. Its anchors hadn't failed. Someone had cut them.",
+      "dialogue_id": "REC_C03"
+    },
+    {
+      "chapter": "C04",
+      "kind": "recap",
+      "asset_id": "REC_C04",
+      "character": "MARA",
+      "text": "I followed air and water through the dark and got the radio working. Nadiya's warning came too late. Meridian was already below.",
+      "dialogue_id": "REC_C04"
+    },
+    {
+      "chapter": "C05",
+      "kind": "recap",
+      "asset_id": "REC_C05",
+      "character": "MARA",
+      "text": "I slipped past Lucian Drake's patrols. Their crates proved one thing: someone gave them our route before we ever opened the door.",
+      "dialogue_id": "REC_C05"
+    },
+    {
+      "chapter": "C06",
+      "kind": "recap",
+      "asset_id": "REC_C06",
+      "character": "MARA",
+      "text": "I drained the drowned temple, and the lower gate rose out of the water. Beyond it was a city no one had seen in centuries.",
+      "dialogue_id": "REC_C06"
+    },
+    {
+      "chapter": "C07",
+      "kind": "recap",
+      "asset_id": "REC_C07",
+      "character": "MARA",
+      "text": "The City of Echoes left its warning on the walls: the Vault worked, until it didn't. Then Tomas called. The team was waiting.",
+      "dialogue_id": "REC_C07"
+    },
+    {
+      "chapter": "C08",
+      "kind": "recap",
+      "asset_id": "REC_C08",
+      "character": "MARA",
+      "text": "Elias was hurt, and the Key was gone. Adrian sold our coordinates to Meridian, and now Drake holds the way into the Vault.",
+      "dialogue_id": "REC_C08"
+    },
+    {
+      "chapter": "C09",
+      "kind": "recap",
+      "asset_id": "REC_C09",
+      "character": "MARA",
+      "text": "Drake's charges tore the Heart Road apart around me. I reached the Vault threshold with the mountain shaking at my back.",
+      "dialogue_id": "REC_C09"
+    },
+    {
+      "chapter": "C10",
+      "kind": "recap",
+      "asset_id": "REC_C10",
+      "character": "MARA",
+      "text": "I broke the four nodes, and the feedback tore the Vault out of Drake's hands. Then the chamber began to seal, and I ran.",
+      "dialogue_id": "REC_C10"
+    },
+    {
+      "chapter": "FIN",
+      "kind": "recap",
+      "asset_id": "REC_FIN",
+      "character": "MARA",
+      "text": "Tomas pulled me onto the ridge as the mountain closed behind us. Everyone made it out. The Vault stays buried.",
+      "dialogue_id": "REC_FIN"
+    },
+    {
+      "chapter": "C04",
+      "kind": "vo",
+      "asset_id": "VO_C04_NADIYA_001_R2",
+      "character": "NADIYA",
+      "text": "Mara? Oh, thank God. Listen to me. Meridian contractors are in the valley. Armed.",
+      "dialogue_id": "C04_NADIYA_001",
+      "radio": true
+    },
+    {
+      "chapter": "C05",
+      "kind": "vo",
+      "asset_id": "VO_C05_MARA_001_R2",
+      "character": "MARA",
+      "text": "Meridian. Armed, and standing between me and the water. Stay low.",
+      "dialogue_id": "C05_MARA_001",
+      "radio": false
+    },
+    {
+      "chapter": "C06",
+      "kind": "vo",
+      "asset_id": "VO_C06_MARA_003_R2",
+      "character": "MARA",
+      "text": "Nadiya... there's a city down here. An entire city.",
+      "dialogue_id": "C06_MARA_003",
+      "radio": false
+    },
+    {
+      "chapter": "C07",
+      "kind": "vo",
+      "asset_id": "VO_C07_MARA_001_R2",
+      "character": "MARA",
+      "text": "They built a city under the mountain. And every stone is still listening.",
+      "dialogue_id": "C07_MARA_001",
+      "radio": false
+    },
+    {
+      "chapter": "C07",
+      "kind": "vo",
+      "asset_id": "VO_C07_MARA_003_R2",
+      "character": "MARA",
+      "text": "A tomb sealed with counterweights. They engineered even their grief.",
+      "dialogue_id": "C07_MARA_003",
+      "radio": false
+    },
+    {
+      "chapter": "C09",
+      "kind": "vo",
+      "asset_id": "VO_C09_MARA_001_R2",
+      "character": "MARA",
+      "text": "Drake's charges are shaking the conduits loose. The whole mountain feels it.",
+      "dialogue_id": "C09_MARA_001",
+      "radio": false
+    },
+    {
+      "chapter": "C10",
+      "kind": "vo",
+      "asset_id": "VO_C10_DRAKE_001_R2",
+      "character": "DRAKE",
+      "text": "Hear that, Vale? Every fault line on Earth, waiting for a conductor.",
+      "dialogue_id": "C10_DRAKE_001",
+      "radio": false
+    },
+    {
+      "kind": "sfx",
+      "chapter": "PRO",
+      "asset_id": "FOL_WADE_STEP_01",
+      "category": "footsteps/water",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single footstep wading through shallow ankle-deep water in a stone cave, boot sloshing, close mic, dry, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "PRO",
+      "asset_id": "FOL_WADE_STEP_02",
+      "category": "footsteps/water",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single footstep wading through shallow ankle-deep water in a stone cave, boot sloshing, close mic, dry, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "PRO",
+      "asset_id": "FOL_WADE_STEP_03",
+      "category": "footsteps/water",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single footstep wading through shallow ankle-deep water in a stone cave, boot sloshing, close mic, dry, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "PRO",
+      "asset_id": "FOL_WADE_STEP_04",
+      "category": "footsteps/water",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single footstep wading through shallow ankle-deep water in a stone cave, boot sloshing, close mic, dry, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C01",
+      "asset_id": "FOL_MUD_STEP_01",
+      "category": "footsteps/mud",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single hiking boot footstep squelching in wet jungle mud, close mic, dry, isolated, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C01",
+      "asset_id": "FOL_MUD_STEP_02",
+      "category": "footsteps/mud",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single hiking boot footstep squelching in wet jungle mud, close mic, dry, isolated, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C01",
+      "asset_id": "FOL_MUD_STEP_03",
+      "category": "footsteps/mud",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single hiking boot footstep squelching in wet jungle mud, close mic, dry, isolated, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C01",
+      "asset_id": "FOL_MUD_STEP_04",
+      "category": "footsteps/mud",
+      "duration": 1,
+      "loop": false,
+      "prompt": "single hiking boot footstep squelching in wet jungle mud, close mic, dry, isolated, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C01",
+      "asset_id": "AMB_JUNGLE_BIRDS_INSECTS",
+      "category": "ambience/jungle",
+      "duration": 15,
+      "loop": true,
+      "prompt": "dense tropical rainforest ambience, distant exotic bird calls, cicadas and insects chirping, gentle leaves, no wind gusts, no music, seamless loop"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C02",
+      "asset_id": "SFX_STONE_MECHANISM_GRIND",
+      "category": "vaelor",
+      "duration": 4,
+      "loop": false,
+      "prompt": "massive ancient stone counterweight mechanism grinding and sliding into place, heavy stone on stone, deep thud at end, cavern reverb"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C06",
+      "asset_id": "AMB_WATER_RISING_LOOP",
+      "category": "ambience/temple",
+      "duration": 8,
+      "loop": true,
+      "prompt": "water rushing and pouring into a flooded stone chamber, rising water level, turbulent gurgling, seamless loop, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C06",
+      "asset_id": "AMB_WATER_DRAINING_LOOP",
+      "category": "ambience/temple",
+      "duration": 8,
+      "loop": true,
+      "prompt": "large basin of water draining through a stone sluice, swirling vortex gurgle, deep hollow drain, seamless loop, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C06",
+      "asset_id": "SFX_WATER_EXIT_SPLASH",
+      "category": "water",
+      "duration": 2,
+      "loop": false,
+      "prompt": "person climbing out of water onto stone ledge, water dripping and splashing off clothes, close, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C07",
+      "asset_id": "AMB_WATERFALL_RESONANT_LOOP",
+      "category": "ambience/lost_city",
+      "duration": 12,
+      "loop": true,
+      "prompt": "large distant underground waterfall roaring into a vast cavern, deep resonant echo, low hum, seamless loop, no music"
+    },
+    {
+      "kind": "sfx",
+      "chapter": "C10",
+      "asset_id": "SFX_HARMONIC_NODE_PULSE",
+      "category": "vaelor",
+      "duration": 3,
+      "loop": false,
+      "prompt": "deep crystalline harmonic resonance pulse from an ancient stone node, singing glass tone swelling then fading, sub bass, no music"
+    }
+  ]
+}

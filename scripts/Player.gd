@@ -1,15 +1,54 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name Player
+const RAGDOLL := preload("res://scripts/Ragdoll.gd")
 
-## Third-Person Character Controller for Mara Vale
-@export_group("Locomotion Speeds")
-@export var walk_speed: float = 2.2
-@export var run_speed: float = 4.8
-@export var sprint_speed: float = 7.2
-@export var crouch_speed: float = 1.5
-@export var swim_speed: float = 3.2
-@export var jump_velocity: float = 5.2
-@export var rotation_speed: float = 12.0
+## Third-person controller for Mara Vale.
+## Movement contract and measured values: see MOVEMENT_TUNING.md.
+
+@export_group("Locomotion Speeds (m/s)")
+@export var walk_speed: float = 1.6
+@export var run_speed: float = 3.6
+@export var sprint_speed: float = 5.6
+@export var crouch_speed: float = 1.3
+@export var swim_speed: float = 1.6
+@export var swim_sprint_speed: float = 2.4
+@export var swim_vertical_speed: float = 1.4
+@export var climb_speed: float = 1.1
+
+@export_group("Acceleration (m/s^2)")
+@export var ground_acceleration: float = 14.0
+@export var ground_deceleration: float = 18.0
+@export var air_acceleration: float = 3.5
+@export var water_acceleration: float = 4.0
+@export var rotation_speed: float = 10.0 ## rad/s turn rate of the body toward the move direction
+@export var sprint_rotation_speed: float = 6.5
+
+@export_group("Jump & Gravity")
+@export var base_gravity: float = 9.8
+@export var fall_gravity_multiplier: float = 1.9
+@export var jump_cut_gravity_multiplier: float = 2.4 ## applied while rising with jump released
+@export var jump_apex_height: float = 1.1
+@export var terminal_velocity: float = 40.0
+@export var coyote_time: float = 0.12
+@export var jump_buffer_time: float = 0.15
+@export var hard_landing_speed: float = 9.0
+@export var damage_landing_speed: float = 15.0
+@export var landing_damage_per_mps: float = 12.0
+
+@export_group("Body")
+@export var character_height: float = 1.70 ## visual height Mara is normalised to
+@export var capsule_radius: float = 0.30
+@export var capsule_height: float = 1.72
+@export var crouch_capsule_height: float = 1.15
+@export var max_slope_degrees: float = 44.0
+@export var max_step_height: float = 0.35
+@export var floor_snap: float = 0.32
+
+@export_group("Traversal")
+@export var mantle_min_height: float = 0.45
+@export var mantle_max_height: float = 1.9
+@export var mantle_reach: float = 0.75
+@export var world_collision_mask: int = 2
 
 @export_group("Vitals")
 @export var max_health: float = 100.0
@@ -26,11 +65,41 @@ var current_oxygen: float = 30.0
 @export var interaction_detector: Area3D
 @export var anim_player: AnimationPlayer
 
-# Kinematic Locomotion & Gait Simulation
+@export_group("Animation Mapping")
+## Logical animation slot -> candidate clip names (first existing wins). Data-driven
+## so a re-rigged Mara with more clips only needs this dictionary edited.
+@export var clip_candidates: Dictionary = {
+	"idle": ["idle", "Idle", "idle_loop", "Idle_Loop"],
+	"walk": ["walk", "Walk", "walk_loop", "Walking"],
+	"run": ["run", "Run", "jog", "Running"],
+	"sprint": ["sprint", "Sprint", "run_fast"],
+	"jump": ["jump", "Jump", "jump_start"],
+	"fall": ["fall", "Fall", "falling", "fall_loop"],
+	"land": ["land", "Land", "landing"],
+	"crouch_idle": ["crouch_idle", "Crouch_Idle", "crouch"],
+	"crouch_walk": ["crouch_walk", "Crouch_Walk", "sneak"],
+	"climb": ["climb", "Climb", "climb_loop"],
+	"mantle": ["mantle", "Mantle", "vault", "climb_ledge"],
+	"swim_idle": ["swim_idle", "tread", "treading_water"],
+	"swim": ["swim", "Swim", "swim_forward", "dive"], # dive = stand-in until a swim clip exists
+}
+## Slot used when a slot has no clip. Chains always terminate at "idle".
+@export var clip_fallback: Dictionary = {
+	"walk": "idle", "run": "walk", "sprint": "run", "jump": "idle", "fall": "idle",
+	"land": "idle", "crouch_idle": "idle", "crouch_walk": "walk", "climb": "idle",
+	"mantle": "climb", "swim_idle": "idle", "swim": "swim_idle",
+}
+## Clip -> ground speed (m/s) at playback scale 1. Measured from root travel when the
+## clip has a Hip/Root translation track; otherwise taken from here.
+@export var clip_cycle_speed_override: Dictionary = {}
+## Playback scale used when the sprint slot falls back to the run clip.
+@export var sprint_from_run_scale: float = 1.35
+@export var default_cycle_speed: Dictionary = {"walk": 1.4, "run": 3.5, "sprint": 5.5, "crouch_walk": 1.0, "swim": 1.2, "climb": 0.8}
+
+# Kept for compatibility with older callers.
 var gait_phase: float = 0.0
 var step_timer: float = 0.0
 var visual_base_y: float = 0.0
-
 
 enum State {
 	IDLE,
@@ -44,36 +113,535 @@ enum State {
 	MANTLE,
 	LEDGE_HANG,
 	SWIM,
-	DEAD
+	DEAD,
+	CLIMB,
 }
 
 var current_state: State = State.IDLE
 var is_flashlight_on: bool = false
-var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
+var gravity: float = 9.8
 var nearby_interactable: Interactable3D = null
 
-# Traversal Probes
+# Water (see MOVEMENT_TUNING.md "Water contract")
+var water_surface: float = 0.0
+var water_vertical_velocity := 0.0
+var underwater := false
+var in_water := false
+var water_depth := 0.0 ## surface height minus feet height (<=0 when dry)
+var _legacy_water := false
+var _water_body: Node = null
+const SWIM_ENTER_DEPTH := 1.25
+const SWIM_EXIT_DEPTH := 1.0
+const SWIM_FLOAT_DEPTH := 1.38 ## feet below surface while floating: shoulders at the waterline
+const WADE_DEPTH := 0.5
+
+# Mantle
 var mantle_target_pos: Vector3 = Vector3.ZERO
 var mantle_timer: float = 0.0
+var _mantle_points: Array[Vector3] = []
+var _mantle_durations: Array[float] = []
+var _mantle_segment := 0
 
+# Climb
+var _climb_normal := Vector3.ZERO
+
+# Combat (unchanged behaviour)
+var ammunition := 12
+var reserve_ammunition := 60
+var magazine_capacity := 12
+var weapon_cooldown := 0.0
+var reload_timer := 0.0
+var melee_cooldown := 0.0
+var is_aiming := false
+var sidearm_visual: Node3D
+var pick_visual: Node3D
+
+# Movement internals
+var facing_yaw := 0.0
+var is_crouching := false
+var camera_height := 1.55 ## read by CameraController
+var anim_state := "locomotion"
+var horizontal_speed := 0.0
+var _coyote := 0.0
+var _jump_buffer := 0.0
+var _was_on_floor := true
+var _air_peak_fall_speed := 0.0
+var _land_lock := 0.0
+var _land_lock_factor := 1.0
+var _land_timer := 0.0
+var _visual_offset := Vector3.ZERO
+var _visual_root_pos := Vector3.ZERO
+var _collision_shape: CollisionShape3D
+var _capsule: CapsuleShape3D
+var _step_distance := 0.0
+var _anim_tree: AnimationTree
+var _clip_for_slot: Dictionary = {}
+var _clip_speed: Dictionary = {}
+var _loco_max_speed := {}
+var _blend_points := {}
+var _dominant_scale := 1.0
+var last_landing_speed := 0.0
+var last_step_up := 0.0
+
+signal ammunition_changed(loaded: int, reserve: int)
 signal health_changed(new_health: float, max_h: float)
 signal stamina_changed(new_stamina: float, max_s: float)
 signal oxygen_changed(new_oxygen: float, max_o: float)
 signal interactable_detected(prompt: String)
 signal interactable_lost()
+signal landed(impact_speed: float, hard: bool)
 
 func _ready() -> void:
+	gravity = base_gravity
 	current_health = max_health
 	current_stamina = max_stamina
 	current_oxygen = max_oxygen
 	if flashlight:
 		flashlight.visible = is_flashlight_on
+	_setup_body()
 	if visual_mesh:
+		_ensure_rigged_model()
+		facing_yaw = visual_mesh.rotation.y + rotation.y
+		_normalise_visual_height()
+		_visual_root_pos = visual_mesh.position
 		visual_base_y = visual_mesh.position.y
 		if not anim_player:
 			anim_player = visual_mesh.find_child("AnimationPlayer", true, false)
+		_hide_stray_meshes()
+	_setup_animation()
+	_setup_crouch_pose()
 	_setup_interaction_detector()
+	_bind_gameplay_inputs()
+	_attach_equipment()
 
+# ---------------------------------------------------------------- body setup
+
+## Canonical rigged Mara. Several levels still instance CHR_Mara_Optimized.glb (static, no
+## skeleton -> frozen bind/T-pose) or CHR_Mara_Production.glb (idle+walk only); any model
+## that is not this one is replaced at startup so every level animates identically.
+@export_file("*.glb") var rigged_model_path := "res://assets/characters/mara/optimized/CHR_Mara_Game_LOD0.glb"
+
+func _ensure_rigged_model() -> void:
+	if rigged_model_path == "" or not ResourceLoader.exists(rigged_model_path):
+		return
+	for child in visual_mesh.get_children():
+		if child.scene_file_path == rigged_model_path:
+			return
+	var packed := load(rigged_model_path) as PackedScene
+	if not packed:
+		return
+	var old_rotation := Vector3(0, PI * 0.5, 0)
+	for child in visual_mesh.get_children():
+		if child is Node3D and child.scene_file_path.ends_with(".glb"):
+			old_rotation = (child as Node3D).rotation
+			visual_mesh.remove_child(child)
+			child.queue_free()
+	var model := packed.instantiate() as Node3D
+	model.rotation = old_rotation
+	visual_mesh.add_child(model)
+	anim_player = null
+
+func _setup_body() -> void:
+	floor_max_angle = deg_to_rad(max_slope_degrees)
+	floor_snap_length = floor_snap
+	floor_stop_on_slope = true
+	floor_constant_speed = true
+	floor_block_on_wall = true
+	safe_margin = 0.01
+	for child in get_children():
+		if child is CollisionShape3D:
+			_collision_shape = child
+			break
+	if not _collision_shape:
+		_collision_shape = CollisionShape3D.new()
+		add_child(_collision_shape)
+	# Levels share one CapsuleShape3D sub-resource with NPCs: never mutate it.
+	_capsule = CapsuleShape3D.new()
+	_capsule.radius = capsule_radius
+	_capsule.height = capsule_height
+	_collision_shape.shape = _capsule
+	_collision_shape.position = Vector3(0, capsule_height * 0.5, 0)
+
+func _normalise_visual_height() -> void:
+	var lo := INF
+	var hi := -INF
+	var inv := global_transform.affine_inverse()
+	for mesh in visual_mesh.find_children("*", "MeshInstance3D", true, false):
+		var box: AABB = (inv * mesh.global_transform) * mesh.get_aabb()
+		lo = minf(lo, box.position.y)
+		hi = maxf(hi, box.end.y)
+	if hi <= lo:
+		return
+	var h := hi - lo
+	if absf(h - character_height) > 0.05:
+		var factor := character_height / h
+		visual_mesh.scale *= factor
+		visual_mesh.position.y = -(lo - visual_mesh.position.y) * factor
+		push_warning("[PLAYER] Mara visual was %.2f m tall; normalised to %.2f m" % [h, character_height])
+	elif absf(lo) > 0.03:
+		visual_mesh.position.y -= lo
+
+func _set_crouch(value: bool) -> void:
+	if value == is_crouching:
+		return
+	if not value and not _can_stand():
+		return
+	is_crouching = value
+	var h := crouch_capsule_height if value else capsule_height
+	_capsule.height = h
+	_collision_shape.position.y = h * 0.5
+
+func _can_stand() -> bool:
+	var probe := CapsuleShape3D.new()
+	probe.radius = capsule_radius - 0.02
+	probe.height = capsule_height - 0.04
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = probe
+	query.transform = Transform3D(Basis.IDENTITY, global_position + Vector3.UP * (capsule_height * 0.5 + 0.03))
+	query.collision_mask = world_collision_mask
+	query.exclude = [get_rid()]
+	return get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
+
+# ---------------------------------------------------------------- animation
+
+## The Tripo/Blender export carries an 80-triangle "Icosphere" helper mesh.
+func _hide_stray_meshes() -> void:
+	for mesh in visual_mesh.find_children("Icosphere*", "MeshInstance3D", true, false):
+		mesh.visible = false
+
+# Procedural crouch (no crouch clip exists): drop the hips, bend knees so feet stay
+# planted, and pitch the spine forward. Applied after the AnimationTree each frame.
+var _crouch_blend := 0.0
+var _skeleton: Skeleton3D
+var _crouch_bones := {}
+var _leg_length := 0.5
+@export var crouch_knee_angle_deg: float = 62.0
+@export var crouch_spine_angle_deg: float = 18.0
+
+func _setup_crouch_pose() -> void:
+	if not visual_mesh:
+		return
+	_skeleton = visual_mesh.find_child("Skeleton3D", true, false) as Skeleton3D
+	if not _skeleton:
+		return
+	for b in ["Hip", "L_Thigh", "L_Calf", "L_Foot", "R_Thigh", "R_Calf", "R_Foot", "Spine01", "Spine02"]:
+		var i := _skeleton.find_bone(b)
+		if i < 0:
+			_skeleton = null
+			return
+		_crouch_bones[b] = i
+	var thigh := _skeleton.get_bone_global_rest(_crouch_bones["L_Thigh"]).origin
+	var calf := _skeleton.get_bone_global_rest(_crouch_bones["L_Calf"]).origin
+	var foot := _skeleton.get_bone_global_rest(_crouch_bones["L_Foot"]).origin
+	_leg_length = thigh.distance_to(calf) + calf.distance_to(foot)
+	if _anim_tree:
+		_anim_tree.mixer_applied.connect(_apply_crouch_pose)
+
+func _rotate_bone_global(bone: int, axis: Vector3, angle: float) -> void:
+	var pose := _skeleton.get_bone_global_pose(bone)
+	pose.basis = Basis(axis, angle) * pose.basis
+	_skeleton.set_bone_global_pose(bone, pose)
+
+func _apply_crouch_pose() -> void:
+	if not _skeleton or _crouch_blend < 0.01:
+		return
+	var k := _crouch_blend
+	var knee := deg_to_rad(crouch_knee_angle_deg) * k
+	# Model space: Mara faces +X, up +Y, so her right-hand axis is +Z.
+	var axis := Vector3(0, 0, 1)
+	var hip: int = _crouch_bones["Hip"]
+	var hip_pose := _skeleton.get_bone_global_pose(hip)
+	hip_pose.origin.y -= _leg_length * (1.0 - cos(knee))
+	_skeleton.set_bone_global_pose(hip, hip_pose)
+	for side in ["L_", "R_"]:
+		_rotate_bone_global(_crouch_bones[side + "Thigh"], axis, knee)
+		_rotate_bone_global(_crouch_bones[side + "Calf"], axis, -2.0 * knee)
+		_rotate_bone_global(_crouch_bones[side + "Foot"], axis, knee)
+	var spine := -deg_to_rad(crouch_spine_angle_deg) * k
+	_rotate_bone_global(_crouch_bones["Spine01"], axis, spine * 0.6)
+	_rotate_bone_global(_crouch_bones["Spine02"], axis, spine * 0.4)
+
+func _resolve_slot(slot: String) -> String:
+	var guard := 0
+	var current := slot
+	while current != "" and guard < 8:
+		for candidate in clip_candidates.get(current, []):
+			for full in anim_player.get_animation_list():
+				if String(full) == candidate or String(full).get_file() == candidate or String(full).ends_with("/" + candidate):
+					return String(full)
+		current = clip_fallback.get(current, "idle" if current != "idle" else "")
+		guard += 1
+	var list := anim_player.get_animation_list()
+	return String(list[0]) if list.size() > 0 else ""
+
+func _setup_animation() -> void:
+	if not anim_player or anim_player.get_animation_list().is_empty():
+		return
+	for slot in clip_candidates.keys():
+		_clip_for_slot[slot] = _resolve_slot(slot)
+	var looping := ["idle", "walk", "run", "sprint", "crouch_idle", "crouch_walk", "climb", "swim_idle"]
+	var one_shot := ["jump", "fall", "land", "mantle", "swim"]
+	var processed := {}
+	for slot in _clip_for_slot:
+		var clip: String = _clip_for_slot[slot]
+		if clip == "" or processed.has(clip):
+			continue
+		processed[clip] = true
+		_make_in_place(clip)
+	for slot in _clip_for_slot:
+		var clip: String = _clip_for_slot[slot]
+		if clip != "":
+			var anim := anim_player.get_animation(clip)
+			if slot in looping:
+				anim.loop_mode = Animation.LOOP_LINEAR
+			elif slot in one_shot and not _clip_used_by(clip, looping):
+				anim.loop_mode = Animation.LOOP_NONE
+	_build_anim_tree()
+
+## Strips horizontal Hip/Root translation (movement belongs to the CharacterBody) and
+## records the clip's natural ground speed so playback can be scaled to stop foot sliding.
+func _make_in_place(clip: String) -> void:
+	var source := anim_player.get_animation(clip)
+	var in_place := source.duplicate(true) as Animation
+	var travel := 0.0
+	for track in in_place.get_track_count():
+		if in_place.track_get_type(track) != Animation.TYPE_POSITION_3D:
+			continue
+		var path := String(in_place.track_get_path(track))
+		if not (path.ends_with(":Hip") or path.ends_with(":Root") or path.ends_with(":Hips")):
+			continue
+		var count := in_place.track_get_key_count(track)
+		if count < 2:
+			continue
+		var first: Vector3 = in_place.track_get_key_value(track, 0)
+		var last: Vector3 = in_place.track_get_key_value(track, count - 1)
+		# Tripo rigs are Z-up in bone space: X/Y carry ground travel, Z carries bob.
+		travel = maxf(travel, Vector2(last.x - first.x, last.y - first.y).length())
+		for key in count:
+			var value: Vector3 = in_place.track_get_key_value(track, key)
+			# Pin to the rig origin, not the first key: retargeted clips (run) start 0.57
+			# units off-centre, which would shove Mara ~1 m ahead of her capsule.
+			value.x = 0.0
+			value.y = 0.0
+			in_place.track_set_key_value(track, key, value)
+	var name_only := clip.get_file() if not clip.contains("/") else clip.split("/")[1]
+	var skeleton := visual_mesh.find_child("Skeleton3D", true, false) as Skeleton3D if visual_mesh else null
+	var world_scale := 1.0
+	if skeleton:
+		world_scale = skeleton.global_basis.get_scale().x / maxf(global_basis.get_scale().x, 0.0001)
+	if clip_cycle_speed_override.has(name_only):
+		_clip_speed[clip] = float(clip_cycle_speed_override[name_only])
+	elif travel > 0.01 and source.length > 0.0:
+		_clip_speed[clip] = travel * world_scale / source.length
+	else:
+		_clip_speed[clip] = 0.0
+	var library_name := anim_player.find_animation_library(source)
+	var library := anim_player.get_animation_library(library_name)
+	var copy := library.duplicate() as AnimationLibrary
+	copy.remove_animation(name_only)
+	copy.add_animation(name_only, in_place)
+	anim_player.remove_animation_library(library_name)
+	anim_player.add_animation_library(library_name, copy)
+
+func _clip_used_by(clip: String, slots: Array) -> bool:
+	for s in slots:
+		if _clip_for_slot.get(s, "") == clip:
+			return true
+	return false
+
+func _slot_speed(slot: String) -> float:
+	var clip: String = _clip_for_slot.get(slot, "")
+	var s: float = _clip_speed.get(clip, 0.0)
+	if s <= 0.0 and slot != "idle" and slot != "crouch_idle" and slot != "swim_idle":
+		s = default_cycle_speed.get(slot, 1.4)
+	return s
+
+func _make_speed_blend(name: String, slots: Array) -> AnimationNodeBlendTree:
+	var tree := AnimationNodeBlendTree.new()
+	var blend := AnimationNodeBlendSpace1D.new()
+	blend.min_space = 0.0
+	blend.max_space = 12.0
+	blend.sync = false
+	var used := {}
+	var points := []
+	var top := 0.0
+	for slot in slots:
+		var clip: String = _clip_for_slot.get(slot, "")
+		if clip == "" or used.has(clip):
+			continue
+		var pos := 0.0 if slot.ends_with("idle") else _slot_speed(slot)
+		if used.size() > 0 and pos <= top:
+			continue
+		used[clip] = pos
+		top = pos
+		# Each point is anim -> own TimeScale so every clip's stride is matched to ground
+		# speed independently before blending (prevents foot sliding in mixed gaits).
+		var node := AnimationNodeAnimation.new()
+		node.animation = clip
+		var point := AnimationNodeBlendTree.new()
+		point.add_node("anim", node, Vector2(0, 0))
+		point.add_node("scale", AnimationNodeTimeScale.new(), Vector2(200, 0))
+		point.connect_node("scale", 0, "anim")
+		point.connect_node("output", 0, "scale")
+		blend.add_blend_point(point, pos, -1, StringName(slot))
+		points.append([slot, pos])
+	_loco_max_speed[name] = maxf(top, 0.01)
+	_blend_points[name] = points
+	tree.add_node("blend", blend, Vector2(0, 0))
+	tree.add_node("scale", AnimationNodeTimeScale.new(), Vector2(200, 0))
+	tree.connect_node("scale", 0, "blend")
+	tree.connect_node("output", 0, "scale")
+	return tree
+
+func _build_anim_tree() -> void:
+	var sm := AnimationNodeStateMachine.new()
+	sm.add_node("locomotion", _make_speed_blend("locomotion", ["idle", "walk", "run", "sprint"]), Vector2(0, 0))
+	sm.add_node("crouch", _make_speed_blend("crouch", ["crouch_idle", "crouch_walk"]), Vector2(0, 150))
+	sm.add_node("swim", _make_speed_blend("swim", ["swim_idle", "swim"]), Vector2(0, 300))
+	sm.add_node("climb", _make_speed_blend("climb", ["climb"]), Vector2(300, 300))
+	for slot in ["jump", "fall", "land", "mantle"]:
+		var node := AnimationNodeAnimation.new()
+		node.animation = _clip_for_slot.get(slot, _clip_for_slot.get("idle", ""))
+		sm.add_node(slot, node, Vector2(300, 0))
+	var names := ["locomotion", "crouch", "swim", "climb", "jump", "fall", "land", "mantle"]
+	for a in names:
+		for b in names:
+			if a == b:
+				continue
+			var t := AnimationNodeStateMachineTransition.new()
+			t.xfade_time = 0.1 if b == "land" or b == "jump" else 0.2
+			sm.add_transition(a, b, t)
+	var entry := AnimationNodeStateMachineTransition.new()
+	sm.add_transition("Start", "locomotion", entry)
+	_anim_tree = AnimationTree.new()
+	_anim_tree.name = "MaraAnimationTree"
+	add_child(_anim_tree)
+	_anim_tree.tree_root = sm
+	_anim_tree.anim_player = _anim_tree.get_path_to(anim_player)
+	_anim_tree.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
+	_anim_tree.active = true
+
+## Returns measured cycle speed per clip (m/s at 1x) for diagnostics.
+func get_clip_speeds() -> Dictionary:
+	return _clip_speed.duplicate()
+
+func get_clip_mapping() -> Dictionary:
+	return _clip_for_slot.duplicate()
+
+func _update_animation(delta: float) -> void:
+	if not _anim_tree:
+		return
+	var target := "locomotion"
+	match current_state:
+		State.SWIM: target = "swim"
+		State.CLIMB: target = "climb"
+		State.MANTLE, State.VAULT: target = "mantle"
+		State.JUMP: target = "jump"
+		State.FALL: target = "fall"
+		State.CROUCH: target = "crouch"
+	if target == "locomotion" and _land_timer > 0.0:
+		target = "land"
+	var playback: AnimationNodeStateMachinePlayback = _anim_tree.get("parameters/playback")
+	if playback and anim_state != target:
+		playback.travel(target)
+		anim_state = target
+	var speed := horizontal_speed
+	if current_state == State.CLIMB:
+		speed = velocity.length()
+	for blend_name in ["locomotion", "crouch", "swim", "climb"]:
+		var top: float = _loco_max_speed.get(blend_name, 1.0)
+		var gait_pos := _gait_position(blend_name, speed)
+		_anim_tree.set("parameters/%s/blend/blend_position" % blend_name, gait_pos)
+		_anim_tree.set("parameters/%s/scale/scale" % blend_name, 1.0)
+		var best := INF
+		for point in _blend_points.get(blend_name, []):
+			var natural: float = point[1]
+			var scale := 1.0
+			if natural > 0.05:
+				# Stride matching: playback rate = ground speed / clip's natural speed.
+				scale = clampf(speed / natural, 0.5, 3.0)
+				if blend_name == "locomotion" and point[0] == "run" and current_state == State.SPRINT and _clip_for_slot.get("sprint") == _clip_for_slot.get("run"):
+					scale = maxf(scale, sprint_from_run_scale)
+			_anim_tree.set("parameters/%s/blend/%s/scale/scale" % [blend_name, point[0]], scale)
+			if blend_name == anim_state and absf(natural - gait_pos) < best:
+				best = absf(natural - gait_pos)
+				_dominant_scale = scale
+
+## Blend position that keeps ONE stride-matched clip dominant: clips with different cycle
+## lengths are not phase aligned, so mixing them (e.g. 16% run into a walk) drags the planted
+## foot. Pure clips are used between switch points; a 0.6 m/s crossfade band joins them.
+@export var gait_crossfade_band: float = 0.6
+func _gait_position(blend_name: String, speed: float) -> float:
+	var pts: Array = _blend_points.get(blend_name, [])
+	if pts.size() < 2:
+		return 0.0
+	var first_moving: float = pts[1][1]
+	if speed <= first_moving:
+		return speed # idle -> first gait
+	for i in range(1, pts.size() - 1):
+		var a: float = pts[i][1]
+		var b: float = pts[i + 1][1]
+		var switch := (a + b) * 0.5
+		var lo := switch - gait_crossfade_band * 0.5
+		var hi := switch + gait_crossfade_band * 0.5
+		if speed <= lo:
+			return a
+		if speed < hi:
+			return lerpf(a, b, (speed - lo) / (hi - lo))
+	return pts[pts.size() - 1][1]
+
+func get_animation_playback_scale() -> float:
+	if not _anim_tree:
+		return 1.0
+	return _dominant_scale
+
+# ---------------------------------------------------------------- equipment / input (unchanged)
+
+func _attach_equipment() -> void:
+	if not visual_mesh:
+		return
+	var skeleton := visual_mesh.find_child("Skeleton3D", true, false) as Skeleton3D
+	if not skeleton:
+		return
+	for equipment in [["R_Hand", "res://assets/props/equipment/expedition_sidearm.glb", 0.23], ["L_Hand", "res://assets/props/equipment/climbing_pick.glb", 0.28]]:
+		if skeleton.find_bone(equipment[0]) < 0 or not ResourceLoader.exists(equipment[1]):
+			continue
+		var attachment := BoneAttachment3D.new()
+		attachment.bone_name = equipment[0]
+		skeleton.add_child(attachment)
+		var model: Node3D = load(equipment[1]).instantiate()
+		attachment.add_child(model)
+		var bounds := AABB()
+		var found := false
+		for mesh in model.find_children("*", "MeshInstance3D", true, false):
+			var box: AABB = (model.global_transform.affine_inverse() * mesh.global_transform) * mesh.get_aabb()
+			bounds = bounds.merge(box) if found else box
+			found = true
+		if found:
+			var scale_factor: float = equipment[2] / maxf(bounds.size[bounds.size.max_axis_index()], 0.001)
+			model.scale = Vector3.ONE * scale_factor
+			model.position = -bounds.get_center() * scale_factor
+		if equipment[0] == "R_Hand":
+			sidearm_visual = model
+		else:
+			pick_visual = model
+		model.hide()
+
+func _bind_gameplay_inputs() -> void:
+	var keys := {"reload": KEY_R, "melee": KEY_Q, "walk": KEY_ALT, "dive": KEY_C}
+	for action in keys:
+		if not InputMap.has_action(action):
+			InputMap.add_action(action)
+			var key := InputEventKey.new()
+			key.physical_keycode = keys[action]
+			InputMap.action_add_event(action, key)
+	var buttons := {"fire": MOUSE_BUTTON_LEFT, "aim": MOUSE_BUTTON_RIGHT}
+	for action in buttons:
+		if not InputMap.has_action(action):
+			InputMap.add_action(action)
+			var button := InputEventMouseButton.new()
+			button.button_index = buttons[action]
+			InputMap.action_add_event(action, button)
 
 func _setup_interaction_detector() -> void:
 	if not interaction_detector:
@@ -85,9 +653,8 @@ func _setup_interaction_detector() -> void:
 		shape.shape = sphere
 		interaction_detector.add_child(shape)
 		interaction_detector.collision_layer = 0
-		interaction_detector.collision_mask = 4 # Interactable layer
+		interaction_detector.collision_mask = 4
 		add_child(interaction_detector)
-	
 	interaction_detector.area_entered.connect(_on_interaction_area_entered)
 	interaction_detector.area_exited.connect(_on_interaction_area_exited)
 
@@ -102,194 +669,648 @@ func _on_interaction_area_exited(area: Area3D) -> void:
 		interactable_lost.emit()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if current_state == State.DEAD or get_tree().paused:
+		return
 	if event.is_action_pressed("flashlight"):
 		toggle_flashlight()
 	elif event.is_action_pressed("interact") and nearby_interactable:
+		_refresh_interactable()
+		if not nearby_interactable:
+			return
 		nearby_interactable.trigger_interaction(self)
+	elif event.is_action_pressed("reload"):
+		start_reload()
+	elif event.is_action_pressed("melee"):
+		melee_attack()
 
 func toggle_flashlight() -> void:
 	is_flashlight_on = not is_flashlight_on
 	if flashlight:
 		flashlight.visible = is_flashlight_on
-	print("[PLAYER] Flashlight toggled:", is_flashlight_on)
+
+# ---------------------------------------------------------------- main loop
+
+func get_facing_forward() -> Vector3:
+	return Vector3(-sin(facing_yaw), 0.0, -cos(facing_yaw))
+
+func _camera_relative(input_dir: Vector2) -> Vector3:
+	var basis := camera_pivot.global_transform.basis if camera_pivot else Basis.IDENTITY
+	var forward := -basis.z
+	forward.y = 0.0
+	if forward.length_squared() < 0.0001:
+		forward = Vector3.FORWARD
+	forward = forward.normalized()
+	var right := Vector3(-forward.z, 0.0, forward.x)
+	var dir := right * input_dir.x - forward * input_dir.y
+	return dir.limit_length(1.0)
 
 func _physics_process(delta: float) -> void:
 	if current_state == State.DEAD:
 		return
-		
-	if current_state == State.MANTLE:
-		_process_mantle(delta)
+	_refresh_interactable()
+	_update_combat(delta)
+	if global_position.y < -80.0:
+		take_damage(max_health)
 		return
+	_update_water()
+	if current_state != State.SWIM and current_oxygen < max_oxygen:
+		current_oxygen = minf(max_oxygen, current_oxygen + delta * 5.0)
+		oxygen_changed.emit(current_oxygen, max_oxygen)
 
-	# Handle Gravity
-	if not is_on_floor() and current_state != State.SWIM:
-		velocity.y -= gravity * delta
-		if velocity.y < 0 and current_state != State.FALL:
-			current_state = State.FALL
-			
-	# Read Player Inputs
-	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var is_sprinting = Input.is_action_pressed("sprint") and current_stamina > 5.0
-	var is_crouching = Input.is_action_pressed("crouch")
-	
-	# Determine Target Speed
-	var target_speed = run_speed
-	if current_state == State.SWIM:
-		target_speed = swim_speed
-	elif is_crouching:
+	if Input.is_action_just_pressed("jump"):
+		_jump_buffer = jump_buffer_time
+	else:
+		_jump_buffer = maxf(0.0, _jump_buffer - delta)
+
+	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var move_dir := _camera_relative(input_dir)
+
+	match current_state:
+		State.MANTLE, State.VAULT:
+			_process_mantle(delta)
+		State.CLIMB:
+			_process_climb(delta, input_dir)
+		State.SWIM:
+			_process_swim(delta, move_dir)
+		_:
+			_process_ground_air(delta, move_dir)
+
+	horizontal_speed = Vector2(velocity.x, velocity.z).length()
+	_update_visual(delta)
+	_update_animation(delta)
+
+func _update_combat(delta: float) -> void:
+	weapon_cooldown = maxf(0.0, weapon_cooldown - delta)
+	melee_cooldown = maxf(0.0, melee_cooldown - delta)
+	is_aiming = Input.is_action_pressed("aim")
+	if sidearm_visual:
+		sidearm_visual.visible = is_aiming or weapon_cooldown > 0.0 or reload_timer > 0.0
+	if pick_visual:
+		pick_visual.visible = current_state in [State.MANTLE, State.LEDGE_HANG, State.CLIMB]
+	if reload_timer > 0.0:
+		reload_timer -= delta
+		if reload_timer <= 0.0:
+			var transfer := mini(magazine_capacity - ammunition, reserve_ammunition)
+			ammunition += transfer
+			reserve_ammunition -= transfer
+			ammunition_changed.emit(ammunition, reserve_ammunition)
+	if Input.is_action_pressed("fire"):
+		fire_weapon()
+
+func _rotate_toward(dir: Vector3, rate: float, delta: float) -> void:
+	if dir.length_squared() < 0.0001:
+		return
+	var target := atan2(-dir.x, -dir.z)
+	var diff := wrapf(target - facing_yaw, -PI, PI)
+	facing_yaw += clampf(diff, -rate * delta, rate * delta)
+
+func _process_ground_air(delta: float, move_dir: Vector3) -> void:
+	var on_floor := is_on_floor()
+	_coyote = coyote_time if on_floor else maxf(0.0, _coyote - delta)
+	_land_lock = maxf(0.0, _land_lock - delta)
+	_land_timer = maxf(0.0, _land_timer - delta)
+
+	# Crouch with ceiling check
+	var want_crouch := Input.is_action_pressed("crouch") and on_floor
+	_set_crouch(want_crouch or (is_crouching and not _can_stand()))
+
+	var has_input := move_dir.length() > 0.1
+	var sprinting := Input.is_action_pressed("sprint") and current_stamina > 5.0 and has_input and not is_crouching
+	var walking := Input.is_action_pressed("walk") or is_aiming
+	var target_speed := run_speed
+	if is_crouching:
 		target_speed = crouch_speed
-		current_state = State.CROUCH
-	elif is_sprinting and input_dir.length() > 0.1:
+	elif sprinting:
 		target_speed = sprint_speed
-		current_state = State.SPRINT
-		current_stamina = max(0.0, current_stamina - 15.0 * delta)
-		stamina_changed.emit(current_stamina, max_stamina)
-	elif input_dir.length() > 0.1:
-		target_speed = run_speed
-		current_state = State.RUN
-		current_stamina = min(max_stamina, current_stamina + 10.0 * delta)
-		stamina_changed.emit(current_stamina, max_stamina)
+	elif walking:
+		target_speed = walk_speed
+	target_speed *= move_dir.length()
+	if water_depth > WADE_DEPTH:
+		target_speed *= clampf(1.0 - (water_depth - WADE_DEPTH) * 0.6, 0.45, 1.0)
+	if _land_lock > 0.0:
+		target_speed *= _land_lock_factor
+
+	# Stamina
+	if sprinting:
+		current_stamina = maxf(0.0, current_stamina - 15.0 * delta)
 	else:
-		target_speed = 0.0
-		if is_on_floor() and current_state != State.SWIM:
-			current_state = State.IDLE
-		current_stamina = min(max_stamina, current_stamina + 20.0 * delta)
-		stamina_changed.emit(current_stamina, max_stamina)
+		current_stamina = minf(max_stamina, current_stamina + (10.0 if has_input else 20.0) * delta)
+	stamina_changed.emit(current_stamina, max_stamina)
 
-	# Transform input relative to camera orientation
-	var cam_basis = camera_pivot.global_transform.basis if camera_pivot else Basis.IDENTITY
-	var direction = (cam_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	direction.y = 0.0
-	direction = direction.normalized()
-	
-	if direction.length() > 0.1:
-		velocity.x = direction.x * target_speed
-		velocity.z = direction.z * target_speed
-		# Orient visual mesh towards moving direction
-		if visual_mesh:
-			var target_rot = atan2(-direction.x, -direction.z)
-			visual_mesh.rotation.y = lerp_angle(visual_mesh.rotation.y, target_rot, rotation_speed * delta)
-	else:
-		velocity.x = move_toward(velocity.x, 0, run_speed * delta * 5.0)
-		velocity.z = move_toward(velocity.z, 0, run_speed * delta * 5.0)
+	# Facing: turn toward input; speed is gated by alignment so Mara never runs backwards.
+	var turn_rate := sprint_rotation_speed if sprinting else rotation_speed
+	if not on_floor:
+		turn_rate *= 0.5
+	if has_input:
+		_rotate_toward(move_dir, turn_rate, delta)
+	var horizontal := Vector3(velocity.x, 0, velocity.z)
+	var desired := Vector3.ZERO
+	var brake := 1.0
+	if has_input:
+		var alignment := get_facing_forward().dot(move_dir.normalized())
+		var gate := smoothstep(-0.1, 0.85, alignment) if on_floor else 1.0
+		desired = move_dir.normalized() * target_speed * gate
+		# Sharp reversal: plant and brake hard while the body turns (no backwards running).
+		if horizontal.length() > 0.5 and horizontal.normalized().dot(move_dir.normalized()) < 0.0:
+			brake = 1.6
+	var rate := ground_acceleration if desired.length() >= horizontal.length() else ground_deceleration * brake
+	if not on_floor:
+		rate = air_acceleration
+	horizontal = horizontal.move_toward(desired, rate * delta)
+	velocity.x = horizontal.x
+	velocity.z = horizontal.z
 
-	# Realistic Kinematic Gait Simulation (Walking, Running, Breathing, Leaning)
-	_apply_gait_animation(delta, input_dir.length(), target_speed)
+	# Gravity
+	if not on_floor:
+		var g := base_gravity
+		if velocity.y < 0.0:
+			g *= fall_gravity_multiplier
+		elif not Input.is_action_pressed("jump"):
+			g *= jump_cut_gravity_multiplier
+		velocity.y = maxf(velocity.y - g * delta, -terminal_velocity)
+		_air_peak_fall_speed = maxf(_air_peak_fall_speed, -velocity.y)
 
-	# Traversal: Ledge / Mantle Probe
-
-	if (is_on_wall() or not is_on_floor()) and Input.is_action_just_pressed("jump"):
-		if _check_and_trigger_mantle(direction):
+	# Jump / mantle / climb
+	if _jump_buffer > 0.0:
+		var probe_dir := move_dir if has_input else get_facing_forward()
+		if _try_climb(probe_dir, true):
+			_jump_buffer = 0.0
+			return
+		if _check_and_trigger_mantle(probe_dir):
+			_jump_buffer = 0.0
+			return
+		if _coyote > 0.0 and not is_crouching:
+			velocity.y = sqrt(2.0 * base_gravity * jump_apex_height)
+			_coyote = 0.0
+			_jump_buffer = 0.0
+			current_state = State.JUMP
+			on_floor = false
+	elif not on_floor and has_input and velocity.y < 1.0:
+		if _try_climb(move_dir, false):
 			return
 
-	# Jump Logic
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
-		current_state = State.JUMP
+	# Step-up for small ledges (blocked above max_step_height)
+	if on_floor and horizontal.length() > 0.05:
+		_try_step_up(delta)
 
+	var pre_fall := _air_peak_fall_speed
 	move_and_slide()
+	if is_on_ceiling() and velocity.y > 0.0:
+		velocity.y = 0.0
 
-func _apply_gait_animation(delta: float, input_magnitude: float, target_speed: float) -> void:
-	if not visual_mesh:
-		return
-		
-	# Check if native AnimationPlayer with 'walk' clip exists
-	if anim_player and anim_player.has_animation("walk"):
-		if input_magnitude > 0.1 and is_on_floor():
-			if not anim_player.is_playing() or anim_player.current_animation != "walk":
-				anim_player.play("walk")
-			anim_player.speed_scale = target_speed / walk_speed
+	var now_floor := is_on_floor()
+	if now_floor and not _was_on_floor:
+		_on_landed(pre_fall)
+	_was_on_floor = now_floor
+	if now_floor:
+		_air_peak_fall_speed = 0.0
+		if is_crouching:
+			current_state = State.CROUCH
+		elif horizontal_speed < 0.15 and not has_input:
+			current_state = State.IDLE
+		elif sprinting:
+			current_state = State.SPRINT
+		elif target_speed <= walk_speed + 0.01:
+			current_state = State.WALK
 		else:
-			if anim_player.is_playing() and anim_player.current_animation == "walk":
-				anim_player.stop()
-		return
-
-	# Secondary Procedural Kinematic Gait (eliminates rigid or floaty gliding)
-	if is_on_floor() and input_magnitude > 0.1:
-		var cadence = 9.0 if current_state == State.SPRINT else (7.2 if current_state == State.RUN else 5.2)
-		gait_phase += delta * cadence
-		
-		# Vertical hip bounce (bobbing down on heel contact, pushing up on stride)
-		var bob_height = 0.055 if current_state == State.RUN else 0.035
-		var target_y = visual_base_y + abs(sin(gait_phase)) * bob_height
-		visual_mesh.position.y = lerp(visual_mesh.position.y, target_y, delta * 18.0)
-		
-		# Lateral pelvic sway / weight shift (shifting weight over the supporting foot)
-		var sway_angle = 0.065 if current_state == State.RUN else 0.04
-		visual_mesh.rotation.z = lerp(visual_mesh.rotation.z, sin(gait_phase * 0.5) * sway_angle, delta * 14.0)
-		
-		# Torso forward pitch/lean proportional to speed
-		var forward_pitch = 0.14 if current_state == State.SPRINT else (0.09 if current_state == State.RUN else 0.04)
-		visual_mesh.rotation.x = lerp(visual_mesh.rotation.x, forward_pitch, delta * 12.0)
-		
-		# Cadence footstep sound trigger
-		step_timer += delta * (cadence / PI)
-		if step_timer >= 1.0:
-			step_timer = 0.0
-			AudioManager.play_sfx("footstep_stone", global_position)
+			current_state = State.RUN
+		# Footsteps every stride (0.67 m measured from the walk clip)
+		_step_distance += horizontal_speed * delta
+		if _step_distance >= 0.67:
+			_step_distance = 0.0
+			var audio = get_node_or_null("/root/AudioManager")
+			if audio and audio.has_method("play_sfx"):
+				audio.play_sfx("footstep_stone", global_position)
 	else:
-		# Idle resting & breathing cycle
-		gait_phase += delta * 2.2
-		var breathing_bob = sin(gait_phase) * 0.008
-		visual_mesh.position.y = lerp(visual_mesh.position.y, visual_base_y + breathing_bob, delta * 8.0)
-		visual_mesh.rotation.z = lerp(visual_mesh.rotation.z, 0.0, delta * 10.0)
-		visual_mesh.rotation.x = lerp(visual_mesh.rotation.x, 0.0, delta * 10.0)
+		current_state = State.JUMP if velocity.y > 0.0 else State.FALL
 
+func _on_landed(impact: float) -> void:
+	last_landing_speed = impact
+	var hard := impact >= hard_landing_speed
+	if hard:
+		_land_lock = 0.35
+		_land_lock_factor = 0.25
+		_land_timer = 0.3
+	elif impact > 4.0:
+		_land_lock = 0.08
+		_land_lock_factor = 0.8
+		_land_timer = 0.12
+	_visual_offset.y -= clampf(impact * 0.012, 0.0, 0.18)
+	if impact >= damage_landing_speed:
+		take_damage((impact - damage_landing_speed) * landing_damage_per_mps)
+	landed.emit(impact, hard)
 
-func _check_and_trigger_mantle(forward_dir: Vector3) -> bool:
-	var space_state = get_world_3d().direct_space_state
-	var move_forward = forward_dir if forward_dir.length() > 0.1 else -transform.basis.z
-	
-	# Ray 1: Forward wall ray at chest height (1.2m)
-	var chest_origin = global_position + Vector3(0, 1.2, 0)
-	var chest_target = chest_origin + move_forward * 1.0
-	var query_wall = PhysicsRayQueryParameters3D.create(chest_origin, chest_target)
-	query_wall.collision_mask = 2 # World geometry
-	var hit_wall = space_state.intersect_ray(query_wall)
-	
-	if hit_wall:
-		# Ray 2: Top-down probe for ledge landing surface (up to 2.2m high)
-		var top_origin = hit_wall.position + move_forward * 0.4 + Vector3(0, 1.5, 0)
-		var top_target = top_origin + Vector3(0, -2.0, 0)
-		var query_ledge = PhysicsRayQueryParameters3D.create(top_origin, top_target)
-		query_ledge.collision_mask = 2
-		var hit_ledge = space_state.intersect_ray(query_ledge)
-		
-		if hit_ledge and hit_ledge.position.y > global_position.y + 0.6:
-			mantle_target_pos = hit_ledge.position + Vector3(0, 0.9, 0)
-			current_state = State.MANTLE
-			mantle_timer = 0.0
-			velocity = Vector3.ZERO
-			print("[PLAYER] Mantle initiated towards:", mantle_target_pos)
-			return true
-	return false
+func _try_step_up(delta: float) -> bool:
+	var motion := Vector3(velocity.x, 0, velocity.z) * delta
+	var probe := motion.normalized() * maxf(motion.length(), 0.1)
+	var start := global_transform
+	var hit := KinematicCollision3D.new()
+	if not test_move(start, probe, hit, 0.001):
+		return false
+	if hit.get_normal().y > cos(floor_max_angle):
+		return false
+	var raised := start
+	var up_hit := KinematicCollision3D.new()
+	var up := Vector3.UP * max_step_height
+	if test_move(raised, up, up_hit, 0.001):
+		up = up_hit.get_travel()
+	raised.origin += up
+	if test_move(raised, probe, null, 0.001):
+		return false # still blocked at step height: obstacle too tall
+	raised.origin += probe
+	var down_hit := KinematicCollision3D.new()
+	if not test_move(raised, -up - Vector3.UP * 0.05, down_hit, 0.001):
+		return false
+	raised.origin += down_hit.get_travel()
+	if down_hit.get_normal().y < cos(floor_max_angle):
+		return false
+	var rise := raised.origin.y - global_position.y
+	if rise < 0.03 or rise > max_step_height + 0.01:
+		return false
+	_visual_offset -= raised.origin - global_position
+	global_position = raised.origin
+	last_step_up = rise
+	return true
+
+# ---------------------------------------------------------------- mantle
+
+func _ray(from: Vector3, to: Vector3) -> Dictionary:
+	var q := PhysicsRayQueryParameters3D.create(from, to, world_collision_mask, [get_rid()])
+	return get_world_3d().direct_space_state.intersect_ray(q)
+
+func _check_and_trigger_mantle(forward_dir: Vector3, from_water := false) -> bool:
+	var forward := forward_dir
+	forward.y = 0.0
+	if forward.length() < 0.1:
+		forward = get_facing_forward()
+	forward = forward.normalized()
+	var feet := global_position
+	var wall := {}
+	for h: float in [0.35, 0.7, 1.05, 1.4]:
+		var origin: Vector3 = feet + Vector3.UP * h
+		var hit := _ray(origin, origin + forward * (capsule_radius + mantle_reach))
+		if not hit.is_empty() and absf(hit.normal.y) < 0.6:
+			wall = hit
+			break
+	if wall.is_empty():
+		return false
+	var max_h := mantle_max_height + (0.6 if from_water else 0.0)
+	var min_h := 0.15 if from_water else mantle_min_height
+	var wall_normal: Vector3 = wall.normal
+	wall_normal.y = 0.0
+	var into := -wall_normal.normalized() if wall_normal.length() > 0.1 else forward
+	var top_origin: Vector3 = wall.position + into * 0.3
+	top_origin.y = feet.y + max_h + 0.1
+	var top := _ray(top_origin, Vector3(top_origin.x, feet.y + min_h - 0.05, top_origin.z))
+	if top.is_empty() or top.normal.y < 0.75:
+		return false
+	# A hit at the very start means the probe began inside geometry (wall taller than reach).
+	if top.position.y > feet.y + max_h:
+		return false
+	var height: float = top.position.y - feet.y
+	if height < min_h or height > max_h:
+		return false
+	# Validate the full path with the real capsule: rise, then move over the edge.
+	var t := global_transform
+	var rise := Vector3.UP * (height + 0.04)
+	if test_move(t, rise, null, 0.001):
+		return false
+	t.origin += rise
+	var over: Vector3 = Vector3(top.position.x, 0, top.position.z) - Vector3(feet.x, 0, feet.z)
+	over = over + into * (capsule_radius * 0.6)
+	if test_move(t, over, null, 0.001):
+		return false
+	var end := t.origin + over
+	_mantle_points = [global_position, global_position + rise, end]
+	_mantle_durations = [0.16 + height * 0.18, 0.18]
+	_mantle_segment = 0
+	mantle_timer = 0.0
+	mantle_target_pos = end
+	velocity = Vector3.ZERO
+	_rotate_toward(into, 1000.0, 1.0)
+	_set_crouch(false)
+	current_state = State.MANTLE
+	return true
 
 func _process_mantle(delta: float) -> void:
-	mantle_timer += delta * 3.5
-	global_position = global_position.lerp(mantle_target_pos, delta * 8.0)
-	if mantle_timer >= 1.0 or global_position.distance_to(mantle_target_pos) < 0.2:
-		global_position = mantle_target_pos
+	if _mantle_points.size() < 2:
 		current_state = State.IDLE
-		velocity = Vector3.ZERO
-		print("[PLAYER] Mantle completed successfully.")
+		return
+	mantle_timer += delta
+	var duration := _mantle_durations[_mantle_segment]
+	var a := _mantle_points[_mantle_segment]
+	var b := _mantle_points[_mantle_segment + 1]
+	var t := clampf(mantle_timer / duration, 0.0, 1.0)
+	var eased := t * t * (3.0 - 2.0 * t)
+	global_position = a.lerp(b, eased)
+	velocity = Vector3.ZERO
+	if t >= 1.0:
+		_mantle_segment += 1
+		mantle_timer = 0.0
+		if _mantle_segment >= _mantle_points.size() - 1:
+			global_position = mantle_target_pos
+			current_state = State.IDLE
+			_was_on_floor = true
+			apply_floor_snap()
 
-func enter_water() -> void:
+# ---------------------------------------------------------------- climbing
+
+func _is_climbable(node: Object) -> bool:
+	var n := node as Node
+	var depth := 0
+	while n and depth < 3:
+		if n.is_in_group("climbable") or (n.has_meta("climbable") and bool(n.get_meta("climbable"))):
+			return true
+		n = n.get_parent()
+		depth += 1
+	return false
+
+func _try_climb(dir: Vector3, from_jump: bool) -> bool:
+	var forward := Vector3(dir.x, 0, dir.z)
+	if forward.length() < 0.1:
+		return false
+	forward = forward.normalized()
+	var origin := global_position + Vector3.UP * 1.1
+	var hit := _ray(origin, origin + forward * (capsule_radius + (0.5 if from_jump else 0.25)))
+	if hit.is_empty() or absf(hit.normal.y) > 0.5 or not _is_climbable(hit.collider):
+		return false
+	if from_jump and _check_and_trigger_mantle(forward):
+		return true # low enough to just mantle
+	_climb_normal = Vector3(hit.normal.x, 0, hit.normal.z).normalized()
+	_rotate_toward(-_climb_normal, 1000.0, 1.0)
+	velocity = Vector3.ZERO
+	_set_crouch(false)
+	current_state = State.CLIMB
+	return true
+
+func _process_climb(delta: float, input_dir: Vector2) -> void:
+	var into := -_climb_normal
+	var chest := _ray(global_position + Vector3.UP * 1.2, global_position + Vector3.UP * 1.2 + into * (capsule_radius + 0.7))
+	var hips := _ray(global_position + Vector3.UP * 0.5, global_position + Vector3.UP * 0.5 + into * (capsule_radius + 0.7))
+	if chest.is_empty() or not _is_climbable(chest.collider):
+		if not hips.is_empty() and _check_and_trigger_mantle(into):
+			return
+		if input_dir.y < 0.0 and not hips.is_empty():
+			# Reached the top lip: haul up onto it.
+			if _check_and_trigger_mantle(into, true):
+				return
+		current_state = State.FALL
+		return
+	_climb_normal = Vector3(chest.normal.x, 0, chest.normal.z).normalized()
+	var right := Vector3.UP.cross(_climb_normal).normalized()
+	var wall_dist: float = (chest.position - (global_position + Vector3.UP * 1.2)).dot(into)
+	var stick := into * clampf((wall_dist - capsule_radius - 0.04) * 8.0, -1.0, 2.0)
+	velocity = Vector3.UP * (-input_dir.y * climb_speed) + right * (input_dir.x * climb_speed) + stick
+	current_stamina = maxf(0.0, current_stamina - 4.0 * delta)
+	stamina_changed.emit(current_stamina, max_stamina)
+	if Input.is_action_just_pressed("jump"):
+		velocity = _climb_normal * 3.0 + Vector3.UP * 3.5
+		_rotate_toward(_climb_normal, 1000.0, 1.0)
+		current_state = State.JUMP
+		move_and_slide()
+		return
+	if Input.is_action_just_pressed("crouch") or Input.is_action_just_pressed("dive") or current_stamina <= 0.0:
+		current_state = State.FALL
+		return
+	move_and_slide()
+	if is_on_floor() and input_dir.y > 0.0:
+		current_state = State.IDLE
+
+# ---------------------------------------------------------------- swimming
+
+## Water contract: Area3D nodes in group "water_volume" exposing
+## get_surface_height(world_pos: Vector3) -> float. Legacy WaterVolume.gd pushes
+## water_surface + enter_water()/exit_water() instead; both are supported.
+func _update_water() -> void:
+	var found := false
+	var surface := -INF
+	for volume in get_tree().get_nodes_in_group("water_volume"):
+		if not (volume is Area3D) or not volume.has_method("get_surface_height"):
+			continue
+		if not (volume as Area3D).overlaps_body(self):
+			continue
+		var h: float = volume.get_surface_height(global_position)
+		if h > surface:
+			surface = h
+			found = true
+			_water_body = volume
+	if not found and _legacy_water:
+		surface = water_surface
+		found = true
+	in_water = found
+	if found:
+		water_surface = surface
+		water_depth = surface - global_position.y
+	else:
+		water_depth = 0.0
+	underwater = in_water and global_position.y + 1.55 < water_surface
+	if current_state == State.SWIM:
+		if not in_water or (water_depth < SWIM_EXIT_DEPTH and is_on_floor()):
+			_leave_swim()
+	elif in_water and water_depth > SWIM_ENTER_DEPTH and current_state not in [State.MANTLE, State.CLIMB]:
+		_enter_swim()
+
+func _enter_swim() -> void:
+	_set_crouch(false)
 	current_state = State.SWIM
-	velocity.y = 0.0
-	print("[PLAYER] Entered water body.")
+	velocity.y *= 0.35
+	var audio = get_node_or_null("/root/AudioManager")
+	if audio and audio.has_method("play_sfx"):
+		audio.play_sfx("splash", global_position)
+
+func _leave_swim() -> void:
+	current_state = State.IDLE
+	_was_on_floor = is_on_floor()
+
+func _process_swim(delta: float, move_dir: Vector3) -> void:
+	var has_input := move_dir.length() > 0.1
+	var fast := Input.is_action_pressed("sprint") and current_stamina > 5.0
+	var target_speed := (swim_sprint_speed if fast else swim_speed) * move_dir.length()
+	if has_input:
+		_rotate_toward(move_dir, rotation_speed * 0.6, delta)
+	var horizontal := Vector3(velocity.x, 0, velocity.z)
+	var desired := move_dir.normalized() * target_speed if has_input else Vector3.ZERO
+	if is_instance_valid(_water_body) and _water_body.has_method("get_flow_velocity"):
+		var flow: Vector3 = _water_body.get_flow_velocity(global_position)
+		desired += Vector3(flow.x, 0, flow.z)
+	horizontal = horizontal.move_toward(desired, water_acceleration * delta)
+	velocity.x = horizontal.x
+	velocity.z = horizontal.z
+
+	var rest_y := water_surface - SWIM_FLOAT_DEPTH
+	var diving := Input.is_action_pressed("dive") or Input.is_action_pressed("crouch")
+	var rising := Input.is_action_pressed("jump") and global_position.y < rest_y - 0.15
+	var target_vy: float
+	if diving:
+		target_vy = -swim_vertical_speed
+	elif rising:
+		target_vy = swim_vertical_speed
+	else:
+		# Buoyancy: spring toward floating depth, gentle ascent when deep.
+		target_vy = clampf((rest_y - global_position.y) * 2.5, -1.5, 0.8)
+	velocity.y = move_toward(velocity.y, target_vy + water_vertical_velocity, 5.0 * delta)
+	velocity.y *= exp(-1.2 * delta) # drag
+
+	# Climb out: jump at the surface toward a ledge.
+	if _jump_buffer > 0.0 and global_position.y > rest_y - 0.4:
+		if _check_and_trigger_mantle(move_dir if has_input else get_facing_forward(), true):
+			_jump_buffer = 0.0
+			return
+
+	if underwater:
+		current_oxygen = maxf(0.0, current_oxygen - delta)
+	else:
+		current_oxygen = minf(max_oxygen, current_oxygen + delta * 5.0)
+	oxygen_changed.emit(current_oxygen, max_oxygen)
+	if current_oxygen <= 0.0:
+		take_damage(delta * 12.0)
+	move_and_slide()
+
+## Legacy hooks (systems/WaterVolume.gd).
+func enter_water() -> void:
+	_legacy_water = true
+	if current_state != State.SWIM and global_position.y < water_surface - SWIM_ENTER_DEPTH + 0.3:
+		_enter_swim()
 
 func exit_water() -> void:
-	current_state = State.IDLE
-	print("[PLAYER] Exited water body.")
+	_legacy_water = false
+	water_vertical_velocity = 0.0
+	if current_state == State.SWIM:
+		_leave_swim()
+
+# ---------------------------------------------------------------- visuals
+
+func _update_visual(delta: float) -> void:
+	if not visual_mesh:
+		return
+	visual_mesh.rotation.y = facing_yaw - rotation.y
+	# Smooth out step-up / mantle snaps so the camera and body do not pop.
+	_visual_offset = _visual_offset.lerp(Vector3.ZERO, 1.0 - exp(-14.0 * delta))
+	visual_mesh.position = _visual_root_pos + _visual_offset
+	# Subtle athletic lean: forward with speed, banked into turns.
+	var lean := 0.0
+	if current_state in [State.RUN, State.SPRINT]:
+		lean = 0.05 if current_state == State.RUN else 0.09
+	elif current_state == State.SWIM and horizontal_speed > 0.3:
+		lean = 0.2
+	visual_mesh.rotation.x = lerpf(visual_mesh.rotation.x, -lean, 1.0 - exp(-8.0 * delta))
+	visual_mesh.rotation.z = lerpf(visual_mesh.rotation.z, 0.0, 1.0 - exp(-8.0 * delta))
+	camera_height = lerpf(camera_height, 1.05 if is_crouching else 1.55, 1.0 - exp(-8.0 * delta))
+	_crouch_blend = move_toward(_crouch_blend, 1.0 if is_crouching else 0.0, delta * 6.0)
+
+## Snapshot for tests / debug overlays.
+func get_movement_debug() -> Dictionary:
+	return {
+		"state": State.keys()[current_state], "anim_state": anim_state, "speed": horizontal_speed,
+		"vy": velocity.y, "on_floor": is_on_floor(), "crouching": is_crouching,
+		"capsule_height": _capsule.height if _capsule else 0.0, "water_depth": water_depth,
+		"facing": get_facing_forward(), "playback_scale": get_animation_playback_scale(),
+	}
+
+# ---------------------------------------------------------------- vitals / combat (unchanged)
+
+func _refresh_interactable() -> void:
+	if not interaction_detector:
+		return
+	var nearest: Interactable3D = null
+	var nearest_distance := INF
+	for area in interaction_detector.get_overlapping_areas():
+		if area is Interactable3D and area.is_enabled:
+			var distance: float = (global_position + Vector3.UP).distance_squared_to(area.global_position)
+			if distance < nearest_distance:
+				nearest = area
+				nearest_distance = distance
+	if nearest != nearby_interactable:
+		nearby_interactable = nearest
+		if nearest:
+			interactable_detected.emit(nearest.prompt_message)
+		else:
+			interactable_lost.emit()
+
+func _sfx(sound: String, at: Vector3) -> void:
+	var audio = get_node_or_null("/root/AudioManager")
+	if audio and audio.has_method("play_sfx"):
+		audio.play_sfx(sound, at)
 
 func take_damage(amount: float) -> void:
 	current_health = max(0.0, current_health - amount)
 	health_changed.emit(current_health, max_health)
-	print("[PLAYER] Took damage:", amount, "Remaining HP:", current_health)
 	if current_health <= 0:
 		die()
 
+## Seconds the ragdoll plays before Game Over pauses the tree.
+@export var death_ragdoll_time: float = 1.6
+var ragdoll: PhysicalBoneSimulator3D
+
 func die() -> void:
+	if current_state == State.DEAD:
+		return
 	current_state = State.DEAD
-	print("[PLAYER] Protagonist perished. Restarting from checkpoint...")
-	GameManager.change_state(GameManager.GameState.GAME_OVER)
+	_start_ragdoll()
+	var gm = get_node_or_null("/root/GameManager")
+	if not gm:
+		return
+	if death_ragdoll_time > 0.0 and is_inside_tree():
+		await get_tree().create_timer(death_ragdoll_time).timeout
+	gm.change_state(gm.GameState.GAME_OVER)
+	gm.handle_player_death()
+
+func _start_ragdoll() -> void:
+	if _anim_tree:
+		_anim_tree.active = false
+	_crouch_blend = 0.0
+	var skeleton := visual_mesh.find_child("Skeleton3D", true, false) as Skeleton3D if visual_mesh else null
+	ragdoll = RAGDOLL.start(skeleton, Vector3(velocity.x, 0.0, velocity.z) * 4.0, world_collision_mask)
+	collision_layer = 0 # corpse no longer blocks enemies / camera
+
+func start_reload() -> void:
+	if reload_timer > 0.0 or ammunition == magazine_capacity or reserve_ammunition <= 0:
+		return
+	reload_timer = 1.4
+	_sfx("reload", global_position)
+	ammunition_changed.emit(ammunition, reserve_ammunition)
+
+func fire_weapon() -> void:
+	if weapon_cooldown > 0.0 or reload_timer > 0.0 or current_state == State.DEAD:
+		return
+	if ammunition <= 0:
+		start_reload()
+		return
+	weapon_cooldown = 0.28
+	ammunition -= 1
+	ammunition_changed.emit(ammunition, reserve_ammunition)
+	_sfx("fire", global_position)
+	var camera := get_viewport().get_camera_3d()
+	if not camera:
+		return
+	var center := get_viewport().get_visible_rect().size * 0.5
+	var ray_start := camera.project_ray_origin(center)
+	var ray_end := ray_start + camera.project_ray_normal(center) * 90.0
+	var query := PhysicsRayQueryParameters3D.create(ray_start, ray_end, 3, [get_rid()])
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if not hit.is_empty():
+		var target = hit.collider
+		if target.has_method("take_damage"):
+			target.take_damage(30.0)
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy.global_position.distance_to(global_position) < 30.0:
+			enemy.hear_noise(global_position)
+
+func melee_attack() -> void:
+	if melee_cooldown > 0.0:
+		return
+	melee_cooldown = 0.8
+	_sfx("melee", global_position)
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy.current_state == EnemyBase.AIState.DEAD:
+			continue
+		var offset: Vector3 = enemy.global_position - global_position
+		if offset.length() > 2.2:
+			continue
+		var direction := offset.normalized()
+		var behind: bool = (-enemy.global_basis.z).dot(direction) > 0.5
+		var query := PhysicsRayQueryParameters3D.create(global_position + Vector3.UP, enemy.global_position + Vector3.UP, 3, [get_rid()])
+		var hit := get_world_3d().direct_space_state.intersect_ray(query)
+		if not hit.is_empty() and hit.collider == enemy:
+			enemy.take_damage(100.0 if behind and current_state == State.CROUCH else 35.0)
+			break

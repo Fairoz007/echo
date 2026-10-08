@@ -1,0 +1,105 @@
+{
+  "assets": [
+    {
+      "asset_id": "AMB_JUNGLE_CANOPY",
+      "path": "res://audio/ambience/jungle/AMB_JUNGLE_CANOPY.wav",
+      "prompt": "Quiet misty mountain jungle canopy, gentle moving leaves, sparse distant birds and soft insects, continuous natural wind, no music, voices, repetitive loud bird calls or dramatic events. Seamless understated background.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 20.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_RUIN_DRAFT",
+      "path": "res://audio/ambience/ruins/AMB_RUIN_DRAFT.wav",
+      "prompt": "A faint natural draft through ancient stone chambers, distant water behind a thick wall, airy stone reflections, restrained archaeological ruin interior, continuous quiet texture, no voices, music or monster sounds. Seamless loop.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 16.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_BRIDGE_GORGE",
+      "path": "res://audio/ambience/ruins/AMB_BRIDGE_GORGE.wav",
+      "prompt": "Wind moving through a deep mountain gorge beneath an ancient high stone bridge, soft air and very distant rushing water, broad outdoor acoustic space, restrained continuous texture, no voices or music. Seamless loop.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 16.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_MERIDIAN_POWER",
+      "path": "res://audio/ambience/meridian/AMB_MERIDIAN_POWER.wav",
+      "prompt": "Distant industrial survey generator and ventilation equipment in a stone tunnel, steady muted mechanical motor, dry modern metallic vibration, no alarm, voices or music, quiet continuous seamless loop.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 12.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_DROWNED_TEMPLE",
+      "path": "res://audio/ambience/temple/AMB_DROWNED_TEMPLE.wav",
+      "prompt": "Quiet submerged stone temple water surface, subtle continuous trickling channels and watery reflections in a large chamber, natural restrained wet ambience, no voices, monster sounds or music. Seamless loop.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 20.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_LOST_CITY_AIRFLOW",
+      "path": "res://audio/ambience/lost_city/AMB_LOST_CITY_AIRFLOW.wav",
+      "prompt": "Vast abandoned subterranean city air movement with very distant aqueduct waterfalls, enormous open stone reflections, still quiet foreground, natural geological space, no voices or music. Seamless restrained continuous texture.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 20.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_HEART_ROAD_RUMBLE",
+      "path": "res://audio/ambience/heart_vault/AMB_HEART_ROAD_RUMBLE.wav",
+      "prompt": "Distant restrained geological low rumble transmitted through old stone conduits, subtle air movement, continuous natural mountain vibration, no distinct repeated impacts, explosions, voices or music. Seamless loop.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 16.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_HEART_VAULT_RESONANCE",
+      "path": "res://audio/ambience/heart_vault/AMB_HEART_VAULT_RESONANCE.wav",
+      "prompt": "Ancient cavern mineral resonance, quiet continuous low stone harmonic with gentle upper overtones and huge geode reflections, grounded acoustic mineral vibration, no melody, electronic beeps, monster voices or music. Seamless loop.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 20.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_DAYLIGHT_RIDGE_WIND",
+      "path": "res://audio/ambience/jungle/AMB_DAYLIGHT_RIDGE_WIND.wav",
+      "prompt": "Gentle open mountain ridge breeze at dawn, light distant birds far below, calm continuous high altitude air, natural broad outdoor space, no voices, music or loud repeated calls. Seamless quiet loop.",
+      "loop": true,
+      "spatial": true,
+      "qa": "PENDING_LISTENING",
+      "duration": 18.0,
+      "sample_rate": 44100,
+      "channels": 1
+    }
+  ],
+  "errors": [],
+  "qa": "PENDING_LISTENING"
+}

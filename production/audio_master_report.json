@@ -1,0 +1,866 @@
+{
+  "dialogue": {
+    "PRO_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -1.5,
+      "duration": 4.802,
+      "gain_db": 1.0
+    },
+    "PRO_MARA_002": {
+      "lufs": -16.1,
+      "true_peak_db": -1.4,
+      "duration": 2.059,
+      "gain_db": 1.7
+    },
+    "PRO_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 4.969,
+      "gain_db": 1.7
+    },
+    "PRO_MARA_004": {
+      "lufs": -16.1,
+      "true_peak_db": -1.4,
+      "duration": 1.115,
+      "gain_db": 1.9
+    },
+    "C01_MARA_001": {
+      "lufs": -16.1,
+      "true_peak_db": -1.2,
+      "duration": 3.576,
+      "gain_db": 1.8
+    },
+    "C01_NADIYA_001": {
+      "lufs": -16.2,
+      "true_peak_db": -1.4,
+      "duration": 3.349,
+      "gain_db": 6.2
+    },
+    "C01_NADIYA_002": {
+      "lufs": -16.8,
+      "true_peak_db": -1.0,
+      "duration": 4.568,
+      "gain_db": 5.3
+    },
+    "C01_ELIAS_001": {
+      "lufs": -16.4,
+      "true_peak_db": -1.4,
+      "duration": 4.87,
+      "gain_db": 8.1
+    },
+    "C01_ELIAS_002": {
+      "lufs": -16.3,
+      "true_peak_db": -1.2,
+      "duration": 5.12,
+      "gain_db": 7.8
+    },
+    "C01_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -1.2,
+      "duration": 6.088,
+      "gain_db": 1.6
+    },
+    "C01_MARA_003": {
+      "lufs": -15.9,
+      "true_peak_db": -1.8,
+      "duration": 5.991,
+      "gain_db": 1.9
+    },
+    "C01_ELIAS_003": {
+      "lufs": -17.1,
+      "true_peak_db": -1.4,
+      "duration": 4.725,
+      "gain_db": 11.4
+    },
+    "C01_MARA_004": {
+      "lufs": -16.0,
+      "true_peak_db": -1.2,
+      "duration": 3.933,
+      "gain_db": 2.3
+    },
+    "C10_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 4.477,
+      "gain_db": 0.8
+    },
+    "C10_DRAKE_001": {
+      "lufs": -16.1,
+      "true_peak_db": -1.3,
+      "duration": 4.371,
+      "gain_db": 8.4
+    },
+    "C10_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -2.1,
+      "duration": 2.322,
+      "gain_db": 0.7
+    },
+    "C10_DRAKE_002": {
+      "lufs": -16.1,
+      "true_peak_db": -1.3,
+      "duration": 4.404,
+      "gain_db": 7.8
+    },
+    "C10_MARA_003": {
+      "lufs": -15.9,
+      "true_peak_db": -2.6,
+      "duration": 1.951,
+      "gain_db": -0.5
+    },
+    "C02_MARA_001": {
+      "lufs": -16.1,
+      "true_peak_db": -1.4,
+      "duration": 4.83,
+      "gain_db": 1.0
+    },
+    "C02_MARA_002": {
+      "lufs": -16.1,
+      "true_peak_db": -1.3,
+      "duration": 3.669,
+      "gain_db": 1.2
+    },
+    "C02_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 5.573,
+      "gain_db": 1.6
+    },
+    "C02_TOMAS_001": {
+      "lufs": -16.4,
+      "true_peak_db": -1.4,
+      "duration": 2.491,
+      "gain_db": 8.9
+    },
+    "C03_ELIAS_001": {
+      "lufs": -16.3,
+      "true_peak_db": -1.3,
+      "duration": 3.396,
+      "gain_db": 11.2
+    },
+    "C03_MARA_001": {
+      "lufs": -15.9,
+      "true_peak_db": -3.1,
+      "duration": 1.904,
+      "gain_db": -1.6
+    },
+    "C03_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -2.8,
+      "duration": 0.88,
+      "gain_db": 3.3
+    },
+    "C04_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 5.062,
+      "gain_db": 1.2
+    },
+    "C04_NADIYA_001": {
+      "lufs": -16.2,
+      "true_peak_db": -1.0,
+      "duration": 6.024,
+      "gain_db": 9.2
+    },
+    "C04_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 3.994,
+      "gain_db": 1.1
+    },
+    "C05_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 4.31,
+      "gain_db": 0.6
+    },
+    "C05_DRAKE_001": {
+      "lufs": -16.1,
+      "true_peak_db": -1.2,
+      "duration": 4.87,
+      "gain_db": 8.2
+    },
+    "C05_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -1.7,
+      "duration": 3.065,
+      "gain_db": 1.1
+    },
+    "C06_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 5.248,
+      "gain_db": 1.3
+    },
+    "C06_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 4.192,
+      "gain_db": 0.3
+    },
+    "C06_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -2.0,
+      "duration": 3.574,
+      "gain_db": 0.7
+    },
+    "C07_MARA_001": {
+      "lufs": -16.1,
+      "true_peak_db": -1.4,
+      "duration": 4.598,
+      "gain_db": 1.4
+    },
+    "C07_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 5.18,
+      "gain_db": 1.0
+    },
+    "C07_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -2.3,
+      "duration": 4.488,
+      "gain_db": 0.0
+    },
+    "C07_TOMAS_001": {
+      "lufs": -17.1,
+      "true_peak_db": -1.3,
+      "duration": 2.523,
+      "gain_db": 10.5
+    },
+    "C08_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -2.6,
+      "duration": 2.994,
+      "gain_db": 0.0
+    },
+    "C08_ELIAS_001": {
+      "lufs": -16.3,
+      "true_peak_db": -1.3,
+      "duration": 5.487,
+      "gain_db": 7.6
+    },
+    "C08_ADRIAN_001": {
+      "lufs": -17.0,
+      "true_peak_db": -1.3,
+      "duration": 5.339,
+      "gain_db": 12.7
+    },
+    "C09_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -1.7,
+      "duration": 4.226,
+      "gain_db": 1.2
+    },
+    "C09_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -2.2,
+      "duration": 1.768,
+      "gain_db": -0.5
+    },
+    "C09_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -1.2,
+      "duration": 3.762,
+      "gain_db": 2.4
+    },
+    "FIN_MARA_001": {
+      "lufs": -16.0,
+      "true_peak_db": -2.4,
+      "duration": 4.438,
+      "gain_db": -0.5
+    },
+    "FIN_TOMAS_001": {
+      "lufs": -16.6,
+      "true_peak_db": -1.4,
+      "duration": 1.598,
+      "gain_db": 5.8
+    },
+    "FIN_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 4.133,
+      "gain_db": 0.3
+    },
+    "C01_MARA_005": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 5.48,
+      "gain_db": 0.9
+    },
+    "C02_MARA_004": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 5.526,
+      "gain_db": 2.0
+    },
+    "C03_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -1.9,
+      "duration": 4.087,
+      "gain_db": 1.7
+    },
+    "C04_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 5.108,
+      "gain_db": 2.3
+    },
+    "C05_MARA_003": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 5.201,
+      "gain_db": 1.4
+    },
+    "C06_MARA_004": {
+      "lufs": -16.1,
+      "true_peak_db": -1.3,
+      "duration": 4.783,
+      "gain_db": 1.5
+    },
+    "C07_MARA_004": {
+      "lufs": -16.0,
+      "true_peak_db": -1.9,
+      "duration": 4.644,
+      "gain_db": 1.2
+    },
+    "C08_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 6.306,
+      "gain_db": 1.5
+    },
+    "C09_MARA_004": {
+      "lufs": -16.0,
+      "true_peak_db": -1.5,
+      "duration": 5.341,
+      "gain_db": 1.2
+    },
+    "C10_MARA_004": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 4.962,
+      "gain_db": 1.7
+    },
+    "C01_TOMAS_001": {
+      "lufs": -17.0,
+      "true_peak_db": -1.4,
+      "duration": 3.649,
+      "gain_db": 6.6
+    },
+    "C01_ADRIAN_001": {
+      "lufs": -16.1,
+      "true_peak_db": -1.5,
+      "duration": 3.615,
+      "gain_db": 7.3
+    },
+    "C05_MERIDIAN_001": {
+      "lufs": -16.4,
+      "true_peak_db": -1.3,
+      "duration": 3.147,
+      "gain_db": 8.7
+    },
+    "C08_MARA_003": {
+      "lufs": -15.9,
+      "true_peak_db": -1.9,
+      "duration": 3.019,
+      "gain_db": 0.9
+    },
+    "C08_ELIAS_002": {
+      "lufs": -16.4,
+      "true_peak_db": -1.3,
+      "duration": 4.103,
+      "gain_db": 8.3
+    },
+    "C10_MARA_005": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 4.458,
+      "gain_db": 1.5
+    },
+    "C10_DRAKE_003": {
+      "lufs": -16.1,
+      "true_peak_db": -1.4,
+      "duration": 4.971,
+      "gain_db": 8.4
+    },
+    "FIN_NADIYA_001": {
+      "lufs": -16.4,
+      "true_peak_db": -1.4,
+      "duration": 3.221,
+      "gain_db": 4.6
+    },
+    "EPI_ELIAS_001": {
+      "lufs": -16.5,
+      "true_peak_db": -1.4,
+      "duration": 3.628,
+      "gain_db": 7.3
+    },
+    "EPI_MARA_001": {
+      "lufs": -16.1,
+      "true_peak_db": -1.3,
+      "duration": 4.412,
+      "gain_db": 3.0
+    },
+    "EPI_MARA_002": {
+      "lufs": -16.0,
+      "true_peak_db": -2.3,
+      "duration": 3.529,
+      "gain_db": 1.3
+    },
+    "REC_PRO": {
+      "lufs": -15.9,
+      "true_peak_db": -1.4,
+      "duration": 8.199,
+      "gain_db": 0.9
+    },
+    "REC_C01": {
+      "lufs": -16.0,
+      "true_peak_db": -1.3,
+      "duration": 9.559,
+      "gain_db": 1.2
+    },
+    "REC_C02": {
+      "lufs": -16.1,
+      "true_peak_db": -1.2,
+      "duration": 8.517,
+      "gain_db": 1.8
+    },
+    "REC_C03": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 6.377,
+      "gain_db": 1.1
+    },
+    "REC_C04": {
+      "lufs": -16.0,
+      "true_peak_db": -1.5,
+      "duration": 7.395,
+      "gain_db": 0.8
+    },
+    "REC_C05": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 7.13,
+      "gain_db": 1.0
+    },
+    "REC_C06": {
+      "lufs": -16.0,
+      "true_peak_db": -1.5,
+      "duration": 7.105,
+      "gain_db": 0.8
+    },
+    "REC_C07": {
+      "lufs": -16.0,
+      "true_peak_db": -1.4,
+      "duration": 7.076,
+      "gain_db": 0.9
+    },
+    "REC_C08": {
+      "lufs": -16.0,
+      "true_peak_db": -1.2,
+      "duration": 7.338,
+      "gain_db": 1.0
+    },
+    "REC_C09": {
+      "lufs": -16.0,
+      "true_peak_db": -1.2,
+      "duration": 6.78,
+      "gain_db": 0.9
+    },
+    "REC_C10": {
+      "lufs": -16.0,
+      "true_peak_db": -1.6,
+      "duration": 7.012,
+      "gain_db": 0.7
+    },
+    "REC_FIN": {
+      "lufs": -16.1,
+      "true_peak_db": -1.3,
+      "duration": 6.173,
+      "gain_db": 0.9
+    }
+  },
+  "ambience": {
+    "AMB_PRO_CAVE_ROOMTONE.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -7.5,
+      "duration": 20.0,
+      "gain_db": 1.4
+    },
+    "AMB_PRO_CAVE_ROOMTONE.ogg": {
+      "lufs": -26.0,
+      "true_peak_db": -10.3,
+      "duration": 20.0,
+      "gain_db": -1.5
+    },
+    "AMB_PRO_CAVE_WATER.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -3.3,
+      "duration": 12.0,
+      "gain_db": 9.4
+    },
+    "AMB_PRO_CAVE_WATER.ogg": {
+      "lufs": -26.1,
+      "true_peak_db": -5.8,
+      "duration": 12.0,
+      "gain_db": 6.1
+    },
+    "AMB_HEART_ROAD_RUMBLE.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -9.5,
+      "duration": 16.0,
+      "gain_db": 17.2
+    },
+    "AMB_HEART_ROAD_RUMBLE.ogg": {
+      "lufs": -26.0,
+      "true_peak_db": -12.2,
+      "duration": 16.0,
+      "gain_db": 14.3
+    },
+    "AMB_HEART_VAULT_RESONANCE.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -11.1,
+      "duration": 20.0,
+      "gain_db": 12.4
+    },
+    "AMB_HEART_VAULT_RESONANCE.ogg": {
+      "lufs": -26.0,
+      "true_peak_db": -13.9,
+      "duration": 20.0,
+      "gain_db": 9.4
+    },
+    "AMB_DAYLIGHT_RIDGE_WIND.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -13.6,
+      "duration": 18.0,
+      "gain_db": 25.6
+    },
+    "AMB_DAYLIGHT_RIDGE_WIND.ogg": {
+      "lufs": -26.3,
+      "true_peak_db": -15.0,
+      "duration": 18.0,
+      "gain_db": 24.4
+    },
+    "AMB_JUNGLE_CANOPY.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -9.4,
+      "duration": 20.0,
+      "gain_db": 18.3
+    },
+    "AMB_JUNGLE_CANOPY.ogg": {
+      "lufs": -26.3,
+      "true_peak_db": -14.6,
+      "duration": 20.0,
+      "gain_db": 13.3
+    },
+    "AMB_LOST_CITY_AIRFLOW.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -14.4,
+      "duration": 20.0,
+      "gain_db": -1.1
+    },
+    "AMB_LOST_CITY_AIRFLOW.ogg": {
+      "lufs": -26.2,
+      "true_peak_db": -17.2,
+      "duration": 20.0,
+      "gain_db": -3.5
+    },
+    "AMB_MERIDIAN_POWER.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -12.5,
+      "duration": 12.0,
+      "gain_db": 0.4
+    },
+    "AMB_MERIDIAN_POWER.ogg": {
+      "lufs": -26.0,
+      "true_peak_db": -15.3,
+      "duration": 12.0,
+      "gain_db": -4.4
+    },
+    "AMB_BRIDGE_GORGE.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -11.6,
+      "duration": 16.0,
+      "gain_db": 1.1
+    },
+    "AMB_BRIDGE_GORGE.ogg": {
+      "lufs": -26.1,
+      "true_peak_db": -13.4,
+      "duration": 16.0,
+      "gain_db": -2.0
+    },
+    "AMB_RUIN_DRAFT.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -2.8,
+      "duration": 16.0,
+      "gain_db": 32.0
+    },
+    "AMB_RUIN_DRAFT.ogg": {
+      "lufs": -26.0,
+      "true_peak_db": -2.9,
+      "duration": 16.0,
+      "gain_db": 29.0
+    },
+    "AMB_DROWNED_TEMPLE.wav": {
+      "lufs": -26.1,
+      "true_peak_db": -3.0,
+      "duration": 20.0,
+      "gain_db": 17.0
+    },
+    "AMB_DROWNED_TEMPLE.ogg": {
+      "lufs": -26.1,
+      "true_peak_db": -4.0,
+      "duration": 20.0,
+      "gain_db": 13.9
+    },
+    "AMB_JUNGLE_BIRDS_INSECTS.ogg": {
+      "lufs": -26.2,
+      "true_peak_db": -17.6,
+      "duration": 15.0,
+      "gain_db": -5.4
+    },
+    "AMB_WATER_RISING_LOOP.ogg": {
+      "lufs": -26.3,
+      "true_peak_db": -11.1,
+      "duration": 8.0,
+      "gain_db": -10.0
+    },
+    "AMB_WATER_DRAINING_LOOP.ogg": {
+      "lufs": -26.2,
+      "true_peak_db": -9.4,
+      "duration": 8.0,
+      "gain_db": -4.6
+    },
+    "AMB_WATERFALL_RESONANT_LOOP.ogg": {
+      "lufs": -26.0,
+      "true_peak_db": -15.8,
+      "duration": 12.0,
+      "gain_db": -10.5
+    }
+  },
+  "sfx": {
+    "FOL_JUNGLE_STEP_01.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -1.6,
+      "duration": 1.0,
+      "gain_db": 0.3
+    },
+    "FOL_JUNGLE_STEP_02.wav": {
+      "lufs": -26.8,
+      "true_peak_db": -1.5,
+      "duration": 1.0,
+      "gain_db": -0.2
+    },
+    "FOL_JUNGLE_STEP_03.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -4.9,
+      "duration": 1.0,
+      "gain_db": 18.1
+    },
+    "FOL_JUNGLE_STEP_04.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -1.5,
+      "duration": 1.0,
+      "gain_db": 12.8
+    },
+    "FOL_MUD_STEP_01.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -3.9,
+      "duration": 1.0,
+      "gain_db": 6.7
+    },
+    "FOL_MUD_STEP_02.wav": {
+      "lufs": -26.9,
+      "true_peak_db": -1.5,
+      "duration": 1.0,
+      "gain_db": 12.7
+    },
+    "FOL_MUD_STEP_03.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -2.3,
+      "duration": 1.0,
+      "gain_db": 2.3
+    },
+    "FOL_MUD_STEP_04.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -4.7,
+      "duration": 1.0,
+      "gain_db": -3.2
+    },
+    "FOL_PRO_WET_ROCK_STEP_01.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -5.3,
+      "duration": 1.0,
+      "gain_db": 25.0
+    },
+    "FOL_PRO_WET_ROCK_STEP_02.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -5.7,
+      "duration": 1.0,
+      "gain_db": 4.1
+    },
+    "FOL_PRO_WET_ROCK_STEP_03.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -8.1,
+      "duration": 1.0,
+      "gain_db": 11.9
+    },
+    "FOL_PRO_WET_ROCK_STEP_04.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -3.4,
+      "duration": 1.0,
+      "gain_db": 5.0
+    },
+    "FOL_STONE_STEP_01.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -3.7,
+      "duration": 1.0,
+      "gain_db": -1.7
+    },
+    "FOL_STONE_STEP_02.wav": {
+      "lufs": -27.0,
+      "true_peak_db": -1.5,
+      "duration": 1.0,
+      "gain_db": 20.9
+    },
+    "FOL_STONE_STEP_03.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -1.7,
+      "duration": 1.0,
+      "gain_db": 1.3
+    },
+    "FOL_STONE_STEP_04.wav": {
+      "lufs": -26.7,
+      "true_peak_db": -1.5,
+      "duration": 1.0,
+      "gain_db": 14.9
+    },
+    "FOL_WADE_STEP_01.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -6.9,
+      "duration": 1.0,
+      "gain_db": -1.1
+    },
+    "FOL_WADE_STEP_02.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -3.9,
+      "duration": 1.0,
+      "gain_db": 9.7
+    },
+    "FOL_WADE_STEP_03.wav": {
+      "lufs": -26.9,
+      "true_peak_db": -1.5,
+      "duration": 1.0,
+      "gain_db": 6.0
+    },
+    "FOL_WADE_STEP_04.wav": {
+      "lufs": -26.0,
+      "true_peak_db": -2.0,
+      "duration": 1.0,
+      "gain_db": -0.1
+    },
+    "SFX_COMBAT_FIRE.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -4.7,
+      "duration": 1.0,
+      "gain_db": 9.6
+    },
+    "SFX_COMBAT_IMPACT.wav": {
+      "lufs": -24.3,
+      "true_peak_db": -1.5,
+      "duration": 1.0,
+      "gain_db": 21.9
+    },
+    "SFX_COMBAT_RELOAD.wav": {
+      "lufs": -25.4,
+      "true_peak_db": -1.5,
+      "duration": 2.0,
+      "gain_db": 5.1
+    },
+    "SFX_COMBAT_TAKEDOWN.wav": {
+      "lufs": -32.3,
+      "true_peak_db": -1.5,
+      "duration": 1.48,
+      "gain_db": 36.0
+    },
+    "SFX_PRO_ROCK_SHIFT.wav": {
+      "lufs": -22.9,
+      "true_peak_db": -1.5,
+      "duration": 3.0,
+      "gain_db": 6.3
+    },
+    "SFX_ROCK_COLLAPSE.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -3.2,
+      "duration": 6.0,
+      "gain_db": -6.4
+    },
+    "FOL_BREATH_RUNNING.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -6.4,
+      "duration": 4.0,
+      "gain_db": 8.3
+    },
+    "FOL_PRO_BREATH_RECOVERY.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -2.4,
+      "duration": 4.0,
+      "gain_db": 18.9
+    },
+    "FOL_PRO_CLOTH_SHIFT.wav": {
+      "lufs": -22.2,
+      "true_peak_db": -1.5,
+      "duration": 2.0,
+      "gain_db": 11.3
+    },
+    "SFX_PRO_UI_OBJECTIVE.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -1.6,
+      "duration": 1.0,
+      "gain_db": 26.0
+    },
+    "SFX_HARMONIC_NODE_PULSE.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -11.5,
+      "duration": 3.0,
+      "gain_db": -7.3
+    },
+    "SFX_PRO_VAELOR_KEY_ACTIVATE.wav": {
+      "lufs": -23.1,
+      "true_peak_db": -1.5,
+      "duration": 4.0,
+      "gain_db": 1.7
+    },
+    "SFX_STONE_MECHANISM_GRIND.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -5.9,
+      "duration": 4.0,
+      "gain_db": -8.6
+    },
+    "SFX_PRO_CAVE_DRIP.wav": {
+      "lufs": -32.8,
+      "true_peak_db": -11.8,
+      "duration": 1.0,
+      "gain_db": 36.0
+    },
+    "SFX_SWIM_STROKE.wav": {
+      "lufs": -22.0,
+      "true_peak_db": -5.5,
+      "duration": 1.48,
+      "gain_db": 0.2
+    },
+    "SFX_WATER_ENTRY.wav": {
+      "lufs": -22.5,
+      "true_peak_db": -1.5,
+      "duration": 2.0,
+      "gain_db": 3.9
+    },
+    "SFX_WATER_EXIT_SPLASH.wav": {
+      "lufs": -22.2,
+      "true_peak_db": -1.5,
+      "duration": 2.0,
+      "gain_db": 10.9
+    }
+  }
+}

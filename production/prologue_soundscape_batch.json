@@ -1,0 +1,131 @@
+{
+  "requested": 0,
+  "generated": 0,
+  "accepted": 0,
+  "rejected": 0,
+  "qa": "PENDING_LISTENING",
+  "assets": [
+    {
+      "asset_id": "AMB_PRO_CAVE_ROOMTONE",
+      "path": "res://audio/ambience/cave/AMB_PRO_CAVE_ROOMTONE.wav",
+      "prompt": "Deep underground limestone cave room tone. Very subtle low air movement and natural cavern resonance. No distinct drops, music, speech, voices, monsters or dramatic events. Seamless restrained quiet background.",
+      "loop": true,
+      "spatial": true,
+      "duration": 20.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "AMB_PRO_CAVE_WATER",
+      "path": "res://audio/ambience/cave/AMB_PRO_CAVE_WATER.wav",
+      "prompt": "Quiet underground trickling water flowing between rocks, close isolated stream perspective, natural cave reflections, subtle realistic seamless continuous water, no music or voices.",
+      "loop": true,
+      "spatial": true,
+      "duration": 12.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_PRO_CAVE_DRIP",
+      "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+      "prompt": "One isolated water droplet falling into a shallow limestone pool, short realistic cave reflection. Single clear drop only. No voices or music.",
+      "loop": false,
+      "spatial": true,
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_PRO_ROCK_SHIFT",
+      "path": "res://audio/destruction/SFX_PRO_ROCK_SHIFT.wav",
+      "prompt": "Small limestone rocks shifting and a little gravel falling nearby underground. Natural restrained geological creak. Clean isolated event, no explosions, no speech or music.",
+      "loop": false,
+      "spatial": true,
+      "duration": 3.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_PRO_VAELOR_KEY_ACTIVATE",
+      "path": "res://audio/vaelor/SFX_PRO_VAELOR_KEY_ACTIVATE.wav",
+      "prompt": "Ancient acoustic stone key waking: a struck dark stone harmonic, resonant mineral ring rising gently into three pure intertwined overtones, subtle geological vibration fading away. Grounded archaeological mechanism, no electronic beep, music or voices.",
+      "loop": false,
+      "spatial": true,
+      "duration": 4.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "SFX_PRO_UI_OBJECTIVE",
+      "path": "res://audio/ui/SFX_PRO_UI_OBJECTIVE.wav",
+      "prompt": "Subtle interface objective update: one delicate rounded stone tap with a very short airy harmonic tail. Quiet archaeological mystery game cue, no arcade reward, voices or music.",
+      "loop": false,
+      "spatial": false,
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_PRO_CLOTH_SHIFT",
+      "path": "res://audio/movement/FOL_PRO_CLOTH_SHIFT.wav",
+      "prompt": "One subtle canvas expedition jacket and backpack strap rustle during a small movement, restrained close dry isolated sound, no metal jangling, footsteps, voices or music.",
+      "loop": false,
+      "spatial": false,
+      "duration": 2.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_PRO_WET_ROCK_STEP_01",
+      "path": "res://audio/footsteps/rock/FOL_PRO_WET_ROCK_STEP_01.wav",
+      "prompt": "Single realistic rugged hiking boot footstep on damp limestone cave floor, medium body weight, short clean transient and tiny gravel shift. One footstep only, no voice or music.",
+      "loop": false,
+      "spatial": true,
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_PRO_WET_ROCK_STEP_02",
+      "path": "res://audio/footsteps/rock/FOL_PRO_WET_ROCK_STEP_02.wav",
+      "prompt": "Single firm hiking boot heel and sole contact on damp rough limestone, subtle wet stone scrape, clean close isolated transient. One step only, no voices or music.",
+      "loop": false,
+      "spatial": true,
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_PRO_WET_ROCK_STEP_03",
+      "path": "res://audio/footsteps/rock/FOL_PRO_WET_ROCK_STEP_03.wav",
+      "prompt": "Single lighter rugged hiking boot contact on uneven damp limestone with a few grit grains, short restrained cave reflection. One isolated footstep only, no voices or music.",
+      "loop": false,
+      "spatial": true,
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_PRO_WET_ROCK_STEP_04",
+      "path": "res://audio/footsteps/rock/FOL_PRO_WET_ROCK_STEP_04.wav",
+      "prompt": "Single cautious hiking boot landing on wet limestone rock, soft heavy sole thud and brief sole friction. One isolated footstep only, no voices or music.",
+      "loop": false,
+      "spatial": true,
+      "duration": 1.0,
+      "sample_rate": 44100,
+      "channels": 1
+    },
+    {
+      "asset_id": "FOL_PRO_BREATH_RECOVERY",
+      "path": "res://audio/movement/FOL_PRO_BREATH_RECOVERY.wav",
+      "prompt": "One adult woman recovering from a fall, two restrained mildly strained breaths, realistic nonverbal breathing, grounded physical effort, not theatrical or sexualized, no words or music.",
+      "loop": false,
+      "spatial": false,
+      "duration": 4.0,
+      "sample_rate": 44100,
+      "channels": 1
+    }
+  ],
+  "errors": [],
+  "remaining_characters_reported": 9320
+}

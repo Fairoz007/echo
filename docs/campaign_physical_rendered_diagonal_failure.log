@@ -1,0 +1,122 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 68 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+PHYSICAL ROUTE chapter 0
+[INTERACTION] Triggered on:Interactable3D
+[PROLOGUE] Player examined the Vaelor Acoustic Relic!
+[MISSION] Completed Objective:obj_prologue_explore
+[MISSION] New Objective:obj_prologue_exit->Examine the vibrating monolithic portal
+PHYSICAL reached ResonantArtifact/Interactable3D at (0.0, 0.000859, -12.19999)
+[PROLOGUE] Reached monolithic portal threshold! Transitioning to Chapter 1.
+[MISSION] Completed Objective:obj_prologue_exit
+PHYSICAL reached ExitTrigger at (0.0, 0.000859, -25.59332)
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[MISSION] Checkpoint stored:chapter_01_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+PHYSICAL ROUTE chapter 1
+[INTERACTION] Triggered on:Interactable3D
+PHYSICAL reached CampArea/NadiyaNPC/Interactable3D at (-2.462154, 0.000937, 8.816423)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] New Objective:obj_c01_inspect_map->Examine the topographic survey table
+PHYSICAL reached CampArea/EliasNPC/Interactable3D at (1.670685, 0.000937, 4.948108)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c01_meet_team
+[MISSION] Completed Objective:obj_c01_inspect_map
+[MISSION] New Objective:obj_c01_reach_ridge->Ascend the Eastern Ridge trail and locate the sealed portal
+PHYSICAL reached CampArea/SurveyTable/Interactable3D at (-0.208196, 0.000937, 4.992813)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c01_reach_ridge
+[MISSION] New Objective:obj_c01_investigate_gate->Report the discovered portal to Elias via radio
+PHYSICAL reached RidgeArea/SealedPortal/Interactable3D at (-0.000737, 0.000937, -61.20638)
+PHYSICAL reached RidgeArea/ChapterEndTrigger at (-0.000541, 0.000937, -60.45304)
+[MISSION] Completed Objective:obj_c01_investigate_gate
+[CHAPTER 1] Reached Eastern Ridge Portal! Transitioning to Chapter 2.
+[MISSION] New Objective:obj_c02_open_gate->Restore hydraulic water flow to lift the sanctuary gate
+[MISSION] Checkpoint stored:chapter_02_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+PHYSICAL ROUTE chapter 2
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 2] Sluice gate opened! Water flowing.
+[MISSION] Completed Objective:obj_c02_open_gate
+[MISSION] New Objective:obj_c02_explore_sanctuary->Explore the inner sanctuary and examine the Vaelor inscription
+PHYSICAL reached HydraulicPuzzle/SluiceLever/Interactable3D at (-8.009329, 0.000937, 4.930066)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c02_explore_sanctuary
+[MISSION] New Objective:obj_c02_investigate_abyss->Investigate the deep acoustic vertical shaft
+PHYSICAL reached Sanctuary/InscriptionTablet/Interactable3D at (-0.025328, 0.000937, -25.23307)
+[CHAPTER 2] Reached abyss overlook! Transitioning to Chapter 3: The Fall.
+PHYSICAL reached Sanctuary/AbyssTrigger at (-0.001909, 0.000937, -36.53296)
+[MISSION] New Objective:obj_c03_cross_bridge->Cross the ancient cyclopean bridge span
+[MISSION] Checkpoint stored:chapter_03_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+PHYSICAL ROUTE chapter 3
+[CHAPTER 3] Structural failure triggered! Bridge collapsing.
+PHYSICAL reached BridgeStructure/CollapseTrigger at (0.0, -1.975381, -1.53999)
+[CHAPTER 3] Player fell through subterranean fissure! Transitioning to Chapter 4: Beneath.
+PHYSICAL reached FissureAbyssTrigger at (0.0, -25.94003, -9.573319)
+[MISSION] New Objective:obj_c04_find_way->Navigate the deep subterranean cavern and seek radio signals
+[MISSION] Checkpoint stored:chapter_04_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+PHYSICAL ROUTE chapter 4
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c04_find_way
+[MISSION] New Objective:obj_c04_reach_outpost->Ascend through the upper tunnels toward the Meridian outpost
+PHYSICAL reached AbandonedCamp/FieldRadio/Interactable3D at (0.0, 0.000937, -0.199983)
+[CHAPTER 4] Navigated subterranean caves! Transitioning to Chapter 5: Hunters.
+PHYSICAL reached ExitTunnel/ExitTrigger at (0.0, 0.000937, -34.54)
+[MISSION] New Objective:obj_c05_neutralize_patrol->Infiltrate the Meridian checkpoint using stealth or combat
+[MISSION] Checkpoint stored:chapter_05_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+PHYSICAL ROUTE chapter 5
+[AI] Mercenary acquired target! Entering COMBAT state.
+PHYSICAL reached Enemies/EnemyMercenary1 at (-1.793496, 0.000937, 16.37657)
+AIM debug yaw=0.17764653396606 desired=0.17764653359717 pitch=-0.06333639515753 desired=-0.06333639768782 hit=Ground:<StaticBody3D#1703944390180> ammo=12
+[AI] Mercenary hit! Remaining HP:30.0
+[PLAYER] Took damage:15.0Remaining HP:85.0
+[AI] Mercenary acquired target! Entering COMBAT state.
+[AI] Mercenary hit! Remaining HP:0.0
+[CHAPTER 5] Enemy neutralized. Remaining:1
+[AI] Mercenary defeated.
+PHYSICAL reached Enemies/EnemyMercenary2 at (-0.702217, 0.000937, 13.30789)
+AIM debug yaw=-0.24178102977944 desired=-0.24178104192274 pitch=-0.01844382730436 desired=-0.01844382731173 hit=<null> ammo=9
+[AI] Mercenary hit! Remaining HP:30.0
+[PLAYER] Took damage:15.0Remaining HP:70.0
+[AI] Mercenary hit! Remaining HP:0.0
+[CHAPTER 5] Enemy neutralized. Remaining:0
+[MISSION] Completed Objective:obj_c05_neutralize_patrol
+[MISSION] New Objective:obj_c05_observe_excavation->Reach the observation ledge overlooking the Drowned Temple
+[AI] Mercenary defeated.
+[MISSION] Completed Objective:obj_c05_observe_excavation
+[MISSION] New Objective:obj_c05_enter_temple->Enter the submerged Drowned Temple aqueduct
+PHYSICAL reached ObservationPerch/DrakeTrigger at (-0.017582, 0.000937, -19.58594)
+[CHAPTER 5] Infiltrated Drowned Temple! Transitioning to Chapter 6.
+PHYSICAL reached TempleEntrance/ChapterEndTrigger at (-0.000974, 0.000937, -34.56598)
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[MISSION] Checkpoint stored:chapter_06_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+PHYSICAL ROUTE chapter 6
+[PLAYER] Entered water body.
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 6] Temple sluice wheel turned! Water draining.
+[MISSION] Completed Objective:obj_c06_drain_temple
+[MISSION] New Objective:obj_c06_reach_city_passage->Proceed through the drained gateway into the subterranean expanse
+PHYSICAL reached TempleMechanisms/SluiceWheel/Interactable3D at (-11.93821, 0.107349, 0.040397)
+[PLAYER] Exited water body.
+[PLAYER] Entered water body.
+PHYSICAL reached TempleSanctum/ExitTrigger at (-0.27749, -3.449998, -32.3515)
+PHYSICAL CAMPAIGN BLOCKER: Chapter 6 exit did not progress; active objectives={ "obj_c06_reach_city_passage": "Proceed through the drained gateway into the subterranean expanse" }
+[GAME_MANAGER] State changed to:MENU
+[PLAYER] Exited water body.

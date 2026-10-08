@@ -1,0 +1,1844 @@
+{
+  "scope": "source metadata only; no rendered or gameplay validation",
+  "assets": [
+    {
+      "path": "assets/characters/adrian/source/CHR_Adrian_Base.glb",
+      "sha256": "6d68f85d1ace8849a34f8b27be9bdc03ef7c56c3336a33cfc0c30a7f9589453e",
+      "bytes": 3949532,
+      "source_triangles": 18322,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1005859375,
+            -0.4990234375,
+            -0.4873046875
+          ],
+          "max": [
+            0.1005859375,
+            0.4990234375,
+            0.4873046875
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_136d6f7e-6777-4c0d-8adc-65ae0a6920d5",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/adrian/source/CHR_Adrian_Idle_Legacy.glb",
+      "sha256": "afa3b77e8923bf74f065c9ef9d48ef41fad6e88b48facbd6ccd0dc7a0830dae5",
+      "bytes": 4689256,
+      "source_triangles": 18322,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.10058589279651642,
+            -4.3486807044246234e-08,
+            -0.4873049259185791
+          ],
+          "max": [
+            0.10058604925870895,
+            0.9980464577674866,
+            0.4873046278953552
+          ]
+        }
+      ],
+      "animations": [
+        "idle"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_136d6f7e-6777-4c0d-8adc-65ae0a6920d5"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/adrian/source/CHR_Adrian_Rig.glb",
+      "sha256": "75628bf0abef360734e8c4e296d4ef9df4372db3ee9e22b6dc086acc4beab261",
+      "bytes": 4492048,
+      "source_triangles": 18322,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.10058599710464478,
+            -1.7881393432617188e-07,
+            -0.48730477690696716
+          ],
+          "max": [
+            0.1005859225988388,
+            0.998046875,
+            0.4873046278953552
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_136d6f7e-6777-4c0d-8adc-65ae0a6920d5"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/adrian/source/CHR_Adrian_Rig_Legacy.glb",
+      "sha256": "f787eca5678c79248ec4ee04e1527b99d24541867371377796ad55ec23611532",
+      "bytes": 4488720,
+      "source_triangles": 18322,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.10058602690696716,
+            -1.8430006321068504e-07,
+            -0.4873049259185791
+          ],
+          "max": [
+            0.10058588534593582,
+            0.9980465769767761,
+            0.4873046278953552
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_136d6f7e-6777-4c0d-8adc-65ae0a6920d5"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/drake/source/CHR_Drake_Base.glb",
+      "sha256": "e92073591930a2c67e3d8c392bbd71235e9898ebce3036c820ab892cd2e5df48",
+      "bytes": 4177072,
+      "source_triangles": 18604,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1181640625,
+            -0.4990234375,
+            -0.3681640625
+          ],
+          "max": [
+            0.1181640625,
+            0.4990234375,
+            0.3681640625
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_44bf68b2-247b-4719-b1dd-374d9ec8d08b",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/drake/source/CHR_Drake_Idle_Legacy.glb",
+      "sha256": "8f75e79952c573343663c19e787ee2cece40033bb1ee35861aa0c72bd90fd8dc",
+      "bytes": 4942932,
+      "source_triangles": 18604,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.11816403269767761,
+            -2.9496487741198507e-07,
+            -0.3681640625
+          ],
+          "max": [
+            0.11816409230232239,
+            0.9980468153953552,
+            0.3681643009185791
+          ]
+        }
+      ],
+      "animations": [
+        "idle"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_44bf68b2-247b-4719-b1dd-374d9ec8d08b"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/drake/source/CHR_Drake_Rig.glb",
+      "sha256": "ebfd32a756931914a954d8ae316c1b6adf2b226e9ef7f87eb23091629c735ed5",
+      "bytes": 4747024,
+      "source_triangles": 18604,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1181640699505806,
+            0,
+            -0.3681640028953552
+          ],
+          "max": [
+            0.1181640699505806,
+            0.9980471134185791,
+            0.3681640625
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_44bf68b2-247b-4719-b1dd-374d9ec8d08b"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/drake/source/CHR_Drake_Rig_Legacy.glb",
+      "sha256": "d611eaa0a26f1da4ee39a02e0aa7c8c05dbddeadf93d522ec0ba7183fe07fbdb",
+      "bytes": 4741524,
+      "source_triangles": 18604,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.11816398054361343,
+            -1.9424189190431207e-07,
+            -0.36816397309303284
+          ],
+          "max": [
+            0.11816410720348358,
+            0.998046875,
+            0.3681643307209015
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_44bf68b2-247b-4719-b1dd-374d9ec8d08b"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/elias/source/CHR_Elias_Base.glb",
+      "sha256": "ccf6b174ac36f8a7f3f8393f7b296e62032b210fb23f29f93f1ec7e406e58aaa",
+      "bytes": 4434448,
+      "source_triangles": 18698,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1201171875,
+            -0.4990234375,
+            -0.4951171875
+          ],
+          "max": [
+            0.1201171875,
+            0.4990234375,
+            0.4951171875
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_3082aa50-b4e4-480a-a658-e9f1eb472cfb",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/elias/source/CHR_Elias_Idle_Legacy.glb",
+      "sha256": "d94c3ade4f4bed9f29c59f5d8be767482548d140535f3377356c535f1fb334ee",
+      "bytes": 5150648,
+      "source_triangles": 18698,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.12011714279651642,
+            6.075290457374649e-07,
+            -0.4951172173023224
+          ],
+          "max": [
+            0.12011723220348358,
+            0.9980475306510925,
+            0.4951172471046448
+          ]
+        }
+      ],
+      "animations": [
+        "idle"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_3082aa50-b4e4-480a-a658-e9f1eb472cfb"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/elias/source/CHR_Elias_Rig.glb",
+      "sha256": "42599a2e25724bc0cdab9bf904c19dbbbe1bab0cdcb5a8fa5ca042c847c49b2f",
+      "bytes": 4953164,
+      "source_triangles": 18698,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.12011723965406418,
+            -1.1920928955078125e-07,
+            -0.4951171875
+          ],
+          "max": [
+            0.12011721730232239,
+            0.9980469942092896,
+            0.49511730670928955
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_3082aa50-b4e4-480a-a658-e9f1eb472cfb"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/elias/source/CHR_Elias_Rig_Legacy.glb",
+      "sha256": "55aa7b51a14df0a4dd1c1e5b9974616ac47de7c58e98248513df7f8b21645885",
+      "bytes": 4949136,
+      "source_triangles": 18698,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.12011715769767761,
+            1.1112980757843616e-07,
+            -0.4951172173023224
+          ],
+          "max": [
+            0.12011723220348358,
+            0.9980471730232239,
+            0.49511727690696716
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_3082aa50-b4e4-480a-a658-e9f1eb472cfb"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/mara/optimized/CHR_Mara_Animated.glb",
+      "sha256": "40fcab328f1c276ce3f70f619becb933c9c57c34c65ea19ec41171428a8c8f23",
+      "bytes": 13787552,
+      "source_triangles": 267420,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.8266776114702225,
+            0.0,
+            -0.23993272930383683
+          ],
+          "max": [
+            0.8266779154539108,
+            1.699994452139981,
+            0.2399328052997589
+          ]
+        }
+      ],
+      "animations": [
+        "walk"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_b7e6a3c4-aea8-480c-a116-2f424527bd89"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/mara/optimized/CHR_Mara_Optimized.glb",
+      "sha256": "4bb48d8fccdd7541b4d266f41750f6e12e696dc3156d6192f97382cbeaaf240a",
+      "bytes": 10819128,
+      "source_triangles": 267420,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.8266773074865341,
+            0.0,
+            -0.2399328052997589
+          ],
+          "max": [
+            0.8266773074865341,
+            1.6999934643507004,
+            0.2399328052997589
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_b7e6a3c4-aea8-480c-a116-2f424527bd89",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/mara/optimized/CHR_Mara_Production.glb",
+      "sha256": "2d3f413b2587f5d634d8b4e482923d54ec15a35d0e6054abecf1f63f9061c6f0",
+      "bytes": 13821716,
+      "source_triangles": 267420,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.14113694429397583,
+            -2.532269718358293e-07,
+            -0.4862809479236603
+          ],
+          "max": [
+            0.14113689959049225,
+            0.9999964833259583,
+            0.4862811267375946
+          ]
+        }
+      ],
+      "animations": [
+        "walk",
+        "idle"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_b7e6a3c4-aea8-480c-a116-2f424527bd89"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/mara/source/CHR_Mara_Base.glb",
+      "sha256": "9ad0020e3c4969da21200ca5d65c81f1dd8cbab5cdc65e2d5805ca5e3d391230",
+      "bytes": 10819148,
+      "source_triangles": 267420,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.14113694429397583,
+            -0.5000011324882507,
+            -0.48628076910972595
+          ],
+          "max": [
+            0.14113694429397583,
+            0.49999502301216125,
+            0.48628076910972595
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_b7e6a3c4-aea8-480c-a116-2f424527bd89",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/mara/source/CHR_Mara_Retarget_Walk.glb",
+      "sha256": "9e75a629fa0c75564f58e10dcfa70149f6072129ef504f48cac5d0966f47e966",
+      "bytes": 13787576,
+      "source_triangles": 267420,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.14113694429397583,
+            -2.532269718358293e-07,
+            -0.4862809479236603
+          ],
+          "max": [
+            0.14113689959049225,
+            0.9999964833259583,
+            0.4862811267375946
+          ]
+        }
+      ],
+      "animations": [
+        "walk"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_b7e6a3c4-aea8-480c-a116-2f424527bd89"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/mara/source/CHR_Mara_Rigged.glb",
+      "sha256": "19e6c241ef4d921f0d9fbabbf8c1db7bd4b3cb298945647b7f8b934cc144b201",
+      "bytes": 13731092,
+      "source_triangles": 267420,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.14113694429397583,
+            -3.022998740220828e-08,
+            -0.48628097772598267
+          ],
+          "max": [
+            0.14113685488700867,
+            0.9999960660934448,
+            0.4862808585166931
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_b7e6a3c4-aea8-480c-a116-2f424527bd89"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/mara/source/CHR_Mara_Walk.glb",
+      "sha256": "19e6c241ef4d921f0d9fbabbf8c1db7bd4b3cb298945647b7f8b934cc144b201",
+      "bytes": 13731092,
+      "source_triangles": 267420,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.14113694429397583,
+            -3.022998740220828e-08,
+            -0.48628097772598267
+          ],
+          "max": [
+            0.14113685488700867,
+            0.9999960660934448,
+            0.4862808585166931
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_b7e6a3c4-aea8-480c-a116-2f424527bd89"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/meridian/base/source/CHR_Meridian_Base.glb",
+      "sha256": "f9098d8cb411d2ab488861da9ccbdc037a2ac46203df1a6faabdfcbd46ee70f9",
+      "bytes": 4242100,
+      "source_triangles": 18738,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1552734375,
+            -0.4873046875,
+            -0.4990234375
+          ],
+          "max": [
+            0.1552734375,
+            0.4873046875,
+            0.4990234375
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_095bc44b-3575-4c8f-bbe9-80990f81c313",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/meridian/base/source/CHR_Meridian_Idle_Legacy.glb",
+      "sha256": "672cad3f8608eee217038dae18bedbe8edfb97839e15f6b25212e766cd5192db",
+      "bytes": 5028148,
+      "source_triangles": 18738,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1552734673023224,
+            -4.276568006389425e-07,
+            -0.4990234971046448
+          ],
+          "max": [
+            0.15527352690696716,
+            0.9746091961860657,
+            0.4990236163139343
+          ]
+        }
+      ],
+      "animations": [
+        "idle"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_095bc44b-3575-4c8f-bbe9-80990f81c313"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/meridian/base/source/CHR_Meridian_Rig.glb",
+      "sha256": "29a4321b8943da538a937ec4b4fc497e418a813a9ad324953034e0063a4aa8f5",
+      "bytes": 4828440,
+      "source_triangles": 18738,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.15527334809303284,
+            0,
+            -0.49902355670928955
+          ],
+          "max": [
+            0.15527352690696716,
+            0.9746095538139343,
+            0.4990236163139343
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_095bc44b-3575-4c8f-bbe9-80990f81c313"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/meridian/base/source/CHR_Meridian_Rig_Legacy.glb",
+      "sha256": "cdb1ec7783cbcc71655fe6cab32a5e8a9b4c24662236c25a9cf6c78c1ad2dfcf",
+      "bytes": 4827260,
+      "source_triangles": 18738,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1552734673023224,
+            -8.106816551389784e-08,
+            -0.4990236163139343
+          ],
+          "max": [
+            0.1552734673023224,
+            0.974609375,
+            0.4990236163139343
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_095bc44b-3575-4c8f-bbe9-80990f81c313"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/nadiya/source/CHR_Nadiya_Base.glb",
+      "sha256": "de1b6ac6ca1925b8413f069e98096f35e7d0e15a7a9a875864c1a58ebf5a05a3",
+      "bytes": 3865400,
+      "source_triangles": 18572,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1181640625,
+            -0.4990234375,
+            -0.2119140625
+          ],
+          "max": [
+            0.1181640625,
+            0.4990234375,
+            0.2119140625
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_472ab5aa-c6a0-4509-aa31-fca2bdc35f54",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/nadiya/source/CHR_Nadiya_Idle_Legacy.glb",
+      "sha256": "31219a92575095bdc1e5f6c6b65deb1f07f892f4fddc53f72e21a98604f452af",
+      "bytes": 4636820,
+      "source_triangles": 18572,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.11816402524709702,
+            8.700283871121428e-08,
+            -0.2119140923023224
+          ],
+          "max": [
+            0.11816404014825821,
+            0.9980467557907104,
+            0.21191412210464478
+          ]
+        }
+      ],
+      "animations": [
+        "idle"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_472ab5aa-c6a0-4509-aa31-fca2bdc35f54"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/nadiya/source/CHR_Nadiya_Rig.glb",
+      "sha256": "d98aacbde45b36c252dfad12d560b46e2611b68a4a601cc5f197854a74577375",
+      "bytes": 4442084,
+      "source_triangles": 18572,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1181640774011612,
+            -1.1920928955078125e-07,
+            -0.21191413700580597
+          ],
+          "max": [
+            0.11816400289535522,
+            0.9980469942092896,
+            0.21191401779651642
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_472ab5aa-c6a0-4509-aa31-fca2bdc35f54"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/nadiya/source/CHR_Nadiya_Rig_Legacy.glb",
+      "sha256": "391e180fa018a3038d8c0fc053734ddf6b9951d1f66fdb77560c9d742f185f81",
+      "bytes": 4436256,
+      "source_triangles": 18572,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.11816401034593582,
+            5.7311417833716405e-08,
+            -0.21191412210464478
+          ],
+          "max": [
+            0.11816411465406418,
+            0.9980473518371582,
+            0.2119140923023224
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_472ab5aa-c6a0-4509-aa31-fca2bdc35f54"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/tomas/source/CHR_Tomas_Base.glb",
+      "sha256": "5f9d34eafd96a42d945a308a311cf350435b07060412eca25bcdaeb7d32b6820",
+      "bytes": 4834748,
+      "source_triangles": 18743,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1005859375,
+            -0.4990234375,
+            -0.4814453125
+          ],
+          "max": [
+            0.1005859375,
+            0.4990234375,
+            0.4814453125
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_9d3e7954-3d9e-4c99-967a-3b64dba1cf84",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/tomas/source/CHR_Tomas_Idle_Legacy.glb",
+      "sha256": "5d4f59a475b08644fa8b38b7f9210407a4a61aa7ab327934914d7d511cffad15",
+      "bytes": 5588928,
+      "source_triangles": 18743,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.10058599710464478,
+            -8.918857474782271e-08,
+            -0.48144567012786865
+          ],
+          "max": [
+            0.10058596730232239,
+            0.9980466961860657,
+            0.4814453423023224
+          ]
+        }
+      ],
+      "animations": [
+        "idle"
+      ],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_9d3e7954-3d9e-4c99-967a-3b64dba1cf84"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/tomas/source/CHR_Tomas_Rig.glb",
+      "sha256": "2eb4b70c9f92fffdf30285cb43a9d67ae02a9407f03bf819e2715433509853c1",
+      "bytes": 5391468,
+      "source_triangles": 18743,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.10058598220348358,
+            -5.960464477539063e-08,
+            -0.48144543170928955
+          ],
+          "max": [
+            0.1005859225988388,
+            0.9980471134185791,
+            0.48144543170928955
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_9d3e7954-3d9e-4c99-967a-3b64dba1cf84"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/characters/tomas/source/CHR_Tomas_Rig_Legacy.glb",
+      "sha256": "9d8a663630a61c171e2ea75e7caa347cfa932a1038d73022c59f7647972f445a",
+      "bytes": 5388188,
+      "source_triangles": 18743,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.10058598220348358,
+            -4.9275861613296e-08,
+            -0.4814456105232239
+          ],
+          "max": [
+            0.10058599710464478,
+            0.9980471730232239,
+            0.48144543170928955
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 1,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "mesh": 0,
+          "name": "tripo_node_9d3e7954-3d9e-4c99-967a-3b64dba1cf84"
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/environment/cave/cave_ceiling_limestone.glb",
+      "sha256": "5db9acd98ffed2336a16c63e50d187e710220f93fa8da241778da6dedb8f2d54",
+      "bytes": 4635456,
+      "source_triangles": 10176,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.2763671875,
+            -0.4853515625,
+            -0.4990234375
+          ],
+          "max": [
+            0.2763671875,
+            0.4853515625,
+            0.4990234375
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_8bfda946-65cd-4c79-898d-9c9319adf54f",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/environment/cave/cave_floor_sediment.glb",
+      "sha256": "3cfd42f92f731d2ca1edebc09298ff0760b47d12b054242fa3551a42f1bb2f28",
+      "bytes": 4619004,
+      "source_triangles": 7388,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.4990234375,
+            -0.0634765625,
+            -0.4970703125
+          ],
+          "max": [
+            0.4990234375,
+            0.0791015625,
+            0.4970703125
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_9ebda37d-24d2-422f-b7e2-13565bd3ab05",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/environment/cave/cave_wall_limestone.glb",
+      "sha256": "364130b9867f2b7d18ff8c1f385433ccc61fdf4fc86d0f58a301c969f38ba441",
+      "bytes": 4866828,
+      "source_triangles": 9669,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.2470703125,
+            -0.4990234375,
+            -0.3837890625
+          ],
+          "max": [
+            0.2470703125,
+            0.4990234375,
+            0.3837890625
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_e63e799a-2e6c-41d4-966d-f77e80cd4719",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/environment/jungle/jungle_fern.glb",
+      "sha256": "697a004efa69f92b167d1b0c53ef9fd1e51969d0abf31e008e98764793789f35",
+      "bytes": 3746464,
+      "source_triangles": 4946,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.4990234375,
+            -0.3720703125,
+            -0.4990234375
+          ],
+          "max": [
+            0.4990234375,
+            0.3720703125,
+            0.4990234375
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_bd7134f2-f172-4f20-8fe6-ad44a093eb46",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/environment/jungle/jungle_tree.glb",
+      "sha256": "0e0fd60c44241dd3fb73c00b2bf06ac2f761720ad14fc0731d81a8e6ef7d3e9f",
+      "bytes": 3566260,
+      "source_triangles": 14891,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.4990234375,
+            -0.4755859375,
+            -0.4990234375
+          ],
+          "max": [
+            0.4990234375,
+            0.4755859375,
+            0.4990234375
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_58eb63cf-1805-4d81-b7c7-e49c26c908b9",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/arch_bridge_span.glb",
+      "sha256": "76d54fb15fa1fe49e34cd4caba61f2597f00cfa7d9f6218ac7e081855d9cfc18",
+      "bytes": 18559260,
+      "source_triangles": 502036,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.5000211000442505,
+            -0.3293341398239136,
+            -0.21857358515262604
+          ],
+          "max": [
+            0.4999755620956421,
+            0.32931283116340637,
+            0.21851682662963867
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_e0c340e7-bc99-4b1c-ba89-c9116086cf4d",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/arch_floor_stone.glb",
+      "sha256": "c9c25c59b813cc230d53f6be72263a2996067fb1c325dce07a4d9750a8b92994",
+      "bytes": 20024868,
+      "source_triangles": 502168,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.08054932206869125,
+            -0.49688997864723206,
+            -0.4999884068965912
+          ],
+          "max": [
+            0.08052850514650345,
+            0.49692487716674805,
+            0.5
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_d47b0ee3-ac23-4a6f-a88d-3b07333e5048",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/arch_glass_barrier.glb",
+      "sha256": "fe1ca406c10fdd3fb5f8de506e7d75dc9f2bdcef5e9c1414ad775110b43766be",
+      "bytes": 13205728,
+      "source_triangles": 391520,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.15228663384914398,
+            -0.35333096981048584,
+            -0.5
+          ],
+          "max": [
+            0.15229731798171997,
+            0.35333356261253357,
+            0.5000000596046448
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_7fcb3078-808f-4030-9b7c-97f93c8b896c",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/arch_wall_vaelor.glb",
+      "sha256": "2553ca246ef865a658b076261b547977da8ec370490b213bcde08c2619fe5d6a",
+      "bytes": 14528212,
+      "source_triangles": 361944,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.07467816770076752,
+            -0.21096152067184448,
+            -0.5000059008598328
+          ],
+          "max": [
+            0.07470103353261948,
+            0.21095137298107147,
+            0.5
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_d9f77c95-5727-4263-9154-96b5edb6edef",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/env_boulder_moss.glb",
+      "sha256": "9b29c4e24eaeadfb3417f5b008a7ae8413665890d265e3582658d033c92966ce",
+      "bytes": 18702604,
+      "source_triangles": 501532,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.4999753534793854,
+            -0.44679898023605347,
+            -0.4415522515773773
+          ],
+          "max": [
+            0.5000242590904236,
+            0.44686615467071533,
+            0.4416100084781647
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_5f5a647b-546c-43b3-a3c5-a81652d3ce2e",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/env_stalagmite_cluster.glb",
+      "sha256": "2de042964c853c23767a704a7b47f5fa4c960d1f51bc3129be212e8206d8e25d",
+      "bytes": 18174784,
+      "source_triangles": 501310,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.38650020956993103,
+            -0.5000097155570984,
+            -0.3956543803215027
+          ],
+          "max": [
+            0.38649868965148926,
+            0.5000704526901245,
+            0.3956625759601593
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_b958e5c8-be07-4208-9d87-b0ac715ece63",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/prop_expedition_radio_station.glb",
+      "sha256": "3d14e97020c3225e388f251a15634b6f6aa46b8f87780d4b591bf80801bcef8b",
+      "bytes": 17613920,
+      "source_triangles": 501146,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.3559251129627228,
+            -0.500015139579773,
+            -0.40981003642082214
+          ],
+          "max": [
+            0.3559230864048004,
+            0.5,
+            0.409793883562088
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_0a4e3f66-2cd6-4ce0-ba71-ba6d2677f7e4",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/prop_expedition_tent.glb",
+      "sha256": "5cb6c5ab16a99cf7d5532ba9f35b7689b4bd22a0f5c2352cbdf0aec0efaf79d6",
+      "bytes": 16969048,
+      "source_triangles": 500960,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.5,
+            -0.27348461747169495,
+            -0.40162864327430725
+          ],
+          "max": [
+            0.5000083446502686,
+            0.2734716534614563,
+            0.40163952112197876
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_f8e14f25-867f-4e02-b513-935ae1ca1cbb",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/prop_meridian_crate.glb",
+      "sha256": "ed68a19926ab47127da2e15fdc8872ebcc1c4c48d62748ad71179a9aa965c9df",
+      "bytes": 17248296,
+      "source_triangles": 501080,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.5000009536743164,
+            -0.26747483015060425,
+            -0.3457641005516052
+          ],
+          "max": [
+            0.5000046491622925,
+            0.2674719989299774,
+            0.34576883912086487
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_18f05e10-e405-4cf5-9c76-78acff66053a",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/prop_vaelor_key.glb",
+      "sha256": "377fe930f40e357c758aacff2cfd2f310bc30bc902ad13d6a15018636c431db5",
+      "bytes": 14230836,
+      "source_triangles": 312942,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.3143933415412903,
+            -0.5000073909759521,
+            -0.28651076555252075
+          ],
+          "max": [
+            0.3143933415412903,
+            0.49999430775642395,
+            0.2865290939807892
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_fc8d93ac-b99c-4fb0-929b-ac9bd457dcb8",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/prop_vaelor_turbine_wheel.glb",
+      "sha256": "12667a7cebe8019b9314f074b08d015f6937508872e77c87b6614f16a47f9985",
+      "bytes": 18537604,
+      "source_triangles": 502666,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.49999549984931946,
+            -0.4393502175807953,
+            -0.43619590997695923
+          ],
+          "max": [
+            0.4999825358390808,
+            0.4393308758735657,
+            0.4362626075744629
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_53d2a571-26fc-474f-be46-1b7faa536caf",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/ruin_arch_portal.glb",
+      "sha256": "976398d953175a4079e7a45736ec0879b241c9b07baed9c7e5e74b3beba23082",
+      "bytes": 18518548,
+      "source_triangles": 501576,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.23000052571296692,
+            -0.49943163990974426,
+            -0.4999840557575226
+          ],
+          "max": [
+            0.23001372814178467,
+            0.499355673789978,
+            0.4999861419200897
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_d8a1d5da-c2f6-40ee-9562-3897e08a0c6e",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/models/ruin_pillar_vaelor.glb",
+      "sha256": "e340b41a763846f2745536cad4bc876f0b40d346ab17d3aadfd85378729ed606",
+      "bytes": 18778704,
+      "source_triangles": 501344,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.2457706183195114,
+            -0.5000044107437134,
+            -0.33696791529655457
+          ],
+          "max": [
+            0.24581779539585114,
+            0.4999590218067169,
+            0.33695924282073975
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_f299f018-ef50-4f2a-830b-34e6a2a2bba3",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/props/camp/survey_fielddesk.glb",
+      "sha256": "c19628f58f4eade1a441443aff4ebae4aee5286506d83869886364146e3ad9f3",
+      "bytes": 4578892,
+      "source_triangles": 5565,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.3212890625,
+            -0.2998047173023224,
+            -0.4990234375
+          ],
+          "max": [
+            0.3212890625,
+            0.2998046875,
+            0.4990234375
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_98090971-1922-4a0f-810a-b814aa46a0a4",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/props/equipment/climbing_pick.glb",
+      "sha256": "870e394ff226d392aca301796923441cfdaa75499c82c6d58021d7a57aaf6e26",
+      "bytes": 4039572,
+      "source_triangles": 2882,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.1083984375,
+            -0.4990234375,
+            -0.2978515625
+          ],
+          "max": [
+            0.1083984375,
+            0.4990234375,
+            0.2978515625
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_1a498a88-0cd5-47c2-b684-65382eb2f821",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    },
+    {
+      "path": "assets/props/equipment/expedition_sidearm.glb",
+      "sha256": "6957c786271ce57a489e9790042b0b6fa821f603cfa0400e7bb025fa76837b33",
+      "bytes": 3268368,
+      "source_triangles": 3937,
+      "mesh_local_bounds": [
+        {
+          "min": [
+            -0.0771484375,
+            -0.2646484076976776,
+            -0.4990234375
+          ],
+          "max": [
+            0.0771484375,
+            0.2646484673023224,
+            0.4990234375
+          ]
+        }
+      ],
+      "animations": [],
+      "skins": 0,
+      "materials": 1,
+      "images": [
+        "embedded",
+        "embedded",
+        "embedded"
+      ],
+      "mesh_node_transforms": [
+        {
+          "name": "tripo_node_16615d1b-b19d-4a34-9817-a2e0acd9a074",
+          "mesh": 0
+        }
+      ],
+      "approval_status": "QA"
+    }
+  ]
+}

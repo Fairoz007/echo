@@ -15,7 +15,15 @@ extends Node3D
 var is_water_diverted: bool = false
 var has_read_inscription: bool = false
 
+var transition_started := false
+
 func _ready() -> void:
+	var exploration := preload("res://systems/CampaignExploration.gd").new()
+	add_child(exploration)
+	exploration.configure(2)
+	var campaign_dialogue := preload("res://systems/CampaignDialogue.gd").new()
+	add_child(campaign_dialogue)
+	campaign_dialogue.configure("C02", hud)
 	MissionManager.register_objective("obj_c02_open_gate", "Restore hydraulic water flow to lift the sanctuary gate")
 	
 	if sluice_lever:
@@ -27,14 +35,14 @@ func _ready() -> void:
 		
 	await get_tree().create_timer(1.2).timeout
 	if hud:
-		hud.show_subtitle("Mara", "The gate is locked by an ancient hydraulic counterweight. The water channel is blocked.", 5.0)
+		AudioManager.play_story_line("Mara", "The gate is locked by an ancient hydraulic counterweight. The water channel is blocked.", 5.0)
 
 func _on_sluice_lever_pulled(_p: Node) -> void:
 	if not is_water_diverted:
 		is_water_diverted = true
 		print("[CHAPTER 2] Sluice gate opened! Water flowing.")
 		if hud:
-			hud.show_subtitle("Mara", "Water's diverted into the conduit! The counterweight is filling.", 4.5)
+			AudioManager.play_story_line("Mara", "Water's diverted into the conduit! The counterweight is filling.", 4.5)
 			
 		# Animate water channel and counterweight
 		if water_flow_mesh:
@@ -50,17 +58,18 @@ func _on_sluice_lever_pulled(_p: Node) -> void:
 		MissionManager.register_objective("obj_c02_explore_sanctuary", "Explore the inner sanctuary and examine the Vaelor inscription")
 
 func _on_inscription_examined(_p: Node) -> void:
-	if not has_read_inscription:
+	if is_water_diverted and not has_read_inscription:
 		has_read_inscription = true
 		MissionManager.complete_objective("obj_c02_explore_sanctuary")
 		MissionManager.register_objective("obj_c02_investigate_abyss", "Investigate the deep acoustic vertical shaft")
 		if hud:
-			hud.show_subtitle("Mara", "\"The Voice Below...\" It refers to a subterranean harmonic nexus deep in the mountain core.", 5.5)
+			AudioManager.play_story_line("Mara", "\"The Voice Below...\" It refers to a subterranean harmonic nexus deep in the mountain core.", 5.5)
 
 func _on_abyss_entered(body: Node) -> void:
-	if body is Player and has_read_inscription:
+	if body is Player and has_read_inscription and not transition_started:
+		transition_started = true
 		print("[CHAPTER 2] Reached abyss overlook! Transitioning to Chapter 3: The Fall.")
 		if hud:
-			hud.show_subtitle("Tomas (Radio)", "Mara, Elias is bringing the bridge rig across now!", 4.0)
+			AudioManager.play_story_line("Tomas (Radio)", "Mara, Elias is bringing the bridge rig across now!", 4.0)
 		await get_tree().create_timer(4.0).timeout
 		GameManager.load_chapter(3, "res://levels/Chapter3.tscn")

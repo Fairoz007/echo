@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://c8qtno3h2w3ag"]
 
 [ext_resource type="Script" path="res://levels/Chapter5.gd" id="1_c05"]
+[ext_resource type="Script" path="res://systems/ProductionCharacter.gd" id="80_character"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="4_hud"]
 [ext_resource type="PackedScene" path="res://scenes/EnemyMercenary.tscn" id="5_enemy"]
-[ext_resource type="PackedScene" path="res://assets/models/prop_meridian_crate.glb" id="6_crate"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/prop_meridian_crate_LOD0.glb" id="6_crate"]
+
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="99_mara_production"]
+
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -55,10 +59,11 @@ flashlight = NodePath("Flashlight")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("Mat_Mara")
+[node name="VisualMesh" type="Node3D" parent="Player"]
+scale = Vector3(1.7, 1.7, 1.7)
+
+[node name="CHR_Mara_Production" parent="Player/VisualMesh" instance=ExtResource("99_mara_production")]
+rotation = Vector3(0, 1.5707963, 0)
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.4)
@@ -112,6 +117,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
 [node name="ObservationPerch" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
+[node name="DrakePresentation" type="Node3D" parent="ObservationPerch"]
+position = Vector3(3, 0, -2)
+rotation = Vector3(0, 3.1415926, 0)
+script = ExtResource("80_character")
+model_path = "res://assets/characters/drake/source/CHR_Drake_Rig.glb"
+character_height = 1.86
+
 [node name="DrakeTrigger" type="Area3D" parent="ObservationPerch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 collision_layer = 0
@@ -130,3 +142,4 @@ collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TempleEntrance/ChapterEndTrigger"]
 shape = SubResource("BoxShape3D_trigger")
+

@@ -10,7 +10,15 @@ extends Node3D
 
 var has_collapse_triggered: bool = false
 
+var transition_started := false
+
 func _ready() -> void:
+	var exploration := preload("res://systems/CampaignExploration.gd").new()
+	add_child(exploration)
+	exploration.configure(3)
+	var campaign_dialogue := preload("res://systems/CampaignDialogue.gd").new()
+	add_child(campaign_dialogue)
+	campaign_dialogue.configure("C03", hud)
 	MissionManager.register_objective("obj_c03_cross_bridge", "Cross the ancient cyclopean bridge span")
 	
 	if bridge_trigger:
@@ -20,14 +28,15 @@ func _ready() -> void:
 		
 	await get_tree().create_timer(1.2).timeout
 	if hud:
-		hud.show_subtitle("Elias (Radio)", "Mara, take the center line! The stone anchors look brittle.", 4.5)
+		AudioManager.play_story_line("Elias (Radio)", "Mara, take the center line! The stone anchors look brittle.", 4.5)
 
 func _on_bridge_collapse_entered(body: Node) -> void:
 	if body is Player and not has_collapse_triggered:
 		has_collapse_triggered = true
+		AudioManager.play_sfx("collapse", bridge_trigger.global_position)
 		print("[CHAPTER 3] Structural failure triggered! Bridge collapsing.")
 		if hud:
-			hud.show_subtitle("Mara", "The anchors are giving way! JUMP!", 3.0)
+			AudioManager.play_story_line("Mara", "The anchors are giving way! JUMP!", 3.0)
 			
 		# Release physical bridge pieces
 		if bridge_section_1:
@@ -36,9 +45,10 @@ func _on_bridge_collapse_entered(body: Node) -> void:
 			bridge_section_2.freeze = false
 
 func _on_fissure_fell(body: Node) -> void:
-	if body is Player:
+	if body is Player and not transition_started:
+		transition_started = true
 		print("[CHAPTER 3] Player fell through subterranean fissure! Transitioning to Chapter 4: Beneath.")
 		if hud:
-			hud.show_subtitle("Mara", "ELIAS!...", 2.5)
+			AudioManager.play_story_line("Mara", "ELIAS!...", 2.5)
 		await get_tree().create_timer(2.5).timeout
 		GameManager.load_chapter(4, "res://levels/Chapter4.tscn")

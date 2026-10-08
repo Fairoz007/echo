@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="6_mara"]
-[ext_resource type="PackedScene" path="res://assets/models/prop_vaelor_turbine_wheel.glb" id="7_turbine"]
-[ext_resource type="PackedScene" path="res://assets/models/ruin_arch_portal.glb" id="8_portal"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="6_mara"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/prop_vaelor_turbine_wheel_LOD0.glb" id="7_turbine"]
+[ext_resource type="PackedScene" path="res://assets/models/optimized/ruin_arch_portal_LOD0.glb" id="8_portal"]
+
+[ext_resource type="Script" path="res://systems/WaterPresentation.gd" id="82_water"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -37,7 +39,8 @@ albedo_color = Color(0.28, 0.32, 0.36, 1)
 background_mode = 1
 background_color = Color(0.015, 0.03, 0.04, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.1, 0.16, 0.22, 1)
+ambient_light_color = Color(0.24, 0.32, 0.38, 1)
+ambient_light_energy = 0.7
 fog_enabled = true
 fog_light_color = Color(0.05, 0.1, 0.14, 1)
 fog_density = 0.02
@@ -47,6 +50,26 @@ script = ExtResource("1_c06")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c06")
+
+[node name="AqueductSkylight" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.9, -0.65, 0)
+light_color = Color(0.55, 0.72, 0.85, 1)
+light_energy = 1.4
+shadow_enabled = false
+
+[node name="SluiceGuideLight" type="OmniLight3D" parent="."]
+position = Vector3(-12, 3, 0)
+light_color = Color(0.65, 0.75, 0.8, 1)
+light_energy = 1.2
+omni_range = 14.0
+shadow_enabled = false
+
+[node name="SanctumGuideLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 4, -30)
+light_color = Color(0.45, 0.65, 0.8, 1)
+light_energy = 1.4
+omni_range = 16.0
+shadow_enabled = false
 
 [node name="HUD" parent="." instance=ExtResource("5_hud")]
 
@@ -65,8 +88,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
 shape = SubResource("CapsuleShape3D_player")
 
 [node name="VisualMesh" type="Node3D" parent="Player"]
+scale = Vector3(1.7, 1.7, 1.7)
 
 [node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("6_mara")]
+rotation = Vector3(0, 1.5707963, 0)
 
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
@@ -91,6 +116,7 @@ current = true
 [node name="TempleStructure" type="Node3D" parent="."]
 
 [node name="Floor" type="StaticBody3D" parent="TempleStructure"]
+position = Vector3(0, -3.8, 0)
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TempleStructure/Floor"]
@@ -104,10 +130,9 @@ material = SubResource("Mat_Temple")
 
 [node name="FloodedBasin" type="Node3D" parent="."]
 
-[node name="WaterPlane" type="CSGBox3D" parent="FloodedBasin"]
+[node name="WaterPlane" type="Node3D" parent="FloodedBasin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-size = Vector3(80, 0.8, 80)
-material = SubResource("Mat_Water")
+script = ExtResource("82_water")
 
 [node name="TempleMechanisms" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
@@ -148,3 +173,4 @@ collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TempleSanctum/ExitTrigger"]
 shape = SubResource("BoxShape3D_trigger")
+

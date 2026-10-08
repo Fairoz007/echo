@@ -7,13 +7,17 @@
 
 ## Tripo3D Multi-Key Pipeline Configuration
 
-Three production API keys have been provided and verified for 3D asset generation with full credit balances:
+Three credentials are loaded from environment variables or Windows user-bound encrypted storage outside this repository. Credentials are never included in runtime assets.
 
-| Key Index | Key Prefix | Tested Balance | Status | Failover Strategy |
-| :--- | :--- | :--- | :--- | :--- |
-| **Key 1** | `tsk_YeVEJC...` | 600 Credits | Active Primary | Use first until balance low/exhausted |
-| **Key 2** | `tsk_-QGbzw...` | 600 Credits | Secondary Backup | Automatic rollover when Key 1 depleted |
-| **Key 3** | `tsk_W5L8He...` | 600 Credits | Tertiary Backup | Rollover when Key 2 depleted |
+Live balance check on 2026-10-07:
+
+| Key index | Available balance | Frozen balance |
+| --- | ---: | ---: |
+| 1 | 0 | 0 |
+| 2 | 60 | 0 |
+| 3 | 100 | 0 |
+
+This production pass spent 920 credits: 14 model requests (560), 12 rig requests (300), and six successful legacy idle retargets (60). Seven rejected v2.5 retarget requests cost zero. All submitted jobs are terminal; 160 credits remain and none are frozen. See ASSET_REGISTRY.md for source provenance and the limits of visual acceptance. Account balances alone do not establish asset quality.
 
 ### Tripo3D API Specifications
 - **Base URL:** `https://api.tripo3d.ai/v2/openapi`
@@ -23,7 +27,7 @@ Three production API keys have been provided and verified for 3D asset generatio
   - `POST /task` - Submit text-to-3d, image-to-3d, animation/rigging tasks
   - `GET /task/{task_id}` - Poll task generation status and download GLTF/GLB models
 - **Target Formats:** `.glb` (Binary glTF 2.0 with PBR textures and embedded animations)
-- **Retry & Failover Architecture:** Managed through autonomous Python wrapper `scripts/tripo_client.py` with automatic error handling, exponential backoff, key rotation, and mesh optimization checks.
+- **Retry & Failover Architecture:** Managed through autonomous Python wrapper `scripts/tripo_client.py` with bounded request timeouts, sequential key rotation on authentication/quota errors, and bounded generation polling. Mesh optimization and gameplay QA are separate stages.
 
 ---
 

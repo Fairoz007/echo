@@ -25,6 +25,8 @@ var target_player: Player = null
 var patrol_points: Array[Vector3] = []
 var current_patrol_idx: int = 0
 var attack_cooldown: float = 0.0
+var lost_sight_time := 0.0
+var last_known_position := Vector3.ZERO
 
 @export var visual_mesh: Node3D
 @export var eyes_marker: Marker3D
@@ -32,6 +34,7 @@ var attack_cooldown: float = 0.0
 signal enemy_died(enemy: EnemyBase)
 
 func _ready() -> void:
+	add_to_group("enemies")
 	current_health = max_health
 	# Populate local patrol offsets
 	patrol_points = [
@@ -45,6 +48,9 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	attack_cooldown = max(0.0, attack_cooldown - delta)
+	if not is_on_floor():
+		velocity.y -= 9.8 * delta
+	lost_sight_time += delta
 	_scan_for_player()
 	
 	match current_state:
@@ -52,6 +58,8 @@ func _physics_process(delta: float) -> void:
 			_process_patrol(delta)
 		AIState.ALERT:
 			_process_alert(delta)
+		AIState.SUSPICIOUS:
+			_process_search(delta)
 		AIState.COMBAT:
 			_process_combat(delta)
 
@@ -68,7 +76,8 @@ func _scan_for_player() -> void:
 	var to_player = player.global_position - global_position
 	var dist = to_player.length()
 	
-	if dist <= sight_range:
+	var detection_range := sight_range * 0.5 if player.current_state == Player.State.CROUCH else sight_range
+	if dist <= detection_range:
 		# Check FOV angle
 		var forward = -transform.basis.z
 		var angle = rad_to_deg(forward.angle_to(to_player.normalized()))
@@ -77,15 +86,21 @@ func _scan_for_player() -> void:
 			var space = get_world_3d().direct_space_state
 			var from = global_position + Vector3(0, 1.4, 0)
 			var to = player.global_position + Vector3(0, 1.2, 0)
-			var query = PhysicsRayQueryParameters3D.create(from, to)
+			var query = PhysicsRayQueryParameters3D.create(from, to, 3, [get_rid()])
 			query.collision_mask = 3 # Player + Environment
 			var hit = space.intersect_ray(query)
 			if hit and hit.collider == player:
 				target_player = player
+				last_known_position = player.global_position
+				lost_sight_time = 0.0
 				if current_state != AIState.COMBAT:
 					current_state = AIState.COMBAT
+					attack_cooldown = maxf(attack_cooldown, 1.2)
 					print("[AI] Mercenary acquired target! Entering COMBAT state.")
 				return
+	if current_state == AIState.COMBAT and lost_sight_time > 2.0:
+		current_state = AIState.SUSPICIOUS
+		target_player = null
 
 func _process_patrol(delta: float) -> void:
 	if patrol_points.is_empty():
@@ -124,6 +139,27 @@ func _process_combat(delta: float) -> void:
 		if attack_cooldown <= 0.0:
 			_attack_player()
 
+func hear_noise(position_hint: Vector3) -> void:
+	if current_state == AIState.DEAD:
+		return
+	last_known_position = position_hint
+	if current_state != AIState.COMBAT:
+		current_state = AIState.SUSPICIOUS
+		lost_sight_time = 0.0
+
+func _process_search(delta: float) -> void:
+	var direction := last_known_position - global_position
+	direction.y = 0.0
+	if direction.length() > 1.0:
+		velocity.x = direction.normalized().x * patrol_speed
+		velocity.z = direction.normalized().z * patrol_speed
+		_look_towards(direction.normalized(), delta)
+	else:
+		velocity.x = 0.0
+		velocity.z = 0.0
+	if lost_sight_time > 8.0:
+		current_state = AIState.PATROL
+
 func _look_towards(dir: Vector3, delta: float) -> void:
 	if dir.length() > 0.01:
 		var target_yaw = atan2(-dir.x, -dir.z)
@@ -132,8 +168,10 @@ func _look_towards(dir: Vector3, delta: float) -> void:
 func _attack_player() -> void:
 	attack_cooldown = 1.8
 	if target_player:
-		print("[AI] Mercenary fires weapon at player!")
-		target_player.take_damage(attack_damage)
+		var query := PhysicsRayQueryParameters3D.create(global_position + Vector3(0, 1.4, 0), target_player.global_position + Vector3(0, 1.2, 0), 3, [get_rid()])
+		var hit := get_world_3d().direct_space_state.intersect_ray(query)
+		if not hit.is_empty() and hit.collider == target_player:
+			target_player.take_damage(attack_damage)
 
 func take_damage(amount: float) -> void:
 	if current_state == AIState.DEAD:
@@ -144,6 +182,7 @@ func take_damage(amount: float) -> void:
 		die()
 	else:
 		current_state = AIState.COMBAT
+		target_player = get_tree().get_first_node_in_group("player") as Player
 
 func die() -> void:
 	current_state = AIState.DEAD

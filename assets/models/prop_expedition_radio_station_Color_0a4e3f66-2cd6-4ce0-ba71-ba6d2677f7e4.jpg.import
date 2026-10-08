@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://da502j0ko4m4m"
-path="res://.godot/imported/prop_expedition_radio_station_Color_0a4e3f66-2cd6-4ce0-ba71-ba6d2677f7e4.jpg-e3191f98b80e2f3498f3ab47040a1a65.ctex"
+path.s3tc="res://.godot/imported/prop_expedition_radio_station_Color_0a4e3f66-2cd6-4ce0-ba71-ba6d2677f7e4.jpg-e3191f98b80e2f3498f3ab47040a1a65.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "ae6a7399fbf117aee55f9507d9b016c1"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/prop_expedition_radio_station_Color_0a4e3f66-2cd6-4ce0-ba71-ba6d2677f7e4.jpg"
-dest_files=["res://.godot/imported/prop_expedition_radio_station_Color_0a4e3f66-2cd6-4ce0-ba71-ba6d2677f7e4.jpg-e3191f98b80e2f3498f3ab47040a1a65.ctex"]
+dest_files=["res://.godot/imported/prop_expedition_radio_station_Color_0a4e3f66-2cd6-4ce0-ba71-ba6d2677f7e4.jpg-e3191f98b80e2f3498f3ab47040a1a65.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

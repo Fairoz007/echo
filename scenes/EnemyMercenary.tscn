@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d02wbv2ai2220"]
 
 [ext_resource type="Script" path="res://scripts/EnemyBase.gd" id="1_enemy"]
+[ext_resource type="Script" path="res://systems/ProductionCharacter.gd" id="80_character"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_merc"]
 radius = 0.4
@@ -23,10 +24,10 @@ script = ExtResource("1_enemy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_merc")
 
-[node name="VisualMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("CapsuleMesh_merc")
-surface_material_override/0 = SubResource("Mat_Merc")
+[node name="VisualMesh" type="Node3D" parent="."]
+script = ExtResource("80_character")
+model_path = "res://assets/characters/meridian/base/source/CHR_Meridian_Animated.glb"
+character_height = 1.82
 
 [node name="EyesMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.4)

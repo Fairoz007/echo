@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WaterPreset" format=3]
+
+[ext_resource type="Script" path="res://systems/water/WaterPreset.gd" id="1_ygrlg"]
+
+[resource]
+script = ExtResource("1_ygrlg")
+preset_name = "RIVER"
+waves = Array[Vector4]([Vector4(0.2, 1, 0.03, 2.9), Vector4(-0.5, 1, 0.018, 1.37), Vector4(0.7, 0.7, 0.01, 0.83), Vector4(1, 0.2, 0.005, 0.53)])
+flow_velocity = Vector2(0, 2.2)
+shallow_color = Color(0.2, 0.4, 0.34, 1)
+deep_color = Color(0.02, 0.07, 0.07, 1)
+absorption = Vector3(0.6, 0.25, 0.22)
+clarity = 0.6
+normal_strength = 0.9
+roughness_base = 0.1
+foam_amount = 1.0
+crest_foam = 0.3
+linear_drag = 4.0

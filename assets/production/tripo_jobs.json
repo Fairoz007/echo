@@ -1,0 +1,2288 @@
+{
+  "ENV_CAVE_WALL_001": {
+    "asset_id": "ENV_CAVE_WALL_001",
+    "path": "assets/environment/cave/cave_wall_limestone.glb",
+    "target_dimensions_m": [
+      4,
+      4,
+      0.9
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural irregular wet limestone cave wall module, 4 meters wide 4 meters tall, layered sedimentary strata and erosion pockets, rough scalloped front face, nearly flat back and modular edges, no masonry, no ancient carvings, no arches.",
+      "face_limit": 10000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "e63e799a-2e6c-41d4-966d-f77e80cd4719",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4866828,
+    "generation_result": {
+      "task_id": "e63e799a-2e6c-41d4-966d-f77e80cd4719",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural irregular wet limestone cave wall module, 4 meters wide 4 meters tall, layered sedimentary strata and erosion pockets, rough scalloped front face, nearly flat back and modular edges, no masonry, no ancient carvings, no arches.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 10000
+      },
+      "progress": 100,
+      "create_time": 1791380245,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural irregular wet limestone cave wall module, 4 meters wide 4 meters tall, layered sedimentary strata and erosion pockets, rough scalloped front face, nearly flat back and modular edges, no masonry, no ancient carvings, no arches.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/e63e799a-2e6c-41d4-966d-f77e80cd4719/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvZTYzZTc5OWEtMmU2Yy00MWQ0LTk2NmQtZjc3ZTgwY2Q0NzE5L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=mWwCjtZGlqUbBVig65LAiGIy06uzGJvIpXFlBx11O4-eUzygUSI-hdjmBsfHpH1M521MGt6BSoTsTEPWwXSEbv4ThjS-u6UBWqAj8YkNnVpHgmAPg8B9v5wz~eeAE-TgLvkCh1rjLG~8nOD3umthv8CImLuyKcPJ4j68E6DtPsxPwUICLJoH~xgOIq0NJpaveYZqwyXk9Brs~Wnp7GmOncDo7DT4-peTunpKF5O594fySqsargsCzmftsDAK5JCH45Z-ZwdksPeYw7CwdhynYdPFoNgNSkzXVtJJbZvX2IXYQuBBR-Ls-YV3UCKTOCzyJbkixh4va4IopOTlgDBkHA__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/e63e799a-2e6c-41d4-966d-f77e80cd4719/tripo_pbr_model_e63e799a-2e6c-41d4-966d-f77e80cd4719.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvZTYzZTc5OWEtMmU2Yy00MWQ0LTk2NmQtZjc3ZTgwY2Q0NzE5L3RyaXBvX3Bicl9tb2RlbF9lNjNlNzk5YS0yZTZjLTQxZDQtOTY2ZC1mNzdlODBjZDQ3MTkuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=WNuLqI176M303gYNZkwxQhGtyTNh5cr~8AhnuX4zNDadkcTh94mpSzN~X9U1xJ4UIwtDrEYDm1xWpG7X-Gx7H303DbjAb95SPfuDnwP7oMikj8VOJLuxE-tqJQutMcrDNi~K4tv4KkDByadCIA6xMJhi3mtrmo6945nKTlqxlHBzpbsPeoHe0z4luPPR9edrhyDRPPWoFy8NblJqDMl50RPi3Ixz~ulOY0T1XE9lzI8s76c-frkP7bTcyyKuxBQlc3or8pbPFNtLSY76ICBHDplfuIQG8Y3G25VgrWrbyYj5M60ekrewIqsEpskzU4a2uyKrXbExhxIjl4h3psmqag__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/e63e799a-2e6c-41d4-966d-f77e80cd4719/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvZTYzZTc5OWEtMmU2Yy00MWQ0LTk2NmQtZjc3ZTgwY2Q0NzE5L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=mWwCjtZGlqUbBVig65LAiGIy06uzGJvIpXFlBx11O4-eUzygUSI-hdjmBsfHpH1M521MGt6BSoTsTEPWwXSEbv4ThjS-u6UBWqAj8YkNnVpHgmAPg8B9v5wz~eeAE-TgLvkCh1rjLG~8nOD3umthv8CImLuyKcPJ4j68E6DtPsxPwUICLJoH~xgOIq0NJpaveYZqwyXk9Brs~Wnp7GmOncDo7DT4-peTunpKF5O594fySqsargsCzmftsDAK5JCH45Z-ZwdksPeYw7CwdhynYdPFoNgNSkzXVtJJbZvX2IXYQuBBR-Ls-YV3UCKTOCzyJbkixh4va4IopOTlgDBkHA__"
+        }
+      }
+    }
+  },
+  "ENV_CAVE_CEILING_001": {
+    "asset_id": "ENV_CAVE_CEILING_001",
+    "path": "assets/environment/cave/cave_ceiling_limestone.glb",
+    "target_dimensions_m": [
+      4,
+      1,
+      4
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural limestone cave ceiling module, broad horizontal 4 by 4 meter slab with downward hanging short stalactites and irregular scalloped underside, eroded mineral seams, damp grey brown stone, rough edges, no buildings, no cave floor.",
+      "face_limit": 10000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "8bfda946-65cd-4c79-898d-9c9319adf54f",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4635456,
+    "generation_result": {
+      "task_id": "8bfda946-65cd-4c79-898d-9c9319adf54f",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural limestone cave ceiling module, broad horizontal 4 by 4 meter slab with downward hanging short stalactites and irregular scalloped underside, eroded mineral seams, damp grey brown stone, rough edges, no buildings, no cave floor.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 10000
+      },
+      "progress": 100,
+      "create_time": 1791380247,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural limestone cave ceiling module, broad horizontal 4 by 4 meter slab with downward hanging short stalactites and irregular scalloped underside, eroded mineral seams, damp grey brown stone, rough edges, no buildings, no cave floor.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/8bfda946-65cd-4c79-898d-9c9319adf54f/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOGJmZGE5NDYtNjVjZC00Yzc5LTg5OGQtOWM5MzE5YWRmNTRmL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=S4i0Wd1wGxXEvLL2nSeLxUI3HldW6hD977bhaUoyBamLz6udoGd1riv72DX624pwex1uVFrMn4RikDLztj8J3frykPxoWap-ScfRjTCRhgIANSMHAWVSL6QfUtEHjahx155baaZi0HMsdJe4YEi10Xj1k1DQ3K04PL7myziX1gVfzpGCzY9rF0ss~ONewVpMqUneYBLmbK-xjqlpj0IxGxaHI0g1amXpXyJoSW3GhdlsV8hvXM7DBxqsc19qRPWuMd4RJefPgRF9wLoAJmBkFopzBKfgDJ0M~FGzuT8vWFePi-qSRnognWWTloWLbAZ5itN7gRigmA7v771Pfl~I5g__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/8bfda946-65cd-4c79-898d-9c9319adf54f/tripo_pbr_model_8bfda946-65cd-4c79-898d-9c9319adf54f.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOGJmZGE5NDYtNjVjZC00Yzc5LTg5OGQtOWM5MzE5YWRmNTRmL3RyaXBvX3Bicl9tb2RlbF84YmZkYTk0Ni02NWNkLTRjNzktODk4ZC05YzkzMTlhZGY1NGYuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=eGLkvKKCJU0ngJkx8h-Em16LdKyymtVGDHs-3YvuIvZqXyZ1RFz6ssL9gMqxv61UgxEhtmmmnIJIeBU9bjtGETw0C3IVl6wwIUC9Tk-ABU-P~rT8yp6YngRDZiM00evBNCu6eUhx0A8~TR4XXDhkDuHLOgedXEglu1C~s8NHRoaucJU~DPR4ObKrRDvSShaW~edx3MSoDQpFC5DZPI9P3EWun0gVMcK-IPf0L8oR8BhHt~pe~xj6vORFEwivdrmgsfRkSvdItEL5L0dKv6Ob0ZYdI~TPcHbNjS9s1n0gxOyDCO~Ksw3AgBvcOS5bMpn36WSds9lTD0CvKrOOkxt4Tg__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/8bfda946-65cd-4c79-898d-9c9319adf54f/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOGJmZGE5NDYtNjVjZC00Yzc5LTg5OGQtOWM5MzE5YWRmNTRmL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=S4i0Wd1wGxXEvLL2nSeLxUI3HldW6hD977bhaUoyBamLz6udoGd1riv72DX624pwex1uVFrMn4RikDLztj8J3frykPxoWap-ScfRjTCRhgIANSMHAWVSL6QfUtEHjahx155baaZi0HMsdJe4YEi10Xj1k1DQ3K04PL7myziX1gVfzpGCzY9rF0ss~ONewVpMqUneYBLmbK-xjqlpj0IxGxaHI0g1amXpXyJoSW3GhdlsV8hvXM7DBxqsc19qRPWuMd4RJefPgRF9wLoAJmBkFopzBKfgDJ0M~FGzuT8vWFePi-qSRnognWWTloWLbAZ5itN7gRigmA7v771Pfl~I5g__"
+        }
+      }
+    }
+  },
+  "ENV_CAVE_FLOOR_001": {
+    "asset_id": "ENV_CAVE_FLOOR_001",
+    "path": "assets/environment/cave/cave_floor_sediment.glb",
+    "target_dimensions_m": [
+      4,
+      0.2,
+      4
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural cave floor module, broad horizontal square 4 by 4 meter flat walkable surface, shallow uneven sediment and gravel, embedded stones, damp dark limestone, thin slab with shallow relief, no walls, no tall rocks, no vegetation, no pedestal.",
+      "face_limit": 8000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "9ebda37d-24d2-422f-b7e2-13565bd3ab05",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4619004,
+    "generation_result": {
+      "task_id": "9ebda37d-24d2-422f-b7e2-13565bd3ab05",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural cave floor module, broad horizontal square 4 by 4 meter flat walkable surface, shallow uneven sediment and gravel, embedded stones, damp dark limestone, thin slab with shallow relief, no walls, no tall rocks, no vegetation, no pedestal.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 8000
+      },
+      "progress": 100,
+      "create_time": 1791380250,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Natural cave floor module, broad horizontal square 4 by 4 meter flat walkable surface, shallow uneven sediment and gravel, embedded stones, damp dark limestone, thin slab with shallow relief, no walls, no tall rocks, no vegetation, no pedestal.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/9ebda37d-24d2-422f-b7e2-13565bd3ab05/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOWViZGEzN2QtMjRkMi00MjJmLWI3ZTItMTM1NjViZDNhYjA1L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=OoPrih3UYlqUAae5p37y8fu0Ol-nl2fz~gR0vvPYFl-W6n1wFLhc3~ZdyD1YRy6ELQYmSQ3O1bPOpWfruYiYQvx86bqmdWQx3x7Le9~v-t9MFx5Jzgg8kmcAUPtFJvLQKTAScSlbhnCJtP4v8gJLMwP8GLeyMmUM5oawlH9OySf3lEnVFA3uYi-x6OYh4P4RW7tQiXmhDcwT0Q1Ty6~K3~bNIInRJinQVfRw5lcC~SLFRjVfoPvh1uVMNIua77kpTmdZIHprUjUq9dPxNOcf3uZypZzO0qZeSbnSq8s6jkPfwQSWJ014-fDNxZiKTENdHX8Eno0fpXYQrQiW~2bcUA__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/9ebda37d-24d2-422f-b7e2-13565bd3ab05/tripo_pbr_model_9ebda37d-24d2-422f-b7e2-13565bd3ab05.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOWViZGEzN2QtMjRkMi00MjJmLWI3ZTItMTM1NjViZDNhYjA1L3RyaXBvX3Bicl9tb2RlbF85ZWJkYTM3ZC0yNGQyLTQyMmYtYjdlMi0xMzU2NWJkM2FiMDUuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=KhyTKdfqSIvFCkJsYgX5W2fr1ZYJ1ORyvQM3Ze7X-Wq2pHQb1ncQS00Bumqm5HURnUzb~QU-dsZ~04miaHHrJhiTcru8Xl83riRvAHpYclOlk1yW5qr-XEsHZz5FrxOOb38z6~ojBlTzZf~Nu5rTxkPDLdev0w9cbuXvHOU1Krprlf95MDiNFqmZ8YbTajHBib1-qYjYsGbCPg7w~eeLbmRyHTJp-REI2R0tAB3fBqBfh0RD~Ywi0ooHnulZkCBgS5eKrb0WQyogha0EzRNczhF6sizE89h~WR3bEjzzbu3EpkVdSglZ6DemCYuRS~H~ElJmKenKR48-9Fu3vyXBVA__",
+          "type": "glb"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/9ebda37d-24d2-422f-b7e2-13565bd3ab05/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOWViZGEzN2QtMjRkMi00MjJmLWI3ZTItMTM1NjViZDNhYjA1L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=OoPrih3UYlqUAae5p37y8fu0Ol-nl2fz~gR0vvPYFl-W6n1wFLhc3~ZdyD1YRy6ELQYmSQ3O1bPOpWfruYiYQvx86bqmdWQx3x7Le9~v-t9MFx5Jzgg8kmcAUPtFJvLQKTAScSlbhnCJtP4v8gJLMwP8GLeyMmUM5oawlH9OySf3lEnVFA3uYi-x6OYh4P4RW7tQiXmhDcwT0Q1Ty6~K3~bNIInRJinQVfRw5lcC~SLFRjVfoPvh1uVMNIua77kpTmdZIHprUjUq9dPxNOcf3uZypZzO0qZeSbnSq8s6jkPfwQSWJ014-fDNxZiKTENdHX8Eno0fpXYQrQiW~2bcUA__"
+        }
+      }
+    }
+  },
+  "CHR_ELIAS_001": {
+    "asset_id": "CHR_ELIAS_001",
+    "path": "assets/characters/elias/source/CHR_Elias_Base.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.8,
+      0.45
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male archaeology expedition mentor age 58, grey short hair and beard, weathered tan field shirt grey utility vest linen trousers hiking boots, individual simple tools, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "face_limit": 20000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4434448,
+    "generation_result": {
+      "task_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male archaeology expedition mentor age 58, grey short hair and beard, weathered tan field shirt grey utility vest linen trousers hiking boots, individual simple tools, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 20000
+      },
+      "progress": 100,
+      "create_time": 1791380261,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male archaeology expedition mentor age 58, grey short hair and beard, weathered tan field shirt grey utility vest linen trousers hiking boots, individual simple tools, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/3082aa50-b4e4-480a-a658-e9f1eb472cfb/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMzA4MmFhNTAtYjRlNC00ODBhLWE2NTgtZTlmMWViNDcyY2ZiL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=NGEESEti4fOLFgXWcUt58~t161U90qz-3QOa8fDTAyYjl9aEsyXiWcmJ90VwhUfndpwBSYcZsSumfd0s4it5j5hmRbpaA4dd71Ma4~NqdBfAVLDiX3WrVsQd9PKlmWdr4Z9i9J4DvjYLJXAjvZnhM8yipvB-JsBglT5saTUszBNoyD5s4W-m171ZCtf-tJZnwlXUxgnWM828V9mFOs748m4PFp2qGcHVFluA8V88ymU2eTC~k4ilTUF0a4RTalcO8SF~ULqkN~bQZGfy0pG0XhZkPtSvCjMLpc9eNg1CmDuMKWyUJGwIk5jyKH9XMqLGX~FEzz8JKsgBqj7jcb0CVg__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/3082aa50-b4e4-480a-a658-e9f1eb472cfb/tripo_pbr_model_3082aa50-b4e4-480a-a658-e9f1eb472cfb.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMzA4MmFhNTAtYjRlNC00ODBhLWE2NTgtZTlmMWViNDcyY2ZiL3RyaXBvX3Bicl9tb2RlbF8zMDgyYWE1MC1iNGU0LTQ4MGEtYTY1OC1lOWYxZWI0NzJjZmIuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=E~Kf0CICQWID0YsL7lNtUW7aVfLSwR-4wxFMFw4Fu8fgg3YwF1lXmVQK5lHF4PudyH-5ETIBKoln6bj5DmxS47YiJvCvIw1VA0mv1ZEsiRTpa6gBIrmEWoMAtlWRtrbCvMvaL5m~6B79O8El8TKZ863yQ4c-fESjIYsvtVS5WYO4exBB1D9p7q3M14e9FPdp-LEBzAzlAFYagt0h49X7H6QWkxOOA0DGpgwRi7JVEyhAlMCXTMt3pH0OASjiJ1lwUh7ZUd6fF325E-vSuDGX3faAsu2Pze~6YzYP2GPED2EOMBFbJdC-RSag1BC~TRQWJFUnhjLxrsvIUdoY1ms7vw__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/3082aa50-b4e4-480a-a658-e9f1eb472cfb/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMzA4MmFhNTAtYjRlNC00ODBhLWE2NTgtZTlmMWViNDcyY2ZiL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=NGEESEti4fOLFgXWcUt58~t161U90qz-3QOa8fDTAyYjl9aEsyXiWcmJ90VwhUfndpwBSYcZsSumfd0s4it5j5hmRbpaA4dd71Ma4~NqdBfAVLDiX3WrVsQd9PKlmWdr4Z9i9J4DvjYLJXAjvZnhM8yipvB-JsBglT5saTUszBNoyD5s4W-m171ZCtf-tJZnwlXUxgnWM828V9mFOs748m4PFp2qGcHVFluA8V88ymU2eTC~k4ilTUF0a4RTalcO8SF~ULqkN~bQZGfy0pG0XhZkPtSvCjMLpc9eNg1CmDuMKWyUJGwIk5jyKH9XMqLGX~FEzz8JKsgBqj7jcb0CVg__"
+        }
+      }
+    }
+  },
+  "CHR_NADIYA_001": {
+    "asset_id": "CHR_NADIYA_001",
+    "path": "assets/characters/nadiya/source/CHR_Nadiya_Base.glb",
+    "target_dimensions_m": [
+      0.65,
+      1.67,
+      0.4
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original female communications engineer age 32, dark hair tied back, slate navy field jacket with small orange trim, utility trousers rugged hiking boots, small belt radio, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "face_limit": 20000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 3865400,
+    "generation_result": {
+      "task_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original female communications engineer age 32, dark hair tied back, slate navy field jacket with small orange trim, utility trousers rugged hiking boots, small belt radio, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 20000
+      },
+      "progress": 100,
+      "create_time": 1791380264,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original female communications engineer age 32, dark hair tied back, slate navy field jacket with small orange trim, utility trousers rugged hiking boots, small belt radio, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/472ab5aa-c6a0-4509-aa31-fca2bdc35f54/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDcyYWI1YWEtYzZhMC00NTA5LWFhMzEtZmNhMmJkYzM1ZjU0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=Fi5YranJ8av4QJLwRuF0IeuKfNUO5HxThYIxuvzdK5WrLfXlw4J35lgYprMSb4ITeLp3XL1XgddfGzcRCuJXux2USU5HDYL7vbRwAilsuQI1~RFKP6XCXH8CSq3mSgaQ9MGtGtdWjoi5BjvZ-yNEmAOmqO8SHalWeWquQtQ68Httz9ZizvXIjFUDE3svA3wwqz35VTad15T-wKHNJCfVU5lGX5V6kiiV5onz91TM3XCby5pPrFZ9em~a--0EutJCW7gRefI-7dniPsWl6oVNLVrnVHZ5ErNlG3Gr9n-HGEpu2a-nY7tuyDwgEtfIB3mHNZbwWSaCf7GofCf1wxf-jQ__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/472ab5aa-c6a0-4509-aa31-fca2bdc35f54/tripo_pbr_model_472ab5aa-c6a0-4509-aa31-fca2bdc35f54.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDcyYWI1YWEtYzZhMC00NTA5LWFhMzEtZmNhMmJkYzM1ZjU0L3RyaXBvX3Bicl9tb2RlbF80NzJhYjVhYS1jNmEwLTQ1MDktYWEzMS1mY2EyYmRjMzVmNTQuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=bFXG4n01h0FqevRe48B6vEcZyqtcc2MIeM2XvRva2yNP6SEaiwf82BBARiippjr8lzCo~rdwEYNZ8KXUlIZOUARMgGxDjjXVXt4XdF1JGMSWByzUuExIRq~NRvHIku1iATK9USrNf4-qksLfnJZjQh1r1QV~v609FZWYX~9dztD0B50XN0Pz4O~0lJa8oVqSgA9HK7mw3XnXhmX8EyFFNeqjCrm1iyJnudvwbc8Z7UyzGwscX487X3KHEUwjfT6FWQHWHeQ73LaZeIz1y1mRyMfkqAuqOA5P6tSbb35tlYpkPDa6oVOoNkmeaQwc4eATPXHss0hmMYcT56kWyVP2vA__",
+          "type": "glb"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/472ab5aa-c6a0-4509-aa31-fca2bdc35f54/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDcyYWI1YWEtYzZhMC00NTA5LWFhMzEtZmNhMmJkYzM1ZjU0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=Fi5YranJ8av4QJLwRuF0IeuKfNUO5HxThYIxuvzdK5WrLfXlw4J35lgYprMSb4ITeLp3XL1XgddfGzcRCuJXux2USU5HDYL7vbRwAilsuQI1~RFKP6XCXH8CSq3mSgaQ9MGtGtdWjoi5BjvZ-yNEmAOmqO8SHalWeWquQtQ68Httz9ZizvXIjFUDE3svA3wwqz35VTad15T-wKHNJCfVU5lGX5V6kiiV5onz91TM3XCby5pPrFZ9em~a--0EutJCW7gRefI-7dniPsWl6oVNLVrnVHZ5ErNlG3Gr9n-HGEpu2a-nY7tuyDwgEtfIB3mHNZbwWSaCf7GofCf1wxf-jQ__"
+        }
+      }
+    }
+  },
+  "CHR_TOMAS_001": {
+    "asset_id": "CHR_TOMAS_001",
+    "path": "assets/characters/tomas/source/CHR_Tomas_Base.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.84,
+      0.45
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male expedition climber medic age 35, short dark hair, forest green field shirt khaki climbing trousers weathered leather climbing harness and hiking boots, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "face_limit": 20000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4834748,
+    "generation_result": {
+      "task_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male expedition climber medic age 35, short dark hair, forest green field shirt khaki climbing trousers weathered leather climbing harness and hiking boots, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 20000
+      },
+      "progress": 100,
+      "create_time": 1791380266,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male expedition climber medic age 35, short dark hair, forest green field shirt khaki climbing trousers weathered leather climbing harness and hiking boots, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/9d3e7954-3d9e-4c99-967a-3b64dba1cf84/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvOWQzZTc5NTQtM2Q5ZS00Yzk5LTk2N2EtM2I2NGRiYTFjZjg0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=dJOSbfl2ULZhnehu4p5O0hH9zfU-85EktCFz6~AR7LD5~6McW8DpPSMJZ~TYQvZQ7b9DpnCRw-NsvrVK5g6fsFl~294TgrEuKuEFVHru1064F55Q9otHda7pSMNwXm0p31z-siyyVsHbAYi~UGOGVSFdFlMBCm1CupR0UcVLLSKsRePWohK8AYtZ-4Wn~0aIQdK4EZJOec~WudrE3ZJGob-ra9f6a9Gt-nLTW8cOqGQDprOmM2l~iFj6iKmblo6ux4cIET2CGDPKUHHLgN5CHTC9yji4VlKm2h8pKnMMUQK~CnWa3A37ismBlabF7dblh1YCh9XYYM77BQFn5XvvqA__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/9d3e7954-3d9e-4c99-967a-3b64dba1cf84/tripo_pbr_model_9d3e7954-3d9e-4c99-967a-3b64dba1cf84.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvOWQzZTc5NTQtM2Q5ZS00Yzk5LTk2N2EtM2I2NGRiYTFjZjg0L3RyaXBvX3Bicl9tb2RlbF85ZDNlNzk1NC0zZDllLTRjOTktOTY3YS0zYjY0ZGJhMWNmODQuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=Y13lYimpvlJLHjNgv2iqKea9VB3y1GKfs2tgY7eNaP86Y~018aR-sGfrwxnNVowbRNzh5tnvjsG72U8Vvr2JzAsZb55~wMTABpConLEErNguRPhKEGLO42MuqOWlLzg5YIctlCxJaXV4YwOqNa6F~fTtUELUDHJXlpvboFi4cdF2Y06mZ1ZEwedYW6xUKGhgkARNEZInycGtU~sgdJaLBusKCHHe~RNp~F2Cj2mSjGogfylkWXrzBzkpn2V1JS0IftahUq3rCQ3Ldw0Eb0CJun2A37ajlpnPxrGCFT8d97rHG~5OTzoBl2rjZhisy8P7MazZki26WHMJTcwCR88M1A__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/9d3e7954-3d9e-4c99-967a-3b64dba1cf84/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvOWQzZTc5NTQtM2Q5ZS00Yzk5LTk2N2EtM2I2NGRiYTFjZjg0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=dJOSbfl2ULZhnehu4p5O0hH9zfU-85EktCFz6~AR7LD5~6McW8DpPSMJZ~TYQvZQ7b9DpnCRw-NsvrVK5g6fsFl~294TgrEuKuEFVHru1064F55Q9otHda7pSMNwXm0p31z-siyyVsHbAYi~UGOGVSFdFlMBCm1CupR0UcVLLSKsRePWohK8AYtZ-4Wn~0aIQdK4EZJOec~WudrE3ZJGob-ra9f6a9Gt-nLTW8cOqGQDprOmM2l~iFj6iKmblo6ux4cIET2CGDPKUHHLgN5CHTC9yji4VlKm2h8pKnMMUQK~CnWa3A37ismBlabF7dblh1YCh9XYYM77BQFn5XvvqA__"
+        }
+      }
+    }
+  },
+  "CHR_ADRIAN_001": {
+    "asset_id": "CHR_ADRIAN_001",
+    "path": "assets/characters/adrian/source/CHR_Adrian_Base.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.78,
+      0.45
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male expedition logistics coordinator age 40, short neat brown hair clean shaven, neutral grey technical field shirt black utility trousers gunmetal belt and hiking boots, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "face_limit": 20000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 3949532,
+    "generation_result": {
+      "task_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male expedition logistics coordinator age 40, short neat brown hair clean shaven, neutral grey technical field shirt black utility trousers gunmetal belt and hiking boots, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 20000
+      },
+      "progress": 100,
+      "create_time": 1791380269,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male expedition logistics coordinator age 40, short neat brown hair clean shaven, neutral grey technical field shirt black utility trousers gunmetal belt and hiking boots, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/136d6f7e-6777-4c0d-8adc-65ae0a6920d5/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMTM2ZDZmN2UtNjc3Ny00YzBkLThhZGMtNjVhZTBhNjkyMGQ1L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=a3PTDx-7xW6G0-pTpyxKJGHJG3ddi41gBIk5Ab7y1OY5~CtJCNLkBke0cdMg1WPI8nI6gIBnwENc2eVRd8ZNN4et4Rrluw4Iah5Ixyjp-tA-ZBT34Gzl8nya0svZ-SbhIR17~tnvxU-l3DsblHjXNbRCNedTPYANd9ko6IVKMKBYoXVknou93AxWTXu-EbRiM~bVIFD0LkARDtM-cQEQL4gObkszSSMqFxqNAmWpyA68ZDT2vLjIZ4IvsgOBcP30TsVyiyE3aTDcE7vNan4cMRQ~q5LCu4BGQBErKqAb-a~abLNs7AzfHtB3Q83vFYfhlB50kcjvKOtYIoPLEWq7og__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/136d6f7e-6777-4c0d-8adc-65ae0a6920d5/tripo_pbr_model_136d6f7e-6777-4c0d-8adc-65ae0a6920d5.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMTM2ZDZmN2UtNjc3Ny00YzBkLThhZGMtNjVhZTBhNjkyMGQ1L3RyaXBvX3Bicl9tb2RlbF8xMzZkNmY3ZS02Nzc3LTRjMGQtOGFkYy02NWFlMGE2OTIwZDUuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=YjkMidiKnZaj4PVvdJGV6S4kq4DJc53kTDAS0B-nLDmCJ9CB5x4FFAPmexpmoA5E5d--ESP3jZCrpUZAs8LgzcmIEosZotzwogg7KoPm9hlTTflqUF8GemovGJ44sRs4wnOtBnC0rLPm31lk2iKJKkHNnQAwpRaAfPRvUBjnL6ZF86eOsEvGmxghBqlF-gQIKT~7k6Y2sooUVauPjw8u4hGLYcfQA4tRoEW8HQZISzQUmV~SpX70kYEU1k1mnCzf97-3TmKNBjn6cXmUYC6fxWfhV7d0yRu-D8Pv7OaKGDesKKS6odMy0hqTDAnQFueCF3n08ntwHfgsgCW6K6RSAQ__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/136d6f7e-6777-4c0d-8adc-65ae0a6920d5/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMTM2ZDZmN2UtNjc3Ny00YzBkLThhZGMtNjVhZTBhNjkyMGQ1L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=a3PTDx-7xW6G0-pTpyxKJGHJG3ddi41gBIk5Ab7y1OY5~CtJCNLkBke0cdMg1WPI8nI6gIBnwENc2eVRd8ZNN4et4Rrluw4Iah5Ixyjp-tA-ZBT34Gzl8nya0svZ-SbhIR17~tnvxU-l3DsblHjXNbRCNedTPYANd9ko6IVKMKBYoXVknou93AxWTXu-EbRiM~bVIFD0LkARDtM-cQEQL4gObkszSSMqFxqNAmWpyA68ZDT2vLjIZ4IvsgOBcP30TsVyiyE3aTDcE7vNan4cMRQ~q5LCu4BGQBErKqAb-a~abLNs7AzfHtB3Q83vFYfhlB50kcjvKOtYIoPLEWq7og__"
+        }
+      }
+    }
+  },
+  "CHR_DRAKE_001": {
+    "asset_id": "CHR_DRAKE_001",
+    "path": "assets/characters/drake/source/CHR_Drake_Base.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.86,
+      0.45
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male private archaeological security director age 48, silver temples short dark hair, stern face, premium dark graphite expedition jacket black industrial tactical trousers understated titanium hardware and boots, no insignia, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "face_limit": 20000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4177072,
+    "generation_result": {
+      "task_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male private archaeological security director age 48, silver temples short dark hair, stern face, premium dark graphite expedition jacket black industrial tactical trousers understated titanium hardware and boots, no insignia, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 20000
+      },
+      "progress": 100,
+      "create_time": 1791380271,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original male private archaeological security director age 48, silver temples short dark hair, stern face, premium dark graphite expedition jacket black industrial tactical trousers understated titanium hardware and boots, no insignia, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no weapon.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/44bf68b2-247b-4719-b1dd-374d9ec8d08b/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDRiZjY4YjItMjQ3Yi00NzE5LWIxZGQtMzc0ZDllYzhkMDhiL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=IR1H5RjLDoufdies6IpeSAu1q6F0c9Ya6IH13Q754tz5p~sT5IZGogKTVlT6RnmMeySYTdvG~9YYdmVIhzUePIlsL-OfQ2Or7S3FFJin0S3OsabVZQZza3DD~IiYef0pcIsJyNeqcQWTfeJC7huVj2oXI7p7jkYozCavHYjfFvgyH0cV35s-vFY4R9mF6KIFKO9bYnZlKGTof5gS7RY83-gks4-NG9ZfySiPXOgKNZQcIvUNwg5l0e7AIuzOWMEreavUmrqSdqqM5FpzOtaxP9EQ8t2Xwl2ETOhdVtQ8if7rNd15S8g5KXWrn4N3VFPUdGEucCFdeEHHUNDm4wDa9Q__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/44bf68b2-247b-4719-b1dd-374d9ec8d08b/tripo_pbr_model_44bf68b2-247b-4719-b1dd-374d9ec8d08b.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDRiZjY4YjItMjQ3Yi00NzE5LWIxZGQtMzc0ZDllYzhkMDhiL3RyaXBvX3Bicl9tb2RlbF80NGJmNjhiMi0yNDdiLTQ3MTktYjFkZC0zNzRkOWVjOGQwOGIuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=StyaBJTMcBKjiWUrHXGq0-SmboIKLWspJsw8wn4gQeyROeGVX9iDzx4iwnefYntKcprqHtJiSxg1~Nm6O2ft3kRazaA3AchBFUjwaT35o2ifsOP6hExPoYJkOyLtMhrL0CcgqgGnRwYdIdUHrZiVzO7eG583hZ-4c7wC3~V~Uz99GKiH~CAYddamta8vn3s9TG57L8rVRYyl-XiMyzXDkw7eKYvTqodYJo3Z8LVdMjgkbh91TTwfkza0H0NRU-rWWWXDBmZZQRBt0VztV~q5hu4~qfQVS-rNXn5B8olOJU99gT7HDGwdEG1mTWy8gkVLr841xk47RkZyhVGfLJtt4w__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/44bf68b2-247b-4719-b1dd-374d9ec8d08b/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDRiZjY4YjItMjQ3Yi00NzE5LWIxZGQtMzc0ZDllYzhkMDhiL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=IR1H5RjLDoufdies6IpeSAu1q6F0c9Ya6IH13Q754tz5p~sT5IZGogKTVlT6RnmMeySYTdvG~9YYdmVIhzUePIlsL-OfQ2Or7S3FFJin0S3OsabVZQZza3DD~IiYef0pcIsJyNeqcQWTfeJC7huVj2oXI7p7jkYozCavHYjfFvgyH0cV35s-vFY4R9mF6KIFKO9bYnZlKGTof5gS7RY83-gks4-NG9ZfySiPXOgKNZQcIvUNwg5l0e7AIuzOWMEreavUmrqSdqqM5FpzOtaxP9EQ8t2Xwl2ETOhdVtQ8if7rNd15S8g5KXWrn4N3VFPUdGEucCFdeEHHUNDm4wDa9Q__"
+        }
+      }
+    }
+  },
+  "CHR_MERIDIAN_BASE_001": {
+    "asset_id": "CHR_MERIDIAN_BASE_001",
+    "path": "assets/characters/meridian/base/source/CHR_Meridian_Base.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.82,
+      0.45
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original professional archaeological security mercenary, dark charcoal field uniform matte black ballistic vest khaki drab tactical trousers boots, bare face short hair, standardized industrial equipment, no insignia, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no held weapon.",
+      "face_limit": 20000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "095bc44b-3575-4c8f-bbe9-80990f81c313",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4242100,
+    "generation_result": {
+      "task_id": "095bc44b-3575-4c8f-bbe9-80990f81c313",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original professional archaeological security mercenary, dark charcoal field uniform matte black ballistic vest khaki drab tactical trousers boots, bare face short hair, standardized industrial equipment, no insignia, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no held weapon.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 20000
+      },
+      "progress": 100,
+      "create_time": 1791380320,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Full body original professional archaeological security mercenary, dark charcoal field uniform matte black ballistic vest khaki drab tactical trousers boots, bare face short hair, standardized industrial equipment, no insignia, realistic human proportions. Symmetrical neutral A pose, arms apart, legs separated, five fingers, no held weapon.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/095bc44b-3575-4c8f-bbe9-80990f81c313/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMDk1YmM0NGItMzU3NS00YzhmLWJiZTktODA5OTBmODFjMzEzL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=lgHVCGSnANQMeojiRXtcPXq9Di3joIqVm3moMdouxrjcGHm3zkruvmE1h9GJ528QahjGJ2NhB9MB1MRZv27r88S2sKMclqRZPdkHiwax~m1owckmAVo2KDOiI3QPMeQTj2H~9XD~200MKnFA0M90HdA0mnTrLYCfWG4fk17SYvyOxxDW9AGWoaeY8j~SpwCiBLHVOEvpj-3lsTbydsNGnWz2wR016-~LcX5krFg9hnp7Ztsm4FoVTIeyUCeqUWTHYA9nAhVlWGjXrPXM-ijRYruGyyfee91EehnJlxp~5ASOQuQ2uCOQZz0U6Dq9E87xrnCLZkUJSjTnpuMRXpyi6g__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/095bc44b-3575-4c8f-bbe9-80990f81c313/tripo_pbr_model_095bc44b-3575-4c8f-bbe9-80990f81c313.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMDk1YmM0NGItMzU3NS00YzhmLWJiZTktODA5OTBmODFjMzEzL3RyaXBvX3Bicl9tb2RlbF8wOTViYzQ0Yi0zNTc1LTRjOGYtYmJlOS04MDk5MGY4MWMzMTMuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=ZhMLGajWPOPzK~cgTz9dnjarCXN-Z0p1is4QU8w1~LD~eMy6A4V3F3y47v34itwyI4NRGLuNr5cIdEZjJQhMMT-mPyIORoIXIDW51rBdTRmS5OT2iGJdflhvP4I3WJsoLz-GRYx3MxPFTISdWu1~JW1Q5mJu9lSd7Hm7UpwpJOyeTyIwJOumIEWSknZUAaouLi1-bXemLjZ8EVoi1pCnGMijL69068QcDVk7UlSR-jNIMWR4rgD~ae-3jCw~4KrhCDF0jL6i1qS3qvRz~uD-FfHA~waqNzzSDeYroRMY5~WxYrBZABwsEAtPjvV6RW319URw3ta2pvQAb0cRyBlLiQ__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/095bc44b-3575-4c8f-bbe9-80990f81c313/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMDk1YmM0NGItMzU3NS00YzhmLWJiZTktODA5OTBmODFjMzEzL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=lgHVCGSnANQMeojiRXtcPXq9Di3joIqVm3moMdouxrjcGHm3zkruvmE1h9GJ528QahjGJ2NhB9MB1MRZv27r88S2sKMclqRZPdkHiwax~m1owckmAVo2KDOiI3QPMeQTj2H~9XD~200MKnFA0M90HdA0mnTrLYCfWG4fk17SYvyOxxDW9AGWoaeY8j~SpwCiBLHVOEvpj-3lsTbydsNGnWz2wR016-~LcX5krFg9hnp7Ztsm4FoVTIeyUCeqUWTHYA9nAhVlWGjXrPXM-ijRYruGyyfee91EehnJlxp~5ASOQuQ2uCOQZz0U6Dq9E87xrnCLZkUJSjTnpuMRXpyi6g__"
+        }
+      }
+    }
+  },
+  "CHR_ELIAS_001_CHECK": {
+    "asset_id": "CHR_ELIAS_001_CHECK",
+    "path": "assets/characters/elias/source/CHR_Elias_Check.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.8,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_prerigcheck",
+      "original_model_task_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb"
+    },
+    "status": "QA",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "155c7bfb-43f4-4d4a-99e0-d6719390e777",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 0,
+    "check_result": {
+      "riggable": true,
+      "rig_type": "biped",
+      "topology": "biped"
+    },
+    "generation_result": {
+      "task_id": "155c7bfb-43f4-4d4a-99e0-d6719390e777",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "input": {
+        "original_model_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb"
+      },
+      "progress": 100,
+      "create_time": 1791380501,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_NADIYA_001_CHECK": {
+    "asset_id": "CHR_NADIYA_001_CHECK",
+    "path": "assets/characters/nadiya/source/CHR_Nadiya_Check.glb",
+    "target_dimensions_m": [
+      0.65,
+      1.67,
+      0.4
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_prerigcheck",
+      "original_model_task_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54"
+    },
+    "status": "QA",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "fbdf85fe-49d5-4de7-9083-70931ef8e289",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 0,
+    "check_result": {
+      "riggable": true,
+      "rig_type": "biped",
+      "topology": "biped"
+    },
+    "generation_result": {
+      "task_id": "fbdf85fe-49d5-4de7-9083-70931ef8e289",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "input": {
+        "original_model_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54"
+      },
+      "progress": 100,
+      "create_time": 1791380503,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_TOMAS_001_CHECK": {
+    "asset_id": "CHR_TOMAS_001_CHECK",
+    "path": "assets/characters/tomas/source/CHR_Tomas_Check.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.84,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_prerigcheck",
+      "original_model_task_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84"
+    },
+    "status": "QA",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "62354ebe-2226-44f2-8d99-1de22bb0dd6b",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 0,
+    "check_result": {
+      "riggable": true,
+      "rig_type": "biped",
+      "topology": "biped"
+    },
+    "generation_result": {
+      "task_id": "62354ebe-2226-44f2-8d99-1de22bb0dd6b",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "input": {
+        "original_model_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84"
+      },
+      "progress": 100,
+      "create_time": 1791380504,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_ADRIAN_001_CHECK": {
+    "asset_id": "CHR_ADRIAN_001_CHECK",
+    "path": "assets/characters/adrian/source/CHR_Adrian_Check.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.78,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_prerigcheck",
+      "original_model_task_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5"
+    },
+    "status": "QA",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "93383737-4aff-42b4-aed1-47f0c0fd5bca",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 0,
+    "check_result": {
+      "riggable": true,
+      "rig_type": "biped",
+      "topology": "biped"
+    },
+    "generation_result": {
+      "task_id": "93383737-4aff-42b4-aed1-47f0c0fd5bca",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "input": {
+        "original_model_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5"
+      },
+      "progress": 100,
+      "create_time": 1791380505,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_DRAKE_001_CHECK": {
+    "asset_id": "CHR_DRAKE_001_CHECK",
+    "path": "assets/characters/drake/source/CHR_Drake_Check.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.86,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_prerigcheck",
+      "original_model_task_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b"
+    },
+    "status": "QA",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "a9d0fb8a-1421-4a1c-9ef0-e4bf9c3a91e4",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 0,
+    "check_result": {
+      "riggable": true,
+      "rig_type": "biped",
+      "topology": "biped"
+    },
+    "generation_result": {
+      "task_id": "a9d0fb8a-1421-4a1c-9ef0-e4bf9c3a91e4",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "input": {
+        "original_model_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b"
+      },
+      "progress": 100,
+      "create_time": 1791380506,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_MERIDIAN_BASE_001_CHECK": {
+    "asset_id": "CHR_MERIDIAN_BASE_001_CHECK",
+    "path": "assets/characters/meridian/base/source/CHR_Meridian_Check.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.82,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_prerigcheck",
+      "original_model_task_id": "095bc44b-3575-4c8f-bbe9-80990f81c313"
+    },
+    "status": "QA",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "1ae34909-cc07-4b7e-812c-fa0f42a7fe7d",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 0,
+    "check_result": {
+      "riggable": true,
+      "rig_type": "biped",
+      "topology": "biped"
+    },
+    "generation_result": {
+      "task_id": "1ae34909-cc07-4b7e-812c-fa0f42a7fe7d",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "input": {
+        "original_model_id": "095bc44b-3575-4c8f-bbe9-80990f81c313"
+      },
+      "progress": 100,
+      "create_time": 1791380528,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_ELIAS_001_RIG": {
+    "asset_id": "CHR_ELIAS_001_RIG",
+    "path": "assets/characters/elias/source/CHR_Elias_Rig.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.8,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb",
+      "model_version": "v2.5-20260210",
+      "rig_type": "biped",
+      "spec": "tripo",
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "ec715575-27c9-4e9d-b9f5-c4e335066d0a",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4953164,
+    "generation_result": {
+      "task_id": "ec715575-27c9-4e9d-b9f5-c4e335066d0a",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v2.5-20260210",
+        "original_model_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791380555,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/ec715575-27c9-4e9d-b9f5-c4e335066d0a/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZWM3MTU1NzUtMjdjOS00ZTlkLWI5ZjUtYzRlMzM1MDY2ZDBhL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=YX0AAoI~aopHOotLUhdIDpSV-~QIfFMgEbgGZau7k0VElftShmkp35Nh07RnxsU~OOVeE1DbmI1RzzVKGtQ~aO231kytaDQaYAdP6P1xTjP2yZtIcm2spyJUme~G-JttqlRdM5dzex1GRFBGPlb0muYn4qPF5yoUA70uGpljMPA9m~Wc9056bhNzzsxgSk~fiQgmDZg5D8tlK2fLVCazEwZ2YT9NqIPFtgmKQKp7fjIIZugwEFQGrnXEi63yD4u~pbxZI7K7N67760nzCISRLm6KIqYr4TERkNPQ7rdCayalAyFFO5NbZpaQEJmSiLDgn2BM75-bzxZtIqXJGQFX~A__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/ec715575-27c9-4e9d-b9f5-c4e335066d0a/tripo_rigging_ec715575-27c9-4e9d-b9f5-c4e335066d0a.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZWM3MTU1NzUtMjdjOS00ZTlkLWI5ZjUtYzRlMzM1MDY2ZDBhL3RyaXBvX3JpZ2dpbmdfZWM3MTU1NzUtMjdjOS00ZTlkLWI5ZjUtYzRlMzM1MDY2ZDBhLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=TQEMiAou4XBY~5YXtVWtTZA~44I2gqpRwG0NEBz7AaxO-462z2wv-2krwjxj5OuRA99OfMew0a0J4czWkIoQ9CkgPExqEco4cszb~rYajxlHmoq2UXDu0X8gllgdUWyK9-FWmZNTVOjNmNbHuIM4nQqgZ~flFFxdFTC6l8s1FzNpiQBZ7uE9PZyGdutsrJdkLD6R2iQ4e9qgoom00Zr0i0iHohUtY3RTfIZH5AMb0H80iKXL4AKh--OiPevwGuzJSaiaaSnUnVOftbvRBoLWDrK1XQywIPJdEkesZVXYJH8ucyFm-nwZqRsj7AGNrlfdsUw6B1pM9A-abEvY1gXqbg__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/ec715575-27c9-4e9d-b9f5-c4e335066d0a/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZWM3MTU1NzUtMjdjOS00ZTlkLWI5ZjUtYzRlMzM1MDY2ZDBhL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=YX0AAoI~aopHOotLUhdIDpSV-~QIfFMgEbgGZau7k0VElftShmkp35Nh07RnxsU~OOVeE1DbmI1RzzVKGtQ~aO231kytaDQaYAdP6P1xTjP2yZtIcm2spyJUme~G-JttqlRdM5dzex1GRFBGPlb0muYn4qPF5yoUA70uGpljMPA9m~Wc9056bhNzzsxgSk~fiQgmDZg5D8tlK2fLVCazEwZ2YT9NqIPFtgmKQKp7fjIIZugwEFQGrnXEi63yD4u~pbxZI7K7N67760nzCISRLm6KIqYr4TERkNPQ7rdCayalAyFFO5NbZpaQEJmSiLDgn2BM75-bzxZtIqXJGQFX~A__"
+        }
+      }
+    }
+  },
+  "CHR_NADIYA_001_RIG": {
+    "asset_id": "CHR_NADIYA_001_RIG",
+    "path": "assets/characters/nadiya/source/CHR_Nadiya_Rig.glb",
+    "target_dimensions_m": [
+      0.65,
+      1.67,
+      0.4
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54",
+      "model_version": "v2.5-20260210",
+      "rig_type": "biped",
+      "spec": "tripo",
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "f38f2e86-db06-4bba-8b4e-7ee4f89786aa",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4442084,
+    "generation_result": {
+      "task_id": "f38f2e86-db06-4bba-8b4e-7ee4f89786aa",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v2.5-20260210",
+        "original_model_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791380556,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/f38f2e86-db06-4bba-8b4e-7ee4f89786aa/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZjM4ZjJlODYtZGIwNi00YmJhLThiNGUtN2VlNGY4OTc4NmFhL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=PKb1GSDLjI4jlzA3iYjPkvQp~CbDjj81ZJ84GUXXm5g9LaYaw9iIoD172RuInBY1ZWXWtexizIBemMSmHOkvAUUo~llL~PkVJ~c0gxnlJ7uuO4bQkn5lM242f2qqhRg7J7xcmdUn4CmPtiC-rEldvJFbGzqBILKvYh40GtpgW5ltQUVCwTS6bF33IxhGTi6q~PJ2eBI1CZ-P53hf48hSkMYYbjkJHZ0Ss5YxELyxkREU4Ve~CoZdqVQrziUCxCtUeKjwAIsKIfPjxMcr295TDJKV8FCtNJClHwQUoXgP11lMjgu6A~VPLFxE0w4fZ2CbtS4thAwhC8tROjDyVjyEbw__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/f38f2e86-db06-4bba-8b4e-7ee4f89786aa/tripo_rigging_f38f2e86-db06-4bba-8b4e-7ee4f89786aa.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZjM4ZjJlODYtZGIwNi00YmJhLThiNGUtN2VlNGY4OTc4NmFhL3RyaXBvX3JpZ2dpbmdfZjM4ZjJlODYtZGIwNi00YmJhLThiNGUtN2VlNGY4OTc4NmFhLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=VFng47~6d~vFsCp3fvU6pxrnsuOTLbHvZc5G-TnAFBdRWHUNQmJCzxz2QbuexoERuGKSsgt7Wz4~Zf7tRDTwLIwTyHpVPsXU1J1wN48Mv-U3d-vSBoZ36S~UZcqpiCHITJWrAlcyfkpw7Mru1iXlh19ywqx074gvzcou~Q3GlZ3rEir3j8hK5WqulUDqo8pBXOF7jgddbXVHidXSX9-D2hRPKEji7yZzDV7DubxdNQCIM4CUEj8sfMtmjCpI4DJmYYyW1K9zj4c0SIzCJfBNaE0nQ4bwiSNOAQNboRUkPOGawmyLEhhZxd~Nta9PzZIyjGpPL9wPmclQEqG6iEHiGg__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/f38f2e86-db06-4bba-8b4e-7ee4f89786aa/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZjM4ZjJlODYtZGIwNi00YmJhLThiNGUtN2VlNGY4OTc4NmFhL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=PKb1GSDLjI4jlzA3iYjPkvQp~CbDjj81ZJ84GUXXm5g9LaYaw9iIoD172RuInBY1ZWXWtexizIBemMSmHOkvAUUo~llL~PkVJ~c0gxnlJ7uuO4bQkn5lM242f2qqhRg7J7xcmdUn4CmPtiC-rEldvJFbGzqBILKvYh40GtpgW5ltQUVCwTS6bF33IxhGTi6q~PJ2eBI1CZ-P53hf48hSkMYYbjkJHZ0Ss5YxELyxkREU4Ve~CoZdqVQrziUCxCtUeKjwAIsKIfPjxMcr295TDJKV8FCtNJClHwQUoXgP11lMjgu6A~VPLFxE0w4fZ2CbtS4thAwhC8tROjDyVjyEbw__"
+        }
+      }
+    }
+  },
+  "CHR_TOMAS_001_RIG": {
+    "asset_id": "CHR_TOMAS_001_RIG",
+    "path": "assets/characters/tomas/source/CHR_Tomas_Rig.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.84,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84",
+      "model_version": "v2.5-20260210",
+      "rig_type": "biped",
+      "spec": "tripo",
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "c478ba6f-85e7-4980-aef1-b724619c7ac7",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 5391468,
+    "generation_result": {
+      "task_id": "c478ba6f-85e7-4980-aef1-b724619c7ac7",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v2.5-20260210",
+        "original_model_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791380557,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/c478ba6f-85e7-4980-aef1-b724619c7ac7/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvYzQ3OGJhNmYtODVlNy00OTgwLWFlZjEtYjcyNDYxOWM3YWM3L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=BSWpM5gJFBggXTnFKoSRjkhEd4WklOo93oD7xQeq9St1hUsDtquWTGYl5HEkas7eOBUCXhnSNQawi50QxeyhmAxmFP2WYUOGI1xlGGLvUqZbx-vXCectBYai-Oz5H71Cu~j98-p-fxfeo7Z2KkAkwV65pShN6C8hlDiaCKBgOqSrQ9VXEewI3jYgnXavMYoWc9b4EH1KeLgfdhpxQ4CHkDrE00zptssy-OiXdWw38aQuSIx0lHa9oFvbMJaHn4M3TmzHAhwPzGpp6Srhksa013LjMPDys1flLy1ISdpZMbM-as3Lb4qy7~0I9g7l2ex0OfZDKcwNvyriySYLGnwH-g__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/c478ba6f-85e7-4980-aef1-b724619c7ac7/tripo_rigging_c478ba6f-85e7-4980-aef1-b724619c7ac7.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvYzQ3OGJhNmYtODVlNy00OTgwLWFlZjEtYjcyNDYxOWM3YWM3L3RyaXBvX3JpZ2dpbmdfYzQ3OGJhNmYtODVlNy00OTgwLWFlZjEtYjcyNDYxOWM3YWM3LmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=V4DuKc5~bArMAtOQtnd5g3lsr1oNDSe7pdr2cKfeWIfWfTidwCYcVMFSkCUkBN13jEPTLoQwwVVN8CZuGniIlRlXXGHjhRDcdRBIhn7cOJshA0QIGp8l3M5IyCsv7vgfpurqc-LXvmmwjPa13nZTFV~dM2kICL-z0fdtzPSizPyFJE1YToBcnbYxoyhOkopv2i5-3EF1oGDjRoEUzs2iKrPjaJsd9oIQETPIcoA04oozBVokv0KzSq4GBrA~Iw1yZcr9xGEIOLFfTeM9tQyZly4SVZf9~2s3SNyVcbH~5pMllY4XKiwDMCpOVVp10h67a0Uix88-Nk6Bs9Tez3RYtw__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/c478ba6f-85e7-4980-aef1-b724619c7ac7/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvYzQ3OGJhNmYtODVlNy00OTgwLWFlZjEtYjcyNDYxOWM3YWM3L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=BSWpM5gJFBggXTnFKoSRjkhEd4WklOo93oD7xQeq9St1hUsDtquWTGYl5HEkas7eOBUCXhnSNQawi50QxeyhmAxmFP2WYUOGI1xlGGLvUqZbx-vXCectBYai-Oz5H71Cu~j98-p-fxfeo7Z2KkAkwV65pShN6C8hlDiaCKBgOqSrQ9VXEewI3jYgnXavMYoWc9b4EH1KeLgfdhpxQ4CHkDrE00zptssy-OiXdWw38aQuSIx0lHa9oFvbMJaHn4M3TmzHAhwPzGpp6Srhksa013LjMPDys1flLy1ISdpZMbM-as3Lb4qy7~0I9g7l2ex0OfZDKcwNvyriySYLGnwH-g__"
+        }
+      }
+    }
+  },
+  "CHR_ADRIAN_001_RIG": {
+    "asset_id": "CHR_ADRIAN_001_RIG",
+    "path": "assets/characters/adrian/source/CHR_Adrian_Rig.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.78,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5",
+      "model_version": "v2.5-20260210",
+      "rig_type": "biped",
+      "spec": "tripo",
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "58414da3-bcd0-4883-afc7-fc36bd934c6b",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4492048,
+    "generation_result": {
+      "task_id": "58414da3-bcd0-4883-afc7-fc36bd934c6b",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v2.5-20260210",
+        "original_model_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791380559,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/58414da3-bcd0-4883-afc7-fc36bd934c6b/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNTg0MTRkYTMtYmNkMC00ODgzLWFmYzctZmMzNmJkOTM0YzZiL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=FqGeQiDt4ySeIXDQtJLhMOxn62-N3stVfC~Kd17en6gQdx-T4LmQGZt~hFDKfb7fDIncUv6kCaaFZ61R6TkcZMkpPmarpTXsQKkb0CkDx~jXpGGBs3lQ7DKQdXRaEtBwOIq6FW6xpA3zMU~Y~2lYhQ5kh1yQDdRo-vVCuBWZPDqObSOcbBPtblSVsOsxZ3-9rWELzY0cXXSZguVbCu0UYvgmDefI-JG9dWnIEgnEiUkcrggCETZmpGNngIesIUiXofKIdkLOC-AisopQ2GXpEoNSPAifo4TSlk7g6B4whdPDu2ln8vqy8Owmgu0i7uU6HinUvYuhwYc0sbS2R5we5A__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/58414da3-bcd0-4883-afc7-fc36bd934c6b/tripo_rigging_58414da3-bcd0-4883-afc7-fc36bd934c6b.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNTg0MTRkYTMtYmNkMC00ODgzLWFmYzctZmMzNmJkOTM0YzZiL3RyaXBvX3JpZ2dpbmdfNTg0MTRkYTMtYmNkMC00ODgzLWFmYzctZmMzNmJkOTM0YzZiLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=v-6nFzdJtkx4-72-W6msw~ThQ1Ms54tEtkPJ63mytBFfqt4-Vgh0VHtaFC1D4je1TnIy7EQC301TjJYIMscg0SmicT9vRSrTESojF6wKSrkyv3ssxL2abVIQoZixugxdlBhibFmGhoS69TlgBAeoql3LEZQd9phTNfXT6V8j831wuo46ptdm6nMID5cwMLrJf7qX-E-Kl91Vt8X8QbIHN6~djJuMUmveq-zxzCAWRJL0SNkhpfrJ6ctQo66fEYENz3qnUiyD0vD5b3MVik41LtlEAkl2rIrpExi56H6N6356vEWqLk9x-sAVK6xYLFDyUE0Q8IwCg8gCFZgU5dgkbA__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/58414da3-bcd0-4883-afc7-fc36bd934c6b/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNTg0MTRkYTMtYmNkMC00ODgzLWFmYzctZmMzNmJkOTM0YzZiL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=FqGeQiDt4ySeIXDQtJLhMOxn62-N3stVfC~Kd17en6gQdx-T4LmQGZt~hFDKfb7fDIncUv6kCaaFZ61R6TkcZMkpPmarpTXsQKkb0CkDx~jXpGGBs3lQ7DKQdXRaEtBwOIq6FW6xpA3zMU~Y~2lYhQ5kh1yQDdRo-vVCuBWZPDqObSOcbBPtblSVsOsxZ3-9rWELzY0cXXSZguVbCu0UYvgmDefI-JG9dWnIEgnEiUkcrggCETZmpGNngIesIUiXofKIdkLOC-AisopQ2GXpEoNSPAifo4TSlk7g6B4whdPDu2ln8vqy8Owmgu0i7uU6HinUvYuhwYc0sbS2R5we5A__"
+        }
+      }
+    }
+  },
+  "CHR_DRAKE_001_RIG": {
+    "asset_id": "CHR_DRAKE_001_RIG",
+    "path": "assets/characters/drake/source/CHR_Drake_Rig.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.86,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b",
+      "model_version": "v2.5-20260210",
+      "rig_type": "biped",
+      "spec": "tripo",
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "0ba94539-0694-4526-b8df-2bb87598fcb7",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4747024,
+    "generation_result": {
+      "task_id": "0ba94539-0694-4526-b8df-2bb87598fcb7",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v2.5-20260210",
+        "original_model_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791380560,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/0ba94539-0694-4526-b8df-2bb87598fcb7/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMGJhOTQ1MzktMDY5NC00NTI2LWI4ZGYtMmJiODc1OThmY2I3L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=VFXVa1v4Pfs6LLDftczD5UJumQ5M92~2En~YOETH2JTkymZYEZw46f9osc4I~efO3gKvAxVLHAeMmEC4D8psL9mzTlxhRex0h1zekc3sIS6jHfedhOMBmtiqM3Y3Ob4o6qS2zKTUUM5O3VQtGaT8943z9316IMPAmYR~88IeRCxtTNu6IefvzGrwqv0vVz4mtzOxVrkwchBoU0hBbjqNBstHN0O93VjGZ42mhdueN2D56XKOS~Yxmr9b8D8ZVlFnWAbjMm5q2Nh6WPaJADRpbvjBGtu7NLVpmeIz6EvLyBH1eXmSC9irs7dL00iQBLWK13qd4FzTUbHwyEwjN8dGrg__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/0ba94539-0694-4526-b8df-2bb87598fcb7/tripo_rigging_0ba94539-0694-4526-b8df-2bb87598fcb7.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMGJhOTQ1MzktMDY5NC00NTI2LWI4ZGYtMmJiODc1OThmY2I3L3RyaXBvX3JpZ2dpbmdfMGJhOTQ1MzktMDY5NC00NTI2LWI4ZGYtMmJiODc1OThmY2I3LmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=ego9vG-j670ji9Cj-ZpaY1nqlUWgLz-M372CpN5V9E-0GWLwK6eybVGl3sCECPeXmybGEnQU-PV08xftpX2sOJoKXw~WijTMHxHZ4OoCqTnLT0lrh267KL0A2CA0Qf6kSNwWhxhUSz6FP4mrfBJs~i5CE4nqtqmtKVnT-zaJvwcCshatv5fh3CHN6bO9D7iqvB7O4YDhhoOktICGA1pLCEh3nud2WaKc~bhhsaAyEN23wmyB~wMCBYmdPZtsFt3h8C4oawip50~BLB0ksAJa~jUosdI6pvOQRt~OML2CBAfk1E6jTWEu0tPx08Zs3q4uiQhdDZgJjkO2TxnXLPw8nA__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/0ba94539-0694-4526-b8df-2bb87598fcb7/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMGJhOTQ1MzktMDY5NC00NTI2LWI4ZGYtMmJiODc1OThmY2I3L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=VFXVa1v4Pfs6LLDftczD5UJumQ5M92~2En~YOETH2JTkymZYEZw46f9osc4I~efO3gKvAxVLHAeMmEC4D8psL9mzTlxhRex0h1zekc3sIS6jHfedhOMBmtiqM3Y3Ob4o6qS2zKTUUM5O3VQtGaT8943z9316IMPAmYR~88IeRCxtTNu6IefvzGrwqv0vVz4mtzOxVrkwchBoU0hBbjqNBstHN0O93VjGZ42mhdueN2D56XKOS~Yxmr9b8D8ZVlFnWAbjMm5q2Nh6WPaJADRpbvjBGtu7NLVpmeIz6EvLyBH1eXmSC9irs7dL00iQBLWK13qd4FzTUbHwyEwjN8dGrg__"
+        }
+      }
+    }
+  },
+  "CHR_MERIDIAN_BASE_001_RIG": {
+    "asset_id": "CHR_MERIDIAN_BASE_001_RIG",
+    "path": "assets/characters/meridian/base/source/CHR_Meridian_Rig.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.82,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "095bc44b-3575-4c8f-bbe9-80990f81c313",
+      "model_version": "v2.5-20260210",
+      "rig_type": "biped",
+      "spec": "tripo",
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "4fe0c3de-8537-4602-aab9-cdb747b4e10f",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4828440,
+    "generation_result": {
+      "task_id": "4fe0c3de-8537-4602-aab9-cdb747b4e10f",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v2.5-20260210",
+        "original_model_id": "095bc44b-3575-4c8f-bbe9-80990f81c313",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791380561,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/4fe0c3de-8537-4602-aab9-cdb747b4e10f/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvNGZlMGMzZGUtODUzNy00NjAyLWFhYjktY2RiNzQ3YjRlMTBmL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=e2LwldygzEKZzyRfCKjg0EukYRPv6FvZlnh5Ky-GIAi8AJFDxHljcGouP6HhHjKdjKtEfvBvifaAcHoavPPDGW8Q-gl~zJST7WTn29mVZwxQy3rvT8vLfzJ3Tp1C4q~pNCnAFKWcX0QSj2zs0YX~uq56llymliyx4nC4kzGKtG-zV4vlcObSQSdCQD04QWw5Re5B6ZRrW8nrAhKFnbR-S5Q4QVajJPTWAwlsl75SGiao7NlZXp3mosq96tbASp-q3qmEVPMSO7F6N1yjna6plEboIelP7YKAjZlmrkiyv7Dd4U4w2jD5vqaznocXQsEiMznNRyGINixThVVY9iGCkw__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/4fe0c3de-8537-4602-aab9-cdb747b4e10f/tripo_rigging_4fe0c3de-8537-4602-aab9-cdb747b4e10f.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvNGZlMGMzZGUtODUzNy00NjAyLWFhYjktY2RiNzQ3YjRlMTBmL3RyaXBvX3JpZ2dpbmdfNGZlMGMzZGUtODUzNy00NjAyLWFhYjktY2RiNzQ3YjRlMTBmLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=PQ1lPY~lAiwT5SsQgy-6ZVz6p3qj2NqzuH5x-8jze8hYHvt5u2hra02LGnStaMDWdbxqkLO8p5wDFZekrfKAsZhvo2e561OvgR7f4ZZB0u-qyV6~UQTDt1L238rhsdE07VMd1sjzxXY66-lTqK4QmBQPugR96MgTMYKefjUQjTr~evj7ACvBox~EFB1c0DjKQijY5kVhl7WhqM5bnkY2j12tDu~3h~AqE3CIhShTsPzxoq~E4Yhl77RTA6pdoVcHBnoZpnyXn~OmPZ~XX6D3j8iAVUg~zXOlK0BbszDbfIUYCJDVEdPxwXIYXpjqQU3wdBltE3eyLZco960WNfmkuQ__",
+          "type": "glb"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/4fe0c3de-8537-4602-aab9-cdb747b4e10f/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvNGZlMGMzZGUtODUzNy00NjAyLWFhYjktY2RiNzQ3YjRlMTBmL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=e2LwldygzEKZzyRfCKjg0EukYRPv6FvZlnh5Ky-GIAi8AJFDxHljcGouP6HhHjKdjKtEfvBvifaAcHoavPPDGW8Q-gl~zJST7WTn29mVZwxQy3rvT8vLfzJ3Tp1C4q~pNCnAFKWcX0QSj2zs0YX~uq56llymliyx4nC4kzGKtG-zV4vlcObSQSdCQD04QWw5Re5B6ZRrW8nrAhKFnbR-S5Q4QVajJPTWAwlsl75SGiao7NlZXp3mosq96tbASp-q3qmEVPMSO7F6N1yjna6plEboIelP7YKAjZlmrkiyv7Dd4U4w2jD5vqaznocXQsEiMznNRyGINixThVVY9iGCkw__"
+        }
+      }
+    }
+  },
+  "PROP_EXPEDITION_SIDEARM_001": {
+    "asset_id": "PROP_EXPEDITION_SIDEARM_001",
+    "path": "assets/props/equipment/expedition_sidearm.glb",
+    "target_dimensions_m": [
+      0.22,
+      0.14,
+      0.035
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Compact original modern expedition semiautomatic sidearm, matte dark steel and textured charcoal grip, coherent realistic functional proportions, complete isolated handgun laid horizontal with muzzle forward, no ammunition, no hands, no branding.",
+      "face_limit": 4000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "16615d1b-b19d-4a34-9817-a2e0acd9a074",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 3268368,
+    "generation_result": {
+      "task_id": "16615d1b-b19d-4a34-9817-a2e0acd9a074",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Compact original modern expedition semiautomatic sidearm, matte dark steel and textured charcoal grip, coherent realistic functional proportions, complete isolated handgun laid horizontal with muzzle forward, no ammunition, no hands, no branding.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 4000
+      },
+      "progress": 100,
+      "create_time": 1791380628,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Compact original modern expedition semiautomatic sidearm, matte dark steel and textured charcoal grip, coherent realistic functional proportions, complete isolated handgun laid horizontal with muzzle forward, no ammunition, no hands, no branding.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/16615d1b-b19d-4a34-9817-a2e0acd9a074/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMTY2MTVkMWItYjE5ZC00YTM0LTk4MTctYTJlMGFjZDlhMDc0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=AcWbo-22gwEgyInatnNsumCKBcV3EXBi7YkKwvbY~j82zdmCIDYbKNnFDzf~EC4RzX41Rbp4z5LtHkEh0IlqgIQ5C4JJN9l9eAUJY-utUjmKZ41aNUaR4on01M~fqYQIOlR6M8-4antQIt-ivq~TMRxyq0LYVzxFxhMqExRqpPIlx~1wa~kvdSiLyOz2~~ix37PcRvcm-pdJyP~1IJUXzIvWTtv4KZms7ikTKHCVvpSAPD1W4QXg4V5cu-TecNnf5McskcvneWSoOzggcWd3Vrqcqp7vZLUsJL30uEDqvLvttZfQn7ORlYgfrAVB9e4D1fGMoCj9MqO6Ramj8HkU3w__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/16615d1b-b19d-4a34-9817-a2e0acd9a074/tripo_pbr_model_16615d1b-b19d-4a34-9817-a2e0acd9a074.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMTY2MTVkMWItYjE5ZC00YTM0LTk4MTctYTJlMGFjZDlhMDc0L3RyaXBvX3Bicl9tb2RlbF8xNjYxNWQxYi1iMTlkLTRhMzQtOTgxNy1hMmUwYWNkOWEwNzQuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=v2APwYDjWrN3zHanbEfiuhWnuqoHeTA9W-MnfHrNqJdHI~ZuBYUxTbpw87Lw3E79~DnBOpDD0m-kUhhED5uKUo~1CfR3Q5nb~gBz2M3Iqnm2OpbvglouDlOY6yzVYOCMHdbW8J894CXF3y5N~Jfmw0b9wfdvhVFAnG8hcpdPhyN0cTcxRlaC0Q7vByu~e-gF14h2Ig~l45rjxoR6UsDQ34u5wbRgQ7NYOgEfkmrnLnbFWlBMDqIh53eHHmQbqJe3OW5LijAA4MPgZnG9fMtEqp0T5C1NTXxKATvhpA841ihYvyMeOm6lYPc~XGo3Wc1afqkGholKHIapR5swcwUF0A__"
+        },
+        "rendered_image": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/16615d1b-b19d-4a34-9817-a2e0acd9a074/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMTY2MTVkMWItYjE5ZC00YTM0LTk4MTctYTJlMGFjZDlhMDc0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=AcWbo-22gwEgyInatnNsumCKBcV3EXBi7YkKwvbY~j82zdmCIDYbKNnFDzf~EC4RzX41Rbp4z5LtHkEh0IlqgIQ5C4JJN9l9eAUJY-utUjmKZ41aNUaR4on01M~fqYQIOlR6M8-4antQIt-ivq~TMRxyq0LYVzxFxhMqExRqpPIlx~1wa~kvdSiLyOz2~~ix37PcRvcm-pdJyP~1IJUXzIvWTtv4KZms7ikTKHCVvpSAPD1W4QXg4V5cu-TecNnf5McskcvneWSoOzggcWd3Vrqcqp7vZLUsJL30uEDqvLvttZfQn7ORlYgfrAVB9e4D1fGMoCj9MqO6Ramj8HkU3w__",
+          "type": "webp"
+        }
+      }
+    }
+  },
+  "PROP_CLIMB_PICK_001": {
+    "asset_id": "PROP_CLIMB_PICK_001",
+    "path": "assets/props/equipment/climbing_pick.glb",
+    "target_dimensions_m": [
+      0.35,
+      0.5,
+      0.05
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single modern compact curved climbing rock ice pick tool, weathered dark steel head and orange rubberized shaft grip with wrist loop, realistic mountaineering equipment, isolated complete object, no hands, no rock.",
+      "face_limit": 3000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "1a498a88-0cd5-47c2-b684-65382eb2f821",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4039572,
+    "generation_result": {
+      "task_id": "1a498a88-0cd5-47c2-b684-65382eb2f821",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single modern compact curved climbing rock ice pick tool, weathered dark steel head and orange rubberized shaft grip with wrist loop, realistic mountaineering equipment, isolated complete object, no hands, no rock.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 3000
+      },
+      "progress": 100,
+      "create_time": 1791380630,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single modern compact curved climbing rock ice pick tool, weathered dark steel head and orange rubberized shaft grip with wrist loop, realistic mountaineering equipment, isolated complete object, no hands, no rock.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/1a498a88-0cd5-47c2-b684-65382eb2f821/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMWE0OThhODgtMGNkNS00N2MyLWI2ODQtNjUzODJlYjJmODIxL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=QES0JrVVkKaRz8bIXj5GVjBxSjcbDwuxqD0mCuh6I58hlJG8ffheMrD4ZBEHKH6rLyN5L9cDdSRnhzLPplsLdbm4s4KSEribVRIwzYRrfA8-Y3eCIsXrDGO1KQHpr-pRYWuPhNMxE8~Iy6WpPggI23rA2CKeuu6vPZ13EHeNyMBEPCpW7F~1Rw2WAMXQIqBdMA-Bx7zsrbYZISBZ5lCUZeqIq9oj5cYhGEMogUyUG9FJoUUOmqmtjfekbR6si5DOb-MINCOto07Qywi8ovhcyZPfTpXb~owZ8BuesIICfWP3VozCWwDRiuhy7IBmGpy8EaClxUl89duFs3ZE3kv--g__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/1a498a88-0cd5-47c2-b684-65382eb2f821/tripo_pbr_model_1a498a88-0cd5-47c2-b684-65382eb2f821.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMWE0OThhODgtMGNkNS00N2MyLWI2ODQtNjUzODJlYjJmODIxL3RyaXBvX3Bicl9tb2RlbF8xYTQ5OGE4OC0wY2Q1LTQ3YzItYjY4NC02NTM4MmViMmY4MjEuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=AcvmY683jun0K3qildWYq~dDZdt8yPQQx5Eo3IPBK~TzRH4L9rT5sv8gO0FH3Xr2e0nAv8AZk3WK7bmO9YIMy0XtIKUQOxQXQQlwkXjmachT8HVMA9u8XrcS4t2DpecyooW2tX5e67esEkUCjWD6mNNMecYQjV8PpQwOj1LeMakOBBOS~nmDpOQM8Lo~pbyPMx0biFg0xJXyEiITs7qUOaAsKAAN3iaEPGJK1YziScWQLFEsC~GLqny~7t7pibWfo5qODAcnQkGuax2OMRfO39mUgvCekbA7rkBPkepsOLJJvJWlvbNddc-xJywADUyAFQvbE5O3VpHJ2gi0U25g1w__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/1a498a88-0cd5-47c2-b684-65382eb2f821/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMWE0OThhODgtMGNkNS00N2MyLWI2ODQtNjUzODJlYjJmODIxL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=QES0JrVVkKaRz8bIXj5GVjBxSjcbDwuxqD0mCuh6I58hlJG8ffheMrD4ZBEHKH6rLyN5L9cDdSRnhzLPplsLdbm4s4KSEribVRIwzYRrfA8-Y3eCIsXrDGO1KQHpr-pRYWuPhNMxE8~Iy6WpPggI23rA2CKeuu6vPZ13EHeNyMBEPCpW7F~1Rw2WAMXQIqBdMA-Bx7zsrbYZISBZ5lCUZeqIq9oj5cYhGEMogUyUG9FJoUUOmqmtjfekbR6si5DOb-MINCOto07Qywi8ovhcyZPfTpXb~owZ8BuesIICfWP3VozCWwDRiuhy7IBmGpy8EaClxUl89duFs3ZE3kv--g__"
+        }
+      }
+    }
+  },
+  "ENV_JUNGLE_TREE_001": {
+    "asset_id": "ENV_JUNGLE_TREE_001",
+    "path": "assets/environment/jungle/jungle_tree.glb",
+    "target_dimensions_m": [
+      6,
+      10,
+      6
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single realistic tropical rainforest tree, mature irregular branching trunk and dense broad green leaf canopy, visible roots, brown bark moss, cohesive natural leaf clusters with gaps, isolated complete tree, no terrain, no pot.",
+      "face_limit": 15000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "58eb63cf-1805-4d81-b7c7-e49c26c908b9",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 3566260,
+    "generation_result": {
+      "task_id": "58eb63cf-1805-4d81-b7c7-e49c26c908b9",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single realistic tropical rainforest tree, mature irregular branching trunk and dense broad green leaf canopy, visible roots, brown bark moss, cohesive natural leaf clusters with gaps, isolated complete tree, no terrain, no pot.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 15000
+      },
+      "progress": 100,
+      "create_time": 1791380633,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single realistic tropical rainforest tree, mature irregular branching trunk and dense broad green leaf canopy, visible roots, brown bark moss, cohesive natural leaf clusters with gaps, isolated complete tree, no terrain, no pot.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/58eb63cf-1805-4d81-b7c7-e49c26c908b9/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvNThlYjYzY2YtMTgwNS00ZDgxLWI3YzctZTQ5YzI2YzkwOGI5L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=BcUELaOHOPeofXqt3hRAPJZCJyRFruMf2futIFeUHiq2Txx6JtL41bui3SjXv1Rk7SCcHMaXJ27y2zx9zawZlZkBFwr8s3pACcgXHVCwCol6eOrEFYVOeCC1ySk0h7n76PmTNFaJrBcL5vTPevvSKuXkJAXqoG0KqsUjlkYWagKk7CJ7oFmNvfRLnG19dagR1fe2MsWtvEvXiE~qvFtWsVsL0wXGMmoRvC8MxMM39Wzvl5xfinsx~iF3p54d0ARx74AHOIizyy75QajxPk8x06qTi4QnF1eIp6XgNzrb7kYJyVyfabXTjZvaC39BL-cIjVeHRpXZFWQ9k3v9-QfgtQ__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/58eb63cf-1805-4d81-b7c7-e49c26c908b9/tripo_pbr_model_58eb63cf-1805-4d81-b7c7-e49c26c908b9.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvNThlYjYzY2YtMTgwNS00ZDgxLWI3YzctZTQ5YzI2YzkwOGI5L3RyaXBvX3Bicl9tb2RlbF81OGViNjNjZi0xODA1LTRkODEtYjdjNy1lNDljMjZjOTA4YjkuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=nhBix51ZRKFXSFADOHtYkOkD2Zr~IxciE2LFqBY-YxN8~8sclcoxKhQeJgi9fIqO49jPa9rWNtndI5O8E2HV37Ol5WX1vqYPjFUNfck9yY1tmy4DvhwyqIRAT60Z4JpP5kegQT3vh90Zmccky0L-4UOU9FxwbrtPI18r~NnSQC6SdMO29zSYQ7P-tIv0gfI-LK147-Tm8FHL6IiiliBZVFsw6CJ23Wvmqt70XxvoY7iOZAbacq77F8yutNePJqhi6dgkWxkt82lPf0ctj3nD0sn9af2-d2Ni695lpJhb0U5CFlMCBE62APG25GgI-DX7RwtXaphLoPECSvBCel6Hkw__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/58eb63cf-1805-4d81-b7c7-e49c26c908b9/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvNThlYjYzY2YtMTgwNS00ZDgxLWI3YzctZTQ5YzI2YzkwOGI5L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=BcUELaOHOPeofXqt3hRAPJZCJyRFruMf2futIFeUHiq2Txx6JtL41bui3SjXv1Rk7SCcHMaXJ27y2zx9zawZlZkBFwr8s3pACcgXHVCwCol6eOrEFYVOeCC1ySk0h7n76PmTNFaJrBcL5vTPevvSKuXkJAXqoG0KqsUjlkYWagKk7CJ7oFmNvfRLnG19dagR1fe2MsWtvEvXiE~qvFtWsVsL0wXGMmoRvC8MxMM39Wzvl5xfinsx~iF3p54d0ARx74AHOIizyy75QajxPk8x06qTi4QnF1eIp6XgNzrb7kYJyVyfabXTjZvaC39BL-cIjVeHRpXZFWQ9k3v9-QfgtQ__"
+        }
+      }
+    }
+  },
+  "ENV_JUNGLE_FERN_001": {
+    "asset_id": "ENV_JUNGLE_FERN_001",
+    "path": "assets/environment/jungle/jungle_fern.glb",
+    "target_dimensions_m": [
+      1.5,
+      1.2,
+      1.5
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single lush tropical fern clump, several gracefully arched green fronds and detailed leaflet silhouettes, coherent rainforest understory plant, isolated complete plant, no pot, no terrain, no rocks.",
+      "face_limit": 5000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "bd7134f2-f172-4f20-8fe6-ad44a093eb46",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 3746464,
+    "generation_result": {
+      "task_id": "bd7134f2-f172-4f20-8fe6-ad44a093eb46",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single lush tropical fern clump, several gracefully arched green fronds and detailed leaflet silhouettes, coherent rainforest understory plant, isolated complete plant, no pot, no terrain, no rocks.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 5000
+      },
+      "progress": 100,
+      "create_time": 1791380635,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single lush tropical fern clump, several gracefully arched green fronds and detailed leaflet silhouettes, coherent rainforest understory plant, isolated complete plant, no pot, no terrain, no rocks.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/bd7134f2-f172-4f20-8fe6-ad44a093eb46/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvYmQ3MTM0ZjItZjE3Mi00ZjIwLThmZTYtYWQ0NGEwOTNlYjQ2L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=UJmVXTwJLcg~n8QEEK5KbdrnnMPkoVwHQiF5Wrh1h4ZE9vku0emMTpqvwHQ9wD1Qe1T342XCSabC2fdYqDlfO8Z5tFgO2-ds5c5Xy4Iip8orMI3JHGCtxzMbp88GKKnZpSMPeDJewFL8Ovh25iByzLLgnI83baem3SqNmFxPD7Aa3d-FUjzIN5qBqA0cZc5JsztX3wixTQh1KcuzG1UIQb7HOs~m0pEasgNnREt1lM6-FMKEzv6TXZ-hyOFHybFAoZhMh7lPeXQaf3EHS4ygXs~kbFO24C-EmApDyNEw7qCEZWa~b18Yr-o1xTO2JRHw1CqHe9R6scpx8x7PhDXPKQ__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/bd7134f2-f172-4f20-8fe6-ad44a093eb46/tripo_pbr_model_bd7134f2-f172-4f20-8fe6-ad44a093eb46.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvYmQ3MTM0ZjItZjE3Mi00ZjIwLThmZTYtYWQ0NGEwOTNlYjQ2L3RyaXBvX3Bicl9tb2RlbF9iZDcxMzRmMi1mMTcyLTRmMjAtOGZlNi1hZDQ0YTA5M2ViNDYuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=bVlPaW5ZHNIUdwk55DbOoYo6L~a6vocvmFMmSownOdhOjAHFpde8wtztYGQkj9fQVpsSCrXBXr4Mpm9DOndQXgbm53vDD6c2Joj-qKKgNcCIH1DxkYJQfCgXgvST79T8C9pG06PzsTI3q5zQSnKNIqNnTZyRGZUUZvqWo1n5WZlW~Hg7h-k6XHXN7hLxwq7p-bCbWBTLJHdhH1TpVodr-wdNK8a2IsoM28N625EBAv4ApEKJwE-hiWSw5uCpLhlXv9BAH0CHpL~U-ULe3NkBRgP5KKoYPLuxNOVa95d2R6f0xDgURF62AVxZ-TVT5sYynB4MzPNLeD0YlShhjwfHIg__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/bd7134f2-f172-4f20-8fe6-ad44a093eb46/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvYmQ3MTM0ZjItZjE3Mi00ZjIwLThmZTYtYWQ0NGEwOTNlYjQ2L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=UJmVXTwJLcg~n8QEEK5KbdrnnMPkoVwHQiF5Wrh1h4ZE9vku0emMTpqvwHQ9wD1Qe1T342XCSabC2fdYqDlfO8Z5tFgO2-ds5c5Xy4Iip8orMI3JHGCtxzMbp88GKKnZpSMPeDJewFL8Ovh25iByzLLgnI83baem3SqNmFxPD7Aa3d-FUjzIN5qBqA0cZc5JsztX3wixTQh1KcuzG1UIQb7HOs~m0pEasgNnREt1lM6-FMKEzv6TXZ-hyOFHybFAoZhMh7lPeXQaf3EHS4ygXs~kbFO24C-EmApDyNEw7qCEZWa~b18Yr-o1xTO2JRHw1CqHe9R6scpx8x7PhDXPKQ__"
+        }
+      }
+    }
+  },
+  "CHR_ELIAS_001_IDLE": {
+    "asset_id": "CHR_ELIAS_001_IDLE",
+    "path": "assets/characters/elias/source/CHR_Elias_Idle.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.8,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "ec715575-27c9-4e9d-b9f5-c4e335066d0a",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "REJECTED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "ac3287ce-c2a3-417c-bdad-95800f09900e",
+    "remote_status": "failed",
+    "progress": 100,
+    "consumed_credit": 0,
+    "error": {
+      "task_id": "ac3287ce-c2a3-417c-bdad-95800f09900e",
+      "type": "animate_retarget",
+      "status": "failed",
+      "input": {
+        "original_model_id": "ec715575-27c9-4e9d-b9f5-c4e335066d0a",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791380671,
+      "error_code": 1004,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_NADIYA_001_IDLE": {
+    "asset_id": "CHR_NADIYA_001_IDLE",
+    "path": "assets/characters/nadiya/source/CHR_Nadiya_Idle.glb",
+    "target_dimensions_m": [
+      0.65,
+      1.67,
+      0.4
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "f38f2e86-db06-4bba-8b4e-7ee4f89786aa",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "REJECTED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "ef55ef10-0d9f-43e6-a3bb-f8a132415ac0",
+    "remote_status": "failed",
+    "progress": 100,
+    "consumed_credit": 0,
+    "error": {
+      "task_id": "ef55ef10-0d9f-43e6-a3bb-f8a132415ac0",
+      "type": "animate_retarget",
+      "status": "failed",
+      "input": {
+        "original_model_id": "f38f2e86-db06-4bba-8b4e-7ee4f89786aa",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791380673,
+      "error_code": 1004,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_TOMAS_001_IDLE": {
+    "asset_id": "CHR_TOMAS_001_IDLE",
+    "path": "assets/characters/tomas/source/CHR_Tomas_Idle.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.84,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "c478ba6f-85e7-4980-aef1-b724619c7ac7",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "REJECTED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "e1d3c69a-8beb-4d43-ae66-0df1125afaea",
+    "remote_status": "failed",
+    "progress": 100,
+    "consumed_credit": 0,
+    "error": {
+      "task_id": "e1d3c69a-8beb-4d43-ae66-0df1125afaea",
+      "type": "animate_retarget",
+      "status": "failed",
+      "input": {
+        "original_model_id": "c478ba6f-85e7-4980-aef1-b724619c7ac7",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791380674,
+      "error_code": 1004,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_ADRIAN_001_IDLE": {
+    "asset_id": "CHR_ADRIAN_001_IDLE",
+    "path": "assets/characters/adrian/source/CHR_Adrian_Idle.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.78,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "58414da3-bcd0-4883-afc7-fc36bd934c6b",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "REJECTED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "b19582c9-3fff-4ca9-a792-27fa7a4b5bcc",
+    "remote_status": "failed",
+    "progress": 100,
+    "consumed_credit": 0,
+    "error": {
+      "task_id": "b19582c9-3fff-4ca9-a792-27fa7a4b5bcc",
+      "type": "animate_retarget",
+      "status": "failed",
+      "input": {
+        "original_model_id": "58414da3-bcd0-4883-afc7-fc36bd934c6b",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791380675,
+      "error_code": 1004,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_DRAKE_001_IDLE": {
+    "asset_id": "CHR_DRAKE_001_IDLE",
+    "path": "assets/characters/drake/source/CHR_Drake_Idle.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.86,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "0ba94539-0694-4526-b8df-2bb87598fcb7",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "REJECTED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "dbb45d9f-7d28-4edb-ac59-05a87bcfc732",
+    "remote_status": "failed",
+    "progress": 100,
+    "consumed_credit": 0,
+    "error": {
+      "task_id": "dbb45d9f-7d28-4edb-ac59-05a87bcfc732",
+      "type": "animate_retarget",
+      "status": "failed",
+      "input": {
+        "original_model_id": "0ba94539-0694-4526-b8df-2bb87598fcb7",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791380676,
+      "error_code": 1004,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_MERIDIAN_BASE_001_IDLE": {
+    "asset_id": "CHR_MERIDIAN_BASE_001_IDLE",
+    "path": "assets/characters/meridian/base/source/CHR_Meridian_Idle.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.82,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "4fe0c3de-8537-4602-aab9-cdb747b4e10f",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "REJECTED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "d54c1c9e-a865-4161-a958-f232a623aaeb",
+    "remote_status": "failed",
+    "progress": 100,
+    "consumed_credit": 0,
+    "error": {
+      "task_id": "d54c1c9e-a865-4161-a958-f232a623aaeb",
+      "type": "animate_retarget",
+      "status": "failed",
+      "input": {
+        "original_model_id": "4fe0c3de-8537-4602-aab9-cdb747b4e10f",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791380678,
+      "error_code": 1004,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_ELIAS_001_IDLE_RETRY": {
+    "asset_id": "CHR_ELIAS_001_IDLE_RETRY",
+    "path": "assets/characters/elias/source/CHR_Elias_Idle_Retry.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.8,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "ec715575-27c9-4e9d-b9f5-c4e335066d0a",
+      "animation": "preset:biped:idle",
+      "bake_animation": true,
+      "export_with_geometry": true,
+      "out_format": "glb"
+    },
+    "status": "REJECTED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "fdcd762a-3949-49a4-af91-c84203fe20e1",
+    "remote_status": "failed",
+    "progress": 100,
+    "consumed_credit": 0,
+    "error": {
+      "task_id": "fdcd762a-3949-49a4-af91-c84203fe20e1",
+      "type": "animate_retarget",
+      "status": "failed",
+      "input": {
+        "original_model_id": "ec715575-27c9-4e9d-b9f5-c4e335066d0a",
+        "out_format": "glb",
+        "animation": "preset:biped:idle",
+        "bake_animation": true,
+        "export_with_geometry": true
+      },
+      "progress": 100,
+      "create_time": 1791380798,
+      "error_code": 1004,
+      "consumed_credit": 0,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {}
+    }
+  },
+  "CHR_ELIAS_001_RIG_LEGACY": {
+    "asset_id": "CHR_ELIAS_001_RIG_LEGACY",
+    "path": "assets/characters/elias/source/CHR_Elias_Rig_Legacy.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.8,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb",
+      "model_version": "v1.0-20240301",
+      "out_format": "glb",
+      "spec": "tripo"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "1adf68f0-f5bb-468b-b7a4-a8ad063d850d",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4949136,
+    "generation_result": {
+      "task_id": "1adf68f0-f5bb-468b-b7a4-a8ad063d850d",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v1.0-20240301",
+        "original_model_id": "3082aa50-b4e4-480a-a658-e9f1eb472cfb",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791381248,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/1adf68f0-f5bb-468b-b7a4-a8ad063d850d/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMWFkZjY4ZjAtZjViYi00NjhiLWI3YTQtYThhZDA2M2Q4NTBkL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=MYztbZVnDwYVrcJQdLxB2bfZaV1iu5OWfKOosUx5jqU5nDtOtkDfyTdzmMSAHCGhNjNi6dGVoQmJFI9hcAwYx8lB47jLzm8sH9Nlkc9J0Cw2Ry6wR5f1E3V7qjlK0KLL6UsrhP3xFK6o9Nlg4uyZ490mURHfwrOeN2ByehsBlevbp~68LLATqt8qIswgd9MHYGRmhJ019RaygKxhTBU2boAKHW9PrORDkgtvmL~7Tx59chBCRSE-Ct5kV~KA9-ZhNDzBLfBqTooQWBS7k7WXJRkvt~53ARytvhydPSoVnoNpJZllzRFeCpptP9K9qFjYFBzczUvmES6bcigkCKpW3w__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/1adf68f0-f5bb-468b-b7a4-a8ad063d850d/tripo_rigging_1adf68f0-f5bb-468b-b7a4-a8ad063d850d.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMWFkZjY4ZjAtZjViYi00NjhiLWI3YTQtYThhZDA2M2Q4NTBkL3RyaXBvX3JpZ2dpbmdfMWFkZjY4ZjAtZjViYi00NjhiLWI3YTQtYThhZDA2M2Q4NTBkLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=YPZBRAf5uar7NxWmOCBskONlVCc2Oi6omiDQGc4RVfMT5qNXVrmPbKvzZHSj1kMwjj9ccIbUd5hI9tvetbWXcoOaYsq939evQOVG8iiu7dGInzTds6QciCwdFs333anGgoJ0tKG6K2pypNPWgSm1fR8MG6z~RQuPgUnmWdvmf~sp26D1WV8SsT-EUK2kAFc7doUYhj6lNnBqdsSIuA-i0WJDb2iTF2SeflhaAH1twSlSfu5xZmUhYIxWSRvY6ZDAYCv7njcEkmSGn59Hr2AJZmVBs5EsXGbcZ7ul3scH0Imp8MY5CkDPvBDaL6LqVY0qx-sRx7Rgc0kpRwh6VJDP4g__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/1adf68f0-f5bb-468b-b7a4-a8ad063d850d/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMWFkZjY4ZjAtZjViYi00NjhiLWI3YTQtYThhZDA2M2Q4NTBkL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=MYztbZVnDwYVrcJQdLxB2bfZaV1iu5OWfKOosUx5jqU5nDtOtkDfyTdzmMSAHCGhNjNi6dGVoQmJFI9hcAwYx8lB47jLzm8sH9Nlkc9J0Cw2Ry6wR5f1E3V7qjlK0KLL6UsrhP3xFK6o9Nlg4uyZ490mURHfwrOeN2ByehsBlevbp~68LLATqt8qIswgd9MHYGRmhJ019RaygKxhTBU2boAKHW9PrORDkgtvmL~7Tx59chBCRSE-Ct5kV~KA9-ZhNDzBLfBqTooQWBS7k7WXJRkvt~53ARytvhydPSoVnoNpJZllzRFeCpptP9K9qFjYFBzczUvmES6bcigkCKpW3w__"
+        }
+      }
+    }
+  },
+  "CHR_ELIAS_001_IDLE_LEGACY": {
+    "asset_id": "CHR_ELIAS_001_IDLE_LEGACY",
+    "path": "assets/characters/elias/source/CHR_Elias_Idle_Legacy.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.8,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "1adf68f0-f5bb-468b-b7a4-a8ad063d850d",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "254bd903-baba-4314-ac71-d32d25f4904c",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 10,
+    "bytes": 5150648,
+    "generation_result": {
+      "task_id": "254bd903-baba-4314-ac71-d32d25f4904c",
+      "type": "animate_retarget",
+      "status": "success",
+      "input": {
+        "original_model_id": "1adf68f0-f5bb-468b-b7a4-a8ad063d850d",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791381333,
+      "consumed_credit": 10,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/254bd903-baba-4314-ac71-d32d25f4904c/tripo_retarget_254bd903-baba-4314-ac71-d32d25f4904c.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMjU0YmQ5MDMtYmFiYS00MzE0LWFjNzEtZDMyZDI1ZjQ5MDRjL3RyaXBvX3JldGFyZ2V0XzI1NGJkOTAzLWJhYmEtNDMxNC1hYzcxLWQzMmQyNWY0OTA0Yy5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=VvnIlWflZhkzt3uVZoMWt1ml3vdSIJirfrrNfUiMwJ74WDrDBNpcI3bEethencl-uR2q4BjzFX1lpTVglATl6dRW~EBuUNPppRDMo61FbpAo2rlEH~YizRuJ7Hy6mE4R8ZkrCP9nKK2QX2Ng4GSCrwhqqWi18sozKMtZv~H1WksXkPndxt1iPCYsvt4~jL35Xh32Qjz~uTLRnjCpOwQdFMhrJ6tvayjVqg4KLMiGPKUYQ~gM9oD8Au9kF-tvaTG~gbRlpPWmiMlLL2xNkd9flO4ilMKzl~GoD6lL7450OlvXNLNXi9IZ7p~snRjrd78TKU6JPCb1P85vhuu~1vOHNg__"
+        }
+      }
+    }
+  },
+  "CHR_NADIYA_001_RIG_LEGACY": {
+    "asset_id": "CHR_NADIYA_001_RIG_LEGACY",
+    "path": "assets/characters/nadiya/source/CHR_Nadiya_Rig_Legacy.glb",
+    "target_dimensions_m": [
+      0.65,
+      1.67,
+      0.4
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54",
+      "model_version": "v1.0-20240301",
+      "out_format": "glb",
+      "spec": "tripo"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4436256,
+    "generation_result": {
+      "task_id": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v1.0-20240301",
+        "original_model_id": "472ab5aa-c6a0-4509-aa31-fca2bdc35f54",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791381384,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/1adccc7d-4bb7-4027-85d8-bb3c0ac915a2/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMWFkY2NjN2QtNGJiNy00MDI3LTg1ZDgtYmIzYzBhYzkxNWEyL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=HdC-TV8h73KSsKXOxvlgIfjs57gZxDTY53X~RaTVbhE7Drw0ebdOnK8USE-yPRGeoF~aQE-8E1EE1qMCRYXxu7llZUotzPBHzpPjny004BRP~o~OoeB2pTEFfhFOKfuk3YH48aWyTLZyrmaphawfDUWpWKduO9J36TOkn~KiHyxEUn4TUpt4JgjBqS9ljvM1iCMkoulmZ4PbX~lxPHFTtiVRfVJo9SvtCMWn4~LIsd8oWrhNKoCBhGF0wHAGw8-gdjQF4ht37~HAvBrBGWsz5-KkzGh3JoxWwxC3hWn4wUNC9xcCuHTMadY3xvGbWr40f4N~iiVMmFXDTD1dR3hPCw__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/1adccc7d-4bb7-4027-85d8-bb3c0ac915a2/tripo_rigging_1adccc7d-4bb7-4027-85d8-bb3c0ac915a2.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMWFkY2NjN2QtNGJiNy00MDI3LTg1ZDgtYmIzYzBhYzkxNWEyL3RyaXBvX3JpZ2dpbmdfMWFkY2NjN2QtNGJiNy00MDI3LTg1ZDgtYmIzYzBhYzkxNWEyLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=J7czGZJCbzhdPaT1g93dqGFVQfXiIMv7k3uPBdIvdu8hnzCKrFbR3AFfX3sM3bbTJrQFZcdES27VlXfbdgonvEM25XAXJZ47WIKF13lXog76DngIQ5L~Ag4qmesI~WSfMQdR9Y07TFXsOaZzjTJbcUtGL2hGmZaYF2~8FWm1AkKqwcu9d4GdeVYSH9gHVstTJ62oppMJ0Dt~b3X9jWWNJusltbONnDaB3tM~9r3MHWSrj5Si1Qrv3vpDWiPew3K~cVaRtL4PNi3~AH4nDPpWJLF9boA9mvufPt3ZsWWmFTleDMM-EmElZK6JyR1utZ1wv9CijczYHNjo957nLmYv4w__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/1adccc7d-4bb7-4027-85d8-bb3c0ac915a2/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMWFkY2NjN2QtNGJiNy00MDI3LTg1ZDgtYmIzYzBhYzkxNWEyL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=HdC-TV8h73KSsKXOxvlgIfjs57gZxDTY53X~RaTVbhE7Drw0ebdOnK8USE-yPRGeoF~aQE-8E1EE1qMCRYXxu7llZUotzPBHzpPjny004BRP~o~OoeB2pTEFfhFOKfuk3YH48aWyTLZyrmaphawfDUWpWKduO9J36TOkn~KiHyxEUn4TUpt4JgjBqS9ljvM1iCMkoulmZ4PbX~lxPHFTtiVRfVJo9SvtCMWn4~LIsd8oWrhNKoCBhGF0wHAGw8-gdjQF4ht37~HAvBrBGWsz5-KkzGh3JoxWwxC3hWn4wUNC9xcCuHTMadY3xvGbWr40f4N~iiVMmFXDTD1dR3hPCw__"
+        }
+      }
+    }
+  },
+  "CHR_TOMAS_001_RIG_LEGACY": {
+    "asset_id": "CHR_TOMAS_001_RIG_LEGACY",
+    "path": "assets/characters/tomas/source/CHR_Tomas_Rig_Legacy.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.84,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84",
+      "model_version": "v1.0-20240301",
+      "out_format": "glb",
+      "spec": "tripo"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "bdfa56e2-6d0e-41c3-bb36-157a1b2eb580",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 5388188,
+    "generation_result": {
+      "task_id": "bdfa56e2-6d0e-41c3-bb36-157a1b2eb580",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v1.0-20240301",
+        "original_model_id": "9d3e7954-3d9e-4c99-967a-3b64dba1cf84",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791381385,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/bdfa56e2-6d0e-41c3-bb36-157a1b2eb580/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvYmRmYTU2ZTItNmQwZS00MWMzLWJiMzYtMTU3YTFiMmViNTgwL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=v4n0sLGGUYKuUiuY0iO7ZvN9S7IVEQIwVV5BLlaY-J7-OTj-7w6nfFjzGNpBm53vBYOW8z5rKKHraFuSNyoyqDC2hSnGyaab3IwG1WE510~H6WEHUa598b0dRdpzJHb6echgy5CXhD8glukRr~jfmHUundDenYD6anfocNiBa~X45g~ZTmq94rjb8M2lPK1qJyZ~grppoKQo6eUxq7XlNhh80Q2VrKMyxrt-xODBQ9KtCP0nJTb4H9lMbbSroPfAKsMJys6ns3qNabsGBvn0bq~Tx4Hg5SrpI~e~9z3TGkkclIC9el4vNqgMHPu1vLwszbwUr~fBSKuBdPKleyLImg__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/bdfa56e2-6d0e-41c3-bb36-157a1b2eb580/tripo_rigging_bdfa56e2-6d0e-41c3-bb36-157a1b2eb580.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvYmRmYTU2ZTItNmQwZS00MWMzLWJiMzYtMTU3YTFiMmViNTgwL3RyaXBvX3JpZ2dpbmdfYmRmYTU2ZTItNmQwZS00MWMzLWJiMzYtMTU3YTFiMmViNTgwLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=o3vGIx3mg44Uy3zZxctJdOsL8rJD3LF7y~6ZD0zFKUE4wKEMaTSnx5chtLWl0dQP9vKMSqE5802XUXiENW6I-JX0T74DpvctWRPrVxE0GC0v7eTt~YLDQH2jn4xuZSJmd8jsAMAsTtlugcEn7BoIGjHTTaOKzG~f-R8n~Emo~SPn7eOS3I0Lxx4NZCQ7cQ~cA4qnIN6EmwmbRJAuO3epMAVGMSZPKJXDO8Ck7ND2cwkRtEVPEFiAmtzxreXtJwrQnsfhZqRPlMvREFxpO8lGkvZ1qVmjobhs91amZGWK8ur9wYmWsJYZ8-iAQE6-TatQhtZ55TwG1LG8pHFS-XBPzw__",
+          "type": "glb"
+        },
+        "rendered_image": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/bdfa56e2-6d0e-41c3-bb36-157a1b2eb580/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvYmRmYTU2ZTItNmQwZS00MWMzLWJiMzYtMTU3YTFiMmViNTgwL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=v4n0sLGGUYKuUiuY0iO7ZvN9S7IVEQIwVV5BLlaY-J7-OTj-7w6nfFjzGNpBm53vBYOW8z5rKKHraFuSNyoyqDC2hSnGyaab3IwG1WE510~H6WEHUa598b0dRdpzJHb6echgy5CXhD8glukRr~jfmHUundDenYD6anfocNiBa~X45g~ZTmq94rjb8M2lPK1qJyZ~grppoKQo6eUxq7XlNhh80Q2VrKMyxrt-xODBQ9KtCP0nJTb4H9lMbbSroPfAKsMJys6ns3qNabsGBvn0bq~Tx4Hg5SrpI~e~9z3TGkkclIC9el4vNqgMHPu1vLwszbwUr~fBSKuBdPKleyLImg__",
+          "type": "webp"
+        }
+      }
+    }
+  },
+  "CHR_ADRIAN_001_RIG_LEGACY": {
+    "asset_id": "CHR_ADRIAN_001_RIG_LEGACY",
+    "path": "assets/characters/adrian/source/CHR_Adrian_Rig_Legacy.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.78,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5",
+      "model_version": "v1.0-20240301",
+      "out_format": "glb",
+      "spec": "tripo"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "fb1ed570-ca61-4537-a865-13146e626608",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4488720,
+    "generation_result": {
+      "task_id": "fb1ed570-ca61-4537-a865-13146e626608",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v1.0-20240301",
+        "original_model_id": "136d6f7e-6777-4c0d-8adc-65ae0a6920d5",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791381387,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/fb1ed570-ca61-4537-a865-13146e626608/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZmIxZWQ1NzAtY2E2MS00NTM3LWE4NjUtMTMxNDZlNjI2NjA4L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=OAafjkVyaDsa2RgWM1SBRwJ7b1Jh4eW~YzllraUpzl2NZG713M38jSiGCZDwgEbRNGzRHrRkeaBalE9BWuxLCXGmjctK2VfGrdNOb3H4tgFUgEKCzmHADirtXoiRnpfIJ~rYxb9G4p8dkf4rR0l1wzOnrVwT0uaPtZRKl~fhzawtC323A8aRzX9nD8qR624-9ct0nsuKt1~XZOKMSFLdPyF4gvJq6RqyiTv~1bbEGKVYHA2sr38KHqZto5S6-XryC4HODEPizFp1q4EjzshO3hjq-VqBYWKPoX4cSyuYT2U4UwdHdd8gP4ArR0C7yFnRUgX0N22Jx97DFvttI-QpmQ__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/fb1ed570-ca61-4537-a865-13146e626608/tripo_rigging_fb1ed570-ca61-4537-a865-13146e626608.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZmIxZWQ1NzAtY2E2MS00NTM3LWE4NjUtMTMxNDZlNjI2NjA4L3RyaXBvX3JpZ2dpbmdfZmIxZWQ1NzAtY2E2MS00NTM3LWE4NjUtMTMxNDZlNjI2NjA4LmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=YB1e1HsPM1bkOIZbVhV1KnA-QktWz3xMSKl4M2Rtn~wXLzjddfy3BtMde3MQt7qQlJjzz5laLxGe59xy76fHqBOsq9SWp~fNmXXfzUX-ZM4uB5fSo~S-4MqfAm5dpe57HwZdt3jNBHZIYh3BJ53qv9Pa0D4m5xaVqrGFDuXknHXmcovW8Y1PiDlcFqgXaT04H8Tdd0Ov6ZiDCaGei2at5AviC7Vm6PTDcCYJy~MaOJiPkLrRMf1oveLpidvRqYWfqNDzJ4f2NcIU4AWx1gwsPxNnTw~YYexi1ooRQZ8fHsOZKB2wCx-oilDLBfCM67TzfOKEtnihcBjuMRMRbOqjeA__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/fb1ed570-ca61-4537-a865-13146e626608/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZmIxZWQ1NzAtY2E2MS00NTM3LWE4NjUtMTMxNDZlNjI2NjA4L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=OAafjkVyaDsa2RgWM1SBRwJ7b1Jh4eW~YzllraUpzl2NZG713M38jSiGCZDwgEbRNGzRHrRkeaBalE9BWuxLCXGmjctK2VfGrdNOb3H4tgFUgEKCzmHADirtXoiRnpfIJ~rYxb9G4p8dkf4rR0l1wzOnrVwT0uaPtZRKl~fhzawtC323A8aRzX9nD8qR624-9ct0nsuKt1~XZOKMSFLdPyF4gvJq6RqyiTv~1bbEGKVYHA2sr38KHqZto5S6-XryC4HODEPizFp1q4EjzshO3hjq-VqBYWKPoX4cSyuYT2U4UwdHdd8gP4ArR0C7yFnRUgX0N22Jx97DFvttI-QpmQ__"
+        }
+      }
+    }
+  },
+  "CHR_DRAKE_001_RIG_LEGACY": {
+    "asset_id": "CHR_DRAKE_001_RIG_LEGACY",
+    "path": "assets/characters/drake/source/CHR_Drake_Rig_Legacy.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.86,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b",
+      "model_version": "v1.0-20240301",
+      "out_format": "glb",
+      "spec": "tripo"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "45f749c9-ecbf-4e46-82b1-33b3502b7cdc",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4741524,
+    "generation_result": {
+      "task_id": "45f749c9-ecbf-4e46-82b1-33b3502b7cdc",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v1.0-20240301",
+        "original_model_id": "44bf68b2-247b-4719-b1dd-374d9ec8d08b",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791381388,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/45f749c9-ecbf-4e46-82b1-33b3502b7cdc/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDVmNzQ5YzktZWNiZi00ZTQ2LTgyYjEtMzNiMzUwMmI3Y2RjL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=VE-FolTGE~onmSj5splfnHNLwGUMYW5fDgDY72XVta1eBCTBloATvgDV8H9uaJhhEkA5RGHQ239lLBUhDtyoRpmGo-RwLRIkSyynbzjwxdS-M7kEgsY~jI96ZkVX-C4hcQU2ablUR8EHYJDZJAuwM5FDQbRNJvG0po5fpgDZAp5QDXMvKU0o-JVRNmS5cFxcHeItkb4oHnm-~U5GNEMZJldT2J-mCexJ2tNuVsl4ys7KxPFm8xqslrGu0uooCgUghHTJngaTPqdGfRD3RjmyrvvANPbpTlkfsBiPzzRzcAAHGY~i1ds8QT1daQsDbgdubEZSJh5VwW0S33igi-I1XQ__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/45f749c9-ecbf-4e46-82b1-33b3502b7cdc/tripo_rigging_45f749c9-ecbf-4e46-82b1-33b3502b7cdc.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDVmNzQ5YzktZWNiZi00ZTQ2LTgyYjEtMzNiMzUwMmI3Y2RjL3RyaXBvX3JpZ2dpbmdfNDVmNzQ5YzktZWNiZi00ZTQ2LTgyYjEtMzNiMzUwMmI3Y2RjLmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=eirC03QUWk12czbI-uoAeTYndYKvwqKIroKdftbg9eHSuhlfBVh9Gyc3avWQKHac76nTrqVgRthLoIs7sIoHPsrm16sSyJqrOVQNPNSb2GXwxAYU6Dfu~EoTtNFSGdN-JPpyr58Y7u0Ei1NXugNypacQb2miwkPNwztfAkjZbeWTs3~GdrYqedZWGeqzMyX7VpM3H7IfwiFG3V4stngkGm6j3o9jlavW6am5FjUfWSxZvdLWJPqAqSYXnteZTfAcgR9zJMfgjA8msQLtxJ8DLJn3blzaPUcOYwpRIYsO1Mov-7gxU2Rgpwm1IvSyrTgiSaklwT1cPsgyLhFsDANZZQ__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/45f749c9-ecbf-4e46-82b1-33b3502b7cdc/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDVmNzQ5YzktZWNiZi00ZTQ2LTgyYjEtMzNiMzUwMmI3Y2RjL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=VE-FolTGE~onmSj5splfnHNLwGUMYW5fDgDY72XVta1eBCTBloATvgDV8H9uaJhhEkA5RGHQ239lLBUhDtyoRpmGo-RwLRIkSyynbzjwxdS-M7kEgsY~jI96ZkVX-C4hcQU2ablUR8EHYJDZJAuwM5FDQbRNJvG0po5fpgDZAp5QDXMvKU0o-JVRNmS5cFxcHeItkb4oHnm-~U5GNEMZJldT2J-mCexJ2tNuVsl4ys7KxPFm8xqslrGu0uooCgUghHTJngaTPqdGfRD3RjmyrvvANPbpTlkfsBiPzzRzcAAHGY~i1ds8QT1daQsDbgdubEZSJh5VwW0S33igi-I1XQ__"
+        }
+      }
+    }
+  },
+  "CHR_MERIDIAN_BASE_001_RIG_LEGACY": {
+    "asset_id": "CHR_MERIDIAN_BASE_001_RIG_LEGACY",
+    "path": "assets/characters/meridian/base/source/CHR_Meridian_Rig_Legacy.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.82,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_rig",
+      "original_model_task_id": "095bc44b-3575-4c8f-bbe9-80990f81c313",
+      "model_version": "v1.0-20240301",
+      "out_format": "glb",
+      "spec": "tripo"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "dcf78562-87d9-4139-b670-6d5292aae3e4",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 25,
+    "bytes": 4827260,
+    "generation_result": {
+      "task_id": "dcf78562-87d9-4139-b670-6d5292aae3e4",
+      "type": "animate_rig",
+      "status": "success",
+      "input": {
+        "model_version": "v1.0-20240301",
+        "original_model_id": "095bc44b-3575-4c8f-bbe9-80990f81c313",
+        "out_format": "glb",
+        "topology": "biped",
+        "spec": "tripo"
+      },
+      "progress": 100,
+      "create_time": 1791381389,
+      "consumed_credit": 25,
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/dcf78562-87d9-4139-b670-6d5292aae3e4/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvZGNmNzg1NjItODdkOS00MTM5LWI2NzAtNmQ1MjkyYWFlM2U0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=UvMavxoi102wSwCbBjwFFdiMUl-3E1PhpZHCKtgcf980mx4Y5bZkxEKRzV8IYy2xRgpJRHL4zdM6Sokyvm0zpv8SdgFY~U8m9Z3eTC7kSPTa1vj1G2sJ-Aog4Oiw9J32~VmSPtyCC3BXm00-ML4woakym90kUltS3EU6Z3B4XHMrxKw5uoWo~ufQ9WjOyKemqGZkI6N0qu6c3lmg7NztzUBLlzChs1PrTz027Izw72yZUY68CUvCQIObViWc3upukz8NrV0Pd-Kdb-nhci6XsSwFkWDKvxuE2X8zfOVbpcWzwS7YSa9rpMtcjOv6ThuE5iMRdPZdArnmMWM4ytYlIw__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/dcf78562-87d9-4139-b670-6d5292aae3e4/tripo_rigging_dcf78562-87d9-4139-b670-6d5292aae3e4.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvZGNmNzg1NjItODdkOS00MTM5LWI2NzAtNmQ1MjkyYWFlM2U0L3RyaXBvX3JpZ2dpbmdfZGNmNzg1NjItODdkOS00MTM5LWI2NzAtNmQ1MjkyYWFlM2U0LmdsYiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5MTQxNzYwMH19fV19&Signature=YztHIlrBdCI3VNOP30c-GfAPl29RWsLelO1pnMfDMGesSxOfICIqzGmECHqNE-S2YHx-nh4Z9m1LPIIXXv0M4YYFzOOCfotaxNYeh6QY3e4ybnzvNo689I-HQxhrlzra4j1nrmNmW83wylaEYsNKmGV05Em0LlqB0R6FCbQP2PhsM0xpjrBDs4wWIha9anK09f6qKoqOQjRfbE9RRTI3fJjCcis119Pcr63UTYAlKrLzuuJtq8~MWf9VIkb9vZ-pU9t4QJkXoBsdEz-~QWugfutRYG3G-3JQ4yGrm3zFkEtDbRV3L2xlGw2g8pk7GLm-tSleYn4wOkxDlm57y-ZAIA__",
+          "type": "glb"
+        },
+        "rendered_image": {
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/dcf78562-87d9-4139-b670-6d5292aae3e4/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvZGNmNzg1NjItODdkOS00MTM5LWI2NzAtNmQ1MjkyYWFlM2U0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=UvMavxoi102wSwCbBjwFFdiMUl-3E1PhpZHCKtgcf980mx4Y5bZkxEKRzV8IYy2xRgpJRHL4zdM6Sokyvm0zpv8SdgFY~U8m9Z3eTC7kSPTa1vj1G2sJ-Aog4Oiw9J32~VmSPtyCC3BXm00-ML4woakym90kUltS3EU6Z3B4XHMrxKw5uoWo~ufQ9WjOyKemqGZkI6N0qu6c3lmg7NztzUBLlzChs1PrTz027Izw72yZUY68CUvCQIObViWc3upukz8NrV0Pd-Kdb-nhci6XsSwFkWDKvxuE2X8zfOVbpcWzwS7YSa9rpMtcjOv6ThuE5iMRdPZdArnmMWM4ytYlIw__",
+          "type": "webp"
+        }
+      }
+    }
+  },
+  "CHR_NADIYA_001_IDLE_LEGACY": {
+    "asset_id": "CHR_NADIYA_001_IDLE_LEGACY",
+    "path": "assets/characters/nadiya/source/CHR_Nadiya_Idle_Legacy.glb",
+    "target_dimensions_m": [
+      0.65,
+      1.67,
+      0.4
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "efe540d5-8eb1-40e7-9038-692ab74bbba3",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 10,
+    "bytes": 4636820,
+    "generation_result": {
+      "task_id": "efe540d5-8eb1-40e7-9038-692ab74bbba3",
+      "type": "animate_retarget",
+      "status": "success",
+      "input": {
+        "original_model_id": "1adccc7d-4bb7-4027-85d8-bb3c0ac915a2",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791381580,
+      "consumed_credit": 10,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/efe540d5-8eb1-40e7-9038-692ab74bbba3/tripo_retarget_efe540d5-8eb1-40e7-9038-692ab74bbba3.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvZWZlNTQwZDUtOGViMS00MGU3LTkwMzgtNjkyYWI3NGJiYmEzL3RyaXBvX3JldGFyZ2V0X2VmZTU0MGQ1LThlYjEtNDBlNy05MDM4LTY5MmFiNzRiYmJhMy5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=QDXPKGowY5kLWz7PVZEicNviTwMPfgyYiRIL~83VlYBEWhkp9Hw018JYcbQC1QE2p8NkV-fOadVNzjN6C8vtpNfWdoByRejob3C3QRZPPa5ZaatihzYH3irY-efacxTHmHJu2xU991L2syjSoCiu01dNUbRkTxAkM9rIvmG3qEVzLrr3VVg13Op2-EWhERx5FOJCJyrCjzUrtj4HCQMedG1NRb4PPOVnirNhfidr~TAmeiD2PfIUqQ~7V8TtEgrHauWcZzC-SjuexqPoo2igObwu8DWYIO5s-Q5WhtRY35sgChhZv1ELWE4h8gQ2aY-766sO-Z1bOQ71CF7i5wKouA__"
+        }
+      }
+    }
+  },
+  "CHR_TOMAS_001_IDLE_LEGACY": {
+    "asset_id": "CHR_TOMAS_001_IDLE_LEGACY",
+    "path": "assets/characters/tomas/source/CHR_Tomas_Idle_Legacy.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.84,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "bdfa56e2-6d0e-41c3-bb36-157a1b2eb580",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "18fb0f80-6af4-4168-8856-2a90fed510a8",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 10,
+    "bytes": 5588928,
+    "generation_result": {
+      "task_id": "18fb0f80-6af4-4168-8856-2a90fed510a8",
+      "type": "animate_retarget",
+      "status": "success",
+      "input": {
+        "original_model_id": "bdfa56e2-6d0e-41c3-bb36-157a1b2eb580",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791381582,
+      "consumed_credit": 10,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/18fb0f80-6af4-4168-8856-2a90fed510a8/tripo_retarget_18fb0f80-6af4-4168-8856-2a90fed510a8.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMThmYjBmODAtNmFmNC00MTY4LTg4NTYtMmE5MGZlZDUxMGE4L3RyaXBvX3JldGFyZ2V0XzE4ZmIwZjgwLTZhZjQtNDE2OC04ODU2LTJhOTBmZWQ1MTBhOC5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=uuJBOJpAMra3KIJtpKyZSqeKJVZi2kxM2xgBJElPQg5SCr9KliFae3rvzMOl2WQBFgvwjkZYdq21SMn6De7QgSKQ1lxRNsLZDwSd1XKij87Xn-aUOJtXNTKCcHKKZTverxV9UXH9iTK2fmiR6M9A-BTsNdoKUTOqXMQfbnmQnO7EmzVNvf5tus1agFKoIsge8EdwXDbSRQmwTiciuKezl2Eicrpn5CunA3DAI4lGC11AKsipU35UW~-FdwRMiBhAapVs07K~AzH-aq3PMxo-X4ywzUVxa46SumGhBxW4Qzx5Y-lFdEZHHkyEPDkzke8kqEIs4iA4yA99rrLFdapIaQ__"
+        }
+      }
+    }
+  },
+  "CHR_ADRIAN_001_IDLE_LEGACY": {
+    "asset_id": "CHR_ADRIAN_001_IDLE_LEGACY",
+    "path": "assets/characters/adrian/source/CHR_Adrian_Idle_Legacy.glb",
+    "target_dimensions_m": [
+      0.7,
+      1.78,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "fb1ed570-ca61-4537-a865-13146e626608",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "11e96944-96ba-4b91-bd8e-1fabe49636cc",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 10,
+    "bytes": 4689256,
+    "generation_result": {
+      "task_id": "11e96944-96ba-4b91-bd8e-1fabe49636cc",
+      "type": "animate_retarget",
+      "status": "success",
+      "input": {
+        "original_model_id": "fb1ed570-ca61-4537-a865-13146e626608",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791381583,
+      "consumed_credit": 10,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/11e96944-96ba-4b91-bd8e-1fabe49636cc/tripo_retarget_11e96944-96ba-4b91-bd8e-1fabe49636cc.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvMTFlOTY5NDQtOTZiYS00YjkxLWJkOGUtMWZhYmU0OTYzNmNjL3RyaXBvX3JldGFyZ2V0XzExZTk2OTQ0LTk2YmEtNGI5MS1iZDhlLTFmYWJlNDk2MzZjYy5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=rZksxiA~k1~u7IQPf8BVkBYjG7juzCiorSRPyZ4OgkxGh3hJM~Dy1NaxiF5Yk6WnqeSNvXPi7j9J9oacq7byp7MZeE1D1h8FR3ghK6xRA88IcEJz~r7Au5PwyewWkP3ucw9QmnbiCZOPB-OoHEO6rSrm-V7V9DCrVQCP~D5mT7Ks5wjHYMjbdgHY8pIYtBzLaW9R61jJQDAfYDRaKwXJpdIj3FpnN~REhQ66wxG4VH17wU6W4I8mRhq29TZO~zGFHJ8hGYhb3Pqwsda6YvmtrM1pjlH0jZrtZMM5JajlljWWOovxDt67mD2G~CA-lwO5cWn-65FHP9dR0-HEXzmfOA__"
+        }
+      }
+    }
+  },
+  "CHR_DRAKE_001_IDLE_LEGACY": {
+    "asset_id": "CHR_DRAKE_001_IDLE_LEGACY",
+    "path": "assets/characters/drake/source/CHR_Drake_Idle_Legacy.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.86,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "45f749c9-ecbf-4e46-82b1-33b3502b7cdc",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 3,
+    "approval": "unreviewed",
+    "task_id": "41df937b-ea15-4d35-bb68-b4e085c5a5cf",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 10,
+    "bytes": 4942932,
+    "generation_result": {
+      "task_id": "41df937b-ea15-4d35-bb68-b4e085c5a5cf",
+      "type": "animate_retarget",
+      "status": "success",
+      "input": {
+        "original_model_id": "45f749c9-ecbf-4e46-82b1-33b3502b7cdc",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791381584,
+      "consumed_credit": 10,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_1e440aabbddc43e193fe8f33a9d8a5db/20261007/41df937b-ea15-4d35-bb68-b4e085c5a5cf/tripo_retarget_41df937b-ea15-4d35-bb68-b4e085c5a5cf.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfMWU0NDBhYWJiZGRjNDNlMTkzZmU4ZjMzYTlkOGE1ZGIvMjAyNjEwMDcvNDFkZjkzN2ItZWExNS00ZDM1LWJiNjgtYjRlMDg1YzVhNWNmL3RyaXBvX3JldGFyZ2V0XzQxZGY5MzdiLWVhMTUtNGQzNS1iYjY4LWI0ZTA4NWM1YTVjZi5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=pWqxf0LNgFW1hu3TzwvLZGXq448cT75A9luJD7JzWhbh646WTBcxx4KC9XsO7BxCVHGWAuF1pCOgbGoucI9WMpnbNAHWsuWrOO~JcxEMqqHTQ9ZdFGfLSDgipmrnPE0YYTUY8ZEmAr3ODRoe4xAn1QC4iMIT~UATwYjZ1ScsmErL12kzwiNJsSs3wjPEh28PkPylBwBZg7QGJAl-zQjq48G4fFy7SLVD1gJXl3uOpgVA3Yx~TYrbSyIfdxJXKvrDKVtAePfZ9iSJXc6gsCEQEj39pI6V4w4UoS7LqB~i7-iInHG7ZtqM8zzPg4CljP3fMCfwH5dz9fhWu4HFUHlEvQ__"
+        }
+      }
+    }
+  },
+  "CHR_MERIDIAN_BASE_001_IDLE_LEGACY": {
+    "asset_id": "CHR_MERIDIAN_BASE_001_IDLE_LEGACY",
+    "path": "assets/characters/meridian/base/source/CHR_Meridian_Idle_Legacy.glb",
+    "target_dimensions_m": [
+      0.75,
+      1.82,
+      0.45
+    ],
+    "requester": "Character Production",
+    "payload": {
+      "type": "animate_retarget",
+      "original_model_task_id": "dcf78562-87d9-4139-b670-6d5292aae3e4",
+      "animation": "preset:idle",
+      "animate_in_place": true,
+      "out_format": "glb"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "27ffa9d5-c489-47b8-98de-a9641eddec67",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 10,
+    "bytes": 5028148,
+    "generation_result": {
+      "task_id": "27ffa9d5-c489-47b8-98de-a9641eddec67",
+      "type": "animate_retarget",
+      "status": "success",
+      "input": {
+        "original_model_id": "dcf78562-87d9-4139-b670-6d5292aae3e4",
+        "out_format": "glb",
+        "animation": "preset:idle",
+        "animate_in_place": true
+      },
+      "progress": 100,
+      "create_time": 1791381586,
+      "consumed_credit": 10,
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/27ffa9d5-c489-47b8-98de-a9641eddec67/tripo_retarget_27ffa9d5-c489-47b8-98de-a9641eddec67.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvMjdmZmE5ZDUtYzQ4OS00N2I4LTk4ZGUtYTk2NDFlZGRlYzY3L3RyaXBvX3JldGFyZ2V0XzI3ZmZhOWQ1LWM0ODktNDdiOC05OGRlLWE5NjQxZWRkZWM2Ny5nbGIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=gM9mnF1CHhvLNTMY55k6GihSOgzPz7EfiiVcVp1KXSTyTd54V-Wf34OnVZxNVVubaGHqLsBqu7dBtldClQtTGgiB5kXaHA~sTfzj8~QCjkM3u7m-3dQOkdqXkoug13uSVAl5~8fge0DTEEbunacxO5CQlryQLuexi9CfzhIDpntS3o20hAdFWK9OHPmDCtgdsa6OKQp1Bjkl6nensFFe7EOo3og5bktHipb3GewJK6eyaBXOGmr9TVft~lURFjn-DfngvM5TE0bDwm25QOmW7cyoBPgdUmX~L7xbFf1AfVAdr73jqnmM-4EOAfCcWkeQHibhNDQ-fNViheC4MA4xWQ__"
+        }
+      }
+    }
+  },
+  "PROP_SURVEY_FIELDDESK_001": {
+    "asset_id": "PROP_SURVEY_FIELDDESK_001",
+    "path": "assets/props/camp/survey_fielddesk.glb",
+    "target_dimensions_m": [
+      2.4,
+      0.9,
+      1.4
+    ],
+    "requester": "Lead / Environment and Character Production",
+    "payload": {
+      "type": "text_to_model",
+      "model_version": "P1-20260311",
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single complete folding archaeology expedition field desk, horizontal weathered olive canvas and aluminium tabletop with spread parchment topographic contour map weighted by small stones, compact compass and pencil, four coherent folding dark metal legs. Grounded realistic rugged outdoor archaeological survey equipment. Desk width2.4 meters height0.9 meters depth1.4 meters. No chairs, no people, no terrain, no text, no buildings. Upright functional table, table surface faces upwards.",
+      "face_limit": 6000,
+      "texture": true,
+      "pbr": true,
+      "texture_quality": "standard"
+    },
+    "status": "GENERATED",
+    "key_slot": 2,
+    "approval": "unreviewed",
+    "task_id": "98090971-1922-4a0f-810a-b814aa46a0a4",
+    "remote_status": "success",
+    "progress": 100,
+    "consumed_credit": 40,
+    "bytes": 4578892,
+    "generation_result": {
+      "task_id": "98090971-1922-4a0f-810a-b814aa46a0a4",
+      "type": "text_to_model",
+      "status": "success",
+      "input": {
+        "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single complete folding archaeology expedition field desk, horizontal weathered olive canvas and aluminium tabletop with spread parchment topographic contour map weighted by small stones, compact compass and pencil, four coherent folding dark metal legs. Grounded realistic rugged outdoor archaeological survey equipment. Desk width2.4 meters height0.9 meters depth1.4 meters. No chairs, no people, no terrain, no text, no buildings. Upright functional table, table surface faces upwards.",
+        "model_version": "P1-20260311",
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "texture_alignment": "geometry",
+        "export_uv": true,
+        "face_limit": 6000
+      },
+      "progress": 100,
+      "create_time": 1791386604,
+      "consumed_credit": 40,
+      "prompt": "Photorealistic grounded archaeological adventure game asset, earth-toned PBR materials, isolated object, no base platform, no text or logos. Single complete folding archaeology expedition field desk, horizontal weathered olive canvas and aluminium tabletop with spread parchment topographic contour map weighted by small stones, compact compass and pencil, four coherent folding dark metal legs. Grounded realistic rugged outdoor archaeological survey equipment. Desk width2.4 meters height0.9 meters depth1.4 meters. No chairs, no people, no terrain, no text, no buildings. Upright functional table, table surface faces upwards.",
+      "thumbnail": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/98090971-1922-4a0f-810a-b814aa46a0a4/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOTgwOTA5NzEtMTkyMi00YTBmLTgxMGEtYjgxNGFhNDZhMGE0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=RTrnueBKBhpRnWfmFFW5Pk1GzBf0YQ6pAZkULNPuM6yO3HWsqMTYLdwfARRfXaAyxjQFs7irYbz3JDZYm9q3g-cgyWIGY64aoK2dtg5D7RPsM-ymRlnpFr5z6N0XH-jBmqis9d7nP5RNiv5UdwpzI7mkQ9s4agEEnnNR0OipJR6t9BJhyUdQr~Fd~miWVy3PZw9JzoBLjUDSJGa6czD6TTUYv9dl2jMNh2GbyXq49MeGK1MuAm9x4Q01QIfBiEfpHfgQPpTMx--tWe1za~scQu5nkSUhstVzl56Y1zF4WiJsZC0jmdCzsizFV7HEeJIRWb1Svo63~xBy-ovIPC1YuQ__",
+      "queuing_num": -1,
+      "running_left_time": -1,
+      "result": {
+        "pbr_model": {
+          "type": "glb",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/98090971-1922-4a0f-810a-b814aa46a0a4/tripo_pbr_model_98090971-1922-4a0f-810a-b814aa46a0a4.glb?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOTgwOTA5NzEtMTkyMi00YTBmLTgxMGEtYjgxNGFhNDZhMGE0L3RyaXBvX3Bicl9tb2RlbF85ODA5MDk3MS0xOTIyLTRhMGYtODEwYS1iODE0YWE0NmEwYTQuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzkxNDE3NjAwfX19XX0_&Signature=U97rzP9hPQHOktCdqHA1qpfaQ4003lo9EPKOl9nqPCJdeJkb2saCcPcb34mQEk4qbm9tEu1nle057CQuE0QQ8Hw8BPtVu8OW8N5~ouYCDNvqGqeKuLFS60CcXba34Mcer~AiKQu8EtFTh8Gr9BWxmKD7wFqJmAt-QUwDHTCKIDDUybTHlw7x7a5qgZwlLsYF1A6BhFXJuq3kX0fUSOrMBIJASaQvv6OUIJ4iEPpU2AAgitFbftxR--ab7qt6QKl43T20OrHk1TyXV9T6YtCMCvJXomo0mVURTQqk0Q~HDjiSzkn7U91umWL~OwqTyys7Ffl5J2-ddox-B6hS0lRiug__"
+        },
+        "rendered_image": {
+          "type": "webp",
+          "url": "https://tripo-data.rg1.data.tripo3d.com/tcli_441f6312826641e28fa57bb353812f84/20261007/98090971-1922-4a0f-810a-b814aa46a0a4/legacy_mesh.webp?Key-Pair-Id=K1676C64NMVM2J&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDQxZjYzMTI4MjY2NDFlMjhmYTU3YmIzNTM4MTJmODQvMjAyNjEwMDcvOTgwOTA5NzEtMTkyMi00YTBmLTgxMGEtYjgxNGFhNDZhMGE0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTE0MTc2MDB9fX1dfQ__&Signature=RTrnueBKBhpRnWfmFFW5Pk1GzBf0YQ6pAZkULNPuM6yO3HWsqMTYLdwfARRfXaAyxjQFs7irYbz3JDZYm9q3g-cgyWIGY64aoK2dtg5D7RPsM-ymRlnpFr5z6N0XH-jBmqis9d7nP5RNiv5UdwpzI7mkQ9s4agEEnnNR0OipJR6t9BJhyUdQr~Fd~miWVy3PZw9JzoBLjUDSJGa6czD6TTUYv9dl2jMNh2GbyXq49MeGK1MuAm9x4Q01QIfBiEfpHfgQPpTMx--tWe1za~scQu5nkSUhstVzl56Y1zF4WiJsZC0jmdCzsizFV7HEeJIRWb1Svo63~xBy-ovIPC1YuQ__"
+        }
+      }
+    }
+  }
+}

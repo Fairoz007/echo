@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gogdurrflds5"
-path="res://.godot/imported/arch_floor_stone_ORM_d47b0ee3-ac23-4a6f-a88d-3b07333e5048.jpg-c45ea1681fabd039d5bd2cb68cea1a96.ctex"
+path.s3tc="res://.godot/imported/arch_floor_stone_ORM_d47b0ee3-ac23-4a6f-a88d-3b07333e5048.jpg-c45ea1681fabd039d5bd2cb68cea1a96.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "979cd9ec94384d656e6e51359e4b1064"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/arch_floor_stone_ORM_d47b0ee3-ac23-4a6f-a88d-3b07333e5048.jpg"
-dest_files=["res://.godot/imported/arch_floor_stone_ORM_d47b0ee3-ac23-4a6f-a88d-3b07333e5048.jpg-c45ea1681fabd039d5bd2cb68cea1a96.ctex"]
+dest_files=["res://.godot/imported/arch_floor_stone_ORM_d47b0ee3-ac23-4a6f-a88d-3b07333e5048.jpg-c45ea1681fabd039d5bd2cb68cea1a96.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

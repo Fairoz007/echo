@@ -1,0 +1,72 @@
+{
+	"log": [
+		"renderer=gl_compatibility driver=opengl3 adapter=NVIDIA GeForce RTX 2060 preset=Low window=(1280, 720)",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\perf_preset1/sceneload_00_Prologue.png",
+		"PERF {\"avg_fps\":702.3,\"draw_calls\":426.0,\"label\":\"sceneload_Prologue\",\"preset\":1,\"primitives\":927148.0,\"process_ram_mb\":105.3,\"ram_static_mb\":105.3,\"vram_mb\":401.3,\"worst_ms\":4.7}",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\perf_preset1/sceneload_01_Chapter1.png",
+		"PERF {\"avg_fps\":495.6,\"draw_calls\":459.0,\"label\":\"sceneload_Chapter1\",\"preset\":1,\"primitives\":3215402.0,\"process_ram_mb\":133.3,\"ram_static_mb\":133.3,\"vram_mb\":604.6,\"worst_ms\":7.7}",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\perf_preset1/sceneload_05_Chapter5.png",
+		"PERF {\"avg_fps\":1384.1,\"draw_calls\":34.0,\"label\":\"sceneload_Chapter5\",\"preset\":1,\"primitives\":191518.0,\"process_ram_mb\":105.5,\"ram_static_mb\":105.5,\"vram_mb\":513.4,\"worst_ms\":8.0}",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\perf_preset1/sceneload_06_Chapter6.png",
+		"PERF {\"avg_fps\":1563.4,\"draw_calls\":31.0,\"label\":\"sceneload_Chapter6\",\"preset\":1,\"primitives\":197976.0,\"process_ram_mb\":109.4,\"ram_static_mb\":109.4,\"vram_mb\":513.0,\"worst_ms\":2.1}",
+		"screenshot D:\\new-dev\\screenshots\\reality_audit\\perf_preset1/sceneload_11_Finale.png",
+		"PERF {\"avg_fps\":1588.7,\"draw_calls\":31.0,\"label\":\"sceneload_Finale\",\"preset\":1,\"primitives\":197976.0,\"process_ram_mb\":109.4,\"ram_static_mb\":109.4,\"vram_mb\":513.0,\"worst_ms\":2.4}"
+	],
+	"perf": [
+		{
+			"avg_fps": 702.3,
+			"draw_calls": 426.0,
+			"label": "sceneload_Prologue",
+			"preset": 1,
+			"primitives": 927148.0,
+			"process_ram_mb": 105.3,
+			"ram_static_mb": 105.3,
+			"vram_mb": 401.3,
+			"worst_ms": 4.7
+		},
+		{
+			"avg_fps": 495.6,
+			"draw_calls": 459.0,
+			"label": "sceneload_Chapter1",
+			"preset": 1,
+			"primitives": 3215402.0,
+			"process_ram_mb": 133.3,
+			"ram_static_mb": 133.3,
+			"vram_mb": 604.6,
+			"worst_ms": 7.7
+		},
+		{
+			"avg_fps": 1384.1,
+			"draw_calls": 34.0,
+			"label": "sceneload_Chapter5",
+			"preset": 1,
+			"primitives": 191518.0,
+			"process_ram_mb": 105.5,
+			"ram_static_mb": 105.5,
+			"vram_mb": 513.4,
+			"worst_ms": 8.0
+		},
+		{
+			"avg_fps": 1563.4,
+			"draw_calls": 31.0,
+			"label": "sceneload_Chapter6",
+			"preset": 1,
+			"primitives": 197976.0,
+			"process_ram_mb": 109.4,
+			"ram_static_mb": 109.4,
+			"vram_mb": 513.0,
+			"worst_ms": 2.1
+		},
+		{
+			"avg_fps": 1588.7,
+			"draw_calls": 31.0,
+			"label": "sceneload_Finale",
+			"preset": 1,
+			"primitives": 197976.0,
+			"process_ram_mb": 109.4,
+			"ram_static_mb": 109.4,
+			"vram_mb": 513.0,
+			"worst_ms": 2.4
+		}
+	]
+}

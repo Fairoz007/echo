@@ -1,0 +1,370 @@
+{
+  "version": 2,
+  "bed_gain_db": -4.0,
+  "note": "Files mastered to -26 LUFS; gain_db is a per-layer trim. See systems/audio/Soundscape.gd.",
+  "chapters": {
+    "PRO": {
+      "reverb": "cave",
+      "beds": [
+        {
+          "path": "res://audio/ambience/cave/AMB_PRO_CAVE_ROOMTONE.ogg",
+          "gain_db": 0.0
+        }
+      ],
+      "emitters": [
+        {
+          "path": "res://audio/ambience/cave/AMB_PRO_CAVE_WATER.ogg",
+          "position": [
+            -2,
+            0.4,
+            -18
+          ],
+          "gain_db": 0,
+          "max_distance": 14
+        }
+      ],
+      "oneshots": [
+        {
+          "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+          "interval": [
+            4,
+            10
+          ],
+          "gain_db": -8.0,
+          "radius": 10.0
+        },
+        {
+          "path": "res://audio/destruction/SFX_PRO_ROCK_SHIFT.wav",
+          "interval": [
+            18,
+            32
+          ],
+          "gain_db": -12.0,
+          "radius": 14.0
+        }
+      ],
+      "surface": "wet_rock"
+    },
+    "C01": {
+      "reverb": "outdoor",
+      "beds": [
+        {
+          "path": "res://audio/ambience/jungle/AMB_JUNGLE_CANOPY.ogg",
+          "gain_db": -2
+        },
+        {
+          "path": "res://audio/ambience/jungle/AMB_JUNGLE_BIRDS_INSECTS.ogg",
+          "gain_db": -4
+        }
+      ],
+      "emitters": [],
+      "oneshots": [],
+      "surface": "mud"
+    },
+    "C02": {
+      "reverb": "ruin",
+      "beds": [
+        {
+          "path": "res://audio/ambience/ruins/AMB_RUIN_DRAFT.ogg",
+          "gain_db": 0.0
+        },
+        {
+          "path": "res://audio/ambience/jungle/AMB_JUNGLE_BIRDS_INSECTS.ogg",
+          "gain_db": -12
+        }
+      ],
+      "emitters": [
+        {
+          "path": "res://audio/ambience/cave/AMB_PRO_CAVE_WATER.ogg",
+          "position": [
+            0,
+            1,
+            -14
+          ],
+          "gain_db": -2,
+          "max_distance": 25
+        }
+      ],
+      "oneshots": [
+        {
+          "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+          "interval": [
+            4,
+            10
+          ],
+          "gain_db": -8.0,
+          "radius": 10.0
+        }
+      ],
+      "surface": "stone"
+    },
+    "C03": {
+      "reverb": "outdoor",
+      "beds": [
+        {
+          "path": "res://audio/ambience/ruins/AMB_BRIDGE_GORGE.ogg",
+          "gain_db": 0.0
+        }
+      ],
+      "emitters": [],
+      "oneshots": [
+        {
+          "path": "res://audio/destruction/SFX_PRO_ROCK_SHIFT.wav",
+          "interval": [
+            18,
+            32
+          ],
+          "gain_db": -12.0,
+          "radius": 14.0
+        }
+      ],
+      "surface": "stone"
+    },
+    "C04": {
+      "reverb": "cave",
+      "beds": [
+        {
+          "path": "res://audio/ambience/cave/AMB_PRO_CAVE_ROOMTONE.ogg",
+          "gain_db": 0.0
+        }
+      ],
+      "emitters": [
+        {
+          "path": "res://audio/ambience/cave/AMB_PRO_CAVE_WATER.ogg",
+          "position": [
+            0,
+            0.5,
+            -10
+          ],
+          "gain_db": 0,
+          "max_distance": 18
+        }
+      ],
+      "oneshots": [
+        {
+          "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+          "interval": [
+            4,
+            10
+          ],
+          "gain_db": -8.0,
+          "radius": 10.0
+        },
+        {
+          "path": "res://audio/destruction/SFX_PRO_ROCK_SHIFT.wav",
+          "interval": [
+            18,
+            32
+          ],
+          "gain_db": -12.0,
+          "radius": 14.0
+        }
+      ],
+      "surface": "wet_rock"
+    },
+    "C05": {
+      "reverb": "cave",
+      "beds": [
+        {
+          "path": "res://audio/ambience/cave/AMB_PRO_CAVE_ROOMTONE.ogg",
+          "gain_db": -3
+        }
+      ],
+      "emitters": [
+        {
+          "path": "res://audio/ambience/meridian/AMB_MERIDIAN_POWER.ogg",
+          "position": [
+            0,
+            1,
+            -12
+          ],
+          "gain_db": 0,
+          "max_distance": 20
+        }
+      ],
+      "oneshots": [
+        {
+          "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+          "interval": [
+            4,
+            10
+          ],
+          "gain_db": -8.0,
+          "radius": 10.0
+        }
+      ],
+      "surface": "wet_rock"
+    },
+    "C06": {
+      "reverb": "temple",
+      "beds": [
+        {
+          "path": "res://audio/ambience/temple/AMB_DROWNED_TEMPLE.ogg",
+          "gain_db": 0.0
+        }
+      ],
+      "emitters": [],
+      "oneshots": [
+        {
+          "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+          "interval": [
+            4,
+            10
+          ],
+          "gain_db": -8.0,
+          "radius": 10.0
+        }
+      ],
+      "surface": "water",
+      "water_loops": {
+        "rising": "res://audio/ambience/temple/AMB_WATER_RISING_LOOP.ogg",
+        "draining": "res://audio/ambience/temple/AMB_WATER_DRAINING_LOOP.ogg"
+      }
+    },
+    "C07": {
+      "reverb": "vast",
+      "beds": [
+        {
+          "path": "res://audio/ambience/lost_city/AMB_LOST_CITY_AIRFLOW.ogg",
+          "gain_db": 0.0
+        }
+      ],
+      "emitters": [
+        {
+          "path": "res://audio/ambience/lost_city/AMB_WATERFALL_RESONANT_LOOP.ogg",
+          "position": [
+            0,
+            4,
+            -30
+          ],
+          "gain_db": 2,
+          "max_distance": 60
+        }
+      ],
+      "oneshots": [
+        {
+          "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+          "interval": [
+            4,
+            10
+          ],
+          "gain_db": -8.0,
+          "radius": 10.0
+        }
+      ],
+      "surface": "stone"
+    },
+    "C08": {
+      "reverb": "ruin",
+      "beds": [
+        {
+          "path": "res://audio/ambience/ruins/AMB_RUIN_DRAFT.ogg",
+          "gain_db": 0.0
+        },
+        {
+          "path": "res://audio/ambience/lost_city/AMB_LOST_CITY_AIRFLOW.ogg",
+          "gain_db": -8
+        }
+      ],
+      "emitters": [],
+      "oneshots": [
+        {
+          "path": "res://audio/water/SFX_PRO_CAVE_DRIP.wav",
+          "interval": [
+            4,
+            10
+          ],
+          "gain_db": -8.0,
+          "radius": 10.0
+        }
+      ],
+      "surface": "stone"
+    },
+    "C09": {
+      "reverb": "cave",
+      "beds": [
+        {
+          "path": "res://audio/ambience/heart_vault/AMB_HEART_ROAD_RUMBLE.ogg",
+          "gain_db": 0.0
+        }
+      ],
+      "emitters": [],
+      "oneshots": [
+        {
+          "path": "res://audio/destruction/SFX_PRO_ROCK_SHIFT.wav",
+          "interval": [
+            8,
+            16
+          ],
+          "gain_db": -8.0,
+          "radius": 14.0
+        }
+      ],
+      "surface": "stone"
+    },
+    "C10": {
+      "reverb": "vault",
+      "beds": [
+        {
+          "path": "res://audio/ambience/heart_vault/AMB_HEART_VAULT_RESONANCE.ogg",
+          "gain_db": 0.0
+        }
+      ],
+      "emitters": [],
+      "oneshots": [
+        {
+          "path": "res://audio/vaelor/SFX_HARMONIC_NODE_PULSE.wav",
+          "interval": [
+            10,
+            20
+          ],
+          "gain_db": -10.0,
+          "radius": 16.0
+        }
+      ],
+      "surface": "stone"
+    },
+    "FIN": {
+      "reverb": "outdoor",
+      "beds": [
+        {
+          "path": "res://audio/ambience/jungle/AMB_DAYLIGHT_RIDGE_WIND.ogg",
+          "gain_db": 0.0
+        },
+        {
+          "path": "res://audio/ambience/heart_vault/AMB_HEART_ROAD_RUMBLE.ogg",
+          "gain_db": -6
+        }
+      ],
+      "emitters": [],
+      "oneshots": [
+        {
+          "path": "res://audio/destruction/SFX_PRO_ROCK_SHIFT.wav",
+          "interval": [
+            18,
+            32
+          ],
+          "gain_db": -12.0,
+          "radius": 14.0
+        }
+      ],
+      "surface": "wet_rock"
+    },
+    "EPI": {
+      "reverb": "outdoor",
+      "beds": [
+        {
+          "path": "res://audio/ambience/jungle/AMB_DAYLIGHT_RIDGE_WIND.ogg",
+          "gain_db": 0.0
+        },
+        {
+          "path": "res://audio/ambience/jungle/AMB_JUNGLE_BIRDS_INSECTS.ogg",
+          "gain_db": -6
+        }
+      ],
+      "emitters": [],
+      "oneshots": [],
+      "surface": "grass"
+    }
+  }
+}

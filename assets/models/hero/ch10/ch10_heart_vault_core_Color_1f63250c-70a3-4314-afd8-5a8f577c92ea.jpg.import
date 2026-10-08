@@ -1,0 +1,44 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dd82gosg00bat"
+path.s3tc="res://.godot/imported/ch10_heart_vault_core_Color_1f63250c-70a3-4314-afd8-5a8f577c92ea.jpg-3b46b1452ca4793f5ca0b8032fc0fb57.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "8148a13f9e1157b38c428c3f7719e2a7"
+}
+
+[deps]
+
+source_file="res://assets/models/hero/ch10/ch10_heart_vault_core_Color_1f63250c-70a3-4314-afd8-5a8f577c92ea.jpg"
+dest_files=["res://.godot/imported/ch10_heart_vault_core_Color_1f63250c-70a3-4314-afd8-5a8f577c92ea.jpg-3b46b1452ca4793f5ca0b8032fc0fb57.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
