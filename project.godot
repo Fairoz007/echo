@@ -33,6 +33,10 @@ window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom="res://ui/theme/echoes_theme.tres"
+
 [input]
 
 move_forward={

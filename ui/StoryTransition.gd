@@ -86,48 +86,35 @@ func _ready() -> void:
 	# "Art": slowly panning layered mist + strata lines (works on GL Compatibility).
 	_art = ColorRect.new()
 	_art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var shader := Shader.new()
-	shader.code = """
-shader_type canvas_item;
-uniform vec3 tint = vec3(0.55, 0.45, 0.32);
-uniform float pan = 0.0;
-float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-float n(vec2 p){ vec2 i = floor(p); vec2 f = fract(p); f = f*f*(3.0-2.0*f);
-	return mix(mix(h(i), h(i+vec2(1,0)), f.x), mix(h(i+vec2(0,1)), h(i+vec2(1,1)), f.x), f.y); }
-float fbm(vec2 p){ float v = 0.0; float a = 0.5; for (int k = 0; k < 5; k++){ v += a*n(p); p *= 2.03; a *= 0.5; } return v; }
-void fragment(){
-	vec2 uv = UV * vec2(1.78, 1.0) + vec2(pan, 0.0);
-	float strata = smoothstep(0.45, 0.5, fract(uv.y * 7.0 + fbm(uv * 2.0) * 1.6)) * 0.12;
-	float mist = fbm(uv * 1.6 + vec2(TIME * 0.015, 0.0));
-	float glow = smoothstep(0.9, 0.0, distance(UV, vec2(0.72, 0.45))) * 0.35;
-	vec3 c = tint * (mist * 0.45 + strata + glow);
-	float vignette = smoothstep(1.1, 0.35, distance(UV, vec2(0.5)));
-	COLOR = vec4(c * vignette, 1.0);
-}
-"""
-	var mat := ShaderMaterial.new()
-	mat.shader = shader
-	_art.material = mat
+	_art.material = preload("res://ui/GameTheme.gd").mist_material(0.35)
 	_root.add_child(_art)
 	var column := VBoxContainer.new()
-	column.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT)
-	column.position = Vector2(140, -170)
-	column.size = Vector2(1300, 340)
-	column.anchor_top = 0.5
-	column.anchor_bottom = 0.5
+	# Anchored (proportional) so the card composes the same at 720p and 1080p.
+	column.anchor_left = 0.09
+	column.anchor_right = 0.9
+	column.anchor_top = 0.28
+	column.anchor_bottom = 0.6
+	column.alignment = BoxContainer.ALIGNMENT_CENTER
 	column.add_theme_constant_override("separation", 10)
 	_root.add_child(column)
 	_kicker = _label(column, 26, Color(0.85, 0.7, 0.45))
-	_title = _label(column, 72, Color(0.96, 0.94, 0.9))
-	_location = _label(column, 24, Color(0.7, 0.72, 0.72))
+	_title = _label(column, 76, Color(0.96, 0.94, 0.9))
+	var rule := ColorRect.new()
+	rule.custom_minimum_size = Vector2(0, 3)
+	rule.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	rule.custom_minimum_size.x = 200
+	rule.color = Color(0.86, 0.7, 0.44, 0.85)
+	column.add_child(rule)
+	_location = _label(column, 24, Color(0.38, 0.86, 0.9, 0.9))
 	_subtitle = Label.new()
 	_subtitle.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 	_subtitle.anchor_left = 0.1
 	_subtitle.anchor_right = 0.9
 	_subtitle.offset_left = 0
 	_subtitle.offset_right = 0
-	_subtitle.offset_top = -230
-	_subtitle.offset_bottom = -150
+	_subtitle.offset_top = -240
+	_subtitle.offset_bottom = -140
+	_subtitle.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 	_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_subtitle.add_theme_font_size_override("font_size", 28)
@@ -138,14 +125,16 @@ void fragment(){
 	_bar.anchor_right = 0.9
 	_bar.anchor_top = 1.0
 	_bar.anchor_bottom = 1.0
-	_bar.offset_top = -100
-	_bar.offset_bottom = -92
+	_bar.offset_top = -98
+	_bar.offset_bottom = -94
 	_bar.show_percentage = false
 	_bar.max_value = 1.0
 	var fill := StyleBoxFlat.new()
-	fill.bg_color = Color(0.85, 0.7, 0.45)
+	fill.bg_color = Color(0.86, 0.7, 0.44)
+	fill.set_corner_radius_all(2)
 	var back := StyleBoxFlat.new()
-	back.bg_color = Color(1, 1, 1, 0.12)
+	back.bg_color = Color(1, 1, 1, 0.1)
+	back.set_corner_radius_all(2)
 	_bar.add_theme_stylebox_override("fill", fill)
 	_bar.add_theme_stylebox_override("background", back)
 	_root.add_child(_bar)
@@ -157,8 +146,8 @@ void fragment(){
 	_prompt.offset_top = -80
 	_prompt.offset_bottom = -50
 	_prompt.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	_prompt.add_theme_font_size_override("font_size", 20)
-	_prompt.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
+	_prompt.add_theme_font_size_override("font_size", 18)
+	_prompt.add_theme_color_override("font_color", Color(0.94, 0.91, 0.84, 0.85))
 	_root.add_child(_prompt)
 	visible = false
 

@@ -9,25 +9,31 @@ script = ExtResource("1_hud")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -100.0
-offset_right = 320.0
+offset_top = -140.0
+offset_right = 360.0
 grow_vertical = 0
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_bottom = 32
+mouse_filter = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 36
 
 [node name="VBoxVitals" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 6
 
 [node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxVitals"]
-custom_minimum_size = Vector2(240, 12)
+custom_minimum_size = Vector2(260, 10)
 layout_mode = 2
+mouse_filter = 2
 value = 100.0
 show_percentage = false
 
 [node name="StaminaBar" type="ProgressBar" parent="MarginContainer/VBoxVitals"]
-custom_minimum_size = Vector2(180, 8)
+custom_minimum_size = Vector2(200, 5)
 layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
 value = 100.0
 show_percentage = false
 
@@ -37,64 +43,59 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 80.0
-offset_right = 200.0
-offset_bottom = 120.0
+offset_left = -300.0
+offset_top = 90.0
+offset_right = 300.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PromptLabel" type="Label" parent="CenterContainer"]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 20
-text = "[E] Interact"
+theme_override_font_sizes/font_size = 19
+text = "Interact"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TopRightMargin" type="MarginContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -450.0
-offset_bottom = 100.0
+offset_left = -480.0
+offset_bottom = 140.0
 grow_horizontal = 0
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
+mouse_filter = 2
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 40
 
 [node name="ObjectiveLabel" type="Label" parent="TopRightMargin"]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
-custom_minimum_size = Vector2(418, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 18
 text = "OBJECTIVE: Investigate the Subterranean Tunnel"
-horizontal_alignment = 2
 autowrap_mode = 3
 
 [node name="BottomMargin" type="MarginContainer" parent="."]
 anchors_preset = 7
-anchor_left = 0.5
+anchor_left = 0.2
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 0.8
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -120.0
-offset_right = 400.0
-offset_bottom = -50.0
+offset_top = -150.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="SubtitleLabel" type="Label" parent="BottomMargin"]
 layout_mode = 2
-custom_minimum_size = Vector2(800, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.97, 0.94, 0.86, 1)
 theme_override_font_sizes/font_size = 22
-text = "Mara: \"What did we find?\""
+text = "Mara: What did we find?"
 horizontal_alignment = 1
 autowrap_mode = 3

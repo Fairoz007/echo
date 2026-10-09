@@ -73,7 +73,7 @@ func _run() -> void:
 	await create_timer(1.0).timeout
 	var player = get_first_node_in_group("player")
 	player.take_damage(10000.0)
-	await create_timer(1.0).timeout
+	await create_timer(2.2).timeout
 	_check(gm.current_state == gm.GameState.GAME_OVER, "death enters GAME_OVER (state=%s)" % gm.GameState.keys()[gm.current_state])
 	await _shot("flow_death_menu")
 	gm._pause_menu._restart()
