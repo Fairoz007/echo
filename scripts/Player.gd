@@ -356,18 +356,22 @@ var _lean_accel := 0.0
 @export var run_pelvis_raise := 0.06 ## m; the clip runs in a deep crouch, foot lock re-straightens legs
 @export var run_arm_swing_deg := 38.0
 @export var sprint_arm_swing_deg := 40.0
-@export var max_forearm_angle_deg := 95.0 ## forearm never rises far above horizontal (no reaching)
+@export var max_forearm_angle_deg := 65.0 ## forearm never rises far above horizontal (no reaching)
 var _posture_w := 0.0
 var _stance_lift := 0.0
 @export var run_stance_extension := 0.93 ## stance leg extension target (fraction of leg length)
 @export var run_stance_max_lift := 0.12 ## m
+@export var idle_stance_extension := 0.985 ## idle leg extension target (fraction of leg length)
+var _idle_w := 0.0
 
 func _apply_run_posture() -> void:
 	if not run_posture_enabled or not _skeleton:
 		return
 	var dt := get_physics_process_delta_time()
-	var running := is_on_floor() and current_state in [State.RUN, State.SPRINT] and horizontal_speed > 2.0
-	var target_w := clampf((horizontal_speed - 2.0) / 0.9, 0.0, 1.0) if running else 0.0
+	var running := is_on_floor() and current_state in [State.RUN, State.SPRINT] and horizontal_speed > 1.7
+	# Ramp in from 1.7 m/s (was 2.0-2.9): while accelerating/braking the raw clip's straight
+	# forward-reaching arm used to show through.
+	var target_w := clampf((horizontal_speed - 1.7) / 0.5, 0.0, 1.0) if running else 0.0
 	_posture_w = move_toward(_posture_w, target_w, dt * 5.0)
 	if _posture_w < 0.01:
 		return
@@ -474,6 +478,7 @@ func _arm_from_rest(rest_basis: Basis, rest_dir: Vector3, dir: Vector3) -> Basis
 @export var foot_lock_enabled := true
 @export var foot_plant_height := 0.10 ## ankle height above sole (m) below which a foot can plant
 @export var foot_release_height := 0.16
+@export var foot_idle_drift := 0.06 ## m, idle re-plant threshold
 @export var foot_max_drift := 0.45 ## m the animated foot may wander from its lock before release
 var _feet := {}
 var _sole_offset := 0.06
@@ -516,11 +521,14 @@ func _apply_foot_lock() -> void:
 	# Stance-leg extension (run/sprint): the retargeted run bends the stance knee to ~120 deg at
 	# mid-stance. Raise the hips (same frame, before the leg solve) until every planted leg's
 	# hip-to-ankle span is >= run_stance_extension x leg length; the IK then straightens the knee.
-	if _posture_w > 0.01 and grounded:
+	# Idle uses the same lift: the idle clip stands with ~148 deg knees (reads as a flexed crouch).
+	_idle_w = move_toward(_idle_w, 1.0 if grounded and current_state == State.IDLE else 0.0, dt * 2.5)
+	var ext_w := maxf(_posture_w, _idle_w)
+	if ext_w > 0.01 and grounded:
 		var need := 0.0
 		var cap := run_stance_max_lift
 		var scale_w := _skeleton.global_basis.get_scale().x
-		var reach := _leg_length * scale_w * run_stance_extension
+		var reach := _leg_length * scale_w * (idle_stance_extension if _idle_w > _posture_w else run_stance_extension)
 		var full := _leg_length * scale_w * 0.99
 		for side in _feet:
 			var foot: Dictionary = _feet[side]
@@ -534,7 +542,7 @@ func _apply_foot_lock() -> void:
 			# Never lift so far that a planted leg would have to over-stretch (the IK would
 			# then drag the foot off its lock and it would slide).
 			cap = minf(cap, sqrt(maxf(full * full - horizontal * horizontal, 0.0)) - below)
-		_stance_lift = minf(move_toward(_stance_lift, clampf(need, 0.0, run_stance_max_lift) * _posture_w, dt * 6.0), maxf(cap, 0.0))
+		_stance_lift = minf(move_toward(_stance_lift, clampf(need, 0.0, run_stance_max_lift) * ext_w, dt * 6.0), maxf(cap, 0.0))
 	else:
 		_stance_lift = move_toward(_stance_lift, 0.0, dt * 3.0)
 	if _stance_lift > 0.001:
@@ -552,7 +560,10 @@ func _apply_foot_lock() -> void:
 			foot.locked = false
 		elif foot.locked:
 			var drift := Vector2(ankle_w.x - foot.lock.x, ankle_w.z - foot.lock.z).length()
-			if height > foot_release_height or drift > foot_max_drift + 0.06 * horizontal_speed:
+			# Idle: let a foot re-plant where the idle clip wants it (no flexed, spread stance
+			# left over from the last stride).
+			var max_drift := foot_idle_drift if current_state == State.IDLE else foot_max_drift + 0.06 * horizontal_speed
+			if height > foot_release_height or drift > max_drift:
 				foot.locked = false
 		elif height < foot_plant_height:
 			foot.locked = true

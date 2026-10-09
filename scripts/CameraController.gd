@@ -96,5 +96,8 @@ func _physics_process(delta: float) -> void:
 		if hit_length < _arm_length - 0.01:
 			_arm_length = hit_length # pull in immediately: never show the inside of rock
 		else:
-			_arm_length = move_toward(_arm_length, max_arm_length, arm_return_speed * delta)
+			# Capped-speed return that eases into full length (a constant-rate return stopped
+			# dead at max length: a visible camera kick after every obstruction).
+			var step := maxf((max_arm_length - _arm_length) * (1.0 - exp(-6.0 * delta)), 0.8 * delta)
+			_arm_length = minf(_arm_length + minf(step, arm_return_speed * delta), max_arm_length)
 		spring_arm.spring_length = maxf(_arm_length, 0.0)

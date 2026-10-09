@@ -9,6 +9,7 @@ var cam
 var c3: Camera3D
 var view_off := Vector3(0, 0.5, 4.5)
 var states := {}
+var gamecam := false
 
 func _init() -> void:
 	call_deferred("_run")
@@ -41,6 +42,15 @@ func _run() -> void:
 	await _seq("slope", "slope_15", Vector3(-3, 0, 0), ["move_forward"], 10, 5)
 	await _seq("steps", "stairs", Vector3(-3, 0, 0), ["move_forward"], 10, 5)
 	await _jump()
+	# Real game camera (CameraController) for follow review.
+	gamecam = true
+	root.get_viewport().get_camera_3d().current = false
+	course.camera_rig.find_child("Camera3D", true, false).make_current()
+	await _seq("gamecam_sprint", "flat", Vector3(-34, 0, 0), ["move_forward", "sprint"], 30, 3)
+	await _stop("gamecam_stop")
+	await _seq("gamecam_steps", "stairs", Vector3(-3, 0, 0), ["move_forward"], 5, 4)
+	gamecam = false
+	c3.make_current()
 	await _seq("swim_entry", "pool", Vector3(2.6, 2.55, 0), ["move_forward", "walk"], 2, 6)
 	quit()
 
@@ -64,6 +74,8 @@ func _tick() -> void:
 	await physics_frame
 	var k: String = Player.State.keys()[p.current_state]
 	states[k] = states.get(k, 0) + 1
+	if gamecam:
+		return
 	var t: Vector3 = p.global_position + Vector3(0, 0.9, 0)
 	c3.global_position = t + view_off
 	c3.look_at(t, Vector3.UP)
@@ -109,15 +121,15 @@ func _turn_180() -> void:
 	await _capture("turn_180", 3)
 	_report("turn_180")
 
-func _stop() -> void:
+func _stop(name := "stop") -> void:
 	await _reset("flat", Vector3(-34, 0, 0))
 	Input.action_press("move_forward")
 	Input.action_press("sprint")
 	for i in 60:
 		await _tick()
 	_release()
-	await _capture("stop", 3)
-	_report("stop")
+	await _capture(name, 3)
+	_report(name)
 
 func _jump() -> void:
 	await _reset("flat", Vector3(-34, 0, 0))
