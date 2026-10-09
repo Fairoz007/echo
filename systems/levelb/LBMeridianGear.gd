@@ -30,6 +30,11 @@ func _ready() -> void:
 			break
 	if skel == null:
 		return
+	# ProductionCharacter now equips its own gear variants (Gear_helmet / Gear_rifle / ...).
+	# Adding ours on top doubled every helmet and rifle, so defer to it when present.
+	await get_tree().process_frame
+	if not skel.find_children("Gear_*", "BoneAttachment3D", false, false).is_empty():
+		return
 	# Sizes in metres at character scale (character ~1.82 m).
 	var s := skel.global_transform.basis.get_scale().x
 	_attach(skel, "Head", HELMET, 0.3, Vector3(0, 0.08, 0.01), Vector3.ZERO, s)

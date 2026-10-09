@@ -24,7 +24,13 @@ const ROUTES = {
 }
 
 func _init() -> void:
+	# Runs share the desktop with an open editor; a stray window close must not end the QA.
+	auto_accept_quit = false
 	call_deferred("_run")
+
+func _notification(what: int) -> void:
+	if what == Node.NOTIFICATION_WM_CLOSE_REQUEST:
+		print("QA KEY SPY: window close request ignored at t=", Time.get_ticks_msec())
 
 func _stop_moving() -> void:
 	for action in ["move_forward", "move_back", "move_left", "move_right", "fire", "aim"]:
@@ -44,6 +50,9 @@ func _run() -> void:
 			chapter_start = argument.get_slice("=", 1).to_int()
 		if argument.begins_with("--qa-end-chapter="):
 			chapter_end = argument.get_slice("=", 1).to_int()
+	var spy = preload("res://dev/levelb_key_spy.gd").new()
+	spy.name = "QAKeySpy"
+	root.add_child.call_deferred(spy)
 	root.get_node("SaveManager").save_directory = "user://qa_campaign_physical"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("user://qa_campaign_physical"))
 	change_scene_to_file("res://ui/MainMenu.tscn")
@@ -84,9 +93,41 @@ func _run() -> void:
 			for enemy_path in ["Enemies/EnemyMercenary1", "Enemies/EnemyMercenary2"]:
 				if not await _fight(enemy_path):
 					return
-		for step in ROUTES[chapter]:
-			if not await _visit(step[0], step[1]):
+		# If the chapter scene is reloaded mid-route (quick-load / checkpoint restart), _visit
+		# returns early; restart the route on the fresh scene instead of skipping steps
+		# (e.g. Ch6 would otherwise head for the exit with the basin undrained).
+		var attempts := 0
+		while true:
+			var route_scene = current_scene
+			var steps: Array = ROUTES[chapter]
+			var reloaded := false
+			for si in steps.size():
+				if not await _visit(steps[si][0], steps[si][1]):
+					return
+				# Leaving the scene after the last step is the normal chapter exit.
+				if si < steps.size() - 1 and current_scene != route_scene:
+					reloaded = true
+					break
+			if not reloaded:
+				break
+			await create_timer(1.0).timeout
+			if root.get_node("GameManager").current_chapter != chapter:
+				break
+			attempts += 1
+			var p = get_first_node_in_group("player")
+			print("PHYSICAL chapter ", chapter, " reloaded mid-route (attempt ", attempts, "); state=", root.get_node("GameManager").current_state, " health=", p.current_health if p else -1.0)
+			if attempts > 2:
+				await _fail("Chapter %d kept reloading mid-route" % chapter)
 				return
+			for i in 160:
+				if current_scene and current_scene.get_node_or_null(ROUTES[chapter][0][0]) and root.get_node("GameManager").current_state == root.get_node("GameManager").GameState.GAMEPLAY:
+					break
+				await create_timer(0.25).timeout
+			if chapter == 6 and current_scene.get_node_or_null("QA_RampFootGuide") == null:
+				var wp = Node3D.new()
+				wp.name = "QA_RampFootGuide"
+				current_scene.add_child(wp)
+				wp.position = Vector3(0, -3.5, -11)
 		_stop_moving()
 		for frame in range(1800):
 			await physics_frame
