@@ -1,39 +1,26 @@
 extends SceneTree
-## DEV ONLY: Player start-up and per-frame cost (headless).
+## DEV ONLY: floor contact / state / foot-lock trace while running.
 func _init() -> void:
 	call_deferred("_run")
 func _run() -> void:
-	var c0 := Time.get_ticks_usec()
-	var first = (load("res://scenes/Player.tscn") as PackedScene).instantiate()
-	var c1 := Time.get_ticks_usec()
-	root.add_child(first)
-	var c2 := Time.get_ticks_usec()
-	print("PERF cold load+instantiate=%.1fms cold _ready=%.1fms" % [(c1 - c0) / 1000.0, (c2 - c1) / 1000.0])
-	first.queue_free()
-	await physics_frame
 	var course = (load("res://dev/MovementTestCourse.tscn") as PackedScene).instantiate()
 	root.add_child(course)
-	for i in 30:
+	for i in 20:
 		await physics_frame
 	var p = course.player
-	var ps: PackedScene = load("res://scenes/Player.tscn")
-	var t0 := Time.get_ticks_usec()
-	var p2 = ps.instantiate()
-	var t1 := Time.get_ticks_usec()
-	p2.position = Vector3(0, 0.1, 30)
-	course.add_child(p2)
-	var t2 := Time.get_ticks_usec()
-	print("PERF instantiate=%.1fms add_child(_ready)=%.1fms" % [(t1 - t0) / 1000.0, (t2 - t1) / 1000.0])
-	p2.queue_free()
-	await physics_frame
 	p.global_position = course.lane_start("flat") + Vector3(-34, 0, 0)
+	p.facing_yaw = -PI * 0.5
+	course.camera_rig.yaw = -PI * 0.5
 	Input.action_press("move_forward")
-	Input.action_press("sprint")
-	for i in 30:
+	for i in 90:
 		await physics_frame
-	var tf := Time.get_ticks_usec()
-	for i in 120:
-		await physics_frame
-	print("EQUIP sidearm=", p.sidearm_visual != null, " pick=", p.pick_visual != null)
-	print("PERF frame=%.2fms (wall, sprinting) physics_process=%.2fms" % [(Time.get_ticks_usec() - tf) / 120000.0, Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0])
+		if i % 6 == 0:
+			var lk := []
+			for sd in p._feet:
+				var sk: Skeleton3D = p._skeleton
+				var aw: Vector3 = sk.global_transform * sk.get_bone_global_pose(p._feet[sd].ids[2]).origin
+				lk.append("%s:%s ay=%.3f g=%.3f lift=%.3f pel=%.3f" % [sd, p._feet[sd].locked, aw.y, p._ground_below(aw), p._stance_lift, p._pelvis_offset])
+			var pb = p._anim_tree.get("parameters/playback")
+			print("N f%d node=%s pos=%s sc=%s dom=%.2f spd=%.2f" % [i, pb.get_current_node(), p._anim_tree.get("parameters/locomotion/blend/blend_position"), p._anim_tree.get("parameters/locomotion/blend/run/scale/scale"), p._dominant_scale, p.horizontal_speed])
+			print("T f%d floor=%s state=%s anim=%s grace=%.2f vy=%.2f %s" % [i, p.is_on_floor(), Player.State.keys()[p.current_state], p.anim_state, p._air_grace, p.velocity.y, lk])
 	quit()

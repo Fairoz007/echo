@@ -87,7 +87,7 @@ var current_oxygen: float = 30.0
 @export var clip_fallback: Dictionary = {
 	"walk": "idle", "run": "walk", "sprint": "run", "jump": "idle", "fall": "idle",
 	"land": "idle", "crouch_idle": "idle", "crouch_walk": "walk", "climb": "idle",
-	"mantle": "climb", "swim_idle": "idle", "swim": "swim_idle",
+	"mantle": "climb", "swim_idle": "swim", "swim": "idle",
 }
 ## Clip -> ground speed (m/s) at playback scale 1. Measured from root travel when the
 ## clip has a Hip/Root translation track; otherwise taken from here.
@@ -336,11 +336,302 @@ func _setup_crouch_pose() -> void:
 	_leg_length = thigh.distance_to(calf) + calf.distance_to(foot)
 	if _anim_tree:
 		_anim_tree.mixer_applied.connect(_apply_crouch_pose)
+		_setup_foot_lock()
+		_anim_tree.mixer_applied.connect(_apply_run_posture)
+		_anim_tree.mixer_applied.connect(_apply_foot_lock)
+
+# ---------------------------------------------------------------- run posture layer
+# The retargeted run lunges forward with the leading arm held straight out. After the
+# AnimationTree applies, while running/sprinting: the torso lean is corrected to a target
+# angle, the head is levelled, and the arms are replaced by an elbow-bent swing that is
+# phase-locked to the legs (arm opposite leg), measured from the animated feet.
+@export var run_posture_enabled := true
+@export var run_torso_lean_deg := 4.0 ## steady-pace lean (small)
+@export var sprint_torso_lean_deg := 6.0
+@export var accel_lean_deg_per_ms2 := 0.8 ## extra lean per m/s^2 of forward acceleration
+@export var accel_lean_max_deg := 8.0
+var _lean_speed_prev := 0.0
+var _lean_accel := 0.0
+@export var run_elbow_bend_deg := 75.0
+@export var run_pelvis_raise := 0.06 ## m; the clip runs in a deep crouch, foot lock re-straightens legs
+@export var run_arm_swing_deg := 38.0
+@export var sprint_arm_swing_deg := 40.0
+@export var max_forearm_angle_deg := 95.0 ## forearm never rises far above horizontal (no reaching)
+var _posture_w := 0.0
+var _stance_lift := 0.0
+@export var run_stance_extension := 0.93 ## stance leg extension target (fraction of leg length)
+@export var run_stance_max_lift := 0.12 ## m
+
+func _apply_run_posture() -> void:
+	if not run_posture_enabled or not _skeleton:
+		return
+	var dt := get_physics_process_delta_time()
+	var running := is_on_floor() and current_state in [State.RUN, State.SPRINT] and horizontal_speed > 2.0
+	var target_w := clampf((horizontal_speed - 2.0) / 0.9, 0.0, 1.0) if running else 0.0
+	_posture_w = move_toward(_posture_w, target_w, dt * 5.0)
+	if _posture_w < 0.01:
+		return
+	var w := _posture_w
+	var sprint := current_state == State.SPRINT
+	var lateral := Vector3(0, 0, 1) # Mara faces +X in skeleton space; +Z is her lateral axis
+	var b := func(n: String) -> int: return _skeleton.find_bone(n)
+	var spine: int = b.call("Spine01")
+	var head: int = b.call("Head")
+	var neck: int = b.call("NeckTwist01")
+	if spine < 0 or head < 0:
+		return
+	# 0. Pelvis: lift out of the clip's deep crouch (feet are re-planted by the foot lock).
+	var hip_bone: int = b.call("Hip")
+	if hip_bone >= 0 and run_pelvis_raise > 0.0:
+		var hp0 := _skeleton.get_bone_global_pose(hip_bone)
+		hp0.origin.y += run_pelvis_raise * w / maxf(_skeleton.global_basis.get_scale().x, 0.0001)
+		_set_global_pose(hip_bone, hp0)
+	# 1. Torso: measure lean of the Spine01 -> Head line, rotate Spine01 to the target lean.
+	var s0 := _skeleton.get_bone_global_pose(spine).origin
+	var h0 := _skeleton.get_bone_global_pose(head).origin
+	var torso := h0 - s0
+	var lean := atan2(torso.x, torso.y) # + = top ahead of hips
+	# Lean = small base + smoothed forward acceleration (leans in when speeding up, back when braking).
+	_lean_accel = lerpf(_lean_accel, (horizontal_speed - _lean_speed_prev) / maxf(dt, 0.001), 1.0 - exp(-6.0 * dt))
+	_lean_speed_prev = horizontal_speed
+	var accel_lean := clampf(_lean_accel * accel_lean_deg_per_ms2, -accel_lean_max_deg, accel_lean_max_deg)
+	var target := deg_to_rad((sprint_torso_lean_deg if sprint else run_torso_lean_deg) + accel_lean)
+	_rotate_bone_global(spine, lateral, (lean - target) * w)
+	# 2. Head level: align the neck->head direction with vertical (partial).
+	if neck >= 0:
+		var n0 := _skeleton.get_bone_global_pose(neck).origin
+		var hp := _skeleton.get_bone_global_pose(head)
+		var up := (hp.origin - n0).normalized()
+		hp.basis = _swing_basis(up, Vector3.UP, 0.85 * w) * hp.basis
+		_set_global_pose(head, hp)
+	# 3. Arms: phase from the animated feet (which foot is ahead), swing opposite.
+	# The foot separation is normalised by a decaying running peak so the phase is a smooth
+	# sine-like -1..1 (a hard clamp made the arms snap between extremes and both forearms
+	# point forward together at the crossover).
+	var lf: int = b.call("L_Foot")
+	var rf: int = b.call("R_Foot")
+	var phase := 0.0
+	if lf >= 0 and rf >= 0:
+		var diff := _skeleton.get_bone_global_pose(rf).origin.x - _skeleton.get_bone_global_pose(lf).origin.x
+		_phase_peak = maxf(maxf(absf(diff), _phase_peak - dt * 0.05), _leg_length * 0.2)
+		phase = clampf(diff / _phase_peak, -1.0, 1.0)
+	var amp := deg_to_rad(sprint_arm_swing_deg if sprint else run_arm_swing_deg)
+	for side in ["L_", "R_"]:
+		var upper: int = b.call(side + "Upperarm")
+		var fore: int = b.call(side + "Forearm")
+		var hand: int = b.call(side + "Hand")
+		if upper < 0 or fore < 0 or hand < 0:
+			continue
+		var sign := 1.0 if side == "L_" else -1.0 # left arm forward when right foot is ahead
+		var swing := amp * phase * sign
+		var u := _skeleton.get_bone_global_pose(upper)
+		var out := 1.0 if u.origin.z > 0.0 else -1.0
+		var down := Basis(lateral, swing) * Vector3(0, -1, 0)
+		down = (down + Vector3(0, 0, out * 0.18)).normalized() # slight abduction clears the body
+		# Elbow bend: tighter going forward, more open behind.
+		var bend := deg_to_rad(lerpf(run_elbow_bend_deg - 20.0, run_elbow_bend_deg + 15.0, (phase * sign + 1.0) * 0.5))
+		var fore_angle := minf(swing + bend, deg_to_rad(max_forearm_angle_deg))
+		# Forearm keeps an outward component so the hand never crosses the body midline.
+		var fdir := (Basis(lateral, fore_angle) * Vector3(0, -1, 0) + Vector3(0, 0, out * sprint_forearm_splay if sprint else out * 0.12)).normalized()
+		# Rebuild the arm from the bind pose (T-pose: arm lateral, palm down) by swinging it
+		# down to the side first, then into the target: palms face the thighs and the wrist is
+		# neutral, instead of inheriting the clip's palm-up forward reach.
+		var r_up := _skeleton.get_bone_global_rest(upper)
+		var r_fo := _skeleton.get_bone_global_rest(fore)
+		var r_ha := _skeleton.get_bone_global_rest(hand)
+		var up_t := _arm_from_rest(r_up.basis, r_fo.origin - r_up.origin, down)
+		u.basis = Basis(u.basis.get_rotation_quaternion().slerp(up_t.get_rotation_quaternion(), w))
+		_set_global_pose(upper, u)
+		var fp := _skeleton.get_bone_global_pose(fore)
+		var fo_t := _arm_from_rest(r_fo.basis, r_ha.origin - r_fo.origin, fdir)
+		fp.basis = Basis(fp.basis.get_rotation_quaternion().slerp(fo_t.get_rotation_quaternion(), w))
+		_set_global_pose(fore, fp)
+		# Wrist and forearm twist: bind-pose relation to the forearm (straight wrist).
+		for child in [hand, b.call(side + "ForearmTwist01")]:
+			if child < 0:
+				continue
+			var rc := _skeleton.get_bone_global_rest(child)
+			var cp := _skeleton.get_bone_global_pose(child)
+			var want := fp.basis * (r_fo.basis.inverse() * rc.basis)
+			cp.basis = Basis(cp.basis.get_rotation_quaternion().slerp(want.get_rotation_quaternion(), w))
+			_set_global_pose(child, cp)
+
+var _phase_peak := 0.1
+@export var sprint_forearm_splay := 0.16
+
+## Bind-pose basis of an arm bone swung (rest dir -> hanging down -> `dir`), two minimal arcs so
+## the roll is the natural "arm at the side" roll rather than an arbitrary twist.
+func _arm_from_rest(rest_basis: Basis, rest_dir: Vector3, dir: Vector3) -> Basis:
+	var hang := Vector3(0, -1, 0)
+	var b1 := _swing_basis(rest_dir, hang, 1.0) * rest_basis.orthonormalized()
+	return _swing_basis(hang, dir, 1.0) * b1
+
+# ---------------------------------------------------------------- foot locking (two-bone IK)
+# Retargeted clips (run especially) let the stance foot creep and dip ~2.5 cm into the floor.
+# After the AnimationTree applies, each foot that is low is pinned at its touchdown point
+# (world space) and lifted onto the real ground from a raycast; thigh/calf are re-solved
+# analytically, keeping the animated knee plane and the animated foot orientation.
+@export var foot_lock_enabled := true
+@export var foot_plant_height := 0.10 ## ankle height above sole (m) below which a foot can plant
+@export var foot_release_height := 0.16
+@export var foot_max_drift := 0.45 ## m the animated foot may wander from its lock before release
+var _feet := {}
+var _sole_offset := 0.06
+var _pelvis_offset := 0.0 ## m, <= 0, smoothed
+var last_feet_ground_gap := Vector2.ZERO ## ankle height above ground minus sole, per foot (L, R); for tests
+
+func _setup_foot_lock() -> void:
+	if not _skeleton:
+		return
+	var scale := _skeleton.global_basis.get_scale().x
+	var lowest := INF
+	for side in ["L_", "R_"]:
+		var ids := [_skeleton.find_bone(side + "Thigh"), _skeleton.find_bone(side + "Calf"), _skeleton.find_bone(side + "Foot")]
+		if ids.has(-1):
+			_feet.clear()
+			return
+		_feet[side] = {"ids": ids, "locked": false, "lock": Vector3.ZERO, "w": 0.0}
+		lowest = minf(lowest, _skeleton.get_bone_global_rest(ids[2]).origin.y * scale)
+	_sole_offset = clampf(lowest, 0.03, 0.12) # ankle height above the sole in bind pose
+
+func _apply_foot_lock() -> void:
+	if not foot_lock_enabled or not _skeleton or _feet.is_empty():
+		return
+	var grounded := is_on_floor() and current_state in [State.IDLE, State.WALK, State.RUN, State.SPRINT, State.CROUCH]
+	var dt := get_physics_process_delta_time()
+	var to_skel := _skeleton.global_transform.affine_inverse()
+	# Pelvis adaptation: on slopes/uneven ground drop the hips by the lower foot's ground so
+	# that foot can reach it (the higher foot is lifted by the IK clamp below).
+	var lowest := 0.0
+	if grounded:
+		for side in _feet:
+			var a: Vector3 = _skeleton.global_transform * _skeleton.get_bone_global_pose(_feet[side].ids[2]).origin
+			lowest = minf(lowest, _ground_below(a) - global_position.y)
+	_pelvis_offset = move_toward(_pelvis_offset, clampf(lowest, -0.3, 0.0), dt * 1.5)
+	if _pelvis_offset < -0.002:
+		var hip_i := _skeleton.find_bone("Hip")
+		var hp := _skeleton.get_bone_global_pose(hip_i)
+		hp.origin.y += _pelvis_offset / maxf(_skeleton.global_basis.get_scale().x, 0.0001)
+		_set_global_pose(hip_i, hp)
+	# Stance-leg extension (run/sprint): the retargeted run bends the stance knee to ~120 deg at
+	# mid-stance. Raise the hips (same frame, before the leg solve) until every planted leg's
+	# hip-to-ankle span is >= run_stance_extension x leg length; the IK then straightens the knee.
+	if _posture_w > 0.01 and grounded:
+		var need := 0.0
+		var cap := run_stance_max_lift
+		var scale_w := _skeleton.global_basis.get_scale().x
+		var reach := _leg_length * scale_w * run_stance_extension
+		var full := _leg_length * scale_w * 0.99
+		for side in _feet:
+			var foot: Dictionary = _feet[side]
+			if not foot.locked:
+				continue
+			var thigh_w: Vector3 = _skeleton.global_transform * _skeleton.get_bone_global_pose(foot.ids[0]).origin
+			var horizontal := Vector2(thigh_w.x - foot.lock.x, thigh_w.z - foot.lock.z).length()
+			var below: float = thigh_w.y - foot.lock.y
+			if horizontal < reach:
+				need = maxf(need, (sqrt(reach * reach - horizontal * horizontal) - below) * foot.w)
+			# Never lift so far that a planted leg would have to over-stretch (the IK would
+			# then drag the foot off its lock and it would slide).
+			cap = minf(cap, sqrt(maxf(full * full - horizontal * horizontal, 0.0)) - below)
+		_stance_lift = minf(move_toward(_stance_lift, clampf(need, 0.0, run_stance_max_lift) * _posture_w, dt * 6.0), maxf(cap, 0.0))
+	else:
+		_stance_lift = move_toward(_stance_lift, 0.0, dt * 3.0)
+	if _stance_lift > 0.001:
+		var hip_s := _skeleton.find_bone("Hip")
+		var hs := _skeleton.get_bone_global_pose(hip_s)
+		hs.origin.y += _stance_lift / maxf(_skeleton.global_basis.get_scale().x, 0.0001)
+		_set_global_pose(hip_s, hs)
+	for side in _feet:
+		var foot: Dictionary = _feet[side]
+		var ids: Array = foot.ids
+		var ankle_w: Vector3 = _skeleton.global_transform * _skeleton.get_bone_global_pose(ids[2]).origin
+		var ground := _ground_below(ankle_w)
+		var height := ankle_w.y - ground - _stance_lift # plant/release on the clip's own foot height
+		if not grounded:
+			foot.locked = false
+		elif foot.locked:
+			var drift := Vector2(ankle_w.x - foot.lock.x, ankle_w.z - foot.lock.z).length()
+			if height > foot_release_height or drift > foot_max_drift + 0.06 * horizontal_speed:
+				foot.locked = false
+		elif height < foot_plant_height:
+			foot.locked = true
+			foot.lock = Vector3(ankle_w.x, ground + _sole_offset, ankle_w.z)
+		foot.w = move_toward(foot.w, 1.0 if foot.locked else 0.0, dt * (40.0 if foot.locked else 6.0))
+		var target := ankle_w
+		if foot.w > 0.0:
+			target = ankle_w.lerp(foot.lock, foot.w)
+		if grounded:
+			target.y = maxf(target.y, ground + _sole_offset) # never sink into the floor
+		if target.distance_to(ankle_w) > 0.002:
+			_solve_leg(ids, to_skel * target)
+		var solved_w: Vector3 = _skeleton.global_transform * _skeleton.get_bone_global_pose(ids[2]).origin
+		if side == "L_":
+			last_feet_ground_gap.x = solved_w.y - ground - _sole_offset
+		else:
+			last_feet_ground_gap.y = solved_w.y - ground - _sole_offset
+
+func _ground_below(p: Vector3) -> float:
+	var hit := _ray(p + Vector3.UP * 0.5, p + Vector3.DOWN * 0.6)
+	return hit.position.y if not hit.is_empty() else global_position.y
+
+## Analytic two-bone IK in skeleton space.
+func _solve_leg(ids: Array, target: Vector3) -> void:
+	var thigh := _skeleton.get_bone_global_pose(ids[0])
+	var calf := _skeleton.get_bone_global_pose(ids[1])
+	var foot := _skeleton.get_bone_global_pose(ids[2])
+	var a := thigh.origin
+	var b := calf.origin
+	var c := foot.origin
+	var la := a.distance_to(b)
+	var lb := b.distance_to(c)
+	var to_t := target - a
+	var dist := clampf(to_t.length(), absf(la - lb) + 0.001, la + lb - 0.001)
+	var dir := to_t.normalized()
+	# Keep the animated knee plane: pole = knee offset from the hip-ankle line.
+	var pole := (b - a) - dir * (b - a).dot(dir)
+	if pole.length() < 0.0001:
+		pole = Vector3(1, 0, 0) # Mara faces +X in skeleton space: knees bend forward
+	pole = pole.normalized()
+	var cos_a := clampf((la * la + dist * dist - lb * lb) / (2.0 * la * dist), -1.0, 1.0)
+	var knee := a + dir * (la * cos_a) + pole * (la * sqrt(1.0 - cos_a * cos_a))
+	var foot_basis := foot.basis
+	thigh.basis = _swing_basis(b - a, knee - a, 1.0) * thigh.basis
+	_set_global_pose(ids[0], thigh)
+	calf = _skeleton.get_bone_global_pose(ids[1])
+	var c_now := _skeleton.get_bone_global_pose(ids[2]).origin
+	var end := a + dir * dist
+	calf.basis = _swing_basis(c_now - calf.origin, end - calf.origin, 1.0) * calf.basis
+	_set_global_pose(ids[1], calf)
+	var solved := _skeleton.get_bone_global_pose(ids[2])
+	solved.basis = foot_basis # keep the animated foot orientation
+	_set_global_pose(ids[2], solved)
+
+## Rotation taking direction `from` a fraction `w` of the way toward `to`. Identity when either
+## vector is zero/non-finite (degenerate bones) so a bad frame never writes NaN into the skeleton.
+func _swing_basis(from: Vector3, to: Vector3, w: float) -> Basis:
+	if not from.is_finite() or not to.is_finite() or from.length_squared() < 1e-8 or to.length_squared() < 1e-8:
+		return Basis()
+	var a := from.normalized()
+	var axis := a.cross(to.normalized())
+	if axis.length_squared() < 1e-10:
+		return Basis()
+	var angle := a.signed_angle_to(to.normalized(), axis) * w
+	return Basis(axis.normalized(), angle) if is_finite(angle) else Basis()
+
+## All procedural layers write through here: the basis is re-orthonormalised so float error
+## (or a skewed blended input) can never accumulate into the bones' persistent local scale.
+## Non-orthonormal arm bases previously compounded frame over frame into NaN forearms.
+func _set_global_pose(bone: int, pose: Transform3D) -> void:
+	if not (pose.origin.is_finite() and pose.basis.x.is_finite() and pose.basis.y.is_finite() and pose.basis.z.is_finite()):
+		return
+	pose.basis = pose.basis.orthonormalized()
+	_skeleton.set_bone_global_pose(bone, pose)
 
 func _rotate_bone_global(bone: int, axis: Vector3, angle: float) -> void:
 	var pose := _skeleton.get_bone_global_pose(bone)
 	pose.basis = Basis(axis, angle) * pose.basis
-	_skeleton.set_bone_global_pose(bone, pose)
+	_set_global_pose(bone, pose)
 
 func _apply_crouch_pose() -> void:
 	if not _skeleton or _crouch_blend < 0.01:
@@ -352,7 +643,7 @@ func _apply_crouch_pose() -> void:
 	var hip: int = _crouch_bones["Hip"]
 	var hip_pose := _skeleton.get_bone_global_pose(hip)
 	hip_pose.origin.y -= _leg_length * (1.0 - cos(knee))
-	_skeleton.set_bone_global_pose(hip, hip_pose)
+	_set_global_pose(hip, hip_pose)
 	for side in ["L_", "R_"]:
 		_rotate_bone_global(_crouch_bones[side + "Thigh"], axis, knee)
 		_rotate_bone_global(_crouch_bones[side + "Calf"], axis, -2.0 * knee)
@@ -374,9 +665,16 @@ func _resolve_slot(slot: String) -> String:
 	var list := anim_player.get_animation_list()
 	return String(list[0]) if list.size() > 0 else ""
 
+## Comparison option: drive run/sprint from the walk clip (time-scaled) instead of `run`.
+@export var synthesize_run_from_walk := false
+
 func _setup_animation() -> void:
 	if not anim_player or anim_player.get_animation_list().is_empty():
 		return
+	if synthesize_run_from_walk:
+		clip_candidates = clip_candidates.duplicate(true)
+		clip_candidates["run"] = []
+		clip_candidates["sprint"] = []
 	for slot in clip_candidates.keys():
 		_clip_for_slot[slot] = _resolve_slot(slot)
 	var looping := ["idle", "walk", "run", "sprint", "crouch_idle", "crouch_walk", "climb", "swim_idle"]
@@ -493,6 +791,24 @@ func _make_speed_blend(name: String, slots: Array) -> AnimationNodeBlendTree:
 	tree.connect_node("output", 0, "scale")
 	return tree
 
+## Crossfade per transition: quick for impacts, long for water and posture changes.
+func _xfade(from: String, to: String) -> float:
+	if to in ["jump", "land"]:
+		return 0.08
+	if from == "land":
+		return 0.18
+	if to == "swim" or from == "swim":
+		return 0.4
+	if (from == "climb" and to == "mantle") or (from == "mantle" and to == "climb"):
+		return 0.15
+	if from == "mantle":
+		return 0.3
+	if to == "fall":
+		return 0.25
+	if to == "crouch" or from == "crouch":
+		return 0.25
+	return 0.2
+
 func _build_anim_tree() -> void:
 	var sm := AnimationNodeStateMachine.new()
 	sm.add_node("locomotion", _make_speed_blend("locomotion", ["idle", "walk", "run", "sprint"]), Vector2(0, 0))
@@ -509,9 +825,10 @@ func _build_anim_tree() -> void:
 			if a == b:
 				continue
 			var t := AnimationNodeStateMachineTransition.new()
-			t.xfade_time = 0.1 if b == "land" or b == "jump" else 0.2
+			t.xfade_time = _xfade(a, b)
 			sm.add_transition(a, b, t)
 	var entry := AnimationNodeStateMachineTransition.new()
+	entry.advance_mode = AnimationNodeStateMachineTransition.ADVANCE_MODE_AUTO # leave Start at once
 	sm.add_transition("Start", "locomotion", entry)
 	_anim_tree = AnimationTree.new()
 	_anim_tree.name = "MaraAnimationTree"
@@ -542,7 +859,11 @@ func _update_animation(delta: float) -> void:
 	if target == "locomotion" and _land_timer > 0.0:
 		target = "land"
 	var playback: AnimationNodeStateMachinePlayback = _anim_tree.get("parameters/playback")
-	if playback and anim_state != target:
+	# Never sit in the state machine's Start node (no clip = frozen/bind pose).
+	if playback and playback.get_current_node() in [&"", &"Start"]:
+		playback.start(target)
+		anim_state = target
+	elif playback and anim_state != target:
 		playback.travel(target)
 		anim_state = target
 	var speed := horizontal_speed
@@ -550,16 +871,24 @@ func _update_animation(delta: float) -> void:
 		speed = velocity.length()
 	for blend_name in ["locomotion", "crouch", "swim", "climb"]:
 		var top: float = _loco_max_speed.get(blend_name, 1.0)
-		var gait_pos := _gait_position(blend_name, speed)
+		# Smoothed so speed jitter (slopes, stops) can't flick between clips.
+		var raw_pos := _gait_position(blend_name, speed)
+		var gait_pos: float = lerpf(_gait_smooth.get(blend_name, raw_pos), raw_pos, 1.0 - exp(-gait_blend_rate * delta))
+		_gait_smooth[blend_name] = gait_pos
 		_anim_tree.set("parameters/%s/blend/blend_position" % blend_name, gait_pos)
 		_anim_tree.set("parameters/%s/scale/scale" % blend_name, 1.0)
 		var best := INF
 		for point in _blend_points.get(blend_name, []):
 			var natural: float = point[1]
 			var scale := 1.0
-			if natural > 0.05:
+			if blend_name == "swim":
+				# No ground contact: swim tempo follows effort (treading 0.9x .. sprint 2.0x; clip is 2 strokes in 5.7 s)
+				# instead of the clip's 0.37 m/s root travel (which forced a 3x cap).
+				scale = lerpf(0.9, 2.0, clampf(speed / swim_sprint_speed, 0.0, 1.0)) + (0.15 if absf(velocity.y) > 0.6 else 0.0)
+			elif natural > 0.05:
 				# Stride matching: playback rate = ground speed / clip's natural speed.
-				scale = clampf(speed / natural, 0.5, 3.0)
+				# Floor 0.2 (was 0.5): while stopping, the walk must slow with her or the feet skate.
+				scale = clampf(speed / natural, 0.2, 3.0)
 				if blend_name == "locomotion" and point[0] == "run" and current_state == State.SPRINT and _clip_for_slot.get("sprint") == _clip_for_slot.get("run"):
 					scale = maxf(scale, sprint_from_run_scale)
 			_anim_tree.set("parameters/%s/blend/%s/scale/scale" % [blend_name, point[0]], scale)
@@ -571,6 +900,8 @@ func _update_animation(delta: float) -> void:
 ## lengths are not phase aligned, so mixing them (e.g. 16% run into a walk) drags the planted
 ## foot. Pure clips are used between switch points; a 0.6 m/s crossfade band joins them.
 @export var gait_crossfade_band: float = 0.6
+@export var gait_blend_rate := 12.0 ## 1/s smoothing of the gait blend position
+var _gait_smooth := {}
 func _gait_position(blend_name: String, speed: float) -> float:
 	var pts: Array = _blend_points.get(blend_name, [])
 	if pts.size() < 2:
@@ -597,35 +928,53 @@ func get_animation_playback_scale() -> float:
 
 # ---------------------------------------------------------------- equipment / input (unchanged)
 
+## Hidden hand props (sidearm, climbing pick). Loading the two GLBs synchronously cost ~400 ms
+## of a cold Player start-up, so they are requested on a loader thread and attached once ready
+## (the visuals are only shown while aiming / climbing, and every use is null-guarded).
+const EQUIPMENT := [["R_Hand", "res://assets/props/equipment/expedition_sidearm.glb", 0.23], ["L_Hand", "res://assets/props/equipment/climbing_pick.glb", 0.28]]
+var _equipment_pending := []
+
 func _attach_equipment() -> void:
 	if not visual_mesh:
 		return
-	var skeleton := visual_mesh.find_child("Skeleton3D", true, false) as Skeleton3D
-	if not skeleton:
-		return
-	for equipment in [["R_Hand", "res://assets/props/equipment/expedition_sidearm.glb", 0.23], ["L_Hand", "res://assets/props/equipment/climbing_pick.glb", 0.28]]:
-		if skeleton.find_bone(equipment[0]) < 0 or not ResourceLoader.exists(equipment[1]):
+	for equipment in EQUIPMENT:
+		if ResourceLoader.exists(equipment[1]):
+			if ResourceLoader.load_threaded_request(equipment[1], "PackedScene") == OK:
+				_equipment_pending.append(equipment)
+
+func _poll_equipment() -> void:
+	for equipment in _equipment_pending.duplicate():
+		var status := ResourceLoader.load_threaded_get_status(equipment[1])
+		if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 			continue
-		var attachment := BoneAttachment3D.new()
-		attachment.bone_name = equipment[0]
-		skeleton.add_child(attachment)
-		var model: Node3D = load(equipment[1]).instantiate()
-		attachment.add_child(model)
-		var bounds := AABB()
-		var found := false
-		for mesh in model.find_children("*", "MeshInstance3D", true, false):
-			var box: AABB = (model.global_transform.affine_inverse() * mesh.global_transform) * mesh.get_aabb()
-			bounds = bounds.merge(box) if found else box
-			found = true
-		if found:
-			var scale_factor: float = equipment[2] / maxf(bounds.size[bounds.size.max_axis_index()], 0.001)
-			model.scale = Vector3.ONE * scale_factor
-			model.position = -bounds.get_center() * scale_factor
-		if equipment[0] == "R_Hand":
-			sidearm_visual = model
-		else:
-			pick_visual = model
-		model.hide()
+		_equipment_pending.erase(equipment)
+		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			_mount_equipment(equipment, ResourceLoader.load_threaded_get(equipment[1]) as PackedScene)
+
+func _mount_equipment(equipment: Array, packed: PackedScene) -> void:
+	var skeleton := visual_mesh.find_child("Skeleton3D", true, false) as Skeleton3D if visual_mesh else null
+	if not skeleton or not packed or skeleton.find_bone(equipment[0]) < 0:
+		return
+	var attachment := BoneAttachment3D.new()
+	attachment.bone_name = equipment[0]
+	skeleton.add_child(attachment)
+	var model: Node3D = packed.instantiate()
+	attachment.add_child(model)
+	var bounds := AABB()
+	var found := false
+	for mesh in model.find_children("*", "MeshInstance3D", true, false):
+		var box: AABB = (model.global_transform.affine_inverse() * mesh.global_transform) * mesh.get_aabb()
+		bounds = bounds.merge(box) if found else box
+		found = true
+	if found:
+		var scale_factor: float = equipment[2] / maxf(bounds.size[bounds.size.max_axis_index()], 0.001)
+		model.scale = Vector3.ONE * scale_factor
+		model.position = -bounds.get_center() * scale_factor
+	if equipment[0] == "R_Hand":
+		sidearm_visual = model
+	else:
+		pick_visual = model
+	model.hide()
 
 func _bind_gameplay_inputs() -> void:
 	var keys := {"reload": KEY_R, "melee": KEY_Q, "walk": KEY_ALT, "dive": KEY_C}
@@ -743,6 +1092,8 @@ func _update_combat(delta: float) -> void:
 	weapon_cooldown = maxf(0.0, weapon_cooldown - delta)
 	melee_cooldown = maxf(0.0, melee_cooldown - delta)
 	is_aiming = Input.is_action_pressed("aim")
+	if not _equipment_pending.is_empty():
+		_poll_equipment()
 	if sidearm_visual:
 		sidearm_visual.visible = is_aiming or weapon_cooldown > 0.0 or reload_timer > 0.0
 	if pick_visual:
@@ -762,7 +1113,9 @@ func _rotate_toward(dir: Vector3, rate: float, delta: float) -> void:
 		return
 	var target := atan2(-dir.x, -dir.z)
 	var diff := wrapf(target - facing_yaw, -PI, PI)
-	facing_yaw += clampf(diff, -rate * delta, rate * delta)
+	# Capped turn rate for big turns, exponential ease for the last few degrees (no hard stop).
+	var eased := diff * (1.0 - exp(-rate * 1.5 * delta))
+	facing_yaw += clampf(eased, -rate * delta, rate * delta)
 
 func _process_ground_air(delta: float, move_dir: Vector3) -> void:
 	var on_floor := is_on_floor()
@@ -881,8 +1234,21 @@ func _process_ground_air(delta: float, move_dir: Vector3) -> void:
 			var audio = get_node_or_null("/root/AudioManager")
 			if audio and audio.has_method("play_sfx"):
 				audio.play_sfx("footstep_stone", global_position)
+	elif velocity.y <= 0.0 and _air_grace < fall_grace_time and current_state in [State.IDLE, State.WALK, State.RUN, State.SPRINT, State.CROUCH] and _ground_within(max_step_height + 0.1):
+		# Grace: stepping off a curb or cresting a slope briefly leaves the floor; keep the
+		# ground state (and clip) unless the drop is real, so FALL never flickers on steps.
+		_air_grace += delta
 	else:
 		current_state = State.JUMP if velocity.y > 0.0 else State.FALL
+	if now_floor:
+		_air_grace = 0.0
+
+@export var fall_grace_time := 0.15 ## s off the floor before the fall clip, while ground is near
+var _air_grace := 0.0
+
+func _ground_within(dist: float) -> bool:
+	var q := PhysicsRayQueryParameters3D.create(global_position + Vector3.UP * 0.1, global_position - Vector3.UP * dist, collision_mask, [get_rid()])
+	return not get_world_3d().direct_space_state.intersect_ray(q).is_empty()
 
 func _on_landed(impact: float) -> void:
 	last_landing_speed = impact
