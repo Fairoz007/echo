@@ -2,7 +2,23 @@
 
 Scope: existing working tree at `6053bbf`, Godot 4.7.2 Steam, RTX 2060 / driver 617.42. Existing source/assets retained. One Astra High task was used for Mara IK; routine inspection and fixes remained in the primary task. No generation API was invoked.
 
-## Priorities and findings
+## Latest status after integration at `7a23488`
+
+The original inspection and intermediate results below are historical. The shared integration commit now includes the idle IK fixes, preserved elbow bend with bounded run/sprint arm reach, stronger hit reaction, mantle hand targeting, chapter wind presets and asynchronous environment/collision builds. Existing Mara assets remain usable; no replacement model or clips were generated.
+
+The integration commit/report records character **27/27**, movement **54/54**, controls **24/24** and a full campaign route pass. Those are the integrating agent's results, not additional runs by this continuation. The stored five-preset performance logs cover six scenes each on OpenGL; they do not certify every chapter, long sessions or Forward+/Vulkan. Ultra also had an earlier timeout before a successful rerun.
+
+This continuation independently ran the rendered turn/climb subset on Godot 4.7.2, Compatibility/OpenGL, Low: **7 checks, 0 failures** (`rig_turn_baseline.log`). The turn check now measures actual foot movement after subtracting character translation instead of accepting an internal gait-blend value: **0.187 m displacement, 0.053 m lift, 5 samples below 1 m/s**. Climb hand contact averaged **0.003 m** over 104 samples; mantle best contact gap was **0.000 m**. Best mantle contact does not prove continuous contact throughout the motion. No additional Player changes were needed after this result.
+
+Current priorities:
+
+1. **P0 GPU stability:** historical crashes remain unexplained; keep Compatibility as the verified path. Initial load/render spikes and the Ultra timeout still warrant investigation.
+2. **P1 rig acceptance:** turn stepping works but only plays a short partial cycle; body-size extremes/collision, sustained mantle contact and real controller acceptance remain unverified. Character LOD selection and the IK-quality setting remain unfinished.
+3. **P2 visual polish:** recolor masks/accessory overlaps, campaign leaf placement and manual foliage acceptance remain. Branch sway is shader deformation. The 41-bone rig has no fingers; slide, ledge shimmy and dedicated combat poses are absent.
+
+The earlier save-backup incident is documented below. Subsequent test runs use current-data snapshot/restore; this continuation did not intentionally change campaign progression or save formats.
+
+## Priorities and findings at initial inspection
 
 | Priority | Area | Working | Broken or unfinished at inspection |
 |---|---|---|---|
@@ -37,7 +53,7 @@ A leftover customization capture and a shell queue launching nature captures wer
 - Fixed a vector/boolean expression in the customization capture harness and isolated its campaign saves.
 - Added `dev/run_recovery_test.ps1`: shared lock, timeout, error checks, optional required success marker and snapshot/restore of top-level game user data.
 
-## Runtime evidence
+## Intermediate recovery runtime evidence (before final integration)
 
 | Check | Result |
 |---|---|
@@ -54,7 +70,7 @@ All rendered runs use Compatibility/OpenGL at 1280×720 window size, normally LO
 
 The original customization capture unexpectedly autosaved slots 0/1. Their current saves were restored byte-for-byte from `.bak` and verified against pre-test SHA-256 hashes. Slot 99 was unchanged. However, the older `.bak` versions for slots 0/1 had already been replaced by that capture; those older backups could not be restored. The capture now writes to `user://qa_customize`, and the runner snapshots/restores existing top-level user files. Campaign QA uses its existing isolated directory. Cosmetic test edits were restored.
 
-## Remaining work / blockers
+## Initial remaining work / blockers (superseded by latest status above)
 
 1. Establish a reproducible GPU-crash trigger before changing renderer architecture or drivers. Forward+/Vulkan stability is not certified.
 2. Repair the three remaining animation-polish checks; validate body extremes against foot IK and collision. Character LOD1–3 assets exist but player LOD selection is unfinished.

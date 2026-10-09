@@ -142,17 +142,23 @@ func _turn() -> void:
 	view_off = Vector3(3.0, 0.8, 3.0)
 	var lf0 := _bone_w("L_Foot")
 	var rf0 := _bone_w("R_Foot")
-	acc = {"w": 0.0, "moved": 0.0}
+	var body0: Vector3 = p.global_position
+	acc = {"w": 0.0, "moved": 0.0, "lift": 0.0, "samples": 0}
 	Input.action_press("move_back") # 180 from standstill
 	await _watch("turn_180", 36, 3, func():
 		acc.w = maxf(acc.w, p._turn_w)
-		if p.horizontal_speed < 0.5: # walk cycle driven while still on the spot
-			acc.moved = maxf(acc.moved, float(p._gait_smooth.get("locomotion", 0.0))))
+		if p.horizontal_speed < 1.0 and p._turn_w > 0.1:
+			var body_delta: Vector3 = p.global_position - body0
+			var left_step := _bone_w("L_Foot") - lf0 - body_delta
+			var right_step := _bone_w("R_Foot") - rf0 - body_delta
+			acc.moved = maxf(acc.moved, maxf(left_step.length(), right_step.length()))
+			acc.lift = maxf(acc.lift, maxf(left_step.y, right_step.y))
+			acc.samples += 1)
 	_release()
 	var max_w: float = acc.w
 	var moved: float = acc.moved
 	_record("turn-in-place weight (max)", "%.2f" % max_w, max_w > 0.5)
-	_record("turn-in-place gait blend at <0.5 m/s", "%.2f" % moved, moved > 0.2, "walk cycle steps the feet (foot lock re-plants)")
+	_record("turn foot motion excluding body travel", "%.3f m, lift %.3f m, %d samples" % [moved, acc.lift, acc.samples], moved > 0.08 and acc.lift > 0.03 and acc.samples >= 3, "actual step while speed <1 m/s")
 	await _reset("flat", Vector3(-30, 0, 0))
 	Input.action_press("move_left") # 90 from standstill
 	await _watch("turn_90", 30, 3, func(): pass)

@@ -18,12 +18,12 @@
 |---|---|---|
 | Straight-knee idle | Stance lift to 0.995 leg length plus a pelvis tilt for the unequal legs | knee 168.5° (clip alone ~148°) |
 | Idle breathing | 0.24 Hz pitch on Spine02 and lift on the clavicles, weighted by idle | head travel 7.4 mm |
-| Turn in place | Standing turns drive the walk cycle at 0.95 m/s pseudo-speed so the feet step and re-plant; spine and head lead the turn by up to 22° | turn weight 1.0; gait blend 0.27 at under 0.5 m/s |
+| Turn in place | Standing turns drive the walk cycle at 0.95 m/s pseudo-speed so the feet step and re-plant; spine and head lead the turn by up to 22° | turn weight 1.0; foot displacement 0.187 m and lift 0.053 m after subtracting body translation, 5 samples below 1 m/s |
 | Soft/hard landing | Hip squash replaces the old whole-mesh drop, which sank the feet; the leg IK bends the knees and the spine pitches forward | soft 0.069 m (7.5 m/s); hard 0.124 m (12.8 m/s); feet gap 0.000 |
 | Hit reaction | Spine, chest and head snap away from the hit direction, then recover in 0.45 s; fires from `take_damage` | weight 0.70, head 0.106 m, recovers to 0 |
 | Interact reach | The right arm reaches toward the interactable through IK (pickup, lever, button) | hand 0.106 m from the lever centre |
 | Climb hand IK | Each animated hand is projected onto the wall with a raycast | average gap 0.003 m over 104 samples |
-| Mantle hand IK | Both hands are pinned to the ledge lip for the whole mantle | gap 0.000 m |
+| Mantle hand IK | Both hands target the ledge lip during mantle/vault | best gap 0.000 m; continuous contact across the whole motion is not established by this metric |
 | Run leading arm (§5.3) | Forward swing ×0.5 of the backward swing; the whole arm is rotated back when the hand would pass 0.27 m ahead of the chest, which keeps the elbow bend | run and sprint 0.270 m (was 0.395 / 0.407) |
 
 ## Tests (all on LOW)
@@ -35,6 +35,12 @@
 | `scripts/qa_water_input.gd` | **PASS** |
 
 The character tests run on gl_compatibility / opengl3 at `--quality=1`.
+
+Follow-up on integration commit `7a23488`: a rendered `--only=turn,climb` run passed **7/7**, including a stronger turn test that measures foot displacement/lift rather than the internal blend weight. Evidence: `docs/rig_turn_baseline.log`. The full-suite counts above are retained from the integration report; this follow-up did not rerun unchanged suites or alter Player movement. Command:
+
+```powershell
+./dev/run_recovery_test.ps1 -Target '-s res://dev/character/character_tests.gd' -Log rig_turn_baseline -UserArgs '--quality=1 --only=turn,climb' -ExpectedMarker '0 failures' -TimeoutSeconds 100
+```
 
 ## Screenshots
 
