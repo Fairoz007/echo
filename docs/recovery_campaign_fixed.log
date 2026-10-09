@@ -1,0 +1,195 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c02_open_gate->Restore hydraulic water flow to lift the sanctuary gate
+[MISSION] Checkpoint stored:chapter_02_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter2: generated 8 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 2
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 2] Sluice gate opened! Water flowing.
+[MISSION] Completed Objective:obj_c02_open_gate
+[MISSION] New Objective:obj_c02_explore_sanctuary->Explore the inner sanctuary and examine the Vaelor inscription
+PHYSICAL reached HydraulicPuzzle/SluiceLever/Interactable3D at (-6.966139, 0.074957, 6.300829)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c02_explore_sanctuary
+[MISSION] New Objective:obj_c02_investigate_abyss->Investigate the deep acoustic vertical shaft
+PHYSICAL reached Sanctuary/InscriptionTablet/Interactable3D at (-0.356391, 0.01, -23.39343)
+PHYSICAL reached QA_TabletBypass at (2.084036, 0.071883, -26.05714)
+[CHAPTER 2] Reached abyss overlook! Transitioning to Chapter 3: The Fall.
+PHYSICAL reached Sanctuary/AbyssTrigger at (0.302927, 0.01, -36.54863)
+[GAME_MANAGER] State changed to:CINEMATIC
+WARNING: [PLAYER] Mara visual was 1.00 m tall; normalised to 1.70 m
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _normalise_visual_height (res://scripts/Player.gd:282)
+       [1] _ready (res://scripts/Player.gd:207)
+[MISSION] New Objective:obj_c03_cross_bridge->Cross the ancient cyclopean bridge span
+[MISSION] Checkpoint stored:chapter_03_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter3: generated 0 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 3
+[CHAPTER 3] Structural failure triggered! Bridge collapsing.
+PHYSICAL reached BridgeStructure/CollapseTrigger at (0.00001, -3.123353, -1.435238)
+[CHAPTER 3] Player fell through subterranean fissure! Transitioning to Chapter 4: Beneath.
+PHYSICAL reached FissureAbyssTrigger at (0.000004, -45.02142, -9.442749)
+[GAME_MANAGER] State changed to:CINEMATIC
+WARNING: [PLAYER] Mara visual was 1.00 m tall; normalised to 1.70 m
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _normalise_visual_height (res://scripts/Player.gd:282)
+       [1] _ready (res://scripts/Player.gd:207)
+[MISSION] New Objective:obj_c04_find_way->Navigate the deep subterranean cavern and seek radio signals
+[MISSION] Checkpoint stored:chapter_04_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter4: generated 2 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 4
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c04_find_way
+[MISSION] New Objective:obj_c04_reach_outpost->Ascend through the upper tunnels toward the Meridian outpost
+PHYSICAL reached AbandonedCamp/FieldRadio/Interactable3D at (0.000087, 0.01, 1.62096)
+PHYSICAL reached QA_CampBypass at (2.450934, 0.034932, -1.11158)
+[CHAPTER 4] Navigated subterranean caves! Transitioning to Chapter 5: Hunters.
+PHYSICAL reached ExitTunnel/ExitTrigger at (0.040828, 0.025916, -34.4295)
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c05_neutralize_patrol->Infiltrate the Meridian checkpoint using stealth or combat
+[MISSION] Checkpoint stored:chapter_05_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 5
+[COLLISION] Chapter5: generated 66 collision bodies
+[AI] Mercenary acquired target! Entering COMBAT state.
+[AI] Mercenary acquired target! Entering COMBAT state.
+PHYSICAL reached Enemies/EnemyMercenary1 at (-2.684616, 0.030994, 11.77018)
+AIM debug yaw=0.15523933410645 desired=0.15523933109846 pitch=-0.07312806309576 desired=-0.07312806474781 hit=SandbagCover:<StaticBody3D#716823333991> ammo=12
+[AI] Mercenary hit! Remaining HP:30.0
+[AI] Mercenary hit! Remaining HP:0.0
+[CHAPTER 5] Enemy neutralized. Remaining:1
+[AI] Mercenary defeated.
+PHYSICAL reached Enemies/EnemyMercenary2 at (-2.685611, 0.030989, 11.76528)
+AIM debug yaw=-0.43314781162454 desired=-0.43314781843363 pitch=-0.03868839720346 desired=-0.03868839736273 hit=@StaticBody3D@2426:<StaticBody3D#717192432765> ammo=9
+[AI] Mercenary hit! Remaining HP:30.0
+[AI] Mercenary hit! Remaining HP:0.0
+[CHAPTER 5] Enemy neutralized. Remaining:0
+[MISSION] Completed Objective:obj_c05_neutralize_patrol
+[MISSION] New Objective:obj_c05_observe_excavation->Reach the observation ledge overlooking the Drowned Temple
+[AI] Mercenary defeated.
+[MISSION] Completed Objective:obj_c05_observe_excavation
+[MISSION] New Objective:obj_c05_enter_temple->Enter the submerged Drowned Temple aqueduct
+PHYSICAL reached ObservationPerch/DrakeTrigger at (-0.024956, 0.010296, -19.47064)
+[CHAPTER 5] Infiltrated Drowned Temple! Transitioning to Chapter 6.
+PHYSICAL reached TempleEntrance/ChapterEndTrigger at (-0.00138, -4.590004, -34.44806)
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[MISSION] Checkpoint stored:chapter_06_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter6: generated 60 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 6
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 6] Temple sluice wheel turned! Water draining.
+[MISSION] Completed Objective:obj_c06_drain_temple
+[MISSION] New Objective:obj_c06_reach_city_passage->Proceed through the drained gateway into the subterranean expanse
+PHYSICAL reached TempleMechanisms/SluiceWheel/Interactable3D at (-11.22151, -0.774514, 1.49114)
+PHYSICAL reached QA_RampFootGuide at (-0.357612, -3.764392, -10.60479)
+[CHAPTER 6] Drowned Temple solved! Transitioning to Chapter 7: City of Echoes.
+PHYSICAL reached TempleSanctum/ExitTrigger at (-0.006854, -0.16265, -32.45595)
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c07_explore_city->Explore the subterranean Vaelor ruins and examine the central plaza mural
+[MISSION] Checkpoint stored:chapter_07_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter7: generated 8 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 7
+PHYSICAL reached QA_MonumentBypass at (3.73458, 0.047147, 1.033305)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c07_explore_city
+[MISSION] New Objective:obj_c07_cross_causeway->Proceed along the Royal Causeway toward the Expedition Rendezvous
+[SKILL] Skill point earned! Total available:1
+PHYSICAL reached CentralPlaza/HistoryMural/Interactable3D at (0.992487, 0.020225, -2.675941)
+[SKILL] Skill point earned! Total available:2
+[CHAPTER 7] Optional Challenge Tomb discovered: Tomb of Weights!
+PHYSICAL reached OptionalTomb/TombTrigger at (24.50115, 0.030518, 9.865371)
+[CHAPTER 7] Reached expedition rendezvous! Transitioning to Chapter 8: The Betrayal.
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c08_reunite_expedition->Reunite with the surviving expedition team at the forward sanctuary
+[MISSION] Checkpoint stored:chapter_08_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter8: generated 46 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 8
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c08_reunite_expedition
+[MISSION] New Objective:obj_c08_hold_refuge->Meridian is breaching the sanctum. Hold them off or push through to Adrian
+[MISSION] New Objective:obj_c08_pursue_adrian->Pursue Adrian Kell through the Heart Road breach
+PHYSICAL reached SurvivorCamp/InjuredElias/Interactable3D at (0.000057, 0.010502, 1.660977)
+[AI] Mercenary acquired target! Entering COMBAT state.
+[CHAPTER 8] Adrian confrontation! Transitioning to Chapter 9: The Heart Road.
+PHYSICAL reached Passage/AdrianConfrontationTrigger at (0.000001, 0.027758, -29.43017)
+[GAME_MANAGER] State changed to:GAME_OVER
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c09_cross_heart_road->Traverse the seismic fractures along the Heart Road
+[MISSION] Checkpoint stored:chapter_09_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter9: generated 2 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 9
+[CHAPTER 9] Seismic tremor! Falling debris.
+PHYSICAL reached CollapsingRoute/TremorTrigger at (0.000014, 0.031644, 5.565172)
+[CHAPTER 9] Reached Heart Vault threshold! Transitioning to Chapter 10: The Heart Vault.
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c10_confront_drake->Approach the central harmonic platform and confront Lucian Drake
+[MISSION] Checkpoint stored:chapter_10_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter10: generated 7 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+[SAVE] Loaded game slot1
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c10_confront_drake->Approach the central harmonic platform and confront Lucian Drake
+[COLLISION] Chapter10: generated 7 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c10_confront_drake
+[MISSION] New Objective:obj_c10_disable_nodes->Deactivate the four peripheral resonance nodes to stop catastrophic frequency overload
+QA KEY SPY: physical key Escape at t=356985 (blocked)
+PHYSICAL ROUTE chapter 10
+PHYSICAL reached QA_NodeSouthBypass at (2.905684, 0.061513, 17.53085)
+PHYSICAL reached CentralPlatform/DrakeTrigger at (0.243286, 0.01, 12.46455)
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 10] Resonance node disabled:SouthTotal disabled:1
+PHYSICAL reached ResonanceChamber/NodeSouth/Interactable3D at (0.070596, 0.017011, 16.38481)
+QA KEY SPY: physical key Escape at t=376284 (blocked)
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 10] Resonance node disabled:EastTotal disabled:2
+QA KEY SPY: physical key Escape at t=376567 (blocked)
+PHYSICAL reached ResonanceChamber/NodeEast/Interactable3D at (16.77688, 0.027461, 1.109301)
+QA KEY SPY: physical key Escape at t=377051 (blocked)

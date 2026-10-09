@@ -85,7 +85,7 @@ func build(level: Node3D) -> void:
 	add_child(grass)
 	grass.position = Vector3(0, 0, -15)
 	_brighten_grass(grass)
-	WindSystem.set_wind(Vector2(0.8, -0.6), 0.7, 0.6, 0.3)
+	WindSystem.set_preset(WindSystem.Preset.BREEZE, 0.0, Vector2(0.8, -0.6))
 
 
 # ---------------------------------------------------------------- terrain

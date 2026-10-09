@@ -18,6 +18,7 @@ var has_read_inscription: bool = false
 var transition_started := false
 
 func _ready() -> void:
+	WindSystem.set_preset(WindSystem.Preset.MODERATE, 0.0)
 	var exploration := preload("res://systems/CampaignExploration.gd").new()
 	add_child(exploration)
 	exploration.configure(2)

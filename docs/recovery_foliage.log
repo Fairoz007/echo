@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+FOLIAGE_WIND bindings res://assets/environment/jungle/jungle_tree.glb n=1 PBR_maps_preserved=true
+FOLIAGE_WIND bindings res://assets/environment/jungle/jungle_fern.glb n=1 PBR_maps_preserved=true
+FOLIAGE_WIND presets storm=2.40 max_step=0.110 signals=10
+FOLIAGE_WIND_PASS

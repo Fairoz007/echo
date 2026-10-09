@@ -48,7 +48,9 @@ func _input(event: InputEvent) -> void:
 		# Physical mouse sensitivity stays constant when the window is downscaled.
 		var motion: Vector2 = event.screen_relative if event.screen_relative != Vector2.ZERO else event.relative
 		yaw -= motion.x * mouse_sensitivity
-		pitch -= motion.y * mouse_sensitivity
+		var remap := get_node_or_null("/root/InputRemap")
+		var invert := -1.0 if remap and remap.invert_y else 1.0
+		pitch -= motion.y * mouse_sensitivity * invert
 		pitch = clamp(pitch, deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 
 func _pivot_target() -> Vector3:
@@ -75,6 +77,11 @@ func snap_to_target() -> void:
 func _physics_process(delta: float) -> void:
 	if not target:
 		return
+	var remap := get_node_or_null("/root/InputRemap")
+	if remap and not get_tree().paused:
+		var look: Vector2 = remap.get_look_vector()
+		yaw -= look.x * 3.0 * delta
+		pitch = clampf(pitch - look.y * 2.2 * delta, deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 	var desired := _pivot_target()
 	if not _snapped or global_position.distance_to(desired) > 4.0:
 		global_position = desired # teleports / respawns

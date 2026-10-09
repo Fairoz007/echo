@@ -192,6 +192,8 @@ signal interactable_lost()
 signal landed(impact_speed: float, hard: bool)
 
 func _ready() -> void:
+	if not is_in_group("player"):
+		add_to_group("player")
 	gravity = base_gravity
 	current_health = max_health
 	current_stamina = max_stamina
@@ -338,7 +340,9 @@ func _setup_crouch_pose() -> void:
 		_anim_tree.mixer_applied.connect(_apply_crouch_pose)
 		_setup_foot_lock()
 		_anim_tree.mixer_applied.connect(_apply_run_posture)
+		_anim_tree.mixer_applied.connect(_apply_body_layers)
 		_anim_tree.mixer_applied.connect(_apply_foot_lock)
+		_anim_tree.mixer_applied.connect(_apply_hand_ik)
 
 # ---------------------------------------------------------------- run posture layer
 # The retargeted run lunges forward with the leading arm held straight out. After the
@@ -356,12 +360,14 @@ var _lean_accel := 0.0
 @export var run_pelvis_raise := 0.06 ## m; the clip runs in a deep crouch, foot lock re-straightens legs
 @export var run_arm_swing_deg := 38.0
 @export var sprint_arm_swing_deg := 40.0
-@export var max_forearm_angle_deg := 65.0 ## forearm never rises far above horizontal (no reaching)
+@export var max_forearm_angle_deg := 80.0 ## forearm stays below horizontal, with the elbow flexed
+@export var run_arm_forward_scale := 0.5 ## forward swing fraction of the backward swing
+@export var run_hand_forward_limit := 0.27 ## m ahead of the chest; shared arm rotation preserves elbow bend
 var _posture_w := 0.0
 var _stance_lift := 0.0
 @export var run_stance_extension := 0.93 ## stance leg extension target (fraction of leg length)
 @export var run_stance_max_lift := 0.12 ## m
-@export var idle_stance_extension := 0.985 ## idle leg extension target (fraction of leg length)
+@export var idle_stance_extension := 0.995 ## ~169 degree knees while leaving a small bend
 var _idle_w := 0.0
 
 func _apply_run_posture() -> void:
@@ -420,6 +426,9 @@ func _apply_run_posture() -> void:
 		_phase_peak = maxf(maxf(absf(diff), _phase_peak - dt * 0.05), _leg_length * 0.2)
 		phase = clampf(diff / _phase_peak, -1.0, 1.0)
 	var amp := deg_to_rad(sprint_arm_swing_deg if sprint else run_arm_swing_deg)
+	var chest_bone: int = b.call("Spine02")
+	var chest_x := _skeleton.get_bone_global_pose(chest_bone if chest_bone >= 0 else spine).origin.x
+	var reach_limit := run_hand_forward_limit / maxf(_skeleton.global_basis.get_scale().x, 0.0001)
 	for side in ["L_", "R_"]:
 		var upper: int = b.call(side + "Upperarm")
 		var fore: int = b.call(side + "Forearm")
@@ -428,13 +437,20 @@ func _apply_run_posture() -> void:
 			continue
 		var sign := 1.0 if side == "L_" else -1.0 # left arm forward when right foot is ahead
 		var swing := amp * phase * sign
+		# Forward half of the swing is shorter than the back half: a full-amplitude forward
+		# swing plus the elbow bend read as the leading hand reaching out ahead of the body.
+		if swing > 0.0:
+			swing *= run_arm_forward_scale
 		var u := _skeleton.get_bone_global_pose(upper)
 		var out := 1.0 if u.origin.z > 0.0 else -1.0
-		var down := Basis(lateral, swing) * Vector3(0, -1, 0)
-		down = (down + Vector3(0, 0, out * 0.18)).normalized() # slight abduction clears the body
 		# Elbow bend: tighter going forward, more open behind.
 		var bend := deg_to_rad(lerpf(run_elbow_bend_deg - 20.0, run_elbow_bend_deg + 15.0, (phase * sign + 1.0) * 0.5))
-		var fore_angle := minf(swing + bend, deg_to_rad(max_forearm_angle_deg))
+		# Rotate both segments back when the forearm reaches its limit. Clamping only
+		# the forearm collapses the requested elbow bend into a straight leading arm.
+		swing -= maxf(swing + bend - deg_to_rad(max_forearm_angle_deg), 0.0)
+		var fore_angle := swing + bend
+		var down := Basis(lateral, swing) * Vector3(0, -1, 0)
+		down = (down + Vector3(0, 0, out * 0.18)).normalized() # slight abduction clears the body
 		# Forearm keeps an outward component so the hand never crosses the body midline.
 		var fdir := (Basis(lateral, fore_angle) * Vector3(0, -1, 0) + Vector3(0, 0, out * sprint_forearm_splay if sprint else out * 0.12)).normalized()
 		# Rebuild the arm from the bind pose (T-pose: arm lateral, palm down) by swinging it
@@ -443,6 +459,17 @@ func _apply_run_posture() -> void:
 		var r_up := _skeleton.get_bone_global_rest(upper)
 		var r_fo := _skeleton.get_bone_global_rest(fore)
 		var r_ha := _skeleton.get_bone_global_rest(hand)
+		# Bound the whole arm's forward projection using its actual segment lengths
+		# and shoulder position. A common sagittal rotation keeps the elbow and roll.
+		var arm_tip := down * r_up.origin.distance_to(r_fo.origin) + fdir * r_fo.origin.distance_to(r_ha.origin)
+		var allowed_x := chest_x + reach_limit - u.origin.x
+		if arm_tip.x > allowed_x:
+			var sagittal_length := Vector2(arm_tip.x, arm_tip.y).length()
+			if sagittal_length > 0.0001:
+				var correction := asin(clampf(allowed_x / sagittal_length, -1.0, 1.0)) - atan2(arm_tip.x, -arm_tip.y)
+				var retract := Basis(lateral, correction)
+				down = retract * down
+				fdir = retract * fdir
 		var up_t := _arm_from_rest(r_up.basis, r_fo.origin - r_up.origin, down)
 		u.basis = Basis(u.basis.get_rotation_quaternion().slerp(up_t.get_rotation_quaternion(), w))
 		_set_global_pose(upper, u)
@@ -480,6 +507,8 @@ func _arm_from_rest(rest_basis: Basis, rest_dir: Vector3, dir: Vector3) -> Basis
 @export var foot_release_height := 0.16
 @export var foot_idle_drift := 0.06 ## m, idle re-plant threshold
 @export var foot_max_drift := 0.45 ## m the animated foot may wander from its lock before release
+@export var foot_align_to_ground := true
+@export var foot_align_max_deg := 30.0
 var _feet := {}
 var _sole_offset := 0.06
 var _pelvis_offset := 0.0 ## m, <= 0, smoothed
@@ -495,13 +524,18 @@ func _setup_foot_lock() -> void:
 		if ids.has(-1):
 			_feet.clear()
 			return
-		_feet[side] = {"ids": ids, "locked": false, "lock": Vector3.ZERO, "w": 0.0}
+		var thigh := _skeleton.get_bone_global_rest(ids[0]).origin
+		var calf := _skeleton.get_bone_global_rest(ids[1]).origin
+		var ankle := _skeleton.get_bone_global_rest(ids[2]).origin
+		_feet[side] = {"ids": ids, "length": thigh.distance_to(calf) + calf.distance_to(ankle), "locked": false, "lock": Vector3.ZERO, "w": 0.0}
 		lowest = minf(lowest, _skeleton.get_bone_global_rest(ids[2]).origin.y * scale)
 	_sole_offset = clampf(lowest, 0.03, 0.12) # ankle height above the sole in bind pose
 
 func _apply_foot_lock() -> void:
 	if not foot_lock_enabled or not _skeleton or _feet.is_empty():
 		return
+	# Disabled in the air (JUMP/FALL), in water (SWIM) and on walls (CLIMB/MANTLE): those
+	# states are not in this list, so feet unlock and the pelvis offset eases back to zero.
 	var grounded := is_on_floor() and current_state in [State.IDLE, State.WALK, State.RUN, State.SPRINT, State.CROUCH]
 	var dt := get_physics_process_delta_time()
 	var to_skel := _skeleton.global_transform.affine_inverse()
@@ -524,16 +558,39 @@ func _apply_foot_lock() -> void:
 	# Idle uses the same lift: the idle clip stands with ~148 deg knees (reads as a flexed crouch).
 	_idle_w = move_toward(_idle_w, 1.0 if grounded and current_state == State.IDLE else 0.0, dt * 2.5)
 	var ext_w := maxf(_posture_w, _idle_w)
+	# Mara's right leg is longer than her left. A small pelvis tilt lets both idle
+	# legs extend naturally; lifting a level pelvis alone leaves the longer knee bent.
+	if _idle_w > 0.01 and grounded and _turn_w < 0.05 and _feet["L_"].locked and _feet["R_"].locked:
+		var raises := Vector2.ZERO
+		var lateral_span := 0.0
+		var scale_w := _skeleton.global_basis.get_scale().x
+		for side in _feet:
+			var foot: Dictionary = _feet[side]
+			var thigh_s := _skeleton.get_bone_global_pose(foot.ids[0]).origin
+			var thigh_w: Vector3 = _skeleton.global_transform * thigh_s
+			var horizontal := Vector2(thigh_w.x - foot.lock.x, thigh_w.z - foot.lock.z).length()
+			var reach: float = foot.length * scale_w * idle_stance_extension
+			var raise: float = foot.lock.y + sqrt(maxf(reach * reach - horizontal * horizontal, 0.0)) - thigh_w.y
+			if side == "L_":
+				raises.x = raise
+				lateral_span -= thigh_s.z * scale_w
+			else:
+				raises.y = raise
+				lateral_span += thigh_s.z * scale_w
+		var pelvis := _skeleton.find_bone("Pelvis")
+		if pelvis >= 0 and absf(lateral_span) > 0.01:
+			var tilt := clampf(-atan((raises.y - raises.x) / lateral_span), -deg_to_rad(8.0), deg_to_rad(8.0))
+			_rotate_bone_global(pelvis, Vector3.RIGHT, tilt * _idle_w)
 	if ext_w > 0.01 and grounded:
 		var need := 0.0
 		var cap := run_stance_max_lift
 		var scale_w := _skeleton.global_basis.get_scale().x
-		var reach := _leg_length * scale_w * (idle_stance_extension if _idle_w > _posture_w else run_stance_extension)
-		var full := _leg_length * scale_w * 0.99
 		for side in _feet:
 			var foot: Dictionary = _feet[side]
 			if not foot.locked:
 				continue
+			var reach: float = foot.length * scale_w * (idle_stance_extension if _idle_w > _posture_w else run_stance_extension)
+			var full: float = foot.length * scale_w * 0.998
 			var thigh_w: Vector3 = _skeleton.global_transform * _skeleton.get_bone_global_pose(foot.ids[0]).origin
 			var horizontal := Vector2(thigh_w.x - foot.lock.x, thigh_w.z - foot.lock.z).length()
 			var below: float = thigh_w.y - foot.lock.y
@@ -555,7 +612,11 @@ func _apply_foot_lock() -> void:
 		var ids: Array = foot.ids
 		var ankle_w: Vector3 = _skeleton.global_transform * _skeleton.get_bone_global_pose(ids[2]).origin
 		var ground := _ground_below(ankle_w)
-		var height := ankle_w.y - ground - _stance_lift # plant/release on the clip's own foot height
+		var ground_n := _last_ground_normal
+		# Plant/release on the clip's own ankle height (thresholds were tuned for this; measuring
+		# sole clearance instead kept moving feet locked until max drift and made them skate).
+		var height := ankle_w.y - ground - _stance_lift
+		var standing := current_state == State.IDLE and horizontal_speed < 0.1 and _turn_w < 0.05
 		if not grounded:
 			foot.locked = false
 		elif foot.locked:
@@ -563,9 +624,13 @@ func _apply_foot_lock() -> void:
 			# Idle: let a foot re-plant where the idle clip wants it (no flexed, spread stance
 			# left over from the last stride).
 			var max_drift := foot_idle_drift if current_state == State.IDLE else foot_max_drift + 0.06 * horizontal_speed
-			if height > foot_release_height or drift > max_drift:
+			if (not standing and height > foot_release_height) or drift > max_drift:
 				foot.locked = false
-		elif height < foot_plant_height:
+		# Both feet support an idle pose, including the high ankle in the retargeted clip.
+		# Replant immediately after drift so an old stride cannot hold the idle stance apart.
+		var just_released: bool = foot.get("was_locked", false) and not foot.locked
+		foot.was_locked = foot.locked
+		if grounded and not foot.locked and (standing or (height < foot_plant_height and not just_released)):
 			foot.locked = true
 			foot.lock = Vector3(ankle_w.x, ground + _sole_offset, ankle_w.z)
 		foot.w = move_toward(foot.w, 1.0 if foot.locked else 0.0, dt * (40.0 if foot.locked else 6.0))
@@ -576,18 +641,29 @@ func _apply_foot_lock() -> void:
 			target.y = maxf(target.y, ground + _sole_offset) # never sink into the floor
 		if target.distance_to(ankle_w) > 0.002:
 			_solve_leg(ids, to_skel * target)
+		# Foot pitch/roll follows the ground (slopes, stair nosings, rocks) while planted.
+		if grounded and foot.w > 0.01 and foot_align_to_ground and ground_n.y > 0.5:
+			var n_s: Vector3 = (_skeleton.global_basis.inverse() * ground_n).normalized()
+			var tilt := minf(Vector3.UP.angle_to(n_s), deg_to_rad(foot_align_max_deg))
+			if tilt > 0.01:
+				var axis := Vector3.UP.cross(n_s).normalized()
+				var fp := _skeleton.get_bone_global_pose(ids[2])
+				fp.basis = Basis(axis, tilt * foot.w) * fp.basis
+				_set_global_pose(ids[2], fp)
 		var solved_w: Vector3 = _skeleton.global_transform * _skeleton.get_bone_global_pose(ids[2]).origin
 		if side == "L_":
 			last_feet_ground_gap.x = solved_w.y - ground - _sole_offset
 		else:
 			last_feet_ground_gap.y = solved_w.y - ground - _sole_offset
 
+var _last_ground_normal := Vector3.UP
 func _ground_below(p: Vector3) -> float:
 	var hit := _ray(p + Vector3.UP * 0.5, p + Vector3.DOWN * 0.6)
+	_last_ground_normal = hit.normal if not hit.is_empty() else Vector3.UP
 	return hit.position.y if not hit.is_empty() else global_position.y
 
 ## Analytic two-bone IK in skeleton space.
-func _solve_leg(ids: Array, target: Vector3) -> void:
+func _solve_leg(ids: Array, target: Vector3, pole_fallback := Vector3(1, 0, 0)) -> void:
 	var thigh := _skeleton.get_bone_global_pose(ids[0])
 	var calf := _skeleton.get_bone_global_pose(ids[1])
 	var foot := _skeleton.get_bone_global_pose(ids[2])
@@ -602,7 +678,7 @@ func _solve_leg(ids: Array, target: Vector3) -> void:
 	# Keep the animated knee plane: pole = knee offset from the hip-ankle line.
 	var pole := (b - a) - dir * (b - a).dot(dir)
 	if pole.length() < 0.0001:
-		pole = Vector3(1, 0, 0) # Mara faces +X in skeleton space: knees bend forward
+		pole = pole_fallback # legs: +X (Mara faces +X in skeleton space, knees bend forward)
 	pole = pole.normalized()
 	var cos_a := clampf((la * la + dist * dist - lb * lb) / (2.0 * la * dist), -1.0, 1.0)
 	var knee := a + dir * (la * cos_a) + pole * (la * sqrt(1.0 - cos_a * cos_a))
@@ -662,6 +738,212 @@ func _apply_crouch_pose() -> void:
 	var spine := -deg_to_rad(crouch_spine_angle_deg) * k
 	_rotate_bone_global(_crouch_bones["Spine01"], axis, spine * 0.6)
 	_rotate_bone_global(_crouch_bones["Spine02"], axis, spine * 0.4)
+
+# ---------------------------------------------------------------- procedural body layers
+# The rig ships only idle/walk/run/jump/fall/climb/dive/swim. These additive layers run after
+# the AnimationTree (and the run posture) but before the foot lock, so anything that moves the
+# hips is absorbed by the leg IK and the feet stay planted:
+#   idle breathing, landing squash, hit reaction, turn-in-place upper-body lead.
+@export var body_layers_enabled := true
+@export var breath_rate_hz := 0.24
+@export var breath_spine_deg := 1.6
+@export var breath_shoulder_deg := 2.2
+@export var breath_chest_rise := 0.003 ## m; subtle inhale/exhale without moving the planted hips
+@export var land_squash_depth := 0.13 ## m hip drop at full squash (hard landing)
+@export var hit_reaction_deg := 18.0
+@export var turn_lead_deg := 22.0 ## max upper-body lead into a standing turn
+var _breath_t := 0.0
+var _land_squash := 0.0
+var _land_squash_t := 9.0
+var _hit_t := 9.0
+var _hit_strength := 0.0
+var _hit_dir := Vector3.ZERO
+var _turn_w := 0.0
+var _turn_diff := 0.0
+var _prev_yaw := 0.0
+var last_land_squash := 0.0 ## current hip drop (m), for tests
+var last_hit_weight := 0.0
+const HIT_TIME := 0.45
+const HIT_ATTACK := 0.06
+const LAND_ATTACK := 0.06
+
+## Flinch away from `from_dir` (world direction the blow travels; zero = from the front).
+func play_hit_reaction(from_dir := Vector3.ZERO, strength := 1.0) -> void:
+	_hit_t = 0.0
+	_hit_strength = clampf(strength, 0.0, 1.0)
+	_hit_dir = from_dir
+
+func _apply_body_layers() -> void:
+	if not body_layers_enabled or not _skeleton or current_state == State.DEAD:
+		return
+	var dt := get_physics_process_delta_time()
+	var to_skel := _skeleton.global_basis.inverse()
+	var inv_scale := 1.0 / maxf(_skeleton.global_basis.get_scale().x, 0.0001)
+	var lateral := Vector3(0, 0, 1)
+	var spine: int = _crouch_bones.get("Spine01", -1)
+	var spine2: int = _crouch_bones.get("Spine02", -1)
+	var hip: int = _crouch_bones.get("Hip", -1)
+	if spine < 0 or hip < 0:
+		return
+	# Imported clips retain rotation tracks but may omit constant chest translation.
+	# Restore its authored local offset before adding the breath so it cannot accumulate.
+	var chest := spine2 if spine2 >= 0 else spine
+	_skeleton.set_bone_pose_position(chest, _skeleton.get_bone_rest(chest).origin)
+	# 1. Breathing: idle only (fades with the idle weight from the foot lock).
+	_breath_t = fmod(_breath_t + dt * breath_rate_hz, 1.0)
+	var calm := _idle_w if current_state in [State.IDLE, State.CROUCH] else 0.0
+	if calm > 0.01:
+		var br := sin(_breath_t * TAU)
+		_rotate_bone_global(chest, lateral, deg_to_rad(breath_spine_deg) * br * calm)
+		var chest_pose := _skeleton.get_bone_global_pose(chest)
+		chest_pose.origin.y += breath_chest_rise * br * calm * inv_scale
+		_set_global_pose(chest, chest_pose)
+		for side in ["L_", "R_"]:
+			var clav := _skeleton.find_bone(side + "Clavicle")
+			if clav < 0:
+				continue
+			var out := 1.0 if _skeleton.get_bone_global_pose(clav).origin.z > 0.0 else -1.0
+			# Inhale lifts the shoulders slightly (rotation about the forward axis).
+			_rotate_bone_global(clav, Vector3(1, 0, 0), -out * deg_to_rad(breath_shoulder_deg) * maxf(br, 0.0) * calm)
+	# 2. Landing squash: fast drop, spring back; the knees bend through the foot-lock IK.
+	_land_squash_t += dt
+	var env := 0.0
+	if _land_squash > 0.0:
+		env = _land_squash_t / LAND_ATTACK if _land_squash_t < LAND_ATTACK else exp(-(_land_squash_t - LAND_ATTACK) * 7.0)
+		if _land_squash_t > 0.9:
+			_land_squash = 0.0
+	var drop := land_squash_depth * _land_squash * env if is_on_floor() else 0.0
+	last_land_squash = drop
+	if drop > 0.001:
+		var hp := _skeleton.get_bone_global_pose(hip)
+		hp.origin.y -= drop * inv_scale
+		_set_global_pose(hip, hp)
+		_rotate_bone_global(spine, lateral, -deg_to_rad(16.0) * _land_squash * env)
+	# 3. Hit reaction: torso and head snap away from the blow, then recover.
+	_hit_t += dt
+	last_hit_weight = 0.0
+	if _hit_t < HIT_TIME:
+		# Reach the requested impact strength before recovery starts. Simultaneous
+		# attack and decay attenuated every hit to roughly 60% of that strength.
+		var hw := smoothstep(0.0, HIT_ATTACK, _hit_t) * (1.0 - smoothstep(HIT_ATTACK, HIT_TIME, _hit_t)) * _hit_strength
+		last_hit_weight = hw
+		var push := Vector3(-1, 0, 0) # default: a blow from the front pushes her back
+		if _hit_dir.length_squared() > 0.01:
+			push = to_skel * _hit_dir
+			push.y = 0.0
+			push = push.normalized() if push.length_squared() > 0.0001 else Vector3(-1, 0, 0)
+		var axis := Vector3.UP.cross(push).normalized()
+		_rotate_bone_global(spine, axis, deg_to_rad(hit_reaction_deg) * 0.6 * hw)
+		if spine2 >= 0:
+			_rotate_bone_global(spine2, axis, deg_to_rad(hit_reaction_deg) * 0.4 * hw)
+		var head := _skeleton.find_bone("Head")
+		if head >= 0:
+			_rotate_bone_global(head, axis, deg_to_rad(hit_reaction_deg) * 0.7 * hw)
+		var hp2 := _skeleton.get_bone_global_pose(hip)
+		hp2.origin += push * 0.04 * hw * inv_scale
+		hp2.origin.y -= 0.03 * hw * inv_scale
+		_set_global_pose(hip, hp2)
+	# 4. Turn in place: the upper body leads into the turn (head, then chest, then hips).
+	if _turn_w > 0.01:
+		var lead := clampf(_turn_diff, -deg_to_rad(turn_lead_deg), deg_to_rad(turn_lead_deg)) * _turn_w
+		_rotate_bone_global(spine, Vector3.UP, lead * 0.45)
+		if spine2 >= 0:
+			_rotate_bone_global(spine2, Vector3.UP, lead * 0.3)
+		var head2 := _skeleton.find_bone("Head")
+		if head2 >= 0:
+			_rotate_bone_global(head2, Vector3.UP, lead * 0.5)
+
+## Called from _update_animation: detects a standing turn (large heading change at low speed).
+func _update_turn_in_place(delta: float) -> void:
+	var rate := absf(wrapf(facing_yaw - _prev_yaw, -PI, PI)) / maxf(delta, 0.0001)
+	_prev_yaw = facing_yaw
+	var standing := is_on_floor() and current_state in [State.IDLE, State.WALK, State.RUN, State.SPRINT] and horizontal_speed < 1.0
+	var turning := rate > 1.0 and absf(_turn_diff) > 0.2
+	_turn_w = move_toward(_turn_w, 1.0 if standing and turning else 0.0, delta * (8.0 if standing and turning else 3.0))
+	if not turning:
+		_turn_diff = lerpf(_turn_diff, 0.0, 1.0 - exp(-10.0 * delta))
+
+# ---------------------------------------------------------------- hand IK (after the foot lock)
+# Climb: each animated hand is projected onto the wall it is reaching for (palm contact).
+# Mantle: both hands plant on the ledge lip while she hauls up.
+# Interact: the right hand reaches toward the interactable (pickup / lever / button).
+@export var hand_ik_enabled := true
+@export var interact_reach_time := 0.7
+var _arms := {}
+var _arm_length := 0.55
+var _climb_hand_w := 0.0
+var _mantle_hand_w := 0.0
+var _mantle_ledge := Vector3.ZERO
+var _mantle_into := Vector3.FORWARD
+var _interact_t := 9.0
+var _interact_target := Vector3.ZERO
+var last_hand_contact_gap := Vector2(-1, -1) ## world distance hand -> contact target (L, R); for tests
+
+func play_interact_reach(target: Vector3) -> void:
+	_interact_t = 0.0
+	_interact_target = target
+
+func _setup_arms() -> void:
+	for side in ["L_", "R_"]:
+		var ids := [_skeleton.find_bone(side + "Upperarm"), _skeleton.find_bone(side + "Forearm"), _skeleton.find_bone(side + "Hand")]
+		if ids.has(-1):
+			_arms.clear()
+			return
+		_arms[side] = ids
+	var r: Array = _arms["R_"]
+	var a := _skeleton.get_bone_global_rest(r[0]).origin
+	var b := _skeleton.get_bone_global_rest(r[1]).origin
+	var c := _skeleton.get_bone_global_rest(r[2]).origin
+	_arm_length = (a.distance_to(b) + b.distance_to(c)) * _skeleton.global_basis.get_scale().x
+
+func _apply_hand_ik() -> void:
+	if not hand_ik_enabled or not _skeleton or current_state == State.DEAD:
+		return
+	if _arms.is_empty():
+		_setup_arms()
+		if _arms.is_empty():
+			return
+	var dt := get_physics_process_delta_time()
+	var xf := _skeleton.global_transform
+	var to_skel := xf.affine_inverse()
+	last_hand_contact_gap = Vector2(-1, -1)
+	var right := _mantle_into.cross(Vector3.UP).normalized()
+	_climb_hand_w = move_toward(_climb_hand_w, 1.0 if current_state == State.CLIMB else 0.0, dt * 5.0)
+	var mantling := current_state in [State.MANTLE, State.VAULT]
+	_mantle_hand_w = move_toward(_mantle_hand_w, 1.0 if mantling else 0.0, dt * (20.0 if mantling else 6.0))
+	_interact_t += dt
+	var reach_w := 0.0
+	if _interact_t < interact_reach_time and current_state in [State.IDLE, State.WALK, State.RUN, State.CROUCH]:
+		reach_w = smoothstep(0.0, 1.0, sin(_interact_t / interact_reach_time * PI))
+	for side in _arms:
+		var ids: Array = _arms[side]
+		var hand_w: Vector3 = xf * _skeleton.get_bone_global_pose(ids[2]).origin
+		var shoulder_w: Vector3 = xf * _skeleton.get_bone_global_pose(ids[0]).origin
+		var target := hand_w
+		var w := 0.0
+		if _climb_hand_w > 0.01:
+			var into := -_climb_normal
+			var hit := _ray(hand_w - into * 0.45, hand_w + into * 0.6)
+			if not hit.is_empty() and absf(hit.normal.y) < 0.6:
+				target = hit.position + hit.normal * 0.05
+				w = _climb_hand_w
+		elif _mantle_hand_w > 0.01:
+			var lat := -0.22 if side == "L_" else 0.22
+			target = _mantle_ledge + right * lat + _mantle_into * 0.1 + Vector3.UP * 0.03
+			w = _mantle_hand_w
+		elif reach_w > 0.0 and side == "R_":
+			var to_t := _interact_target - shoulder_w
+			target = shoulder_w + to_t.limit_length(_arm_length * 0.92)
+			w = reach_w
+		if w <= 0.001:
+			continue
+		# Out-of-reach goals are clamped by the solver (the arm straightens toward them).
+		_solve_leg(ids, to_skel * hand_w.lerp(target, w), Vector3(-1, -0.5, 0))
+		var gap: float = (xf * _skeleton.get_bone_global_pose(ids[2]).origin).distance_to(target)
+		if side == "L_":
+			last_hand_contact_gap.x = gap
+		else:
+			last_hand_contact_gap.y = gap
 
 func _resolve_slot(slot: String) -> String:
 	var guard := 0
@@ -877,9 +1159,14 @@ func _update_animation(delta: float) -> void:
 	elif playback and anim_state != target:
 		playback.travel(target)
 		anim_state = target
+	_update_turn_in_place(delta)
 	var speed := horizontal_speed
 	if current_state == State.CLIMB:
 		speed = velocity.length()
+	elif target == "locomotion" and _turn_w > 0.01:
+		# Standing turn: drive the walk cycle slowly so the feet step around (the foot lock
+		# re-plants each foot) instead of the whole body spinning on fixed feet.
+		speed = maxf(speed, turn_step_speed * _turn_w)
 	for blend_name in ["locomotion", "crouch", "swim", "climb"]:
 		var top: float = _loco_max_speed.get(blend_name, 1.0)
 		# Smoothed so speed jitter (slopes, stops) can't flick between clips.
@@ -910,6 +1197,7 @@ func _update_animation(delta: float) -> void:
 ## Blend position that keeps ONE stride-matched clip dominant: clips with different cycle
 ## lengths are not phase aligned, so mixing them (e.g. 16% run into a walk) drags the planted
 ## foot. Pure clips are used between switch points; a 0.6 m/s crossfade band joins them.
+@export var turn_step_speed := 0.95 ## pseudo ground speed (m/s) driving the walk cycle in a standing turn
 @export var gait_crossfade_band: float = 0.6
 @export var gait_blend_rate := 12.0 ## 1/s smoothing of the gait blend position
 var _gait_smooth := {}
@@ -1037,6 +1325,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_refresh_interactable()
 		if not nearby_interactable:
 			return
+		play_interact_reach(nearby_interactable.global_position)
 		nearby_interactable.trigger_interaction(self)
 	elif event.is_action_pressed("reload"):
 		start_reload()
@@ -1124,6 +1413,7 @@ func _rotate_toward(dir: Vector3, rate: float, delta: float) -> void:
 		return
 	var target := atan2(-dir.x, -dir.z)
 	var diff := wrapf(target - facing_yaw, -PI, PI)
+	_turn_diff = diff
 	# Capped turn rate for big turns, exponential ease for the last few degrees (no hard stop).
 	var eased := diff * (1.0 - exp(-rate * 1.5 * delta))
 	facing_yaw += clampf(eased, -rate * delta, rate * delta)
@@ -1272,7 +1562,9 @@ func _on_landed(impact: float) -> void:
 		_land_lock = 0.08
 		_land_lock_factor = 0.8
 		_land_timer = 0.12
-	_visual_offset.y -= clampf(impact * 0.012, 0.0, 0.18)
+	# Landing squash (hips drop, knees absorb via the leg IK; feet stay on the ground).
+	_land_squash = maxf(_land_squash, clampf((impact - 2.5) / 9.0, 0.0, 1.0))
+	_land_squash_t = 0.0
 	if impact >= damage_landing_speed:
 		take_damage((impact - damage_landing_speed) * landing_damage_per_mps)
 	landed.emit(impact, hard)
@@ -1363,6 +1655,8 @@ func _check_and_trigger_mantle(forward_dir: Vector3, from_water := false) -> boo
 	_mantle_segment = 0
 	mantle_timer = 0.0
 	mantle_target_pos = end
+	_mantle_ledge = Vector3(wall.position.x, top.position.y, wall.position.z)
+	_mantle_into = into
 	velocity = Vector3.ZERO
 	_rotate_toward(into, 1000.0, 1.0)
 	_set_crouch(false)
@@ -1575,6 +1869,16 @@ func _update_visual(delta: float) -> void:
 	camera_height = lerpf(camera_height, 1.05 if is_crouching else 1.55, 1.0 - exp(-8.0 * delta))
 	_crouch_blend = move_toward(_crouch_blend, 1.0 if is_crouching else 0.0, delta * 6.0)
 
+## Public rig accessors (character customisation depends on these).
+func get_skeleton() -> Skeleton3D:
+	if not _skeleton and visual_mesh:
+		_skeleton = visual_mesh.find_child("Skeleton3D", true, false) as Skeleton3D
+	return _skeleton
+
+## Node that carries Mara's model (yawed to facing, offset for step smoothing).
+func get_visual_root() -> Node3D:
+	return visual_mesh
+
 ## Snapshot for tests / debug overlays.
 func get_movement_debug() -> Dictionary:
 	return {
@@ -1609,7 +1913,9 @@ func _sfx(sound: String, at: Vector3) -> void:
 	if audio and audio.has_method("play_sfx"):
 		audio.play_sfx(sound, at)
 
-func take_damage(amount: float) -> void:
+func take_damage(amount: float, from_dir := Vector3.ZERO) -> void:
+	if amount >= 1.0 and current_state != State.DEAD:
+		play_hit_reaction(from_dir, clampf(amount / 25.0, 0.7, 1.0))
 	current_health = max(0.0, current_health - amount)
 	health_changed.emit(current_health, max_health)
 	if current_health <= 0:

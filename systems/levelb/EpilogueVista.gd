@@ -42,7 +42,7 @@ func _ready() -> void:
 	camera.far = 800.0
 	world.add_child(camera)
 	camera.current = true
-	WindSystem.set_wind(Vector2(0.6, -0.8), 0.5, 0.4, 0.2)
+	WindSystem.set_preset(WindSystem.Preset.BREEZE, 0.0, Vector2(0.6, -0.8))
 	_update_camera()
 
 func _height(x: float, z: float) -> float:

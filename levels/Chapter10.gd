@@ -20,6 +20,7 @@ var disabled_nodes: Array[String] = []
 var transition_started := false
 
 func _ready() -> void:
+	WindSystem.set_preset(WindSystem.Preset.CAVE, 0.0)
 	var exploration := preload("res://systems/CampaignExploration.gd").new()
 	add_child(exploration)
 	exploration.configure(10)

@@ -67,7 +67,10 @@ static func is_blockout(node: GeometryInstance3D) -> bool:
 
 static func apply(level: Node) -> Array[String]:
 	var changed: Array[String] = []
+	var t := Time.get_ticks_usec()
 	var mats := materials()
+	if OS.get_cmdline_user_args().has("--profile-build"):
+		print("[BlockoutDresser] materials %.0f ms" % ((Time.get_ticks_usec() - t) / 1000.0))
 	for node in level.find_children("*", "GeometryInstance3D", true, false):
 		if not (node is CSGShape3D or node is MeshInstance3D):
 			continue

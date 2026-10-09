@@ -80,7 +80,7 @@ func build() -> void:
 	var stages := [_build_shell, _build_pits, _build_ground, _build_caps, _build_speleothems, _build_pebbles]
 	for i in stages.size():
 		var t := Time.get_ticks_usec()
-		stages[i].call()
+		await stages[i].call()
 		if has_meta("profile_build") or OS.get_cmdline_user_args().has("--profile-build"):
 			print("[CaveBuilder] %s stage %d: %.0f ms" % [name, i, (Time.get_ticks_usec() - t) / 1000.0])
 		if i < stages.size() - 1:
@@ -89,7 +89,10 @@ func build() -> void:
 		while not _pending_shapes.is_empty():
 			var job: Array = _pending_shapes.pop_front()
 			if is_instance_valid(job[0]):
+				var tc := Time.get_ticks_usec()
 				job[0].shape = (job[1] as Mesh).create_trimesh_shape()
+				if OS.get_cmdline_user_args().has("--profile-build"):
+					print("[CaveBuilder] %s trimesh %s %.0f ms" % [name, job[0].get_parent().name, (Time.get_ticks_usec() - tc) / 1000.0])
 			await _yield()
 	_deferring_shapes = false
 	is_built = true
@@ -205,6 +208,18 @@ func _wet(y: float, z: float) -> float:
 	return clampf(1.0 - y / 0.8, 0.0, 1.0) * 0.7 + clampf(n_ground.get_noise_2d(z * 0.7, y * 0.2), 0.0, 1.0) * 0.4
 
 func _build_shell() -> void:
+	var arrays: Array = await _threaded(_with_faces.bind(_shell_arrays))
+	if arrays.is_empty():
+		return
+	var t := Time.get_ticks_usec()
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays[0])
+	_add_solid("CaveShell", mesh, rock_material, true, arrays[1])
+	if OS.get_cmdline_user_args().has("--profile-build"):
+		print("[CaveBuilder] shell main-thread commit %.0f ms" % ((Time.get_ticks_usec() - t) / 1000.0))
+
+## Pure CPU: runs on a WorkerThreadPool thread (no scene-tree / RenderingServer calls).
+func _shell_arrays() -> Array:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var slices := int(ceil((start_z - end_z) / slice_step)) + 1
@@ -248,8 +263,7 @@ func _build_shell() -> void:
 			st.add_index(b); st.add_index(d); st.add_index(c)
 	st.generate_normals()
 	st.generate_tangents()
-	var mesh := st.commit()
-	_add_solid("CaveShell", mesh, rock_material, true)
+	return st.commit_to_arrays()
 
 # ---------------------------------------------------------------- ground
 func ground_y(x: float, z: float) -> float:
@@ -322,6 +336,25 @@ func _puddle(x: float, z: float) -> float:
 	return smoothstep(0.18, 0.32, v) * (1.0 - smoothstep(1.4, 2.2, absf(x)))
 
 func _build_ground() -> void:
+	var arrays: Array = await _threaded(_with_faces.bind(_ground_arrays))
+	if arrays.is_empty():
+		return
+	var ground_mesh := ArrayMesh.new()
+	ground_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays[0])
+	_add_solid("CaveGround", ground_mesh, ground_material, true, arrays[1])
+	# Water placeholder markers for the water system (systems/water/).
+	var markers := Node3D.new()
+	markers.name = "WaterPlaceholders"
+	add_child(markers)
+	for p in puddle_points:
+		var m := Marker3D.new()
+		m.position = p + Vector3.UP * 0.01
+		m.add_to_group("water_placeholder")
+		m.set_meta("kind", "puddle")
+		markers.add_child(m)
+
+## Pure CPU: runs on a WorkerThreadPool thread. Fills puddle_points.
+func _ground_arrays() -> Array:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var max_w := 0.0
@@ -360,17 +393,7 @@ func _build_ground() -> void:
 			st.add_index(b); st.add_index(c); st.add_index(d)
 	st.generate_normals()
 	st.generate_tangents()
-	_add_solid("CaveGround", st.commit(), ground_material, true)
-	# Water placeholder markers for the water system (systems/water/).
-	var markers := Node3D.new()
-	markers.name = "WaterPlaceholders"
-	add_child(markers)
-	for p in puddle_points:
-		var m := Marker3D.new()
-		m.position = p + Vector3.UP * 0.01
-		m.add_to_group("water_placeholder")
-		m.set_meta("kind", "puddle")
-		markers.add_child(m)
+	return st.commit_to_arrays()
 
 # ---------------------------------------------------------------- caps (rockfall + far wall)
 func _build_caps() -> void:
@@ -547,6 +570,48 @@ func _build_pebbles() -> void:
 	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(mmi)
 
+## Worker-side: builds surface arrays plus the expanded triangle list for collision, so
+## the main thread never reads the mesh back from the GPU (get_faces() is a GL readback
+## on the Compatibility renderer).
+func _with_faces(builder: Callable) -> Array:
+	var arrays: Array = builder.call()
+	var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var idx: PackedInt32Array = arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX] != null else PackedInt32Array()
+	var faces := PackedVector3Array()
+	if idx.is_empty():
+		faces = verts
+	else:
+		faces.resize(idx.size())
+		for i in idx.size():
+			faces[i] = verts[idx[i]]
+	return [arrays, faces]
+
+## Runs a pure-CPU builder on a worker thread while the main thread keeps rendering.
+## Outside the tree (tools/tests) it runs inline.
+var _task_id := -1
+func _threaded(work: Callable) -> Variant:
+	if not is_inside_tree():
+		return work.call()
+	var result := []
+	var t0 := Time.get_ticks_usec()
+	_task_id = WorkerThreadPool.add_task(func(): result.append(work.call()), false, "CaveBuilder")
+	while not WorkerThreadPool.is_task_completed(_task_id):
+		await get_tree().process_frame
+		if not is_inside_tree():
+			break
+	var t1 := Time.get_ticks_usec()
+	WorkerThreadPool.wait_for_task_completion(_task_id)
+	if OS.get_cmdline_user_args().has("--profile-build"):
+		print("[CaveBuilder] worker %.0f ms wall, join %.0f ms" % [(t1 - t0) / 1000.0, (Time.get_ticks_usec() - t1) / 1000.0])
+	_task_id = -1
+	return result[0] if not result.is_empty() else []
+
+func _notification(what: int) -> void:
+	# Never free the builder while a worker still reads its noise/profile members.
+	if what == NOTIFICATION_PREDELETE and _task_id != -1:
+		WorkerThreadPool.wait_for_task_completion(_task_id)
+		_task_id = -1
+
 func _yield() -> void:
 	if is_inside_tree():
 		await get_tree().process_frame
@@ -584,12 +649,12 @@ func add_rock(parent: Node3D, pos: Vector3, radius: float, rot := Vector3.ZERO) 
 var _pending_shapes: Array = []
 var _deferring_shapes := false
 
-func _add_solid(label: String, mesh: ArrayMesh, material: Material, collide: bool) -> MeshInstance3D:
+func _add_solid(label: String, mesh: ArrayMesh, material: Material, collide: bool, faces := PackedVector3Array()) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
 	mi.name = label
 	mi.mesh = mesh
 	mi.material_override = material
-	if collide and not _has_area_faces(mesh):
+	if collide and not _has_area_faces(mesh, faces):
 		# Jolt rejects concave shapes with only degenerate triangles ("Need triangles to create a mesh shape!").
 		push_warning("CaveBuilder: %s has no non-degenerate triangles; skipping collision" % label)
 		collide = false
@@ -601,7 +666,11 @@ func _add_solid(label: String, mesh: ArrayMesh, material: Material, collide: boo
 		body.add_child(mi)
 		var shape := CollisionShape3D.new()
 		# Ground collision stays immediate so the player never spawns over a hole.
-		if _deferring_shapes and label != "CaveGround":
+		if not faces.is_empty():
+			var concave := ConcavePolygonShape3D.new()
+			concave.set_faces(faces)
+			shape.shape = concave
+		elif _deferring_shapes and label != "CaveGround":
 			_pending_shapes.append([shape, mesh])
 		else:
 			shape.shape = mesh.create_trimesh_shape()
@@ -610,8 +679,8 @@ func _add_solid(label: String, mesh: ArrayMesh, material: Material, collide: boo
 		add_child(mi)
 	return mi
 
-func _has_area_faces(mesh: Mesh) -> bool:
-	var faces := mesh.get_faces()
+func _has_area_faces(mesh: Mesh, known := PackedVector3Array()) -> bool:
+	var faces := known if not known.is_empty() else mesh.get_faces()
 	for i in range(0, faces.size() - 2, 3):
 		if (faces[i + 1] - faces[i]).cross(faces[i + 2] - faces[i]).length_squared() > 1e-10:
 			return true

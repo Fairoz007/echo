@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+SWEEP_BEGIN quality=4 (Ultra) forward_plus=false
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[COLLISION] Prologue: generated 11 collision bodies
+SWEEP|q=4|Prologue|load=572|add=920|spike=602|hitch100=5|avg=4.17|low1=6.32|steadymax=19.7|draws=405|objs=785|prims=1235490|mem=95|vmem=547|live=true
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[COLLISION] Chapter1: generated 200 collision bodies
+SWEEP|q=4|Chapter1|load=578|add=3045|spike=927|hitch100=1|avg=6.75|low1=8.53|steadymax=8.6|draws=844|objs=1281|prims=8825369|mem=131|vmem=945|live=true
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[COLLISION] Chapter6: generated 61 collision bodies
+SWEEP|q=4|Chapter6|load=133|add=1593|spike=258|hitch100=1|avg=4.17|low1=5.08|steadymax=5.7|draws=682|objs=1167|prims=6265067|mem=124|vmem=1076|live=true
+[MISSION] New Objective:obj_c07_explore_city->Explore the subterranean Vaelor ruins and examine the central plaza mural
+[COLLISION] Chapter7: generated 8 collision bodies
+SWEEP|q=4|Chapter7|load=105|add=267|spike=285|hitch100=2|avg=4.17|low1=5.05|steadymax=5.9|draws=264|objs=785|prims=1151374|mem=128|vmem=1375|live=true
+[MISSION] New Objective:obj_c09_cross_heart_road->Traverse the seismic fractures along the Heart Road
+[COLLISION] Chapter9: generated 2 collision bodies
+SWEEP|q=4|Chapter9|load=33|add=250|spike=289|hitch100=1|avg=4.17|low1=5.54|steadymax=14.3|draws=286|objs=750|prims=718403|mem=126|vmem=1296|live=true
+[MISSION] New Objective:obj_finale_escape->Sprint through the collapsing shafts toward daylight
+[COLLISION] Finale: generated 0 collision bodies
+SWEEP|q=4|Finale|load=36|add=26|spike=243|hitch100=1|avg=4.17|low1=4.79|steadymax=5.1|draws=217|objs=687|prims=348034|mem=123|vmem=1233|live=true
+SWEEP_END quality=4
+WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

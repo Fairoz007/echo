@@ -1,0 +1,28 @@
+
+TimeCreated : 07-10-2026 22:41:57
+Message     : Faulting application name: godot.windows.opt.tools.64.exe, version: 4.7.2.0, time stamp: 0x6a8269f4
+              Faulting module name: nvoglv64.dll, version: 32.0.16.1742, time stamp: 0x6abd7218
+              Exception code: 0xc0000409
+              Fault offset: 0x00000000010af62d
+              Faulting process id: 0x5F14
+              Faulting application start time: 0x1DD568B75C86A42
+              Faulting application path: C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe
+              Faulting module path: C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_feedb8c0271ca811\nvoglv64.dll
+              Report Id: 259a6612-99ce-499e-b10d-128d22453028
+              Faulting package full name: 
+              Faulting package-relative application ID: 
+
+TimeCreated : 07-10-2026 18:15:16
+Message     : Faulting application name: godot.windows.opt.tools.64.exe, version: 4.7.2.0, time stamp: 0x6a8269f4
+              Faulting module name: godot.windows.opt.tools.64.exe, version: 4.7.2.0, time stamp: 0x6a8269f4
+              Exception code: 0xc0000005
+              Fault offset: 0x00000000034cbb38
+              Faulting process id: 0x35C0
+              Faulting application start time: 0x1DD56663A61FC9C
+              Faulting application path: C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe
+              Faulting module path: C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe
+              Report Id: 38f29c53-c3ca-47c9-a573-bafcbaf7e9f2
+              Faulting package full name: 
+              Faulting package-relative application ID: 
+
+

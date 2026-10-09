@@ -1,0 +1,35 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+=== CHARACTER TESTS ===
+CHR get_skeleton() bones                     41                                 PASS 
+CHR get_visual_root()                        VisualRoot                         PASS 
+CHR in group player                          true                               PASS 
+CHR idle knee angle avg/min (deg)            115.4 / 115.4                      FAIL 180 = straight; clip alone ~148
+CHR idle breathing head travel (m)           0.0014                             FAIL 
+CHR idle feet on ground (gap m)              -0.000 / 0.120                     FAIL 
+CHR turn-in-place weight (max)               1.00                               PASS 
+CHR turn-in-place feet step (m)              1.58                               PASS feet re-plant instead of pivoting fixed
+CHR slope 15 side-on stand: worst foot gap (m) 0.129 (L -0.000 R 0.129) pelvis -0.006 FAIL 
+CHR slope 30 stand: worst foot gap (m)       0.143 (L -0.000 R 0.143) pelvis -0.035 FAIL 
+CHR stair edge stand: worst foot gap (m)     0.120 (L -0.000 R 0.120) pelvis -0.005 FAIL 
+CHR stairs walk: deepest foot penetration (m) -0.000                             PASS 
+CHR slope 15 walk: deepest foot penetration (m) -0.002                             PASS 
+CHR small rock walk: deepest foot penetration (m) -0.000                             PASS 
+CHR skeleton finite after terrain            true                               PASS 
+CHR land_soft squash depth (m)               0.069 impact 7.5 m/s               PASS 
+CHR land_soft feet stay on ground (m)        -0.000                             PASS 
+CHR land_hard squash depth (m)               0.124 impact 12.8 m/s              PASS 
+CHR land_hard feet stay on ground (m)        -0.001                             PASS 
+CHR hit reaction weight / head travel        0.30 / 0.038 m                     FAIL 
+CHR hit recovers                             w=0.00                             PASS 
+[INTERACTION] Triggered on:Lever
+CHR interact reach: hand to lever min (m)    0.100 via_input=true               PASS 
+CHR climb hands on wall: avg gap (m)         0.003 (110 samples)                PASS hand bone to wall contact target
+CHR mantle hands on ledge: best gap (m)      0.027                              PASS 
+CHR run hand max ahead of chest (m)          0.395                              FAIL leading-arm reach
+CHR sprint hand max ahead of chest (m)       0.406                              FAIL leading-arm reach
+CHR water entry -> swim, foot IK off         swim=true pelvis=0.000             PASS 
+=== 27 results, 9 failures ===

@@ -1,0 +1,61 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[GAME_MANAGER] State changed to:CINEMATIC
+[FLOW] PASS New Game shows story card
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_flow/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_flow/save_slot_1.json
+[GAME_MANAGER] State changed to:GAMEPLAY
+[FLOW] PASS Prologue loads after skip
+[FLOW] PASS chapter-start checkpoint written (slot 1)
+[COLLISION] Prologue: generated 11 collision bodies
+[GAME_MANAGER] State changed to:GAME_OVER
+[FLOW] PASS death enters GAME_OVER (state=GAME_OVER)
+[SAVE] Loaded game slot1
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[GAME_MANAGER] State changed to:GAMEPLAY
+[COLLISION] Prologue: generated 11 collision bodies
+[FLOW] PASS restart checkpoint reloads Prologue
+[FLOW] PASS player alive after restart (hp=100.0)
+[FLOW] PASS gameplay resumes unpaused after restart
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c05_neutralize_patrol->Infiltrate the Meridian checkpoint using stealth or combat
+[MISSION] Checkpoint stored:chapter_05_start
+[SAVE] Successfully saved game slot0touser://qa_flow/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_flow/save_slot_1.json
+[GAME_MANAGER] State changed to:GAMEPLAY
+[FLOW] PASS Chapter 5 loads through card
+[FLOW] PASS XP persists through chapter transition
+[SAVE] Loaded game slot1
+[FLOW] PASS chapter-start checkpoint records chapter 5
+[COLLISION] Chapter5: generated 66 collision bodies
+[SAVE] Successfully saved game slot0touser://qa_flow/save_slot_0.json
+[FLOW] PASS save_game slot 0 in Chapter 5
+[GAME_MANAGER] State changed to:MENU
+[SAVE] Loaded game slot0
+[FLOW] PASS continue_saved_game
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c05_neutralize_patrol->Infiltrate the Meridian checkpoint using stealth or combat
+[GAME_MANAGER] State changed to:GAMEPLAY
+[FLOW] PASS Continue returns to Chapter 5
+[GAME_MANAGER] State changed to:CINEMATIC
+[COLLISION] Chapter5: generated 66 collision bodies
+[MISSION] New Objective:obj_finale_escape->Sprint through the collapsing shafts toward daylight
+[MISSION] Checkpoint stored:chapter_11_start
+[SAVE] Successfully saved game slot0touser://qa_flow/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_flow/save_slot_1.json
+[COLLISION] Finale: generated 0 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+[FLOW] PASS Finale loads through card
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:CREDITS
+[FLOW] PASS Epilogue loads through card
+[FLOW] PASS mouse visible on Epilogue
+[FLOW] PASS credits card shown when Epilogue rolls credits
+[FLOW] RESULT PASS (0 failures) 

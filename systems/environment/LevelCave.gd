@@ -117,6 +117,7 @@ func _ready() -> void:
 	# The shared sediment multimesh from CampaignEnvironmentArt would z-fight the new ground.
 	var art := level.get_node_or_null("CampaignEnvironmentArt")
 	if art:
+		art.set_meta("hide_ground", true) # its ground may still be loading on a thread
 		var ground := art.get_node_or_null("SedimentGroundInstances")
 		if ground:
 			ground.visible = false

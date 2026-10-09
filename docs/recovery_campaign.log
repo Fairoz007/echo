@@ -1,0 +1,71 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+[GAME_MANAGER] State changed to:GAMEPLAY
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+ERROR: Error calling deferred method: 'Node(MaraAppearance.gd)::_apply_later': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[GAME_MANAGER] State changed to:GAMEPLAY
+[COLLISION] Prologue: generated 11 collision bodies
+PHYSICAL ROUTE chapter 0
+[INTERACTION] Triggered on:Interactable3D
+[PROLOGUE] Player examined the Vaelor Acoustic Relic!
+[MISSION] Completed Objective:obj_prologue_explore
+[MISSION] New Objective:obj_prologue_exit->Examine the vibrating monolithic portal
+PHYSICAL reached ResonantArtifact/Interactable3D at (1.814267, 0.04557, -10.42411)
+[PROLOGUE] Reached monolithic portal threshold! Transitioning to Chapter 1.
+[MISSION] Completed Objective:obj_prologue_exit
+PHYSICAL reached ExitTrigger at (0.056169, -0.000923, -25.44013)
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[MISSION] Checkpoint stored:chapter_01_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 1
+[COLLISION] Chapter1: generated 192 collision bodies
+[INTERACTION] Triggered on:Interactable3D
+PHYSICAL reached CampArea/NadiyaNPC/Interactable3D at (-2.130974, 0.041872, 10.61132)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] New Objective:obj_c01_inspect_map->Examine the topographic survey table
+PHYSICAL reached CampArea/EliasNPC/Interactable3D at (0.899122, 0.190337, 6.055103)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c01_meet_team
+[MISSION] Completed Objective:obj_c01_inspect_map
+[MISSION] New Objective:obj_c01_reach_ridge->Ascend the Eastern Ridge trail and locate the sealed portal
+PHYSICAL reached CampArea/SurveyTable/Interactable3D at (0.394369, 0.203714, 5.463097)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c01_reach_ridge
+[MISSION] New Objective:obj_c01_investigate_gate->Report the discovered portal to Elias via radio
+PHYSICAL reached RidgeArea/SealedPortal/Interactable3D at (0.013216, 5.989079, -59.38579)
+PHYSICAL reached RidgeArea/ChapterEndTrigger at (0.013216, 5.989079, -59.38579)
+[MISSION] Completed Objective:obj_c01_investigate_gate
+[CHAPTER 1] Reached Eastern Ridge Portal! Transitioning to Chapter 2.
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c02_open_gate->Restore hydraulic water flow to lift the sanctuary gate
+ERROR: Error calling deferred method: 'Node(MaraAppearance.gd)::_apply_later': Cannot convert argument 1 from Object to Object.
+   at: _call_function (core/object/message_queue.cpp:220)
+[MISSION] Checkpoint stored:chapter_02_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter2: generated 8 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 2
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 2] Sluice gate opened! Water flowing.
+[MISSION] Completed Objective:obj_c02_open_gate
+[MISSION] New Objective:obj_c02_explore_sanctuary->Explore the inner sanctuary and examine the Vaelor inscription
+PHYSICAL reached HydraulicPuzzle/SluiceLever/Interactable3D at (-6.994915, 0.072238, 6.264518)
+[INTERACTION] Triggered on:Interactable3D
+[MISSION] Completed Objective:obj_c02_explore_sanctuary
+[MISSION] New Objective:obj_c02_investigate_abyss->Investigate the deep acoustic vertical shaft
+PHYSICAL reached Sanctuary/InscriptionTablet/Interactable3D at (-0.351397, 0.01, -23.42312)
+PHYSICAL reached QA_TabletBypass at (2.081249, 0.072124, -26.05254)
+[CHAPTER 2] Reached abyss overlook! Transitioning to Chapter 3: The Fall.
+PHYSICAL reached Sanctuary/AbyssTrigger at (0.30698, 0.01, -36.54141)

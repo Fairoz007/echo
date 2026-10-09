@@ -15,6 +15,7 @@ var has_seen_drake: bool = false
 var transition_started := false
 
 func _ready() -> void:
+	WindSystem.set_preset(WindSystem.Preset.BREEZE, 0.0)
 	var dressing := preload("res://systems/levelb/Chapter5Dressing.gd").new()
 	add_child(dressing)
 	dressing.build(self)

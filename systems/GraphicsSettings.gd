@@ -39,6 +39,13 @@ const TABLE := {
 	"vegetation_density":[0.25,  0.5,    0.75,    1.0,     1.0],
 	"water_quality":     [0,     0,      1,       2,       2],   # 0 low, 1 medium, 2 high
 	"max_fps":           [60,    60,     0,       0,       0],   # 0 = uncapped (vsync governs)
+	# --- Foliage / character keys (read by the wind, nature and character systems
+	# with defaults; see get_setting()). Keep every row 5 entries long.
+	"foliage_density":   [0.35,  0.6,    0.8,     1.0,     1.0],  # fraction of authored trees/ferns kept
+	"foliage_wind_detail":[0,    1,      1,       2,       2],    # 0 primary sway only, 1 +leaf flutter, 2 +secondary branch
+	"leaf_particles":    [0,     0,      1,       1,       1],    # 0 off, 1 on (falling-leaf emitters)
+	"vegetation_interaction":[0, 1,      1,       1,       1],    # 0 off, 1 player pushes grass/foliage
+	"character_ik_quality":[0,   0,      1,       2,       2],    # 0 off/cheap, 1 foot IK, 2 foot+hand/look IK
 }
 ## Legacy 3-tier mapping consumed by set_graphics_quality(tier).
 const LEGACY_TIER := [0, 0, 1, 2, 2]
@@ -59,11 +66,18 @@ var water_quality: int:
 	get:
 		return int(settings.get("water_quality", 2))
 
+## Safe accessor for consumers: GraphicsSettings.get_setting("foliage_density", 1.0)
+func get_setting(key: String, default_value: Variant = null) -> Variant:
+	return settings.get(key, default_value)
+
 func is_forward_plus() -> bool:
 	return RenderingServer.get_rendering_device() != null
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	for key in TABLE:
+		if TABLE[key].size() != QUALITY_NAMES.size():
+			push_error("GraphicsSettings.TABLE[%s] needs %d entries" % [key, QUALITY_NAMES.size()])
 	var level := DEFAULT_LEVEL
 	var cfg := ConfigFile.new()
 	if cfg.load(SETTINGS_PATH) == OK:
@@ -166,7 +180,7 @@ func _apply_scene() -> void:
 				enable = false
 			environment.set(property, enable)
 	var tier: int = LEGACY_TIER[quality_level]
-	var density := float(settings.vegetation_density)
+	var density := float(settings.foliage_density)
 	var foliage_index := 0
 	for model in scene.find_children("*", "Node3D", true, false):
 		if model.scene_file_path.ends_with("jungle_tree.glb") or model.scene_file_path.ends_with("jungle_fern.glb"):

@@ -1,0 +1,49 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_c10_confront_drake->Approach the central harmonic platform and confront Lucian Drake
+[MISSION] Checkpoint stored:chapter_10_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Chapter10: generated 7 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+QA KEY SPY: physical key Escape at t=26105 (blocked)
+QA KEY SPY: physical key Escape at t=26788 (blocked)
+PHYSICAL ROUTE chapter 10
+PHYSICAL reached QA_NodeSouthBypass at (2.517852, 0.026419, 18.52438)
+[MISSION] Completed Objective:obj_c10_confront_drake
+[MISSION] New Objective:obj_c10_disable_nodes->Deactivate the four peripheral resonance nodes to stop catastrophic frequency overload
+PHYSICAL reached CentralPlatform/DrakeTrigger at (0.20625, 0.01, 12.5279)
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 10] Resonance node disabled:SouthTotal disabled:1
+PHYSICAL reached ResonanceChamber/NodeSouth/Interactable3D at (0.061803, 0.015527, 16.35243)
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 10] Resonance node disabled:EastTotal disabled:2
+PHYSICAL reached ResonanceChamber/NodeEast/Interactable3D at (16.79504, 0.026344, 1.091849)
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 10] Resonance node disabled:NorthTotal disabled:3
+PHYSICAL reached ResonanceChamber/NodeNorth/Interactable3D at (1.064853, 0.01, -16.78531)
+[INTERACTION] Triggered on:Interactable3D
+[CHAPTER 10] Resonance node disabled:WestTotal disabled:4
+[MISSION] Completed Objective:obj_c10_disable_nodes
+[MISSION] New Objective:obj_c10_escape_mountain->The Vault is collapsing! Sprint to the extraction breach!
+PHYSICAL reached ResonanceChamber/NodeWest/Interactable3D at (-16.7558, 0.17663, -1.097655)
+[CHAPTER 10] Escaping the Heart Vault! Transitioning to Finale: The Mountain Breaks.
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_finale_escape->Sprint through the collapsing shafts toward daylight
+[MISSION] Checkpoint stored:chapter_11_start
+[SAVE] Successfully saved game slot0touser://qa_campaign_physical/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_campaign_physical/save_slot_1.json
+[COLLISION] Finale: generated 0 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+PHYSICAL ROUTE chapter 11
+[FINALE] Daylight reached! Mountain sealed behind Mara. Transitioning to Epilogue & Credits.
+[MISSION] Completed Objective:obj_finale_escape
+PHYSICAL reached DaylightRidge/DaylightExitTrigger at (0.000001, 0.01, -34.80985)
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:CREDITS
+[GAME_MANAGER] State changed to:MENU
+QA PASS: scoped physical chapters 10-11, distance 194.1m, elapsed 116.3s; not a full campaign claim

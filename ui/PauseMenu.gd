@@ -14,6 +14,8 @@ var _kicker: Label
 var _card: PanelContainer
 var _tabs: TabContainer
 var _settings_built := false
+var _controls_tab: VBoxContainer
+var _controls_screen: Control
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -72,11 +74,40 @@ func _ready() -> void:
 		controls.name = "Controls"
 		controls.add_theme_constant_override("separation", 6)
 		_tabs.add_child(controls)
-		for pair in [["WASD", "Move"], ["Shift", "Sprint"], ["Space", "Jump / ascend"], ["C", "Crouch / dive"], ["E", "Interact"], ["F", "Flashlight"], ["R / Q", "Reload / melee"], ["J", "Field journal"], ["F5 / F9", "Quick save / load"]]:
-			controls.add_child(_key_row(pair[0], pair[1]))
+		_controls_tab = controls
+		_build_controls_tab()
 		GameTheme.wire_sounds(panel)
 		_settings_built = true).call_deferred()
 	panel.hide()
+
+# Controls tab: live summary of the current bindings plus the full customization screen.
+func _build_controls_tab() -> void:
+	for c in _controls_tab.get_children():
+		c.queue_free()
+	var customize := _button(_controls_tab, "Customize controls…", _open_controls)
+	customize.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var gap := Control.new()
+	gap.custom_minimum_size.y = 4
+	_controls_tab.add_child(gap)
+	var remap := get_node_or_null("/root/InputRemap")
+	var rows := [["move_forward", "Move"], ["sprint", "Sprint"], ["jump", "Jump / ascend"], ["crouch", "Crouch / dive"], ["interact", "Interact"], ["flashlight", "Flashlight"], ["journal", "Field journal"]]
+	for pair in rows:
+		var key := "?"
+		if remap:
+			key = remap.event_label(remap.get_event(pair[0], remap.SLOT_KBM))
+			if pair[0] == "move_forward":
+				key = "/".join(["move_forward", "move_left", "move_back", "move_right"].map(func(a): return remap.event_label(remap.get_event(a, remap.SLOT_KBM))))
+		_controls_tab.add_child(_key_row(key, pair[1]))
+	_controls_tab.add_child(_key_row("F5 / F9", "Quick save / load"))
+	GameTheme.wire_sounds(_controls_tab)
+
+func _open_controls() -> void:
+	if is_instance_valid(_controls_screen):
+		return
+	_controls_screen = preload("res://ui/controls/ControlsMenu.gd").open(self)
+	_controls_screen.closed.connect(func():
+		_build_controls_tab()
+		(func(): if _controls_tab.get_child_count() > 0: _controls_tab.get_child(0).grab_focus()).call_deferred())
 
 func _key_row(key: String, action: String) -> HBoxContainer:
 	var r := HBoxContainer.new()
@@ -118,6 +149,8 @@ func show_menu(dead: bool = false) -> void:
 	(restart if dead else resume).grab_focus()
 
 func close_menu() -> void:
+	if is_instance_valid(_controls_screen):
+		_controls_screen.close()
 	panel.hide()
 	_set_hud_visible(true)
 	GameManager.change_state(GameManager.GameState.GAMEPLAY)

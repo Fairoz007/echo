@@ -29,15 +29,34 @@ static func attach(level: Node) -> void:
 	level.add_child.call_deferred(pass_node)
 
 var report: Array[Dictionary] = []
+## Set once the deferred pass has finished (the runtime pass is spread over frames).
+var is_done := false
+signal done
+## Main-thread budget per frame for the runtime pass. One shape is always cooked per
+## frame, so a single huge hull can still exceed it, but the pass no longer cooks
+## every hull of the level in one frame (Ch7 was 606 ms in a single frame).
+const FRAME_BUDGET_USEC := 6000
+## Cooked shapes shared between instances of the same mesh resource (Tripo props are
+## instanced many times; a simplified convex hull costs ~40 ms each).
+var _shape_cache := {}
+var _profile := false
 
 func _ready() -> void:
+	_profile = OS.get_cmdline_user_args().has("--profile-build")
 	# Two frames so dressing that is spawned in sibling _ready()/deferred calls exists.
 	await get_tree().process_frame
 	await get_tree().process_frame
 	if is_inside_tree():
-		build(get_parent())
-		print("[COLLISION] %s: generated %d collision bodies" % [get_parent().name, report.size()])
+		var t := Time.get_ticks_usec()
+		await build_async(get_parent())
+		if _profile:
+			print("[COLLISION] build spread over frames, %.0f ms wall" % ((Time.get_ticks_usec() - t) / 1000.0))
+		if is_inside_tree():
+			print("[COLLISION] %s: generated %d collision bodies" % [get_parent().name, report.size()])
+	is_done = true
+	done.emit()
 
+## Synchronous pass (QA / tools).
 func build(level: Node) -> Array[Dictionary]:
 	report.clear()
 	for mesh in level.find_children("*", "MeshInstance3D", true, false):
@@ -45,6 +64,45 @@ func build(level: Node) -> Array[Dictionary]:
 	for csg in level.find_children("*", "CSGShape3D", true, false):
 		_process_csg(level, csg as CSGShape3D)
 	return report
+
+## Runtime pass: same result as build(), but yields whenever the frame budget is spent.
+func build_async(level: Node) -> Array[Dictionary]:
+	report.clear()
+	var items: Array = level.find_children("*", "MeshInstance3D", true, false)
+	items.append_array(level.find_children("*", "CSGShape3D", true, false))
+	var frame_start := Time.get_ticks_usec()
+	for node in items:
+		if not is_inside_tree() or not is_instance_valid(level):
+			return report
+		if not is_instance_valid(node):
+			continue
+		var t := Time.get_ticks_usec()
+		if node is MeshInstance3D:
+			_process_mesh(level, node)
+		else:
+			_process_csg(level, node)
+		var cost := Time.get_ticks_usec() - t
+		if _profile and cost > 15000:
+			print("[COLLISION] slow %s %.0f ms" % [node.name, cost / 1000.0])
+		if Time.get_ticks_usec() - frame_start > FRAME_BUDGET_USEC:
+			await get_tree().process_frame
+			frame_start = Time.get_ticks_usec()
+	return report
+
+func _cached_shape(key: String, maker: Callable) -> Shape3D:
+	if not _shape_cache.has(key):
+		_shape_cache[key] = maker.call()
+	return _shape_cache[key]
+
+func _lod3_shape(lod3_path: String, fallback: Mesh) -> Shape3D:
+	var lod_mesh: Mesh = null
+	if lod3_path != "" and ResourceLoader.exists(lod3_path):
+		var inst := (load(lod3_path) as PackedScene).instantiate()
+		var found := inst.find_children("*", "MeshInstance3D", true, false)
+		if found.size() > 0:
+			lod_mesh = found[0].mesh
+		inst.free()
+	return (lod_mesh if lod_mesh else fallback).create_trimesh_shape()
 
 func _process_csg(level: Node, csg: CSGShape3D) -> void:
 	# Only root CSG shapes own collision; skip ones already colliding or under a body.
@@ -161,16 +219,9 @@ func _process_mesh(level: Node, mesh: MeshInstance3D) -> void:
 		"lod3":
 			var root := asset_root(mesh, level)
 			var lod3_path := root.scene_file_path.replace("_LOD0.glb", "_LOD3.glb") if root else ""
-			var lod_mesh: Mesh = null
-			if lod3_path != "" and ResourceLoader.exists(lod3_path):
-				var inst := (load(lod3_path) as PackedScene).instantiate()
-				var found := inst.find_children("*", "MeshInstance3D", true, false)
-				if found.size() > 0:
-					lod_mesh = found[0].mesh
-				inst.free()
-			shape_node.shape = (lod_mesh if lod_mesh else mesh.mesh).create_trimesh_shape()
+			shape_node.shape = _cached_shape("lod3:%s:%d" % [lod3_path, mesh.mesh.get_rid().get_id()], _lod3_shape.bind(lod3_path, mesh.mesh))
 		"trimesh":
-			shape_node.shape = mesh.mesh.create_trimesh_shape()
+			shape_node.shape = _cached_shape("tri:%d" % mesh.mesh.get_rid().get_id(), mesh.mesh.create_trimesh_shape)
 		"trunk":
 			# Trunk: thin cylinder through the lower 60% of the bounds, ~12% of width.
 			var cyl := CylinderShape3D.new()
@@ -184,7 +235,7 @@ func _process_mesh(level: Node, mesh: MeshInstance3D) -> void:
 			shape_node.shape = bs
 			shape_node.position = box.get_center()
 		_:
-			shape_node.shape = mesh.mesh.create_convex_shape(true, true)
+			shape_node.shape = _cached_shape("cvx:%d" % mesh.mesh.get_rid().get_id(), mesh.mesh.create_convex_shape.bind(true, false))
 			kind = "convex"
 	if shape_node.shape == null:
 		return

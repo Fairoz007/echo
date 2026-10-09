@@ -112,6 +112,12 @@ layout_mode = 2
 text = "NEW GAME"
 alignment = 0
 
+[node name="BtnCustomize" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+text = "CUSTOMIZE MARA"
+alignment = 0
+
 [node name="BtnSettings" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2

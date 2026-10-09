@@ -22,6 +22,9 @@ func _ready() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if settings.get_value("display", "fullscreen", false) else DisplayServer.WINDOW_MODE_WINDOWED)
 	btn_new_game.pressed.connect(_on_new_game_pressed)
 	btn_settings.pressed.connect(_on_settings_pressed)
+	var btn_customize := get_node_or_null("VBoxContainer/BtnCustomize") as Button
+	if btn_customize:
+		btn_customize.pressed.connect(func(): get_tree().change_scene_to_file("res://ui/customize/CustomizeScreen.tscn"))
 	btn_credits.pressed.connect(_on_credits_pressed)
 	btn_quit.pressed.connect(func(): get_tree().quit())
 
@@ -181,6 +184,21 @@ func _on_settings_pressed() -> void:
 	display.add_child(fullscreen)
 	display.add_child(GameTheme.caption("The interface scales automatically with the window size."))
 	add_graphics_controls(_tab(tabs, "Graphics"))
+	var controls_btn := Button.new()
+	controls_btn.name = "ControlsButton"
+	controls_btn.text = "Controls"
+	controls_btn.pressed.connect(func():
+		var popup := content.get_parent()
+		while popup and not (popup is Window):
+			popup = popup.get_parent()
+		if popup:
+			popup.queue_free() # the settings Window is exclusive; close it so Controls gets input
+		var menu: Control = preload("res://ui/controls/ControlsMenu.gd").open(self)
+		if menu and menu.has_signal("closed"):
+			menu.closed.connect(func():
+				if is_instance_valid(btn_settings):
+					btn_settings.grab_focus()))
+	content.add_child(controls_btn)
 
 ## Shared by MainMenu and PauseMenu: quality selector + live description, persisted by GraphicsSettings.
 static func add_graphics_controls(content: Control) -> OptionButton:

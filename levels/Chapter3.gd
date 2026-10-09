@@ -13,6 +13,7 @@ var has_collapse_triggered: bool = false
 var transition_started := false
 
 func _ready() -> void:
+	WindSystem.set_preset(WindSystem.Preset.STRONG, 0.0)
 	var exploration := preload("res://systems/CampaignExploration.gd").new()
 	add_child(exploration)
 	exploration.configure(3)

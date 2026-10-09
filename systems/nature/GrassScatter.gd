@@ -56,6 +56,8 @@ func scatter() -> Dictionary:
 		dens *= float(graphics.vegetation_density)
 	elif graphics and int(graphics.preset) == 0:
 		dens *= low_quality_density_scale
+	if graphics and "settings" in graphics:
+		dens *= float(graphics.settings.get("foliage_density", 1.0))
 	var count := int(area_size.x * area_size.y * dens)
 	stats = {"candidates": count, "accepted": 0, "no_hit": 0, "slope": 0, "underwater": 0, "overlap": 0, "no_grass": 0, "dynamic": 0}
 	var min_up := cos(deg_to_rad(max_slope_deg))

@@ -1,0 +1,41 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+SCRIPT ERROR: Parse Error: Cannot infer the type of "left" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://ui/controls/ControlsMenu.gd:360)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://ui/PauseMenu.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://systems/GameManager.gd:0)
+ERROR: Failed to load script "res://systems/GameManager.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "node_name" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://systems/MaraAppearance.gd:312)
+ERROR: Failed to load script "res://systems/MaraAppearance.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+ERROR: Failed to instantiate an autoload, script 'res://systems/MaraAppearance.gd' does not inherit from 'Node'.
+   at: start (main/main.cpp:4539)
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+SWEEP_BEGIN quality=2 (Medium) forward_plus=false
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[COLLISION] Prologue: generated 11 collision bodies
+SWEEP|q=2|Prologue|load=492|add=884|spike=1279|hitch100=5|avg=4.17|low1=4.95|steadymax=5.4|draws=465|objs=847|prims=1589901|mem=112|vmem=529|live=true
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[COLLISION] Chapter1: generated 197 collision bodies
+SWEEP|q=2|Chapter1|load=566|add=3121|spike=9159|hitch100=2|avg=4.34|low1=22.32|steadymax=63.3|draws=732|objs=1169|prims=6988155|mem=166|vmem=915|live=true
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[COLLISION] Chapter6: generated 60 collision bodies
+SWEEP|q=2|Chapter6|load=135|add=1609|spike=1925|hitch100=2|avg=4.17|low1=4.90|steadymax=5.1|draws=602|objs=1087|prims=5392037|mem=171|vmem=1047|live=true
+[MISSION] New Objective:obj_c07_explore_city->Explore the subterranean Vaelor ruins and examine the central plaza mural
+[COLLISION] Chapter7: generated 8 collision bodies
+SWEEP|q=2|Chapter7|load=97|add=250|spike=609|hitch100=5|avg=4.17|low1=4.93|steadymax=5.3|draws=264|objs=785|prims=843076|mem=170|vmem=1341|live=true
+[MISSION] New Objective:obj_c09_cross_heart_road->Traverse the seismic fractures along the Heart Road
+[COLLISION] Chapter9: generated 2 collision bodies
+SWEEP|q=2|Chapter9|load=26|add=269|spike=458|hitch100=4|avg=4.17|low1=4.84|steadymax=5.0|draws=286|objs=750|prims=676619|mem=169|vmem=1267|live=true
+[MISSION] New Objective:obj_finale_escape->Sprint through the collapsing shafts toward daylight
+[COLLISION] Finale: generated 0 collision bodies
+SWEEP|q=2|Finale|load=29|add=27|spike=223|hitch100=3|avg=4.17|low1=4.84|steadymax=5.1|draws=217|objs=687|prims=338258|mem=161|vmem=1207|live=true
+SWEEP_END quality=2
+WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

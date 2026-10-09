@@ -15,6 +15,7 @@ var transition_started := false
 var dressing
 
 func _ready() -> void:
+	WindSystem.set_preset(WindSystem.Preset.MODERATE, 0.0)
 	dressing = preload("res://systems/levelb/Chapter8Dressing.gd").new()
 	add_child(dressing)
 	dressing.build(self)
