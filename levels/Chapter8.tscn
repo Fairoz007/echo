@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
 
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="99_mara_production"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Game_LOD0.glb" id="99_mara_production"]
 
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]

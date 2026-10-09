@@ -11,15 +11,15 @@ var chapter_end := 12
 const ROUTES = {
 	0: [["ResonantArtifact/Interactable3D", true], ["ExitTrigger", false]], # relic now at x=2.2, off the centreline
 	1: [["CampArea/NadiyaNPC/Interactable3D", true], ["CampArea/EliasNPC/Interactable3D", true], ["CampArea/SurveyTable/Interactable3D", true], ["RidgeArea/SealedPortal/Interactable3D", true], ["RidgeArea/ChapterEndTrigger", false]],
-	2: [["HydraulicPuzzle/SluiceLever/Interactable3D", true], ["Sanctuary/InscriptionTablet/Interactable3D", true], ["Sanctuary/AbyssTrigger", false]],
+	2: [["HydraulicPuzzle/SluiceLever/Interactable3D", true], ["Sanctuary/InscriptionTablet/Interactable3D", true], ["QA_TabletBypass", false], ["Sanctuary/AbyssTrigger", false]],
 	3: [["BridgeStructure/CollapseTrigger", false], ["FissureAbyssTrigger", false]],
-	4: [["AbandonedCamp/FieldRadio/Interactable3D", true], ["ExitTunnel/ExitTrigger", false]],
+	4: [["AbandonedCamp/FieldRadio/Interactable3D", true], ["QA_CampBypass", false], ["ExitTunnel/ExitTrigger", false]],
 	5: [["ObservationPerch/DrakeTrigger", false], ["TempleEntrance/ChapterEndTrigger", false]],
 	6: [["TempleMechanisms/SluiceWheel/Interactable3D", true], ["QA_RampFootGuide", false], ["TempleSanctum/ExitTrigger", false]],
-	7: [["CentralPlaza/HistoryMural/Interactable3D", true], ["OptionalTomb/TombTrigger", false], ["RoyalCauseway/CausewayExitTrigger", false]],
+	7: [["QA_MonumentBypass", false], ["CentralPlaza/HistoryMural/Interactable3D", true], ["OptionalTomb/TombTrigger", false], ["RoyalCauseway/CausewayExitTrigger", false]],
 	8: [["SurvivorCamp/InjuredElias/Interactable3D", true], ["Passage/AdrianConfrontationTrigger", false]],
 	9: [["CollapsingRoute/TremorTrigger", false], ["VaultThreshold/VaultGateTrigger", false]],
-	10: [["CentralPlatform/DrakeTrigger", false], ["ResonanceChamber/NodeSouth/Interactable3D", true], ["ResonanceChamber/NodeEast/Interactable3D", true], ["ResonanceChamber/NodeNorth/Interactable3D", true], ["ResonanceChamber/NodeWest/Interactable3D", true], ["CentralPlatform/EscapeTrigger", false]],
+	10: [["QA_NodeSouthBypass", false], ["CentralPlatform/DrakeTrigger", false], ["ResonanceChamber/NodeSouth/Interactable3D", true], ["ResonanceChamber/NodeEast/Interactable3D", true], ["ResonanceChamber/NodeNorth/Interactable3D", true], ["ResonanceChamber/NodeWest/Interactable3D", true], ["CentralPlatform/EscapeTrigger", false]],
 	11: [["DaylightRidge/DaylightExitTrigger", false]]
 }
 
@@ -56,12 +56,14 @@ func _run() -> void:
 		var gm = root.get_node("GameManager")
 		gm.load_chapter(chapter_start, gm.chapter_scene(chapter_start))
 	await create_timer(0.8).timeout
-	# Levels now build procedural caves on load; wait until the first route node exists.
-	for i in 80:
-		if current_scene and ROUTES.has(chapter_start) and current_scene.get_node_or_null(ROUTES[chapter_start][0][0]):
-			break
-		await create_timer(0.25).timeout
 	for chapter in range(chapter_start, chapter_end):
+		# Each chapter opens behind a story card and builds procedural geometry on load;
+		# wait for GAMEPLAY and the first route node before driving input.
+		var gm := root.get_node("GameManager")
+		for i in 160:
+			if gm.current_chapter == chapter and gm.current_state == gm.GameState.GAMEPLAY and current_scene and ROUTES.has(chapter) and current_scene.get_node_or_null(ROUTES[chapter][0][0]):
+				break
+			await create_timer(0.25).timeout
 		if root.get_node("GameManager").current_chapter != chapter:
 			await _fail("Expected chapter %d before route" % chapter)
 			return
@@ -71,6 +73,13 @@ func _run() -> void:
 			waypoint.name = "QA_RampFootGuide"
 			current_scene.add_child(waypoint)
 			waypoint.position = Vector3(0, -3.5, -11)
+		# Guides steer around solid props that now sit on straight-line routes.
+		var guides := {10: [["QA_NodeSouthBypass", Vector3(2.6, 0, 18)]], 2: [["QA_TabletBypass", Vector3(2.4, 0, -26.5)]], 4: [["QA_CampBypass", Vector3(2.8, 0, -1.5)]], 7: [["QA_MonumentBypass", Vector3(3.8, 0, 0.5)]]}
+		for g in guides.get(chapter, []):
+			var guide = Node3D.new()
+			guide.name = g[0]
+			current_scene.add_child(guide)
+			guide.position = g[1]
 		if chapter == 5:
 			for enemy_path in ["Enemies/EnemyMercenary1", "Enemies/EnemyMercenary2"]:
 				if not await _fight(enemy_path):
@@ -93,8 +102,14 @@ func _run() -> void:
 		current_scene.btn_menu.pressed.emit()
 	else:
 		root.get_node("GameManager").return_to_menu()
-	await create_timer(12.0).timeout
-	if current_scene.name != "MainMenu":
+	# The next chapter may still be streaming in; poll and retry instead of a fixed wait.
+	for i in 40:
+		await create_timer(1.0).timeout
+		if current_scene and current_scene.name == "MainMenu":
+			break
+		if i == 15 and chapter_end != 12:
+			root.get_node("GameManager").return_to_menu()
+	if current_scene == null or current_scene.name != "MainMenu":
 		await _fail("Credits return did not reach Main Menu")
 		return
 	if chapter_start == 0 and chapter_end == 12:
@@ -119,7 +134,10 @@ func _visit(path: String, interact: bool, radius: float = 0.9) -> bool:
 			return false
 		var offset: Vector3 = target.global_position - player.global_position
 		offset.y = 0.0
-		if offset.length() < (0.25 if interact else radius):
+		# Interactables inside solid props (pedestal, lever, radio, mural) are selected by proximity,
+		# so an interaction target is reached once the player has it selected.
+		var selected: bool = interact and player.nearby_interactable == target and offset.length() < 2.0
+		if offset.length() < (0.25 if interact else radius) or selected:
 			_stop_moving()
 			await create_timer(0.15).timeout
 			if interact:
@@ -181,4 +199,21 @@ func _fight(path: String) -> bool:
 			var ray = PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position - camera.global_basis.z * 80.0)
 			ray.exclude = [player.get_rid()]
 			var hit = player.get_world_3d().direct_space_state.intersect_ray(ray)
-			print("AIM debug yaw=", pivot.yaw, " desired=", des
+			print("AIM debug yaw=", pivot.yaw, " desired=", desired_yaw, " pitch=", pivot.pitch, " desired=", desired_pitch, " hit=", hit.get("collider"), " ammo=", player.ammunition)
+		# Ch5 cover (sandbags/crates) can block the shot from the 12 m stop: advance toward
+		# the enemy while line of sight is blocked instead of emptying the magazine into cover.
+		if frame % 10 == 0:
+			var los = PhysicsRayQueryParameters3D.create(camera.global_position, enemy.global_position + Vector3(0, 1.2, 0))
+			los.exclude = [player.get_rid()]
+			var blocker = player.get_world_3d().direct_space_state.intersect_ray(los).get("collider")
+			var clear: bool = blocker == null or blocker == enemy or (blocker is Node and enemy.is_ancestor_of(blocker))
+			Input.action_release("move_forward")
+			if not clear and player.global_position.distance_to(enemy.global_position) > 3.0:
+				Input.action_press("move_forward")
+		Input.action_press("aim")
+		Input.action_press("fire")
+		await physics_frame
+	await _fail("Patrol enemy could not be defeated using aim/fire input " + path)
+	return false
+
+

@@ -96,8 +96,25 @@ static func override_material(node: Node, mat: Material) -> void:
 		var src_mat := m.get_active_material(0) as BaseMaterial3D
 		var tex: Texture2D = src_mat.albedo_texture if src_mat else null
 		var ntex: Texture2D = src_mat.normal_texture if src_mat and src_mat.normal_enabled else null
-		var t: Vector3 = mat.get_shader_parameter("tint")
-		m.material_override = rock_material(Color(t.x, t.y, t.z), float(mat.get_shader_parameter("moss_amount")), float(mat.get_shader_parameter("wet_line")), tex, ntex)
+		var tv: Variant = mat.get_shader_parameter("tint")
+		var tc := Color(0.62, 0.61, 0.56)
+		if tv is Vector3:
+			tc = Color(tv.x, tv.y, tv.z)
+		elif tv is Color:
+			tc = tv
+		var rm := rock_material(tc, float(mat.get_shader_parameter("moss_amount")), float(mat.get_shader_parameter("wet_line")), tex, ntex)
+		var dc: Variant = mat.get_shader_parameter("detail_contrast")
+		if dc != null and absf(float(dc) - 1.0) > 0.001:
+			var key := "%s_dc%.2f" % [str(rm.get_instance_id()), float(dc)]
+			if not _rock_mats.has(key):
+				var d := rm.duplicate() as ShaderMaterial
+				d.set_shader_parameter("detail_contrast", float(dc))
+				var sp: Variant = mat.get_shader_parameter("specular_amount")
+				if sp != null:
+					d.set_shader_parameter("specular_amount", float(sp))
+				_rock_mats[key] = d
+			rm = _rock_mats[key]
+		m.material_override = rm
 
 static func noise_tex(freq: float, octaves: int, normal: bool, bump: float, seed_value: int, cellular := false) -> NoiseTexture2D:
 	var n := FastNoiseLite.new()
@@ -238,4 +255,21 @@ static func std_mat(color: Color, rough := 0.8, metal := 0.0, emission := Color.
 		m.emission_energy_multiplier = emission_energy
 	return m
 
-static func mesh(parent: Node, m: Mesh, xf: Transform3D,
+static func mesh(parent: Node, m: Mesh, xf: Transform3D, mat: Material, node_name := "") -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.mesh = m
+	if node_name != "":
+		mi.name = node_name
+	mi.material_override = mat
+	mi.set_meta("keep_material", true)
+	parent.add_child(mi)
+	mi.global_transform = xf
+	return mi
+
+## Attaches the shared FoliageWind sway to a placed plant.
+static func sway(piece: Node3D, height: float, base_y: float, profile := "tree") -> void:
+	var wind := preload("res://systems/levelb/LBFoliageWind.gd").new()
+	wind.name = "FoliageWind"
+	piece.add_child(wind)
+	if wind.has_method("configure"):
+		wind.configure(piece, height, base_y, profile)

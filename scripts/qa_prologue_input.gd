@@ -14,8 +14,13 @@ func _run() -> void:
 	root.get_node("SaveManager").save_directory = "user://qa_prologue"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("user://qa_prologue"))
 	root.get_node("GameManager").start_new_game()
-	await create_timer(0.8).timeout
-	var player = get_first_node_in_group("player")
+	# New Game plays the intro story card (CINEMATIC) before the Prologue spawns Mara.
+	var player = null
+	for i in 150:
+		await create_timer(0.1).timeout
+		player = get_first_node_in_group("player")
+		if player and root.get_node("GameManager").current_state == root.get_node("GameManager").GameState.GAMEPLAY:
+			break
 	if not player:
 		_fail("New Game did not create player")
 		return

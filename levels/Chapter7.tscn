@@ -13,6 +13,7 @@
 
 [ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
 [ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -182,3 +183,7 @@ rock_masses = Array[Vector4]([Vector4(-30, 20, 3, 14), Vector4(30, 22, 3, 14), V
 lamps = PackedVector3Array(2, 0, 32, -2, 0, 24, 4, 0, -2, -4, 0, -2, 26, 0, 12)
 vaelor_lights = PackedVector3Array(0, 5, 0, 0, 3, -45, -10, 6, -10, 10, 6, -10, 25, 3, 10)
 hide_paths = Array[NodePath]([NodePath("CityGround/MeshInstance3D")])
+
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch7/lod/ch7_city_of_echoes_tower_LOD0.glb|-22,0,-24|0|22|convex|y", "res://assets/models/hero/ch7/lod/ch7_archive_facade_LOD0.glb|28,0,-18|-90|15|lod3|z", "res://assets/models/hero/ch7/lod/ch7_terraced_ruins_LOD0.glb|-26,0,6|90|12|lod2", "res://assets/models/hero/ch7/lod/ch7_waterfall_cliff_LOD0.glb|-34,0,-34|90|15|lod3|y", "res://assets/models/hero/ch7/lod/ch7_optional_tomb_sarcophagus_LOD0.glb|28,0,13|0|2.6|box", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|-9,0,-40|0|2.4|convex", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|9,0,-40|0|2.4|convex", "res://assets/models/cave/lod/cav_flowstone_column_LOD0.glb|-37,0,36|0|12|capsule|y")

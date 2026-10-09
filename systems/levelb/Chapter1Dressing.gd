@@ -17,7 +17,7 @@ const PICK := "res://assets/props/equipment/climbing_pick.glb"
 const J := "res://assets/models/jungle/lod/"
 ## [path, target metres] (sizes per TRIPO_DELIVERY_REPORT phase-2 table)
 const JUN_TREES := [[J + "jun_kapok_tree_buttress_LOD0.glb", 18.0], [J + "jun_strangler_fig_tree_LOD0.glb", 14.0], [J + "jun_leaning_palm_cluster_LOD0.glb", 10.0], [J + "jun_mossy_dead_tree_LOD0.glb", 7.0], [TREE, 13.0]]
-const JUN_FERNS := [[J + "jun_fern_cluster_tree_fern_LOD0.glb", 3.0], [J + "jun_fern_cluster_low_LOD0.glb", 1.5], [FERN, 1.4]]
+const JUN_FERNS := [[J + "jun_fern_cluster_tree_fern_LOD0.glb", 3.0], [J + "jun_fern_cluster_low_LOD0.glb", 1.5]]
 const JUN_BOULDERS := [[J + "jun_boulder_cluster_mossy_a_LOD0.glb", 4.0], [J + "jun_boulder_cluster_split_b_LOD0.glb", 5.0], [J + "jun_boulder_ruin_mix_c_LOD0.glb", 5.0], [BOULDER, 2.5]]
 ## [path, size, fit_height]
 const JUN_ROOTS := [[J + "jun_giant_surface_roots_a_LOD0.glb", 6.0, false], [J + "jun_root_arch_over_stone_LOD0.glb", 4.0, false], [J + "jun_hanging_root_curtain_LOD0.glb", 5.0, true]]
@@ -64,6 +64,7 @@ func build(level: Node3D) -> void:
 	terrain.name = "JungleTerrain"
 	add_child(terrain)
 	terrain.build(Vector2(-110, -130), Vector2(220, 220), 1.6, _height, _mask)
+	terrain.material.set_shader_parameter("path_grit", 1.0)
 	_lift_ridge(level)
 	_cliffs()
 	_camp(level)
@@ -83,7 +84,7 @@ func build(level: Node3D) -> void:
 	grass.set("ray_depth", 60.0)
 	add_child(grass)
 	grass.position = Vector3(0, 0, -15)
-	_brighten_grass.call_deferred(grass)
+	_brighten_grass(grass)
 	WindSystem.set_wind(Vector2(0.8, -0.6), 0.7, 0.6, 0.3)
 
 
@@ -183,7 +184,7 @@ func _lift_ridge(level: Node3D) -> void:
 		if ResourceLoader.exists(H1 + "ch1_first_sealed_portal_LOD0.glb"):
 			portal.visible = false
 			portal.set_meta("collision", "none")
-			var hero := KIT.place(ridge, H1 + "ch1_first_sealed_portal_LOD0.glb", Vector3(0, -0.3, -13.6), 10.0, 0.0, Vector3.ONE, true, "HeroSealedPortal")
+			var hero := KIT.place(ridge, H1 + "ch1_first_sealed_portal_LOD0.glb", Vector3(0, -0.3, -15.4), 10.0, PI / 2, Vector3.ONE, true, "HeroSealedPortal")
 			if hero:
 				hero.set_meta("collision", "trimesh")
 	var cliff := ridge.get_node_or_null("CliffWall")
@@ -244,7 +245,7 @@ func _camp(level: Node3D) -> void:
 		var tpos: Vector3 = tents[t][0]
 		KIT.place(camp, TENT, Vector3(tpos.x, terrain.height_at(tpos.x, tpos.z), tpos.z), 2.6, tents[t][1], Vector3.ONE, true, "CampTent%d" % t)
 	# Phase-2 hero camp pieces: command tent hub behind the survey table, supply truck.
-	var hub := KIT.place(camp, H1 + "ch1_expedition_command_tent_LOD0.glb", Vector3(-0.5, 0, -2.6), 7.5, PI, Vector3.ONE, false, "CommandTentHub")
+	var hub := KIT.place(camp, H1 + "ch1_expedition_command_tent_LOD0.glb", Vector3(-10.5, 0, -5.5), 7.5, PI * 0.8, Vector3.ONE, false, "CommandTentHub")
 	var truck := KIT.place(camp, H1 + "ch1_expedition_supply_truck_LOD0.glb", Vector3(14.5, 0, 9.0), 5.6, 2.3, Vector3.ONE, false, "SupplyTruck")
 	if truck:
 		truck.set_meta("collision", "convex")
@@ -335,15 +336,43 @@ func _camp(level: Node3D) -> void:
 	can.size = Vector3(0.18, 0.45, 0.32)
 	for k in 3:
 		KIT.mesh(camp, can, Transform3D(Basis(Vector3.UP, k * 0.3), Vector3(9.3 + k * 0.22, 0.225, 6.2)), KIT.std_mat(Color(0.12, 0.28, 0.12), 0.6, 0.2))
-	# Lantern posts around the clearing (warm practical light).
-	var lantern_mat := KIT.std_mat(Color(0.9, 0.75, 0.45), 0.4, 0.0, Color(1.0, 0.75, 0.4), 2.5)
-	for lp in [Vector3(-7, 0, 6), Vector3(7, 0, 4), Vector3(-1.5, 0, 19)]:
-		KIT.mesh(camp, pole, Transform3D(Basis(), lp + Vector3(0, 1.4, 0)), pole_mat)
-		var bulb := SphereMesh.new()
-		bulb.radius = 0.1
-		bulb.height = 0.2
-		KIT.mesh(camp, bulb, Transform3D(Basis(), lp + Vector3(0, 2.9, 0)), lantern_mat)
-		KIT.omni(camp, lp + Vector3(0, 2.8, 0), Color(1.0, 0.78, 0.5), 0.9, 7.0)
+	# Camp lanterns: timber post, crossarm and a hurricane lantern hanging from a hook.
+	var wood := KIT.std_mat(Color(0.3, 0.22, 0.14), 0.9)
+	var post := BoxMesh.new()
+	post.size = Vector3(0.1, 2.4, 0.1)
+	var arm := BoxMesh.new()
+	arm.size = Vector3(0.55, 0.07, 0.07)
+	var glass := CylinderMesh.new()
+	glass.top_radius = 0.07
+	glass.bottom_radius = 0.08
+	glass.height = 0.2
+	var lcap := CylinderMesh.new()
+	lcap.top_radius = 0.03
+	lcap.bottom_radius = 0.1
+	lcap.height = 0.07
+	var base_m := CylinderMesh.new()
+	base_m.top_radius = 0.09
+	base_m.bottom_radius = 0.09
+	base_m.height = 0.04
+	var tin := KIT.std_mat(Color(0.16, 0.17, 0.15), 0.5, 0.7)
+	var flame := KIT.std_mat(Color(0.95, 0.62, 0.3), 0.2, 0.0, Color(1.0, 0.55, 0.2), 1.1)
+	var hook := CylinderMesh.new()
+	hook.top_radius = 0.008
+	hook.bottom_radius = 0.008
+	hook.height = 0.12
+	for lp in [Vector3(-7, 0, 6), Vector3(7, 0, 4), Vector3(-3.5, 0, 19)]:
+		KIT.mesh(camp, post, Transform3D(Basis(), lp + Vector3(0, 1.2, 0)), wood, "LanternPost")
+		KIT.mesh(camp, arm, Transform3D(Basis(), lp + Vector3(0.25, 2.3, 0)), wood).set_meta("collision", "none")
+		var hang: Vector3 = lp + Vector3(0.45, 2.05, 0)
+		KIT.mesh(camp, lcap, Transform3D(Basis(), hang + Vector3(0, 0.14, 0)), tin).set_meta("collision", "none")
+		KIT.mesh(camp, hook, Transform3D(Basis(), hang + Vector3(0, 0.235, 0)), tin).set_meta("collision", "none")
+		KIT.mesh(camp, glass, Transform3D(Basis(), hang), flame, "LanternGlass").set_meta("collision", "none")
+		KIT.mesh(camp, base_m, Transform3D(Basis(), hang + Vector3(0, -0.12, 0)), tin).set_meta("collision", "none")
+		KIT.omni(camp, hang, Color(1.0, 0.72, 0.42), 0.9, 7.0)
+	# The survey desk sits inside the SurveyTable interaction body (legacy layout, no collision).
+	var desk := level.get_node_or_null("CampArea/SurveyTable/SurveyDeskModel")
+	if desk:
+		desk.set_meta("collision", "none")
 	# NPC staging: everyone idles at a station, facing what they work on.
 	var elias := level.get_node_or_null("CampArea/EliasNPC") as Node3D
 	if elias:
@@ -585,8 +614,8 @@ func _sky(level: Node3D) -> void:
 		env.ambient_light_energy = 0.7
 		env.fog_enabled = true
 		env.fog_light_color = Color(0.68, 0.74, 0.72)
-		env.fog_density = 0.006
-		env.fog_sky_affect = 0.35
+		env.fog_density = 0.0022
+		env.fog_sky_affect = 0.12
 		env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 		env.tonemap_exposure = 1.0
 		env_node.environment = env
@@ -602,18 +631,20 @@ func _sky(level: Node3D) -> void:
 func _brighten_grass(grass: Node) -> void:
 	# The shared grass material reads near-black on back faces in the Compatibility
 	# renderer; give this valley a lighter, sun-bleached tint (still wind-registered).
-	for i in 4:
-		await get_tree().physics_frame
-	var src := GrassScatter._material
-	if src == null:
-		return
-	var mat := src.duplicate() as ShaderMaterial
-	mat.set_shader_parameter("base_color", Vector3(0.2, 0.3, 0.1))
-	mat.set_shader_parameter("tip_color", Vector3(0.52, 0.62, 0.26))
+	# Build our own material (no dependence on scatter timing) and re-apply it to every
+	# MultiMesh chunk the scatter creates now or later (it rescatters on quality changes).
+	var mat := ShaderMaterial.new()
+	mat.shader = preload("res://systems/levelb/grass_lb.gdshader")
+	mat.set_shader_parameter("base_color", Vector3(0.16, 0.26, 0.08))
+	mat.set_shader_parameter("tip_color", Vector3(0.42, 0.58, 0.2))
+	mat.set_shader_parameter("dry_tip_color", Vector3(0.62, 0.58, 0.3))
 	WindSystem.register_material(mat)
-	for c in grass.get_children():
+	var apply := func(c: Node) -> void:
 		if c is MultiMeshInstance3D:
-			c.material_override = mat
+			(c as MultiMeshInstance3D).set_deferred("material_override", mat)
+	grass.child_entered_tree.connect(apply)
+	for c in grass.find_children("*", "MultiMeshInstance3D", true, false):
+		apply.call(c)
 
 func _path_no_grass() -> void:
 	# Invisible strips on a non-gameplay layer (bit 20) keep grass off the beaten tracks.
@@ -650,4 +681,4 @@ func hook_audio(sc: Node) -> void:
 	sc.add_emitter("res://audio/ambience/lost_city/AMB_WATERFALL_RESONANT_LOOP.ogg", WATERFALL_POS + Vector3(0, 3, 2), 0.0, 40.0)
 	sc.add_emitter("res://audio/ambience/jungle/AMB_DAYLIGHT_RIDGE_WIND.ogg", Vector3(0, RIDGE_Y + 3, -58), -4.0, 35.0)
 	sc.add_reverb_zone(WATERFALL_POS + Vector3(0, 4, 8), Vector3(18, 12, 26), "ruin")
-	sc.add_reverb_zon
+	sc.add_reverb_zone(Vector3(0, RIDGE_Y + 4, -62), Vector3(26, 10, 10), "ruin")

@@ -4,9 +4,9 @@ shader_type spatial;
 // boulder textures only add high-frequency detail, so the ground never reads as a stamped tile.
 render_mode diffuse_burley, specular_schlick_ggx;
 
-uniform sampler2D detail_tex : source_color, filter_linear_mipmap, repeat_enable;
-uniform sampler2D detail_nrm : hint_normal, filter_linear_mipmap, repeat_enable;
-uniform sampler2D rock_tex : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D detail_tex : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D detail_nrm : hint_normal, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D rock_tex : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
 uniform vec3 grass_a : source_color = vec3(0.16, 0.24, 0.08);
 uniform vec3 grass_b : source_color = vec3(0.26, 0.31, 0.11);
 uniform vec3 soil_a : source_color = vec3(0.27, 0.20, 0.13);
@@ -18,6 +18,8 @@ uniform float detail_scale = 0.32;
 uniform float rock_scale = 0.12;
 uniform float slope_rock_start = 0.30;
 uniform float wet_global = 0.0;
+// Crisp gravel/pebble breakup on paths (smooth noise alone reads blurry at grazing angles).
+uniform float path_grit = 0.0;
 
 varying vec3 wpos;
 varying vec3 wnrm;
@@ -49,10 +51,22 @@ void fragment() {
 	float n2 = fbm(wpos.xz * 0.35 + 17.0);
 	float n3 = fbm(wpos.xz * 1.7 + 3.0);
 	vec3 det = texture(detail_tex, wpos.xz * detail_scale).rgb;
-	float dl = clamp(dot(det, vec3(0.3333)) * 1.6 - 0.35, 0.0, 1.2);
+	// Second, 5x finer detail octave + cellular grit so close-up soil stays crisp.
+	float fine = dot(texture(detail_tex, wpos.xz * detail_scale * 5.3 + 0.37).rgb, vec3(0.3333));
+	float grit = dot(texture(rock_tex, wpos.xz * 1.9).rgb, vec3(0.3333));
+	float dl = clamp(dot(det, vec3(0.3333)) * 1.1 + fine * 0.9 - 0.6, 0.0, 1.3);
 	vec3 grass = mix(grass_a, grass_b, smoothstep(0.3, 0.7, n1)) * (0.78 + 0.32 * n3);
-	vec3 soil = mix(soil_a, soil_b, n2) * (0.65 + 0.45 * dl);
+	vec3 soil = mix(soil_a, soil_b, n2) * (0.6 + 0.45 * dl) * mix(0.8, 1.15, smoothstep(0.35, 0.75, grit));
 	float pm = smoothstep(0.38, 0.62, COLOR.r + (n2 - 0.5) * 0.55 + (n3 - 0.5) * 0.15);
+	if (path_grit > 0.0) {
+		float c1 = dot(texture(rock_tex, wpos.xz * 3.7 + 0.11).rgb, vec3(0.3333));
+		float c2 = dot(texture(rock_tex, wpos.xz * 8.3 + 0.53).rgb, vec3(0.3333));
+		float pebble = smoothstep(0.56, 0.64, c1) * 0.5 + smoothstep(0.6, 0.66, c2) * 0.3;
+		float gap = 1.0 - smoothstep(0.18, 0.3, c1) * 0.3;
+		soil = mix(soil * gap, soil_b * 1.12 + vec3(0.015), clamp(pebble, 0.0, 1.0) * path_grit);
+		// Wheel/boot ruts: two darker bands along the path at fine scale.
+		soil *= 1.0 - 0.12 * path_grit * smoothstep(0.55, 0.85, n3);
+	}
 	vec3 col = mix(grass, soil, pm);
 	float lit = smoothstep(0.52, 0.72, n1 + COLOR.a * 0.4) * (1.0 - pm);
 	col = mix(col, litter * (0.7 + 0.5 * n3), lit * 0.65);
@@ -71,6 +85,8 @@ void fragment() {
 	ALBEDO = col;
 	ROUGHNESS = mix(mix(0.93, 0.85, rm), 0.35, wet);
 	SPECULAR = 0.35;
-	NORMAL_MAP = texture(detail_nrm, wpos.xz * detail_scale).rgb;
+	vec3 nm1 = texture(detail_nrm, wpos.xz * detail_scale).rgb;
+	vec3 nm2 = texture(detail_nrm, wpos.xz * detail_scale * 4.7 + 0.19).rgb;
+	NORMAL_MAP = normalize(vec3((nm1.xy + nm2.xy) - 1.0, 1.0)) * 0.5 + 0.5;
 	NORMAL_MAP_DEPTH = mix(0.5, 1.1, max(pm, rm));
 }

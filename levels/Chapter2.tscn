@@ -12,6 +12,7 @@
 
 [ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
 [ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -195,6 +196,7 @@ chapter_index = 2
 
 [node name="LevelCave" type="Node3D" parent="."]
 script = ExtResource("90_levelcave")
+ghost_paths = Array[NodePath]([NodePath("SanctuaryGate/GateMesh")])
 soundscape_key = "C02"
 hall_reverb = "temple"
 profile_z = PackedFloat32Array(48, 30, 0, -14, -22, -30, -44)
@@ -208,3 +210,11 @@ lamps = PackedVector3Array(2.5, 0, 13, -6.5, 0, 6.5, -5, 0, -7.5, 5, 0, -7.5, 24
 vaelor_lights = PackedVector3Array(0, 3, -25, 0, 2, -34, -5, 4, -22, 5, 4, -22)
 water_proxies = Array[NodePath]([NodePath("HydraulicPuzzle/WaterFlowMesh")])
 hide_paths = Array[NodePath]([NodePath("DungeonStructure/Floor/FloorMesh")])
+
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch2/lod/ch2_hydraulic_counterweight_machine_LOD0.glb|12,0,-5|-90|5.0|convex|y", "res://assets/models/hero/ch2/lod/ch2_voice_below_tablet_wall_LOD0.glb|0,0,-31.5|0|5.5|box", "res://assets/models/hero/ch2/lod/ch2_hydraulic_cistern_valve_LOD0.glb|-12.5,0,6|90|4.5|convex", "res://assets/models/cave/lod/cav_flowstone_column_LOD0.glb|-14,0,24|0|9|capsule|y", "res://assets/models/cave/lod/cav_flowstone_column_LOD0.glb|17,0,30|0|10|capsule|y", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|-7,0,-30|0|2.2|convex", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|7,0,-33|0|2.0|convex", "res://assets/models/cave/lod/cav_rimstone_pool_terrace_LOD0.glb|-20,0,14|30|6|lod3", "res://assets/models/cave/lod/cav_limestone_cliff_b_overhang_LOD0.glb|-38,0,24|90|10|lod3", "res://assets/models/cave/lod/cav_flowstone_drapery_wall_LOD0.glb|40,0,8|-90|7|lod3")
+
+[node name="HeroProps1" type="Node3D" parent="SanctuaryGate"]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch2/lod/ch2_inscribed_vaelor_gate_LOD0.glb|0,-3,0|90|6.0|none|y")

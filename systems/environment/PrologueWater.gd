@@ -24,6 +24,8 @@ func _ready() -> void:
 	if cave == null:
 		push_warning("[PrologueWater] cave not found")
 		return
+	if not cave.is_built:
+		await cave.built
 	_puddles()
 	# Relic sits off the walking line (x=2.2); move its Vaelor light from CavernArt with it.
 	var art := get_node_or_null("../NaturalCavernArt")

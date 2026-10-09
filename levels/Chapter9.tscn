@@ -11,6 +11,7 @@
 
 [ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
 [ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -164,3 +165,7 @@ rock_masses = Array[Vector4]([Vector4(-9, 22, 2.6, 16), Vector4(9, 18, 2.6, 16),
 lamps = PackedVector3Array(2, 0, 27, -3, 0, 10, 3, 0, -8, -2, 0, -25)
 vaelor_lights = PackedVector3Array(0, 4, -38, -5, 2, -36, 5, 2, -36)
 hide_paths = Array[NodePath]([NodePath("Terrain/MeshInstance3D")])
+
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch9/lod/ch9_sheared_resonance_conduit_LOD0.glb|5.5,0,-2|30|12|convex|x", "res://assets/models/hero/ch9/lod/ch9_tectonic_fault_rock_LOD0.glb|-14,0,-6|0|10|lod3|y", "res://assets/models/hero/ch9/lod/ch9_heart_road_gatehouse_LOD0.glb|0,0,-44.5|0|12|lod3|y", "res://assets/models/cave/lod/cav_limestone_cliff_b_overhang_LOD0.glb|16,0,8|-90|10|lod3", "res://assets/models/cave/lod/cav_resonant_crystal_vein_b_LOD0.glb|-6,0,-34|0|3|convex", "res://assets/models/cave/lod/cav_resonant_crystal_vein_b_LOD0.glb|6,0,-33|180|3|convex", "res://assets/models/cave/lod/cav_stalactite_ceiling_cluster_LOD0.glb|0,13,-20|0|6|none")

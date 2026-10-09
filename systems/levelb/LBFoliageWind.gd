@@ -35,6 +35,10 @@ func configure(plant: Node3D, height: float, base_y: float, profile := "") -> vo
 			var original := mesh.get_active_material(index) as StandardMaterial3D
 			if original == null or original.albedo_texture == null:
 				continue
+			# The wind shader is opaque: alpha-cut cards (legacy jungle_fern) would render as black
+			# silhouettes, so those keep their original material.
+			if original.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED:
+				continue
 			var animated := ShaderMaterial.new()
 			animated.shader = preload("res://shaders/foliage_wind.gdshader")
 			animated.set_shader_parameter("albedo_texture", original.albedo_texture)

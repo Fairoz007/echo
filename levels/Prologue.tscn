@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/optimized/arch_glass_barrier_LOD0.glb" id="13_glass"]
 [ext_resource type="Script" path="res://systems/CavernArt.gd" id="14_cavern"]
 [ext_resource type="Script" path="res://systems/environment/PrologueWater.gd" id="15_water"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -175,3 +176,6 @@ collision_mask = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitTrigger"]
 shape = SubResource("BoxShape3D_exit")
 
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/prologue/lod/pro_resonant_glyph_monolith_LOD0.glb|-2.6,0,-25|25|3.0|convex", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|3.3,0,-26.5|-20|1.8|convex", "res://assets/models/cave/lod/cav_resonant_crystal_vein_b_LOD0.glb|-3.4,0,-28.5|40|2.4|convex", "res://assets/models/cave/lod/cav_flowstone_drapery_wall_LOD0.glb|5.6,0,-14.5|-90|5.5|lod3", "res://assets/models/cave/lod/cav_flowstone_column_LOD0.glb|-5.0,0,-9.4|0|5.0|capsule|y", "res://assets/models/cave/lod/cav_stalactite_ceiling_cluster_LOD0.glb|1.5,6.6,-11.5|0|3.5|none")

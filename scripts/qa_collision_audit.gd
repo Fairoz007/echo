@@ -178,6 +178,8 @@ func _check_white(node: Node, scene: String, level: Node, size: Vector3) -> void
 		mat = node.material if "material" in node else null
 	elif node is MeshInstance3D:
 		mat = node.material_override if node.material_override else node.get_active_material(0)
+	if node.has_meta("keep_material"):
+		return # intentional: invisible ghost colliders, daylight/sky cards
 	var area := maxf(size.x * size.z, maxf(size.x * size.y, size.y * size.z))
 	if area < 4.0:
 		return

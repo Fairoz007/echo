@@ -35,7 +35,9 @@ const WATER_BODY := preload("res://systems/water/WaterBody.tscn")
 @export var fog_color := Color(0.07, 0.08, 0.09)
 @export var fog_density := 0.022
 @export var exposure := 1.1
-@export var hide_paths: Array[NodePath] = [] ## blockout visuals to hide
+@export var hide_paths: Array[NodePath] = [] ## blockout visuals to hide (any Node3D)
+## Blockout solids replaced by hero art: made invisible but keep their collision.
+@export var ghost_paths: Array[NodePath] = []
 @export var soundscape_key := "" ## e.g. "C02"; attaches systems/audio/Soundscape
 @export var hall_reverb := "vast"
 ## Extra reverb zones: x, z, half-length along Z, preset index into REVERB_NAMES
@@ -78,19 +80,40 @@ func _ready() -> void:
 	cave.avoid_rects = avoid
 	cave.route_clear = 3.0
 	cave.cap_far = not daylight_exit
+	var prof := OS.get_cmdline_user_args().has("--profile-build")
+	var t := Time.get_ticks_usec()
 	add_child(cave)
-	_rock_masses()
+	if prof: print("[LevelCave] cave add %.0f ms" % ((Time.get_ticks_usec() - t) / 1000.0))
+	# Let the builder's heavy stages run on their own frames first.
+	if not cave.is_built:
+		await cave.built
+	if not is_inside_tree():
+		return
+	await _rock_masses()
+	if not is_inside_tree():
+		return
+	t = Time.get_ticks_usec()
 	if daylight_exit:
 		_daylight()
 	_lights()
 	_water()
 	_environment()
 	_audio()
+	if prof: print("[LevelCave] lights/water/env/audio %.0f ms" % ((Time.get_ticks_usec() - t) / 1000.0))
 	for path in hide_paths:
 		var n := level.get_node_or_null(path)
-		if n is GeometryInstance3D:
+		if n is Node3D:
 			n.visible = false
 			n.set_meta("collision", "none")
+	for path in ghost_paths:
+		var g := level.get_node_or_null(path) as GeometryInstance3D
+		if g:
+			var clear := StandardMaterial3D.new()
+			clear.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			clear.albedo_color = Color(0, 0, 0, 0)
+			g.material_override = clear
+			g.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			g.set_meta("keep_material", true)
 	# The shared sediment multimesh from CampaignEnvironmentArt would z-fight the new ground.
 	var art := level.get_node_or_null("CampaignEnvironmentArt")
 	if art:
@@ -105,6 +128,9 @@ func _rock_masses() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value + 9
 	for m in rock_masses:
+		if not is_inside_tree():
+			return
+		var t := Time.get_ticks_usec()
 		# Stack of overlapping irregular rocks from floor to (near) the ceiling.
 		var radius := m.z
 		var height := m.w
@@ -112,8 +138,10 @@ func _rock_masses() -> void:
 		while y < height:
 			var r := radius * rng.randf_range(0.75, 1.05) * (1.0 - 0.25 * y / maxf(height, 1.0))
 			var body: StaticBody3D = cave.add_rock(root, Vector3(m.x + rng.randf_range(-0.4, 0.4) * radius, y + r * 0.45, m.y + rng.randf_range(-0.4, 0.4) * radius), r, Vector3(rng.randf() * 0.4, rng.randf() * TAU, rng.randf() * 0.4))
-			body.scale = Vector3(1.0, rng.randf_range(1.0, 1.5), 1.0)
 			y += r * 0.9
+		if OS.get_cmdline_user_args().has("--profile-build"):
+			print("[LevelCave] rock mass %.0f ms" % ((Time.get_ticks_usec() - t) / 1000.0))
+		await get_tree().process_frame
 
 func _lamp(pos: Vector3) -> void:
 	var body := MeshInstance3D.new()
@@ -214,6 +242,7 @@ func _daylight() -> void:
 	m.albedo_color = Color(0.86, 0.9, 0.95)
 	sky.material_override = m
 	sky.set_meta("collision", "none")
+	sky.set_meta("keep_material", true)
 	add_child(sky)
 	sky.position = Vector3(0, q.size.y * 0.5 - 2.0, z - 1.5)
 	var day := OmniLight3D.new()

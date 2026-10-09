@@ -14,3 +14,10 @@ flowchart TD
     M9 --> M10[FINAL CHAPTER: The Heart Vault\nConfrontation with Elias & Heavy Syndicate unit\nPhase 1: Arena combat\nPhase 2: Resonance node puzzle disruption\nPhase 3: Catastrophic escape climb]
     M10 --> M11[EPILOGUE: Daylight\nReach mountain surface\nSurviving team reunion\nClosing journal reflection & Credits]
 ```
+
+
+## Level B additions (Ch1, Ch5, Ch6, Ch8, Epilogue)
+Main objectives are unchanged. New objectives, all registered through MissionManager:
+- **Optional discoveries:** `opt_<id>` is registered and completed when the collectible is read. The IDs are c01_journal_father, c01_tablet_gorge, c05_meridian_order, c05_tower_logbook, c06_diver_slate, c06_tablet_waterline, c08_transmission_log and c08_elias_journal.
+- **C06** `obj_c06_opt_cistern`: open the east cistern valve, then swim up the rising water to the high ledge.
+- **C08** `obj_c08_hold_refuge`: Meridian waves begin about 6 s after Elias's reveal (wave 1 is 2 mercs, wave 2 is 3). The waves do not block the confrontation trigger.

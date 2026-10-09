@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="4_hud"]
 [ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="99_mara_production"]
 [ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -122,3 +123,7 @@ rock_masses = Array[Vector4]([Vector4(-4, 12, 1.6, 3), Vector4(5, -4, 1.8, 3), V
 lamps = PackedVector3Array(2, 0, 30, -2.5, 0, 14, 3, 0, -2)
 ambient_color = Color(0.14, 0.15, 0.17, 1)
 hide_paths = Array[NodePath]([NodePath("RidgeGround/MeshInstance3D")])
+
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/finale/lod/fin_collapsed_cave_exit_LOD0.glb|0,0,-40|0|9|none|y", "res://assets/models/hero/finale/lod/fin_rockfall_rubble_slope_LOD0.glb|-3.5,0,9|0|8|lod3|z", "res://assets/models/hero/finale/lod/fin_rockfall_rubble_slope_LOD0.glb|4.5,0,-12|180|7|lod3|z", "res://assets/models/cave/lod/cav_stalactite_ceiling_cluster_LOD0.glb|0,9,-10|0|4|none")

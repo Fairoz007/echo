@@ -120,7 +120,7 @@ func _test_speeds() -> void:
 				t95 = t
 		var speed := p.horizontal_speed
 		var scale := p.get_animation_playback_scale()
-		var slide := await _foot_slide(150)
+		var slide := await _foot_slide(300)
 		_record("%s planted-foot slide (m/s)" % mode[0], "%.3f" % slide, slide < 0.35, "stance-foot world speed, worst foot")
 		if mode[0] == "run":
 			await _shot("01_run_flat")

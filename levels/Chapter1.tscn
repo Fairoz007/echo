@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/optimized/prop_meridian_crate_LOD0.glb" id="7_crate"]
 [ext_resource type="PackedScene" path="res://assets/models/optimized/env_boulder_moss_LOD0.glb" id="8_boulder"]
 [ext_resource type="PackedScene" path="res://assets/models/optimized/ruin_arch_portal_LOD0.glb" id="9_portal"]
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Production.glb" id="10_mara"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Game_LOD0.glb" id="10_mara"]
 
 [ext_resource type="PackedScene" path="res://assets/props/camp/survey_fielddesk.glb" id="83_desk"]
 

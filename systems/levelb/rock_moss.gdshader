@@ -14,6 +14,9 @@ uniform float moss_amount = 0.55;
 uniform float desaturate = 0.6;
 uniform float wetness = 0.0;
 uniform float wet_line = -1000.0;
+// <1 flattens the source atlas' light/dark blotches (Ch6 walls read as white specks otherwise).
+uniform float detail_contrast = 1.0;
+uniform float specular_amount = 0.4;
 
 varying vec3 wpos;
 varying vec3 wnrm;
@@ -34,6 +37,11 @@ void fragment() {
 	vec3 a = texture(rock_tex, UV).rgb;
 	float l = dot(a, vec3(0.333));
 	a = mix(a, vec3(l), desaturate);
+	// Tripo atlases carry near-white seam/highlight texels; compress them so walls don't speckle.
+	a = min(a, vec3(0.58)) * (1.0 - 0.35 * smoothstep(0.62, 0.9, l));
+	l = min(l, 0.58);
+	a = mix(vec3(0.36), a, detail_contrast);
+	l = mix(0.36, l, detail_contrast);
 	float big = vnoise(wpos.xz * 0.04 + wpos.y * 0.025);
 	float mid = vnoise(wpos.xy * 0.35 + wpos.zx * 0.27);
 	vec3 base = a * mix(tint, tint_b, big) * 1.35 * (0.85 + 0.3 * mid);
@@ -47,7 +55,7 @@ void fragment() {
 	col *= mix(1.0, 0.5, wet);
 	ALBEDO = col;
 	ROUGHNESS = mix(mix(0.88, 0.95, m), 0.22, wet);
-	SPECULAR = 0.4;
+	SPECULAR = specular_amount;
 	if (has_normal) {
 		NORMAL_MAP = texture(rock_nrm, UV).rgb;
 		NORMAL_MAP_DEPTH = 1.0;

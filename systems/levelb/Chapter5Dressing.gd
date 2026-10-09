@@ -141,7 +141,7 @@ func _checkpoint(level: Node3D) -> void:
 		KIT.place(root, CRATE, crates[i], rng.randf_range(0.9, 1.25), rng.randf_range(-0.4, 0.4), Vector3(1.3, 1, 1), true, "CoverCrate%02d" % i)
 	# Sandbag walls (procedural stacked bags).
 	var bag_mat := KIT.std_mat(Color(0.36, 0.33, 0.25), 0.95)
-	for wall in [[Vector3(-1.5, 0, -2), 0.2], [Vector3(6, 0, -7), -0.4], [Vector3(-9, 0, -9), 0.5]]:
+	for wall in [[Vector3(-5.0, 0, 1.0), 0.2], [Vector3(6, 0, -7), -0.4], [Vector3(-9, 0, -9), 0.5]]:
 		_sandbags(root, wall[0], wall[1], bag_mat)
 	# Command tent + radio + generator.
 	var tent := KIT.place(root, TENT, Vector3(10, 0, -20), 3.0, PI + 0.3, Vector3.ONE, true, "CommandTent")

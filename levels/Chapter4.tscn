@@ -5,12 +5,13 @@
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="Script" path="res://scripts/Interactable3D.gd" id="4_interact"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="5_hud"]
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="6_mara"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Game_LOD0.glb" id="6_mara"]
 [ext_resource type="PackedScene" path="res://assets/models/optimized/prop_expedition_radio_station_LOD0.glb" id="7_radio"]
 [ext_resource type="PackedScene" path="res://assets/models/optimized/prop_meridian_crate_LOD0.glb" id="8_crate"]
 
 [ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
 [ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -66,7 +67,7 @@ shape = SubResource("CapsuleShape3D_player")
 
 [node name="VisualMesh" type="Node3D" parent="Player"]
 
-[node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("6_mara")]
+[node name="CHR_Mara_Game" parent="Player/VisualMesh" instance=ExtResource("6_mara")]
 
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
@@ -154,3 +155,7 @@ rock_masses = Array[Vector4]([Vector4(-6, 12, 3, 10), Vector4(8, -14, 3.5, 12), 
 lamps = PackedVector3Array(1.5, 0, 1.5, -1.5, 0, -1.2, 0, 0, 18, 3, 0, -30)
 vaelor_lights = PackedVector3Array(0, 2.5, -38)
 hide_paths = Array[NodePath]([NodePath("CaveCavern/Floor/MeshInstance3D")])
+
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch4/lod/ch4_meridian_generator_LOD0.glb|-5.5,0,-3|20|2.6|box", "res://assets/models/hero/ch4/lod/ch4_meridian_crate_stack_LOD0.glb|-3.5,0,3.5|-15|2.2|box", "res://assets/models/hero/ch4/lod/ch4_meridian_field_tent_LOD0.glb|-8,0,4|90|5|box", "res://assets/models/hero/ch4/lod/ch4_mobile_light_tower_LOD0.glb|4.5,0,4|200|6|box|y", "res://assets/models/hero/ch4/lod/ch4_1890s_expedition_relics_LOD0.glb|-18,0,22|35|2.4|box", "res://assets/models/cave/lod/cav_flowstone_column_LOD0.glb|-26,0,28|0|8|capsule|y", "res://assets/models/cave/lod/cav_rimstone_pool_terrace_LOD0.glb|14,0,-30|0|6|lod3", "res://assets/models/cave/lod/cav_limestone_cliff_a_LOD0.glb|-37,0,26|90|10|lod3", "res://assets/models/cave/lod/cav_stalactite_ceiling_cluster_LOD0.glb|-6,8.5,-14|0|5|none")

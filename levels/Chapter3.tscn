@@ -4,11 +4,12 @@
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/CameraController.gd" id="3_cam"]
 [ext_resource type="PackedScene" path="res://ui/HUD.tscn" id="4_hud"]
-[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Optimized.glb" id="5_mara"]
+[ext_resource type="PackedScene" path="res://assets/characters/mara/optimized/CHR_Mara_Game_LOD0.glb" id="5_mara"]
 [ext_resource type="PackedScene" path="res://assets/models/optimized/arch_bridge_span_LOD0.glb" id="6_bridge"]
 
 [ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
 [ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -69,7 +70,7 @@ shape = SubResource("CapsuleShape3D_player")
 
 [node name="VisualMesh" type="Node3D" parent="Player"]
 
-[node name="CHR_Mara_Optimized" parent="Player/VisualMesh" instance=ExtResource("5_mara")]
+[node name="CHR_Mara_Game" parent="Player/VisualMesh" instance=ExtResource("5_mara")]
 
 
 [node name="Flashlight" type="SpotLight3D" parent="Player"]
@@ -163,4 +164,16 @@ pit_depth = 22.0
 rock_masses = Array[Vector4]([Vector4(-30, -19.5, 2.4, 18), Vector4(-34, -19.5, 2.4, 18), Vector4(-38, -19.5, 2.4, 18), Vector4(-42, -19.5, 2.4, 18), Vector4(30, -19.5, 2.4, 18), Vector4(34, -19.5, 2.4, 18), Vector4(38, -19.5, 2.4, 18), Vector4(42, -19.5, 2.4, 18)])
 lamps = PackedVector3Array(3, 0, 15, -3, 0, 9, 2.5, 0, 4, -2.5, 0, 4)
 vaelor_lights = PackedVector3Array(0, 4, -28, -12, 3, -30, 12, 3, -30, 0, -10, -10)
-hide_paths = Array[NodePath]([NodePath("ChasmEnvironment/SouthLedge/MeshInstance3D")])
+hide_paths = Array[NodePath]([NodePath("ChasmEnvironment/SouthLedge/MeshInstance3D"), NodePath("BridgeStructure/BridgeSection1/BridgeModel1"), NodePath("BridgeStructure/BridgeSection2/BridgeModel2")])
+
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch3/lod/ch3_broken_pylon_a_LOD0.glb|-10,-22,-9.5|0|16|convex|y", "res://assets/models/hero/ch3/lod/ch3_broken_pylon_b_LOD0.glb|10,-22,-16|180|13|convex|y", "res://assets/models/hero/ch3/lod/ch3_broken_pylon_a_LOD0.glb|-14,-22,-2|90|12|convex|y", "res://assets/models/hero/ch3/lod/ch3_fallen_bridge_deck_chunk_LOD0.glb|-6,-22,-15|30|7|convex", "res://assets/models/cave/lod/cav_limestone_cliff_a_LOD0.glb|-16,-22,-12|90|14|lod3", "res://assets/models/cave/lod/cav_limestone_cliff_b_overhang_LOD0.glb|16,-22,-6|-90|12|lod3", "res://assets/models/cave/lod/cav_stalactite_ceiling_cluster_LOD0.glb|0,17,-10|0|6|none", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|-8,-22,-20|0|3|convex")
+
+[node name="HeroProps1" type="Node3D" parent="BridgeStructure/BridgeSection1"]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch3/lod/ch3_massive_bridge_section_LOD0.glb|0,-0.4,0|90|14|none|x")
+
+[node name="HeroProps2" type="Node3D" parent="BridgeStructure/BridgeSection2"]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch3/lod/ch3_massive_bridge_section_LOD0.glb|0,-0.4,0|90|14|none|x")

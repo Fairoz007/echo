@@ -55,6 +55,7 @@ static func start(skeleton: Skeleton3D, impulse := Vector3.ZERO, world_mask := 2
 		pb.linear_damp = 0.3
 		pb.angular_damp = 2.0
 		pb.body_offset = pose.affine_inverse() * body_xform
+		_limit_joint(pb, bone_name, y)
 		var shape := CollisionShape3D.new()
 		var capsule := CapsuleShape3D.new()
 		var radius: float = spec[1] / world_scale
@@ -69,3 +70,29 @@ static func start(skeleton: Skeleton3D, impulse := Vector3.ZERO, world_mask := 2
 	if hips and impulse != Vector3.ZERO:
 		hips.apply_central_impulse(impulse)
 	return sim
+
+## Joint limits (radians). Cones: swing/twist span. Hinges: knees and elbows only bend one way.
+## Hinge axis = joint frame Z = body z (lateral for legs). T-pose arms lie along the lateral
+## axis, so the elbow frame is rotated to hinge around the vertical axis instead.
+const LIMITS := {
+	"Spine01": [0.35, 0.25], "Spine02": [0.35, 0.25], "Head": [0.6, 0.6],
+	"L_Thigh": [1.1, 0.3], "R_Thigh": [1.1, 0.3],
+	"L_Upperarm": [1.4, 0.6], "R_Upperarm": [1.4, 0.6],
+}
+const HINGES := {"L_Calf": [-2.3, 0.0], "R_Calf": [-2.3, 0.0], "L_Forearm": [0.0, 2.2], "R_Forearm": [0.0, -2.2]}
+
+static func _limit_joint(pb: PhysicalBone3D, bone_name: String, bone_axis: Vector3) -> void:
+	if LIMITS.has(bone_name):
+		pb.set("joint_constraints/swing_span", rad_to_deg(LIMITS[bone_name][0]))
+		pb.set("joint_constraints/twist_span", rad_to_deg(LIMITS[bone_name][1]))
+		pb.set("joint_constraints/softness", 0.8)
+		pb.set("joint_constraints/relaxation", 1.0)
+	elif HINGES.has(bone_name):
+		var lim: Array = HINGES[bone_name]
+		if bone_name.ends_with("Forearm") and absf(bone_axis.y) < 0.6:
+			pb.joint_rotation = Vector3(0, PI * 0.5, 0)
+		pb.set("joint_constraints/angular_limit_enabled", true)
+		pb.set("joint_constraints/angular_limit_lower", rad_to_deg(minf(lim[0], lim[1])))
+		pb.set("joint_constraints/angular_limit_upper", rad_to_deg(maxf(lim[0], lim[1])))
+		pb.set("joint_constraints/angular_limit_softness", 0.9)
+		pb.set("joint_constraints/angular_limit_relaxation", 1.0)

@@ -179,6 +179,8 @@ func _build_course() -> void:
 func _spawn_player() -> void:
 	player = (load("res://scenes/Player.tscn") as PackedScene).instantiate()
 	player.position = lane_start("flat")
+	if Engine.has_meta("dev_run_from_walk"):
+		player.synthesize_run_from_walk = true
 	camera_rig = CameraController.new()
 	camera_rig.name = "CameraController"
 	var arm := SpringArm3D.new()

@@ -79,7 +79,10 @@ func _height(x: float, z: float) -> float:
 
 func _mask(x: float, z: float) -> Color:
 	var aisle := 1.0 - smoothstep(2.0, 3.5, absf(x))
-	return Color(aisle * 0.4, 0.0, 0.6, 0.5)
+	# Terraces outside the hall show above/through the wall tops: dark cave rock there, not
+	# the pale flagstone grey (it read as white specks along the wall line).
+	var outside := maxf(smoothstep(22.0, 25.0, absf(x)), smoothstep(24.0, 27.0, z))
+	return Color(aisle * 0.4 * (1.0 - outside), outside * 0.9, 0.6 * (1.0 - outside), 0.5)
 
 func _water() -> void:
 	basin = preload("res://systems/water/WaterBody.tscn").instantiate()
@@ -89,6 +92,18 @@ func _water() -> void:
 	basin.set("depth", WATER_Y - FLOOR_Y + 0.4)
 	basin.set("surface_level", 0.0)
 	basin.set("wet_dry_time", 90.0)
+	basin.set("quality_override", 0) # force the full shader (depth/refraction/foam) even on Low
+	# Level-B grade of the temple preset: the stock FLOODED_TEMPLE goes near-black over a 6 m
+	# deep, dim hall. Clearer green-teal body so the sunken floor/pillars read through it.
+	var wp: Resource = WaterPreset.make("FLOODED_TEMPLE").duplicate()
+	wp.shallow_color = Color(0.2, 0.4, 0.36)
+	wp.deep_color = Color(0.035, 0.12, 0.115)
+	wp.absorption = Vector3(0.32, 0.12, 0.13)
+	wp.clarity = 0.8
+	wp.normal_strength = 0.55
+	wp.roughness_base = 0.04
+	wp.specular_amount = 0.7
+	basin.set("preset", wp)
 	add_child(basin)
 	basin.global_position = Vector3(-1.0, WATER_Y, 6.0)
 
@@ -108,6 +123,9 @@ func drain(seconds: float) -> void:
 	get_tree().create_timer(seconds).timeout.connect(func(): _spin_target = 0.15)
 
 func _process(delta: float) -> void:
+	_tt += delta
+	for i in _torches.size():
+		_torches[i].light_energy = 2.0 + sin(_tt * 11.0 + i) * 0.15 + sin(_tt * 6.7 + i * 2.0) * 0.2
 	_spin = move_toward(_spin, _spin_target, delta * 0.4)
 	if waterwheel:
 		waterwheel.rotate_object_local(Vector3.RIGHT, delta * (_spin * 0.6 + 0.04))
@@ -121,7 +139,9 @@ func _architecture() -> void:
 	var root := Node3D.new()
 	root.name = "TempleHall"
 	add_child(root)
-	var stone := KIT.rock_material(Color(0.66, 0.68, 0.64), 0.35)
+	var stone := KIT.rock_material(Color(0.66, 0.68, 0.64), 0.35).duplicate() as ShaderMaterial
+	stone.set_shader_parameter("detail_contrast", 0.3)
+	stone.set_shader_parameter("specular_amount", 0.12)
 	# Perimeter walls (Vaelor carved), leaving the north gate and east walkway open.
 	var spans := []
 	for z in [20.0, 12.0, 4.0, -4.0]:
@@ -156,7 +176,8 @@ func _architecture() -> void:
 				KIT.override_material(p, stone)
 				p.add_to_group("wettable")
 	# Cavern ceiling and outer rock beyond the hall.
-	var cave := KIT.rock_material(Color(0.36, 0.37, 0.36), 0.25)
+	var cave := KIT.rock_material(Color(0.36, 0.37, 0.36), 0.25).duplicate() as ShaderMaterial
+	cave.set_shader_parameter("detail_contrast", 0.5)
 	for k in 10:
 		var c := KIT.place(root, CEIL, Vector3(rng.randf_range(-22, 22), rng.randf_range(13.0, 15.0), rng.randf_range(-12, 24)), rng.randf_range(16, 22), rng.randf() * TAU, Vector3.ONE, false, "Vault%02d" % k)
 		if c:
@@ -167,28 +188,62 @@ func _architecture() -> void:
 	shaft.top_radius = 2.2
 	shaft.bottom_radius = 3.4
 	shaft.height = 16.0
-	var beam := StandardMaterial3D.new()
-	beam.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	beam.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	beam.albedo_color = Color(0.6, 0.8, 0.9, 0.025)
-	beam.cull_mode = BaseMaterial3D.CULL_DISABLED
-	beam.albedo_texture = KIT.grain()
-	beam.set_meta("keep_material", true)
+	shaft.cap_top = false
+	shaft.cap_bottom = false
+	var beam := ShaderMaterial.new()
+	beam.shader = preload("res://systems/levelb/light_shaft.gdshader")
 	var b := KIT.mesh(root, shaft, Transform3D(Basis(Vector3.RIGHT, 0.25), Vector3(3, 6, 8)), beam, "LightShaft")
 	b.set_meta("collision", "none")
 	b.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-
+	# Dust motes drifting in the shaft.
+	var motes := GPUParticles3D.new()
+	motes.name = "ShaftDust"
+	motes.amount = 60
+	motes.lifetime = 8.0
+	motes.visibility_aabb = AABB(Vector3(-4, -8, -4), Vector3(8, 16, 8))
+	var pm := ParticleProcessMaterial.new()
+	pm.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	pm.emission_box_extents = Vector3(2.0, 6.0, 2.0)
+	pm.gravity = Vector3(0, -0.02, 0)
+	pm.initial_velocity_min = 0.02
+	pm.initial_velocity_max = 0.08
+	pm.direction = Vector3(0.3, 0.2, 0.1)
+	pm.spread = 180.0
+	pm.scale_min = 0.6
+	pm.scale_max = 1.2
+	motes.process_material = pm
+	var q := QuadMesh.new()
+	q.size = Vector2(0.05, 0.05)
+	var dm := StandardMaterial3D.new()
+	dm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	dm.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	dm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	dm.albedo_color = Color(0.9, 0.95, 1.0, 0.5)
+	dm.albedo_texture = KIT.grain()
+	q.material = dm
+	motes.draw_pass_1 = q
+	root.add_child(motes)
+	motes.global_position = Vector3(3, 5, 8)
 # ------------------------------------------------------------------ hydraulic machinery
 
 func _machinery(level: Node3D) -> void:
 	var root := Node3D.new()
 	root.name = "HydraulicMachinery"
 	add_child(root)
+	# Sanctum arch: face the aqueduct ramp and frame it (was side-on and blocked the ramp).
+	var arch := level.get_node_or_null("TempleSanctum/SanctumPortal") as Node3D
+	if arch:
+		arch.transform = Transform3D(Basis(Vector3.UP, PI / 2).scaled(Vector3.ONE * 7.5), Vector3(0, -2.4, 0))
+		arch.set_meta("collision", "none")
+		for side in [-1.0, 1.0]:
+			KIT.box_body(root, Vector3(side * 3.1, 0.5, -25.0), Vector3(1.0, 7.0, 2.5), 0.0, "ArchJamb")
 	# Scale the existing turbine (the interactable stays where QA/players expect it).
 	var turbine := level.get_node_or_null("TempleMechanisms/SluiceWheel/TurbineWheelModel") as Node3D
 	if turbine:
 		turbine.scale = Vector3.ONE * 3.0
-		turbine.position.y = -0.6
+		turbine.position = Vector3(-1.9, -0.6, 0)
+		turbine.set_meta("collision", "none")
+		KIT.box_body(root, Vector3(-14.0, 0.6, 0), Vector3(1.4, 4.2, 3.6), 0.0, "TurbineBody")
 		gears.append(turbine)
 	# Great gear train against the west wall: three meshing bronze wheels + axle.
 	var specs := [[Vector3(-21.0, 1.5, -2.0), 3.2], [Vector3(-21.0, 5.6, 2.2), 2.0], [Vector3(-21.0, 1.0, 5.2), 1.4]]
@@ -301,7 +356,8 @@ func _cistern() -> void:
 	cistern_water.set("preset_name", "RISING_PUZZLE_WATER")
 	cistern_water.set("size", Vector2(11.6, 11.6))
 	cistern_water.set("depth", 9.0)
-	cistern_water.set("surface_level", -7.6) # nearly dry until the valve is opened
+	cistern_water.set("surface_level", -7.6)
+	cistern_water.set("quality_override", 0) # nearly dry until the valve is opened
 	add_child(cistern_water)
 	cistern_water.global_position = CISTERN + Vector3(0, 7.8, 0)
 	# Valve wheel at the shaft floor.
@@ -368,7 +424,7 @@ func _underwater() -> void:
 	# Waterweed (fern assets, gentle sway) on the hall floor.
 	for k in 18:
 		var p := Vector3(rng.randf_range(-21, 19), FLOOR_Y, rng.randf_range(-9, 23))
-		var f := KIT.place(root, "res://assets/environment/jungle/jungle_fern.glb", p, rng.randf_range(0.6, 1.3), rng.randf() * TAU, Vector3.ONE, true, "Weed%02d" % k)
+		var f := KIT.place(root, "res://assets/models/jungle/lod/jun_fern_cluster_low_LOD0.glb", p, rng.randf_range(0.6, 1.2), rng.randf() * TAU, Vector3.ONE, true, "Weed%02d" % k)
 		if f:
 			f.set_meta("collision", "none")
 			KIT.sway(f, 1.0, FLOOR_Y, "fern")
@@ -392,19 +448,59 @@ func _lighting(level: Node3D) -> void:
 		var env := env_node.environment.duplicate() as Environment
 		env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 		env.ambient_light_color = Color(0.3, 0.38, 0.42)
-		env.ambient_light_energy = 1.45
+		env.ambient_light_energy = 1.7
 		env.fog_light_color = Color(0.08, 0.14, 0.17)
-		env.fog_density = 0.014
+		env.fog_density = 0.008
 		env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 		env_node.environment = env
 	var sky := level.get_node_or_null("AqueductSkylight") as DirectionalLight3D
 	if sky:
+		# A hall-wide sun through the broken vault lit ragged pale patches on the walls
+		# (read as white specks). Keep it as a faint cool fill; the shaft spot below carries it.
 		sky.shadow_enabled = true
-		sky.shadow_blur = 2.0
-	# Torches on the colonnade (warm vs cool water contrast).
-	for p in [Vector3(-16.5, 4.5, 14), Vector3(16.5, 4.5, 14), Vector3(-16.5, 4.5, -2), Vector3(16.5, 4.5, -2)]:
-		KIT.omni(self, p, Color(1.0, 0.6, 0.3), 1.3, 10.0)
-
+		sky.shadow_blur = 3.0
+		sky.light_energy = 0.3
+		var shaft_light := SpotLight3D.new()
+		shaft_light.name = "ShaftSpot"
+		shaft_light.light_color = Color(0.7, 0.85, 0.95)
+		shaft_light.light_energy = 4.0
+		shaft_light.spot_range = 22.0
+		shaft_light.spot_angle = 16.0
+		shaft_light.spot_attenuation = 0.6
+		add_child(shaft_light)
+		shaft_light.global_position = Vector3(3, 13.5, 10.0)
+		shaft_light.look_at(Vector3(3, 0, 6.5))
+	# Expedition work lights and wall torches (warm) + Vaelor glyph glow (cool) so walls read.
+	var bracket := KIT.std_mat(Color(0.25, 0.2, 0.15), 0.6, 0.5)
+	var fire := KIT.std_mat(Color(1, 0.6, 0.25), 0.3, 0.0, Color(1.0, 0.55, 0.2), 4.0)
+	var cup := CylinderMesh.new()
+	cup.top_radius = 0.18
+	cup.bottom_radius = 0.08
+	cup.height = 0.3
+	var flame := SphereMesh.new()
+	flame.radius = 0.14
+	flame.height = 0.4
+	var torches := [Vector3(-23.6, 3.2, 16), Vector3(-23.6, 3.2, -1), Vector3(21.6, 3.2, 16), Vector3(21.6, 3.2, -6), Vector3(-9, 3.2, 24.6), Vector3(9, 3.2, 24.6), Vector3(-5, 3.2, -11.6), Vector3(5, 3.2, -11.6)]
+	for p in torches:
+		KIT.mesh(self, cup, Transform3D(Basis(), p), bracket).set_meta("collision", "none")
+		KIT.mesh(self, flame, Transform3D(Basis(), p + Vector3(0, 0.25, 0)), fire).set_meta("collision", "none")
+		var l := KIT.omni(self, p + Vector3(0, 0.6, 0) + (Vector3(-p.x, 0, 0).normalized() * 0.6 if absf(p.x) > 20 else Vector3(0, 0, -signf(p.z) * 0.6)), Color(1.0, 0.62, 0.32), 2.2, 13.0)
+		_torches.append(l)
+	var glyph := KIT.std_mat(Color(0.2, 0.5, 0.55), 0.4, 0.0, Color(0.3, 0.9, 1.0), 2.5)
+	var strip := BoxMesh.new()
+	strip.size = Vector3(0.05, 0.25, 5.0)
+	for p in [Vector3(-24.0, 6.5, 8), Vector3(22.0, 6.5, 8)]:
+		KIT.mesh(self, strip, Transform3D(Basis(), p), glyph, "VaelorGlyphBand").set_meta("collision", "none")
+		KIT.omni(self, p + Vector3(-signf(p.x) * 1.5, 0, 0), Color(0.35, 0.85, 1.0), 1.6, 14.0)
+	# Expedition floodlight aimed at the sanctum gate.
+	var spot := SpotLight3D.new()
+	spot.light_color = Color(1.0, 0.93, 0.8)
+	spot.light_energy = 3.0
+	spot.spot_range = 40.0
+	spot.spot_angle = 30.0
+	add_child(spot)
+	spot.global_position = Vector3(0, 4.5, 22.0)
+	spot.look_at(Vector3(0, 0, -12))
 func hook_audio(p_sc: Node) -> void:
 	sc = p_sc
 	if sc == null:
@@ -418,6 +514,8 @@ func hook_audio(p_sc: Node) -> void:
 		pass
 
 var _uw := false
+var _torches: Array[OmniLight3D] = []
+var _tt := 0.0
 
 func _physics_process(_d: float) -> void:
 	if sc == null:
@@ -445,4 +543,16 @@ func _hero_props() -> void:
 	pivot.name = "GreatWaterwheel"
 	root.add_child(pivot)
 	pivot.global_position = Vector3(-20.5, FLOOR_Y + 4.7, 13.0)
-	var wheel := KIT.place(pivot, H6 + "ch6
+	var wheel := KIT.place(pivot, H6 + "ch6_great_hydraulic_wheel_LOD0.glb", Vector3.ZERO, 9.4, 0.0, Vector3.ONE, true, "Wheel")
+	if wheel:
+		wheel.position.y -= 4.7 # centre the wheel on the pivot (bottom-fit placement)
+		wheel.set_meta("collision", "none")
+		wheel.add_to_group("wettable")
+		waterwheel = pivot
+	KIT.box_body(root, Vector3(-20.5, FLOOR_Y + 4.7, 13.0), Vector3(2.0, 9.0, 9.0), 0.0, "WaterwheelBody")
+	# Sunken aqueduct arches along the east side of the hall.
+	for z in [15.0, 4.5]:
+		var aq := KIT.place(root, H6 + "ch6_sunken_aqueduct_arches_LOD0.glb", Vector3(19.0, FLOOR_Y, z), 10.0, 0.0, Vector3.ONE, false, "Aqueduct%d" % int(z))
+		if aq:
+			aq.set_meta("collision", "trimesh")
+			aq.add_to_group("wettable")

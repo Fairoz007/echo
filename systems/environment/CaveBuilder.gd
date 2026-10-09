@@ -43,6 +43,8 @@ var rock_material: ShaderMaterial
 var plain_rock_material: ShaderMaterial ## for meshes without vertex colour
 var ground_material: ShaderMaterial
 var noise_texture: NoiseTexture2D
+signal built
+var is_built := false
 var puddle_points: Array[Vector3] = []
 ## Wet zones near water: Marker3D nodes in group "cave_wet_zone" (meta "radius").
 var wet_zones: Array[Vector4] = []
@@ -72,12 +74,26 @@ func build() -> void:
 		max_w = maxf(max_w, v)
 	CEIL_COLS = clampi(int(max_w * 0.8), 16, 44)
 	_make_materials()
-	_build_shell()
-	_build_pits()
-	_build_ground()
-	_build_caps()
-	_build_speleothems()
-	_build_pebbles()
+	# Staged over frames to avoid a load hitch (shell/ground trimesh + scatter are the heavy parts).
+	# One heavy stage per frame; set meta "profile_build" to print per-stage cost.
+	_deferring_shapes = is_inside_tree()
+	var stages := [_build_shell, _build_pits, _build_ground, _build_caps, _build_speleothems, _build_pebbles]
+	for i in stages.size():
+		var t := Time.get_ticks_usec()
+		stages[i].call()
+		if has_meta("profile_build") or OS.get_cmdline_user_args().has("--profile-build"):
+			print("[CaveBuilder] %s stage %d: %.0f ms" % [name, i, (Time.get_ticks_usec() - t) / 1000.0])
+		if i < stages.size() - 1:
+			await _yield()
+		# Trimesh cooking for this stage's solids gets its own frame.
+		while not _pending_shapes.is_empty():
+			var job: Array = _pending_shapes.pop_front()
+			if is_instance_valid(job[0]):
+				job[0].shape = (job[1] as Mesh).create_trimesh_shape()
+			await _yield()
+	_deferring_shapes = false
+	is_built = true
+	built.emit()
 
 # ---------------------------------------------------------------- profile
 func _key(arr: PackedFloat32Array, z: float) -> float:
@@ -277,7 +293,7 @@ func _build_pits() -> void:
 			var cols := maxi(4, int(a.distance_to(b) / 1.2))
 			var base := st_vertex_count(st)
 			for iy in rows + 1:
-				var y := lerpf(0.3, -pit_depth, float(iy) / rows)
+				var y := lerpf(-minf(0.35, pit_depth * 0.3), -pit_depth - 0.05, float(iy) / rows)
 				for ix in cols + 1:
 					var q := a.lerp(b, float(ix) / cols)
 					var d := n_lump.get_noise_3d(q.x, y * 0.7, q.y) * 1.2 + n_detail.get_noise_3d(q.x, y, q.y) * 0.15
@@ -531,6 +547,21 @@ func _build_pebbles() -> void:
 	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(mmi)
 
+func _yield() -> void:
+	if is_inside_tree():
+		await get_tree().process_frame
+
+## Cached unit rocks: convex hulls are expensive, so a few variants are built once per
+## builder and reused with a uniform scale.
+var _rock_cache: Array = []
+func _cached_rock() -> Array:
+	if _rock_cache.size() < 6:
+		var m := _rock_mesh(1.0, 0.45)
+		var entry := [m, m.create_convex_shape(true, false)] # simplify=true cost ~40 ms per hull
+		_rock_cache.append(entry)
+		return entry
+	return _rock_cache[rng.randi() % _rock_cache.size()]
+
 ## Builds a rubble pile of irregular rocks with convex collision (used for rockfall).
 func add_rock(parent: Node3D, pos: Vector3, radius: float, rot := Vector3.ZERO) -> StaticBody3D:
 	var body := StaticBody3D.new()
@@ -538,21 +569,30 @@ func add_rock(parent: Node3D, pos: Vector3, radius: float, rot := Vector3.ZERO) 
 	body.position = pos
 	body.rotation = rot
 	parent.add_child(body)
+	var cached := _cached_rock()
 	var mi := MeshInstance3D.new()
-	mi.mesh = _rock_mesh(radius, 0.45)
+	mi.mesh = cached[0]
 	mi.material_override = rock_material
 	body.add_child(mi)
 	var shape := CollisionShape3D.new()
-	shape.shape = mi.mesh.create_convex_shape(true, true)
+	shape.shape = cached[1]
 	body.add_child(shape)
+	body.scale = Vector3.ONE * radius # uniform body scale: safe for Jolt/Godot physics
 	return body
 
 # ---------------------------------------------------------------- helpers
+var _pending_shapes: Array = []
+var _deferring_shapes := false
+
 func _add_solid(label: String, mesh: ArrayMesh, material: Material, collide: bool) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
 	mi.name = label
 	mi.mesh = mesh
 	mi.material_override = material
+	if collide and not _has_area_faces(mesh):
+		# Jolt rejects concave shapes with only degenerate triangles ("Need triangles to create a mesh shape!").
+		push_warning("CaveBuilder: %s has no non-degenerate triangles; skipping collision" % label)
+		collide = false
 	if collide:
 		var body := StaticBody3D.new()
 		body.name = label + "Body"
@@ -560,8 +600,19 @@ func _add_solid(label: String, mesh: ArrayMesh, material: Material, collide: boo
 		add_child(body)
 		body.add_child(mi)
 		var shape := CollisionShape3D.new()
-		shape.shape = mesh.create_trimesh_shape()
+		# Ground collision stays immediate so the player never spawns over a hole.
+		if _deferring_shapes and label != "CaveGround":
+			_pending_shapes.append([shape, mesh])
+		else:
+			shape.shape = mesh.create_trimesh_shape()
 		body.add_child(shape)
 	else:
 		add_child(mi)
 	return mi
+
+func _has_area_faces(mesh: Mesh) -> bool:
+	var faces := mesh.get_faces()
+	for i in range(0, faces.size() - 2, 3):
+		if (faces[i + 1] - faces[i]).cross(faces[i + 2] - faces[i]).length_squared() > 1e-10:
+			return true
+	return false

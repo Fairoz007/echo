@@ -1,4 +1,4 @@
-# Mara Movement Tuning
+﻿# Mara Movement Tuning
 
 Owner: player movement / animation agent. Measured on 2026-10-08 with `dev/movement_tests.gd`, headless, on `dev/MovementTestCourse.tscn`. Visual checks used the Compatibility renderer (opengl3) at the Ultra Low preset.
 
@@ -61,15 +61,40 @@ Owner: player movement / animation agent. Measured on 2026-10-08 with `dev/movem
 - Foot sliding:
   - Each blend point has its own TimeScale set to ground speed divided by that clip's natural speed.
   - The blend position picks one dominant clip. Crossfades happen only in a 0.6 m/s band at the midpoint between gaits, because walk and run cycles are not phase-aligned.
-- Stance-foot world speed, measured as the mean over each foot's lowest 20% of frames, worst foot:
-  - Walk: 0.31 m/s. The source clip alone measures 0.07-0.09 m/s.
-  - Run: 2.39 m/s. FAIL. The source run clip alone already slides 0.66-0.74 m/s (a retarget artifact). A per-frame trace shows one foot reaching 0.2-0.5 m/s, while the other foot's stance creeps at about 2.3 m/s.
-  - Sprint: 3.0 m/s. FAIL, for the same reason.
+- Foot locking (Player.gd `_apply_foot_lock`, runs after the AnimationTree each frame):
+  - A foot locks when its ankle is within 0.10 m of the ground under it (from a raycast).
+  - While locked, it is pinned at its touchdown point in world space.
+  - It releases when the ankle rises above 0.16 m, or drifts more than 0.45 m + 0.06 x speed from the lock.
+  - Lock weight ramps in at 40/s and out at 6/s.
+  - The thigh and calf are re-solved with analytic two-bone IK. The animated knee plane and foot orientation are kept.
+  - The ankle is never allowed below ground + sole height (0.06 m). This fixes the run clip's 2.5 cm dip into the floor.
+  - Active only while grounded in IDLE, WALK, RUN, SPRINT or CROUCH.
+- Stance-foot world speed, measured as the mean over each foot's lowest 20% of frames over 300 frames, worst foot. Two consecutive runs gave the same result:
+  - Before foot locking: walk 0.31, run 2.39, sprint 3.0 m/s.
+  - After: walk 0.000, run 0.000, sprint 0.000 m/s.
+  - A per-frame run trace shows locked frames at exactly 0.00 m/s with the ankle at y = 0.070.
+  - Caveat: the 1-2 frame touchdown blend-in is not fully captured by this metric. The source run clip's foot creep is still visible as a slight leg stretch before release.
+## Run posture layer (Player.gd `_apply_run_posture`, after the AnimationTree and before the foot lock)
+- Fades in between 2.0 and 2.9 m/s while grounded in RUN or SPRINT.
+- Pelvis is raised 6 cm. The foot lock re-plants the feet, which straightens the clip's deep crouch.
+- Torso lean (the Spine01-to-Head line) is corrected to a target: 9 deg for run, 14 deg for sprint. The raw clip is nearly horizontal. Measured after correction: 9 deg every frame, and 12-13 deg from Hip to Head.
+- Head is levelled at 85% weight.
+- Arms are replaced with a swing phase-locked to the gait. The phase comes from which animated foot is ahead, so each arm swings opposite its leg: +/-38 deg for run, +/-40 deg for sprint.
+- Elbow bend varies with the swing, from 50 deg (arm back) to 95 deg (arm forward). The forearm is capped at 95 deg from vertical, so the hand never rises above the shoulder in a reach.
+- Compared with a run synthesised from the walk clip (`synthesize_run_from_walk`, the walk clip time-scaled to 3x): that version is upright but has a short, quick stride and reads as speed-walking. Rejected.
+- After posture, stance-foot slide: run 0.09 m/s, sprint 0.27 m/s, walk 0.00 m/s.
+- Framing: in every capture frame (side and in-game third-person views, run and sprint), the head and both toes project inside the viewport.
 
 ## Known problems
-1. Run and sprint foot slide. The run clip's right-foot stance is not planted in the source, and both ankles dip about 2.5 cm below the floor. Fixing this needs a cleaner run clip, or foot IK (SkeletonModifier3D two-bone IK with ground raycasts). Neither is done.
+1. Run and sprint slide: fixed by foot locking. Still to do: the foot lock does not adapt the foot to slopes (it stays flat); pelvis height is not adjusted on uneven ground; and the retargeted run keeps a strong forward lunge, which comes from the clip.
 2. The swim clip's natural speed is 0.37 m/s, so playback is clamped at 3x while swimming at 1.6 m/s.
 3. The 'land' state uses idle because there is no landing clip. Landing compression is a visual offset only.
-4. Ragdoll joint limits are not tuned, so the bodies collapse into contorted poses.
+4. Ragdoll joint limits:
+   - Cone limits: spine 20 deg swing / 14 deg twist, neck 34/34, hips 63/17, shoulders 80/34.
+   - Hinges: knees -132..0 deg, elbows 0..126 deg.
+   - Mara now settles on her back with her limbs spread naturally.
+   - The enemy ragdoll was only checked at a distance.
+   - The hinge directions were inferred from the bone frames, not verified up close.
 5. Meridian gear sizes and offsets are set in code; alignment has not been checked up close.
 6. Chapter 6 spawns Mara in water, so she starts in the swim state.
+7. Run posture: at the sprint arm crossover, the side view shows both forearms pointing forward together for about 1 frame in 6. The deep knee bend of the retargeted run still shows at mid-stance.

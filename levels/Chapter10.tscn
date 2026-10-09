@@ -12,6 +12,7 @@
 
 [ext_resource type="Script" path="res://systems/CampaignEnvironmentArt.gd" id="81_environment"]
 [ext_resource type="Script" path="res://systems/environment/LevelCave.gd" id="90_levelcave"]
+[ext_resource type="Script" path="res://systems/environment/HeroProps.gd" id="91_heroprops"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -207,6 +208,7 @@ chapter_index = 10
 
 [node name="LevelCave" type="Node3D" parent="."]
 script = ExtResource("90_levelcave")
+ghost_paths = Array[NodePath]([NodePath("CentralPlatform/PillarCore")])
 soundscape_key = "C10"
 hall_reverb = "vault"
 profile_z = PackedFloat32Array(48, 30, 15, 0, -15, -30, -40)
@@ -218,3 +220,7 @@ lamps = PackedVector3Array(2, 0, 32, -2, 0, 26)
 vaelor_lights = PackedVector3Array(0, 10, 0, 0, 2.5, -18, 0, 2.5, 18, 18, 2.5, 0, -18, 2.5, 0, 0, 3, -30)
 ambient_color = Color(0.1, 0.13, 0.17, 1)
 hide_paths = Array[NodePath]([NodePath("ChamberFloor/MeshInstance3D")])
+
+[node name="HeroProps" type="Node3D" parent="."]
+script = ExtResource("91_heroprops")
+placements = PackedStringArray("res://assets/models/hero/ch10/lod/ch10_heart_vault_core_LOD0.glb|0,0,0|0|11|none|y", "res://assets/models/hero/ch10/lod/ch10_harmonic_node_pillar_LOD0.glb|0,0,-21.5|0|6|capsule|y", "res://assets/models/hero/ch10/lod/ch10_harmonic_node_pillar_LOD0.glb|0,0,21.5|180|6|capsule|y", "res://assets/models/hero/ch10/lod/ch10_harmonic_node_pillar_LOD0.glb|21.5,0,0|-90|6|capsule|y", "res://assets/models/hero/ch10/lod/ch10_harmonic_node_pillar_LOD0.glb|-21.5,0,0|90|6|capsule|y", "res://assets/models/hero/ch10/lod/ch10_geode_crystal_wall_LOD0.glb|-33,0,-8|90|9|lod3", "res://assets/models/hero/ch10/lod/ch10_geode_crystal_wall_LOD0.glb|33,0,8|-90|9|lod3", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|-12,0,-12|0|2.5|convex", "res://assets/models/cave/lod/cav_resonant_crystal_cluster_a_LOD0.glb|12,0,12|0|2.5|convex")
