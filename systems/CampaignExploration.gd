@@ -66,6 +66,8 @@ func _place_model(parent: Node3D, path: String, size: Vector3, pos: Vector3) -> 
 		var local_size := (model.basis.inverse() * size).abs()
 		model.scale = Vector3(local_size.x / maxf(dimensions.x, 0.001), local_size.y / maxf(dimensions.y, 0.001), local_size.z / maxf(dimensions.z, 0.001))
 		model.position = pos - model.basis * bounds.get_center()
+	if path == FLOOR:
+		model.add_child(preload("res://systems/environment/TerrainSurfaceDetail.gd").new())
 	return model
 
 func _solid(parent: Node3D, pos: Vector3, size: Vector3) -> void:

@@ -1,0 +1,31 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+[GAME_MANAGER] State changed to:CINEMATIC
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_00_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+[COLLISION] Prologue: generated 11 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+RENDER FPS chapter=0 avg=62.4 min=1.0 samples=284
+[GAME_MANAGER] State changed to:CINEMATIC
+SCRIPT ERROR: Parse Error: Could not preload resource script "res://systems/levelb/Chapter1Dressing.gd".
+   at: GDScript::reload (res://levels/Chapter1.gd:22)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://systems/levelb/Chapter1Dressing.gd".
+   at: GDScript::reload (res://levels/Chapter1.gd:22)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "dressing" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://levels/Chapter1.gd:22)
+ERROR: Failed to load script "res://levels/Chapter1.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+RENDER FPS chapter=1 avg=123.3 min=83.0 samples=315
+RENDER FPS chapter=2 avg=82.0 min=80.0 samples=246
+[MISSION] Checkpoint stored:chapter_03_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+[GAME_MANAGER] State changed to:GAMEPLAY
+RENDER FPS chapter=3 avg=143.7 min=143.0 samples=432
+WARNING: 30 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

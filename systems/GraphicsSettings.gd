@@ -47,6 +47,7 @@ const TABLE := {
 	"vegetation_interaction":[0, 1,      1,       1,       1],    # 0 off, 1 player pushes grass/foliage
 	"character_ik_quality":[0,   0,      1,       2,       2],    # 0 off/cheap, 1 foot IK, 2 foot+hand/look IK
 	"natural_lighting":  [0.0,   0.0,    0.0,     0.65,    1.0],  # authored light balance -> refined High/Ultra
+	"terrain_detail":    [0.0,   0.0,    0.35,    0.7,     1.0],  # shared ground relief/roughness, no geometry changes
 }
 ## Legacy 3-tier mapping consumed by set_graphics_quality(tier).
 const LEGACY_TIER := [0, 0, 1, 2, 2]
@@ -106,6 +107,7 @@ func apply_quality(level: int, persist := true) -> void:
 		settings[key] = TABLE[key][quality_level]
 	settings["name"] = QUALITY_NAMES[quality_level]
 	settings["forward_plus"] = is_forward_plus()
+	RenderingServer.global_shader_parameter_set("terrain_detail", float(settings.terrain_detail))
 	_apply_viewport()
 	if persist:
 		var cfg := ConfigFile.new()

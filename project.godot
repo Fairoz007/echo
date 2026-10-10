@@ -102,3 +102,10 @@ rendering_device/fallback_to_d3d12=false
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 lights_and_shadows/directional_shadow/size=2048
+
+[shader_globals]
+
+terrain_detail={
+"type": "float",
+"value": 0.0
+}

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dxo3402c2xxtt"
+
+[deps]
+
+files=["res://qa_reports/ultra/gpu_medium. temperature.gpu.translation", "res://qa_reports/ultra/gpu_medium. power.draw [W].translation", "res://qa_reports/ultra/gpu_medium. utilization.gpu [%].translation", "res://qa_reports/ultra/gpu_medium. memory.used [MiB].translation", "res://qa_reports/ultra/gpu_medium. clocks.current.graphics [MHz].translation"]
+
+source_file="res://qa_reports/ultra/gpu_medium.csv"
+dest_files=["res://qa_reports/ultra/gpu_medium. temperature.gpu.translation", "res://qa_reports/ultra/gpu_medium. power.draw [W].translation", "res://qa_reports/ultra/gpu_medium. utilization.gpu [%].translation", "res://qa_reports/ultra/gpu_medium. memory.used [MiB].translation", "res://qa_reports/ultra/gpu_medium. clocks.current.graphics [MHz].translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

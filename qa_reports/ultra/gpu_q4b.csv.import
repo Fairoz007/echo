@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://26qwhas6t3fj"
+
+[deps]
+
+files=["res://qa_reports/ultra/gpu_q4b. 66.translation", "res://qa_reports/ultra/gpu_q4b. 61.94 W.translation", "res://qa_reports/ultra/gpu_q4b. 26 %.translation", "res://qa_reports/ultra/gpu_q4b. 2528 MiB.translation"]
+
+source_file="res://qa_reports/ultra/gpu_q4b.csv"
+dest_files=["res://qa_reports/ultra/gpu_q4b. 66.translation", "res://qa_reports/ultra/gpu_q4b. 61.94 W.translation", "res://qa_reports/ultra/gpu_q4b. 26 %.translation", "res://qa_reports/ultra/gpu_q4b. 2528 MiB.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

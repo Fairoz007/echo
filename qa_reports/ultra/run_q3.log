@@ -1,0 +1,142 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+[GAME_MANAGER] State changed to:CINEMATIC
+RENDER FPS chapter=0 avg=60.0 min=60.0 samples=180
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[MISSION] Checkpoint stored:chapter_01_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+RENDER FPS chapter=1 avg=60.0 min=60.0 samples=154
+[COLLISION] Prologue: generated 11 collision bodies
+[GAME_MANAGER] State changed to:GAMEPLAY
+SCRIPT ERROR: Parse Error: Could not preload resource script "res://systems/levelb/Chapter1Dressing.gd".
+   at: GDScript::reload (res://levels/Chapter1.gd:22)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://systems/levelb/Chapter1Dressing.gd".
+   at: GDScript::reload (res://levels/Chapter1.gd:22)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "dressing" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://levels/Chapter1.gd:22)
+ERROR: Failed to load script "res://levels/Chapter1.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+RENDER FPS chapter=2 avg=60.0 min=60.0 samples=181
+RENDER FPS chapter=3 avg=59.8 min=59.0 samples=180
+[MISSION] Checkpoint stored:chapter_04_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:GAMEPLAY
+RENDER FPS chapter=4 avg=58.1 min=22.0 samples=180
+[MISSION] New Objective:obj_c02_open_gate->Restore hydraulic water flow to lift the sanctuary gate
+[MISSION] Checkpoint stored:chapter_05_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+RENDER FPS chapter=5 avg=60.0 min=60.0 samples=110
+[COLLISION] Chapter2: generated 8 collision bodies
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:GAMEPLAY
+RENDER FPS chapter=6 avg=59.3 min=47.0 samples=180
+RENDER FPS chapter=7 avg=59.7 min=59.0 samples=180
+WARNING: [PLAYER] Mara visual was 1.00 m tall; normalised to 1.70 m
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _normalise_visual_height (res://scripts/Player.gd:280)
+       [1] _ready (res://scripts/Player.gd:205)
+[MISSION] New Objective:obj_c03_cross_bridge->Cross the ancient cyclopean bridge span
+[MISSION] Checkpoint stored:chapter_08_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+[COLLISION] Chapter3: generated 0 collision bodies
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:GAMEPLAY
+RENDER FPS chapter=8 avg=48.1 min=1.0 samples=180
+RENDER FPS chapter=9 avg=60.0 min=60.0 samples=181
+WARNING: [PLAYER] Mara visual was 1.00 m tall; normalised to 1.70 m
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _normalise_visual_height (res://scripts/Player.gd:280)
+       [1] _ready (res://scripts/Player.gd:205)
+[MISSION] New Objective:obj_c04_find_way->Navigate the deep subterranean cavern and seek radio signals
+[MISSION] Checkpoint stored:chapter_10_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+ERROR: Failed to build Jolt Physics concave polygon shape with {vertex_count=1728}. It returned the following error: 'Need triangles to create a mesh shape!'. This shape belongs to 'ChasmWallsBody:<StaticBody3D#995241232826>' and 0 other object(s).
+   at: _build (modules/jolt_physics/shapes/jolt_concave_polygon_shape_3d.cpp:76)
+   GDScript backtrace (most recent call first):
+       [0] _add_solid (res://systems/environment/CaveBuilder.gd:564)
+       [1] _build_pits (res://systems/environment/CaveBuilder.gd:297)
+       [2] build (res://systems/environment/CaveBuilder.gd:76)
+       [3] _ready (res://systems/environment/CaveBuilder.gd:51)
+       [4] _ready (res://systems/environment/LevelCave.gd:83)
+ERROR: Failed to build Jolt Physics concave polygon shape with {vertex_count=1440}. It returned the following error: 'Need triangles to create a mesh shape!'. This shape belongs to '@StaticBody3D@2071:<StaticBody3D#995375450558>' and 0 other object(s).
+   at: _build (modules/jolt_physics/shapes/jolt_concave_polygon_shape_3d.cpp:76)
+   GDScript backtrace (most recent call first):
+       [0] _add_solid (res://systems/environment/CaveBuilder.gd:564)
+       [1] _build_pits (res://systems/environment/CaveBuilder.gd:297)
+       [2] build (res://systems/environment/CaveBuilder.gd:76)
+       [3] _ready (res://systems/environment/CaveBuilder.gd:51)
+       [4] _ready (res://systems/environment/LevelCave.gd:83)
+ERROR: Failed to build Jolt Physics concave polygon shape with {vertex_count=1440}. It returned the following error: 'Need triangles to create a mesh shape!'. This shape belongs to '@StaticBody3D@2073:<StaticBody3D#995509668295>' and 0 other object(s).
+   at: _build (modules/jolt_physics/shapes/jolt_concave_polygon_shape_3d.cpp:76)
+   GDScript backtrace (most recent call first):
+       [0] _add_solid (res://systems/environment/CaveBuilder.gd:564)
+       [1] _build_pits (res://systems/environment/CaveBuilder.gd:297)
+       [2] build (res://systems/environment/CaveBuilder.gd:76)
+       [3] _ready (res://systems/environment/CaveBuilder.gd:51)
+       [4] _ready (res://systems/environment/LevelCave.gd:83)
+[COLLISION] Chapter4: generated 2 collision bodies
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:GAMEPLAY
+RENDER FPS chapter=10 avg=57.4 min=46.0 samples=181
+RENDER FPS chapter=11 avg=59.7 min=58.0 samples=180
+[GAME_MANAGER] State changed to:MENU
+[MISSION] New Objective:obj_c05_neutralize_patrol->Infiltrate the Meridian checkpoint using stealth or combat
+[MISSION] Checkpoint stored:chapter_11_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+[COLLISION] Chapter5: generated 66 collision bodies
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:GAMEPLAY
+ERROR: Parameter "material" is null.
+   at: material_casts_shadows (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2610)
+ERROR: Parameter "material" is null.
+   at: material_is_animated (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2597)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2641)
+ERROR: Parameter "material" is null.
+   at: material_update_dependency (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2653)
+ERROR: Parameter "material" is null.
+   at: material_casts_shadows (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2610)
+ERROR: Parameter "material" is null.
+   at: material_is_animated (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2597)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2641)
+ERROR: Parameter "material" is null.
+   at: material_update_dependency (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2653)
+ERROR: Parameter "material" is null.
+   at: material_casts_shadows (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2610)
+ERROR: Parameter "material" is null.
+   at: material_is_animated (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2597)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2641)
+ERROR: Parameter "material" is null.
+   at: material_update_dependency (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2653)
+ERROR: Parameter "material" is null.
+   at: material_casts_shadows (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2610)
+ERROR: Parameter "material" is null.
+   at: material_is_animated (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2597)
+ERROR: Parameter "material" is null.
+   at: material_get_instance_shader_parameters (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2641)
+ERROR: Parameter "material" is null.
+   at: material_update_dependency (servers/rendering/renderer_rd/storage_rd/material_storage.cpp:2653)
+[MISSION] New Objective:obj_c06_drain_temple->Navigate the submerged temple and rotate the sluice turbine
+[MISSION] Checkpoint stored:chapter_11_start
+[SAVE] Successfully saved game slot0touser://qa_performance/save_slot_0.json
+[SAVE] Successfully saved game slot1touser://qa_performance/save_slot_1.json
+[COLLISION] Chapter6: generated 61 collision bodies
+[GAME_MANAGER] State changed to:CINEMATIC
+[GAME_MANAGER] State changed to:GAMEPLAY
+QA PASS: rendered stationary frame rate samples; navigation stress and ten-hour endurance unverified
+WARNING: 44 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

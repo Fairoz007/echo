@@ -1,0 +1,54 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+TERRAIN OpenGL Compatibility: PASS
+TERRAIN imported floor quality 0 swaps reversibly: PASS
+TERRAIN sediment MultiMesh quality 0 swaps reversibly: PASS
+TERRAIN source floor geometry retained at 0: PASS
+TERRAIN imported floor quality 1 swaps reversibly: PASS
+TERRAIN sediment MultiMesh quality 1 swaps reversibly: PASS
+TERRAIN source floor geometry retained at 1: PASS
+TERRAIN imported floor quality 2 swaps reversibly: PASS
+TERRAIN sediment MultiMesh quality 2 swaps reversibly: PASS
+TERRAIN source floor geometry retained at 2: PASS
+TERRAIN imported floor quality 3 swaps reversibly: PASS
+TERRAIN sediment MultiMesh quality 3 swaps reversibly: PASS
+TERRAIN source floor geometry retained at 3: PASS
+TERRAIN imported floor quality 4 swaps reversibly: PASS
+TERRAIN sediment MultiMesh quality 4 swaps reversibly: PASS
+TERRAIN source floor geometry retained at 4: PASS
+TERRAIN imported albedo normal roughness atlases preserved: PASS
+TERRAIN source UV scale and offset preserved: PASS
+TERRAIN imported floor quality 1 swaps reversibly: PASS
+TERRAIN sediment MultiMesh quality 1 swaps reversibly: PASS
+TERRAIN source floor geometry retained at 1: PASS
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[COLLISION] Chapter1: generated 200 collision bodies
+TERRAIN Chapter1 terrain construction completed: PASS
+TERRAIN Chapter1 upgraded main terrain: PASS
+TERRAIN Chapter1 optional floors included: PASS
+TERRAIN_COVERAGE Chapter1 cave=0 heightfield=1 imported=3
+TERRAIN Chapter1 existing Mara rig: PASS
+TERRAIN capture Chapter1_surface_before: PASS
+TERRAIN capture Chapter1_surface_ultra: PASS
+TERRAIN_FRAME Chapter1 avg=15.92ms max=17.01ms draws=600 (0.7s stationary, cap60)
+TERRAIN Chapter1 Low disables added relief: PASS
+TERRAIN Chapter1 Low restores imported materials: PASS
+TERRAIN Chapter1 live Ultra restores material coverage: PASS
+TERRAIN Chapter1 collision shapes unchanged: PASS
+[MISSION] New Objective:obj_prologue_explore->Navigate the collapsed subterranean tunnel
+[COLLISION] Prologue: generated 11 collision bodies
+TERRAIN Prologue terrain construction completed: PASS
+TERRAIN Prologue upgraded main terrain: PASS
+TERRAIN_COVERAGE Prologue cave=1 heightfield=0 imported=0
+TERRAIN Prologue existing Mara rig: PASS
+TERRAIN capture Prologue_surface_before: PASS
+TERRAIN capture Prologue_surface_ultra: PASS
+TERRAIN_FRAME Prologue avg=15.92ms max=16.83ms draws=370 (0.7s stationary, cap60)
+TERRAIN Prologue Low disables added relief: PASS
+TERRAIN Prologue Low restores imported materials: PASS
+TERRAIN Prologue live Ultra restores material coverage: PASS
+TERRAIN Prologue collision shapes unchanged: PASS
+TERRAIN_DONE checks=40 failures=0 scenes=2

@@ -54,6 +54,8 @@ func set_graphics_quality(preset: int) -> void:
 			ground_transforms.append(placement)
 			instances.set_instance_transform(x * rows + z, placement)
 	ground_instances.multimesh = instances
+	if not ground_instances.has_node("TerrainSurfaceDetail"):
+		ground_instances.add_child(preload("res://systems/environment/TerrainSurfaceDetail.gd").new())
 
 ## GraphicsSettings hook (5-level dictionary). Foliage spawned over several frames
 ## would miss the scene-wide thinning pass, so this node thins its own pieces.
