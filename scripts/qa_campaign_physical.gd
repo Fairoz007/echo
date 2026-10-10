@@ -217,6 +217,10 @@ func _fight(path: String) -> bool:
 		return false
 	var player = get_first_node_in_group("player")
 	var pivot = player.camera_pivot
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		# Mouse look only applies while captured; --headless cannot capture, so aim never moves.
+		await _fail("Mouse not captured (headless?); combat aim cannot be driven. Run with a window (e.g. xvfb-run).")
+		return false
 	for frame in range(600):
 		if not is_instance_valid(enemy) or enemy.current_health <= 0.0:
 			_stop_moving()

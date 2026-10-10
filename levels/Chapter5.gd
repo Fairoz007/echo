@@ -11,6 +11,8 @@ extends Node3D
 
 var enemies_remaining: int = 2
 var has_seen_drake: bool = false
+## Stealth route: reaching the perch without any mercenary entering COMBAT bypasses the fight.
+var was_detected: bool = false
 
 var transition_started := false
 
@@ -43,17 +45,32 @@ func _ready() -> void:
 	if hud:
 		AudioManager.play_story_line("Mara", "Meridian mercenaries ahead. Stay low, use cover, or take them down quietly.", 5.0)
 
+func _physics_process(_delta: float) -> void:
+	if was_detected or has_seen_drake:
+		return
+	for e in [enemy_1, enemy_2]:
+		if is_instance_valid(e) and e.current_state == EnemyBase.AIState.COMBAT:
+			was_detected = true
+			return
+
 func _on_enemy_defeated(_e: EnemyBase) -> void:
 	enemies_remaining -= 1
 	print("[CHAPTER 5] Enemy neutralized. Remaining:", enemies_remaining)
-	if enemies_remaining <= 0:
+	if enemies_remaining <= 0 and not has_seen_drake:
 		MissionManager.complete_objective("obj_c05_neutralize_patrol")
 		MissionManager.register_objective("obj_c05_observe_excavation", "Reach the observation ledge overlooking the Drowned Temple")
 		if drake_observation_trigger.overlaps_body(player):
 			_on_drake_observed(player)
 
 func _on_drake_observed(body: Node) -> void:
-	if body is Player and enemies_remaining <= 0 and not has_seen_drake:
+	if not (body is Player) or has_seen_drake:
+		return
+	if enemies_remaining > 0 and not was_detected:
+		# Ghosted the checkpoint: the patrol never saw Mara.
+		MissionManager.complete_objective("obj_c05_neutralize_patrol")
+		if hud:
+			AudioManager.play_story_line("Mara", "Past them. They never knew I was here.", 3.0)
+	if enemies_remaining <= 0 or not was_detected:
 		has_seen_drake = true
 		MissionManager.complete_objective("obj_c05_observe_excavation")
 		MissionManager.register_objective("obj_c05_enter_temple", "Enter the submerged Drowned Temple aqueduct")
