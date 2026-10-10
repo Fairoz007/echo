@@ -159,6 +159,19 @@ func _architecture() -> void:
 			KIT.override_material(w, stone)
 			w.set_meta("collision", "trimesh")
 			w.add_to_group("wettable")
+	# The wall trimesh is one-sided from the hall, so the camera spring arm passed
+	# through it at spawn. Back the south wall with a solid box on the world layer.
+	var south_back := StaticBody3D.new()
+	south_back.name = "SouthWallBacking"
+	south_back.collision_layer = 2
+	south_back.collision_mask = 0
+	root.add_child(south_back)
+	south_back.position = Vector3(0, 1.2, 25.6)
+	var south_shape := CollisionShape3D.new()
+	var south_box := BoxShape3D.new()
+	south_box.size = Vector3(48.0, 11.0, 1.2)
+	south_shape.shape = south_box
+	south_back.add_child(south_shape)
 	# Dry entry landing (spawn) at the south wall: Mara starts on stone, steps into the flood.
 	var landing := BoxMesh.new()
 	landing.size = Vector3(8.0, 4.8, 5.0)
