@@ -48,6 +48,7 @@ const DAYLIGHT_WIND := "res://audio/ambience/jungle/AMB_DAYLIGHT_RIDGE_WIND.ogg"
 @export var daylight_exit := false ## open far end with a daylight portal
 
 var cave: Node3D
+var _lighting_environment: Environment
 
 func _ready() -> void:
 	# Chapter scripts add exploration rooms in their _ready; wait so they can be avoided.
@@ -230,6 +231,22 @@ func _environment() -> void:
 		env.set(prop, false)
 		if world.has_meta(prop):
 			world.set_meta(prop, false)
+	_lighting_environment = env
+	# The cave is built asynchronously, after the initial GraphicsSettings scene pass.
+	# Apply the current balance here as well as on later live quality switches.
+	var graphics := get_tree().root.get_node_or_null("GraphicsSettings")
+	if graphics:
+		set_quality_settings(graphics.settings)
+
+func set_quality_settings(settings: Dictionary) -> void:
+	if _lighting_environment == null:
+		return
+	var detail := clampf(float(settings.get("natural_lighting", 0.0)), 0.0, 1.0)
+	# Soft reflected fill reveals limestone in the city without washing out local
+	# warm lamps/cool mineral lights. Keep authored brighter caves at their baseline.
+	var fill := Color(maxf(ambient_color.r, 0.30), maxf(ambient_color.g, 0.32), maxf(ambient_color.b, 0.35), ambient_color.a)
+	_lighting_environment.ambient_light_color = ambient_color.lerp(fill, detail)
+	_lighting_environment.ambient_light_energy = lerpf(ambient_energy, maxf(ambient_energy, 1.05), detail)
 
 func _daylight() -> void:
 	var z: float = cave.end_z

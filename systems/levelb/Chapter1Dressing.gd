@@ -31,6 +31,8 @@ var noise := FastNoiseLite.new()
 var detail := FastNoiseLite.new()
 ## Corridors: [from, to, half_width, height_from, height_to, path_paint]
 var corridors := []
+var _lighting_environment: Environment
+var _lighting_sun: DirectionalLight3D
 
 func _init() -> void:
 	name = "LevelBDressing"
@@ -608,6 +610,7 @@ func _sky(level: Node3D) -> void:
 		sky_mat.sun_angle_max = 20.0
 		var sky := Sky.new()
 		sky.sky_material = sky_mat
+		sky.process_mode = Sky.PROCESS_MODE_INCREMENTAL
 		env.background_mode = Environment.BG_SKY
 		env.sky = sky
 		env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
@@ -619,6 +622,7 @@ func _sky(level: Node3D) -> void:
 		env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 		env.tonemap_exposure = 1.0
 		env_node.environment = env
+		_lighting_environment = env
 	var sun := level.get_node_or_null("SunLight") as DirectionalLight3D
 	if sun:
 		sun.light_color = Color(1.0, 0.93, 0.8)
@@ -627,6 +631,29 @@ func _sky(level: Node3D) -> void:
 		sun.directional_shadow_max_distance = 80.0
 		sun.shadow_blur = 2.5
 		sun.shadow_opacity = 0.72
+		_lighting_sun = sun
+	var graphics := get_tree().root.get_node_or_null("GraphicsSettings")
+	if graphics:
+		set_quality_settings(graphics.settings)
+
+func set_quality_settings(settings: Dictionary) -> void:
+	# Explicit endpoints make repeated live preset changes reversible. Sky radiance
+	# supplies environment reflections; no realtime probe or screen-space pass needed.
+	var detail := clampf(float(settings.get("natural_lighting", 0.0)), 0.0, 1.0)
+	if _lighting_environment:
+		_lighting_environment.ambient_light_energy = lerpf(0.7, 0.42, detail)
+		_lighting_environment.tonemap_exposure = lerpf(1.0, 0.95, detail)
+		_lighting_environment.fog_light_color = Color(0.68, 0.74, 0.72).lerp(Color(0.62, 0.70, 0.76), detail)
+		var sky_mat := _lighting_environment.sky.sky_material as ProceduralSkyMaterial
+		if sky_mat:
+			sky_mat.sun_angle_max = lerpf(20.0, 5.0, detail)
+			sky_mat.sky_top_color = Color(0.36, 0.52, 0.66).lerp(Color(0.25, 0.43, 0.62), detail)
+			sky_mat.ground_horizon_color = Color(0.42, 0.45, 0.4).lerp(Color(0.26, 0.29, 0.25), detail)
+	if is_instance_valid(_lighting_sun):
+		_lighting_sun.light_color = Color(1.0, 0.93, 0.8).lerp(Color(1.0, 0.97, 0.91), detail)
+		_lighting_sun.light_energy = lerpf(1.25, 1.05, detail)
+		_lighting_sun.shadow_opacity = lerpf(0.72, 0.90, detail)
+		_lighting_sun.shadow_blur = lerpf(2.5, 1.5, detail)
 
 func _brighten_grass(grass: Node) -> void:
 	# The shared grass material reads near-black on back faces in the Compatibility

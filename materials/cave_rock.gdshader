@@ -24,16 +24,36 @@ varying vec3 wnorm;
 
 void vertex() {
 	wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	wnorm = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	wnorm = normalize(MODEL_NORMAL_MATRIX * NORMAL);
 }
 
 vec4 tri(sampler2D t, vec3 p, vec3 w) {
 	return texture(t, p.zy) * w.x + texture(t, p.xz) * w.y + texture(t, p.xy) * w.z;
 }
 
+vec2 normal_slope(vec2 encoded) {
+	// Normal textures may store only RG; reconstruct Z before converting to slopes.
+	vec2 xy = encoded * 2.0 - 1.0;
+	float z = sqrt(max(1.0 - dot(xy, xy), 0.0001));
+	return xy / max(z, 0.2);
+}
+
+vec3 tri_normal(vec3 p, vec3 n, vec3 w) {
+	vec2 nx = normal_slope(texture(normal_tex, p.zy).rg);
+	vec2 ny = normal_slope(texture(normal_tex, p.xz).rg);
+	vec2 nz = normal_slope(texture(normal_tex, p.xy).rg);
+	// Lift each projection's slopes into world space, then onto the surface tangent
+	// plane. A flat normal map contributes zero, preserving n on every face/slope.
+	vec3 slope = vec3(0.0, nx.y, nx.x) * w.x
+		+ vec3(ny.x, 0.0, ny.y) * w.y + vec3(nz.x, nz.y, 0.0) * w.z;
+	slope -= n * dot(n, slope);
+	return normalize(n + slope * normal_depth);
+}
+
 void fragment() {
 	vec4 vc = mix(default_mask, COLOR, vertex_color_mix);
-	vec3 w = pow(abs(wnorm), vec3(4.0));
+	vec3 world_normal = normalize(wnorm);
+	vec3 w = pow(abs(world_normal), vec3(4.0));
 	w /= (w.x + w.y + w.z);
 	float n_large = tri(noise_tex, wpos * 0.09, w).r;
 	float n_detail = tri(noise_tex, wpos * detail_scale, w).r;
@@ -57,8 +77,7 @@ void fragment() {
 	ALBEDO = base * mix(1.0, 0.55, wet);
 	ROUGHNESS = mix(0.93, 0.28, wet);
 	SPECULAR = mix(0.35, 0.6, wet);
-	NORMAL_MAP = tri(normal_tex, wpos * detail_scale * 0.45, w).rgb;
-	NORMAL_MAP_DEPTH = normal_depth;
+	NORMAL = normalize((VIEW_MATRIX * vec4(tri_normal(wpos * detail_scale * 0.45, world_normal, w), 0.0)).xyz);
 	// Continuous mineral veins: iso-line of low-frequency noise, anti-aliased with fwidth,
 	// kept sparse by a large-scale mask so they read as a few long seams, not speckle.
 	float vn = tri(noise_tex, wpos * 0.11, w).r;

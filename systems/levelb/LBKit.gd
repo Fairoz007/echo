@@ -63,18 +63,37 @@ static func place(parent: Node, path: String, ground: Vector3, target: float, ya
 	return inst
 
 ## Rock re-grade material. `src` = the model's own albedo (UV atlas); defaults to limestone.
-static func rock_material(tint := Color(0.62, 0.61, 0.56), moss := 0.55, wet_line := -1000.0, src: Texture2D = null, src_n: Texture2D = null) -> ShaderMaterial:
-	var key := "%s_%.2f_%.2f_%s" % [tint.to_html(), moss, wet_line, str(src.get_rid()) if src else "lime"]
+static func rock_material(tint := Color(0.62, 0.61, 0.56), moss := 0.55, wet_line := -1000.0, src: Texture2D = null, src_n: Texture2D = null, source_material: BaseMaterial3D = null) -> ShaderMaterial:
+	if src == null:
+		src = load(ROCK_TEX)
+		if source_material == null and src_n == null:
+			src_n = load(ROCK_NRM)
+	var rough_tex: Texture2D = null
+	var roughness := 0.88
+	var channel := Vector4(1, 0, 0, 0)
+	var normal_strength := 1.0
+	if source_material:
+		roughness = source_material.roughness
+		rough_tex = source_material.roughness_texture
+		channel = _texture_channel(source_material.roughness_texture_channel)
+		normal_strength = source_material.normal_scale
+		if source_material is ORMMaterial3D:
+			rough_tex = source_material.orm_texture
+			channel = Vector4(0, 1, 0, 0)
+	# Exact values avoid collisions between nearby tints/strengths or distinct maps.
+	var key := var_to_bytes([tint, moss, wet_line, _texture_id(src), _texture_id(src_n), _texture_id(rough_tex), roughness, channel, normal_strength]).hex_encode()
 	if _rock_mats.has(key):
 		return _rock_mats[key]
 	var m := ShaderMaterial.new()
 	m.shader = ROCK_SHADER
-	if src == null:
-		src = load(ROCK_TEX)
-		src_n = load(ROCK_NRM)
 	m.set_shader_parameter("rock_tex", src)
 	m.set_shader_parameter("rock_nrm", src_n)
 	m.set_shader_parameter("has_normal", src_n != null)
+	m.set_shader_parameter("normal_strength", normal_strength)
+	m.set_shader_parameter("rock_roughness", rough_tex)
+	m.set_shader_parameter("has_roughness", rough_tex != null)
+	m.set_shader_parameter("source_roughness", roughness)
+	m.set_shader_parameter("roughness_channel", channel)
 	m.set_shader_parameter("tint", Vector3(tint.r, tint.g, tint.b))
 	m.set_shader_parameter("tint_b", Vector3(tint.r, tint.g, tint.b) * 0.72)
 	m.set_shader_parameter("moss_amount", moss)
@@ -82,39 +101,60 @@ static func rock_material(tint := Color(0.62, 0.61, 0.56), moss := 0.55, wet_lin
 	_rock_mats[key] = m
 	return m
 
+static func _texture_id(texture: Texture2D) -> int:
+	return texture.get_instance_id() if texture else 0
+
+static func _texture_channel(channel: int) -> Vector4:
+	match channel:
+		BaseMaterial3D.TEXTURE_CHANNEL_GREEN:
+			return Vector4(0, 1, 0, 0)
+		BaseMaterial3D.TEXTURE_CHANNEL_BLUE:
+			return Vector4(0, 0, 1, 0)
+		BaseMaterial3D.TEXTURE_CHANNEL_ALPHA:
+			return Vector4(0, 0, 0, 1)
+		BaseMaterial3D.TEXTURE_CHANNEL_GRAYSCALE:
+			return Vector4(1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0, 0)
+	return Vector4(1, 0, 0, 0)
+
 ## Re-grades every mesh of a placed rock model with the moss/tint shader, keeping each
-## mesh's own albedo/normal atlas. `mat` supplies tint/moss/wet_line parameters.
+## surface's albedo/normal/roughness atlas. `mat` supplies the artistic parameters.
 static func override_material(node: Node, mat: Material) -> void:
 	var meshes := node.find_children("*", "MeshInstance3D", true, false)
 	if node is MeshInstance3D:
 		meshes.append(node)
 	for mi in meshes:
 		var m := mi as MeshInstance3D
-		if not (mat is ShaderMaterial) or m.mesh == null:
+		if not (mat is ShaderMaterial) or mat.shader != ROCK_SHADER or m.mesh == null:
 			m.material_override = mat
 			continue
-		var src_mat := m.get_active_material(0) as BaseMaterial3D
-		var tex: Texture2D = src_mat.albedo_texture if src_mat else null
-		var ntex: Texture2D = src_mat.normal_texture if src_mat and src_mat.normal_enabled else null
 		var tv: Variant = mat.get_shader_parameter("tint")
 		var tc := Color(0.62, 0.61, 0.56)
 		if tv is Vector3:
 			tc = Color(tv.x, tv.y, tv.z)
 		elif tv is Color:
 			tc = tv
-		var rm := rock_material(tc, float(mat.get_shader_parameter("moss_amount")), float(mat.get_shader_parameter("wet_line")), tex, ntex)
-		var dc: Variant = mat.get_shader_parameter("detail_contrast")
-		if dc != null and absf(float(dc) - 1.0) > 0.001:
-			var key := "%s_dc%.2f" % [str(rm.get_instance_id()), float(dc)]
+		var replacements: Array[ShaderMaterial] = []
+		for surface in range(m.mesh.get_surface_count()):
+			var src_mat := m.get_active_material(surface) as BaseMaterial3D
+			var tex: Texture2D = src_mat.albedo_texture if src_mat else null
+			var ntex: Texture2D = src_mat.normal_texture if src_mat and src_mat.normal_enabled else null
+			var rm := rock_material(tc, float(mat.get_shader_parameter("moss_amount")), float(mat.get_shader_parameter("wet_line")), tex, ntex, src_mat)
+			var style := {}
+			for parameter in ["tint_b", "moss", "desaturate", "wetness", "detail_contrast", "specular_amount"]:
+				var value: Variant = mat.get_shader_parameter(parameter)
+				if value != null:
+					style[parameter] = value
+			var key := var_to_bytes([rm.get_instance_id(), style]).hex_encode()
 			if not _rock_mats.has(key):
 				var d := rm.duplicate() as ShaderMaterial
-				d.set_shader_parameter("detail_contrast", float(dc))
-				var sp: Variant = mat.get_shader_parameter("specular_amount")
-				if sp != null:
-					d.set_shader_parameter("specular_amount", float(sp))
+				for parameter in style:
+					d.set_shader_parameter(parameter, style[parameter])
 				_rock_mats[key] = d
-			rm = _rock_mats[key]
-		m.material_override = rm
+			replacements.append(_rock_mats[key])
+		# Read every active source before removing the mesh-wide override.
+		m.material_override = null
+		for surface in range(replacements.size()):
+			m.set_surface_override_material(surface, replacements[surface])
 
 static func noise_tex(freq: float, octaves: int, normal: bool, bump: float, seed_value: int, cellular := false) -> NoiseTexture2D:
 	var n := FastNoiseLite.new()

@@ -46,6 +46,7 @@ const TABLE := {
 	"leaf_particles":    [0,     0,      1,       1,       1],    # 0 off, 1 on (falling-leaf emitters)
 	"vegetation_interaction":[0, 1,      1,       1,       1],    # 0 off, 1 player pushes grass/foliage
 	"character_ik_quality":[0,   0,      1,       2,       2],    # 0 off/cheap, 1 foot IK, 2 foot+hand/look IK
+	"natural_lighting":  [0.0,   0.0,    0.0,     0.65,    1.0],  # authored light balance -> refined High/Ultra
 }
 ## Legacy 3-tier mapping consumed by set_graphics_quality(tier).
 const LEGACY_TIER := [0, 0, 1, 2, 2]

@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+LIGHTING Compatibility renderer: PASS
+[MISSION] New Objective:obj_c07_explore_city->Explore the subterranean Vaelor ruins and examine the central plaza mural
+[COLLISION] Chapter7: generated 8 collision bodies
+LIGHTING Chapter7 lighting initialized after asynchronous build: PASS
+LIGHTING Chapter7 existing Mara rig: PASS
+LIGHTING capture Chapter7_authored_lighting: PASS
+LIGHTING Chapter7 lighting changes rendered scene: PASS
+LIGHTING Chapter7 lighting restoration does not accumulate: PASS
+LIGHTING capture Chapter7_ultra: PASS
+LIGHTING_FRAME Chapter7 avg=16.31ms p99=16.92ms draws=264 (stationary 1.5s, cap 60)
+LIGHTING Chapter7 Low preserves authored lighting: PASS
+LIGHTING Chapter7 Low disables costly environment effects: PASS
+LIGHTING Chapter7 live Ultra restores lighting: PASS
+LIGHTING Chapter7 collision shapes preserved: PASS
+LIGHTING Chapter7 player supported by floor: PASS
+LIGHTING_DONE checks=12 failures=0

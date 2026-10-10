@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+WARNING: Your video card drivers seem not to support the required OpenGL 3.3 version, switching to ANGLE.
+   at: DisplayServerWindows (platform/windows/display_server_windows.cpp:8227)
+ERROR: Can't initialize an EGL display.
+   at: _get_gldisplay_id (drivers/egl/egl_manager.cpp:113)
+ERROR: Condition "gldisplay_id < 0" is true. Returning: ERR_CANT_CREATE
+   at: window_create (drivers/egl/egl_manager.cpp:259)
+ERROR: Failed to create ANGLE OpenGL window.
+   at: _create_gl_window (platform/windows/display_server_windows.cpp:7539)
+ERROR: Unexpected window message 0x1f received for window we cannot recognize in our collection; sequence error.
+   at: _handle_early_window_message (platform/windows/display_server_windows.cpp:5612)

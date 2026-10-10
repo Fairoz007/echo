@@ -38,7 +38,7 @@ float fbm(vec2 p) {
 
 void vertex() {
 	wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	wnrm = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	wnrm = normalize(MODEL_NORMAL_MATRIX * NORMAL);
 }
 
 vec3 triplanar(sampler2D t, vec3 p, vec3 n, float s) {

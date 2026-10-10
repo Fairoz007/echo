@@ -6,7 +6,12 @@ render_mode diffuse_burley, specular_schlick_ggx;
 
 uniform sampler2D rock_tex : source_color, filter_linear_mipmap, repeat_enable;
 uniform sampler2D rock_nrm : hint_normal, filter_linear_mipmap, repeat_enable;
+uniform sampler2D rock_roughness : filter_linear_mipmap, repeat_enable;
 uniform bool has_normal = false;
+uniform bool has_roughness = false;
+uniform float normal_strength = 1.0;
+uniform float source_roughness = 0.88;
+uniform vec4 roughness_channel = vec4(1.0, 0.0, 0.0, 0.0);
 uniform vec3 tint : source_color = vec3(0.62, 0.61, 0.56);
 uniform vec3 tint_b : source_color = vec3(0.45, 0.43, 0.38);
 uniform vec3 moss : source_color = vec3(0.17, 0.24, 0.08);
@@ -30,7 +35,7 @@ float vnoise(vec2 p) {
 
 void vertex() {
 	wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	wnrm = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	wnrm = normalize(MODEL_NORMAL_MATRIX * NORMAL);
 }
 
 void fragment() {
@@ -45,7 +50,7 @@ void fragment() {
 	float big = vnoise(wpos.xz * 0.04 + wpos.y * 0.025);
 	float mid = vnoise(wpos.xy * 0.35 + wpos.zx * 0.27);
 	vec3 base = a * mix(tint, tint_b, big) * 1.35 * (0.85 + 0.3 * mid);
-	float up = smoothstep(0.35, 0.85, wnrm.y + (mid - 0.5) * 0.6);
+	float up = smoothstep(0.35, 0.85, normalize(wnrm).y + (mid - 0.5) * 0.6);
 	float streak = smoothstep(0.55, 0.8, vnoise(vec2(wpos.x * 0.6 + wpos.z * 0.6, wpos.y * 0.05)));
 	float m = clamp(up * moss_amount * (0.6 + big) + streak * moss_amount * 0.25, 0.0, 1.0);
 	vec3 col = mix(base, moss * (0.7 + 0.6 * mid), m);
@@ -54,10 +59,14 @@ void fragment() {
 	float wet = clamp(wetness + step(wpos.y, wet_line) * 0.85, 0.0, 1.0);
 	col *= mix(1.0, 0.5, wet);
 	ALBEDO = col;
-	ROUGHNESS = mix(mix(0.88, 0.95, m), 0.22, wet);
+	float dry_roughness = source_roughness;
+	if (has_roughness) {
+		dry_roughness *= dot(texture(rock_roughness, UV), roughness_channel);
+	}
+	ROUGHNESS = mix(mix(clamp(dry_roughness, 0.0, 1.0), 0.95, m), 0.22, wet);
 	SPECULAR = specular_amount;
 	if (has_normal) {
 		NORMAL_MAP = texture(rock_nrm, UV).rgb;
-		NORMAL_MAP_DEPTH = 1.0;
+		NORMAL_MAP_DEPTH = normal_strength;
 	}
 }

@@ -1,5 +1,7 @@
 # ECHOES BENEATH recovery audit — 2026-10-09
 
+Follow-up: [2026-10-10 lighting/material refinement](LIGHTING_MATERIALS_2026-10-10.md) adds verified High/Ultra lighting balance and PBR preservation. It also records a fresh GPU-loss incident and the successful OpenGL checks after the GPU became available again; universal GPU stability is still unproven.
+
 Scope: existing working tree at `6053bbf`, Godot 4.7.2 Steam, RTX 2060 / driver 617.42. Existing source/assets retained. One Astra High task was used for Mara IK; routine inspection and fixes remained in the primary task. No generation API was invoked.
 
 ## Latest status after integration at `7a23488`

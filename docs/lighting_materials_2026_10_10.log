@@ -1,0 +1,45 @@
+Godot Engine v4.7.2.stable.steam.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 617.42 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 2060
+
+[GAME_MANAGER] Initialized. Engine version:4.7.2-stable (steam)
+[AUDIO] Asset-backed audio initialized; 80 dialogue entries.
+LIGHTING Compatibility renderer: PASS
+LIGHTING multi-surface rock is not flattened to surface zero: PASS
+LIGHTING surface 0 retains PBR atlas and strength: PASS
+LIGHTING surface 0 specular style survives default contrast: PASS
+LIGHTING surface 1 retains PBR atlas and strength: PASS
+LIGHTING surface 1 specular style survives default contrast: PASS
+LIGHTING packed ORM roughness uses green: PASS
+LIGHTING disabled source normals remain disabled: PASS
+LIGHTING identical source reuses cache: PASS
+LIGHTING nearby tints do not collide in cache: PASS
+[MISSION] New Objective:obj_c01_meet_team->Regroup with Elias at the Expedition Camp
+[COLLISION] Chapter1: generated 200 collision bodies
+LIGHTING Chapter1 lighting initialized after asynchronous build: PASS
+LIGHTING Chapter1 existing Mara rig: PASS
+LIGHTING capture Chapter1_authored_lighting: PASS
+LIGHTING Chapter1 lighting changes rendered scene: PASS
+LIGHTING Chapter1 lighting restoration does not accumulate: PASS
+LIGHTING capture Chapter1_ultra: PASS
+LIGHTING_FRAME Chapter1 avg=16.31ms p99=17.46ms draws=526 (stationary 1.5s, cap 60)
+LIGHTING Chapter1 Low preserves authored lighting: PASS
+LIGHTING Chapter1 Low disables costly environment effects: PASS
+LIGHTING Chapter1 live Ultra restores lighting: PASS
+LIGHTING sun balance restored: PASS
+LIGHTING Chapter1 collision shapes preserved: PASS
+LIGHTING Chapter1 player supported by floor: PASS
+[MISSION] New Objective:obj_c07_explore_city->Explore the subterranean Vaelor ruins and examine the central plaza mural
+[COLLISION] Chapter7: generated 8 collision bodies
+LIGHTING Chapter7 lighting initialized after asynchronous build: PASS
+LIGHTING Chapter7 existing Mara rig: PASS
+LIGHTING capture Chapter7_authored_lighting: PASS
+LIGHTING Chapter7 lighting changes rendered scene: PASS
+LIGHTING Chapter7 lighting restoration does not accumulate: PASS
+LIGHTING capture Chapter7_ultra: PASS
+LIGHTING_FRAME Chapter7 avg=16.31ms p99=19.85ms draws=264 (stationary 1.5s, cap 60)
+LIGHTING Chapter7 Low preserves authored lighting: PASS
+LIGHTING Chapter7 Low disables costly environment effects: PASS
+LIGHTING Chapter7 live Ultra restores lighting: PASS
+LIGHTING Chapter7 collision shapes preserved: PASS
+LIGHTING Chapter7 player supported by floor: PASS
+LIGHTING_DONE checks=33 failures=0
