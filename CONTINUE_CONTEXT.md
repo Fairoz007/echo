@@ -1,10 +1,10 @@
 # Echoes Beneath: Session Handoff Context
 
-Paste this whole file into a new chat to continue the game-recovery work. Last updated 2026-10-09.
+Paste this whole file into a new chat to continue the game-recovery work. Last updated 2026-10-10.
 
-## 1. Hard rule: LOW GRAPHICS ONLY
+## 1. Hard rule: LOW GRAPHICS BY DEFAULT
 
-The user wants every test run in low graphics. Never launch Forward+/Vulkan/D3D12 or the Medium/High/Ultra presets unless the user explicitly asks.
+Test on LOW by default. On 2026-10-09 the user asked for the game to be "optimized for all graphics", so the Ultra Low to Ultra presets (`--quality=0..4`) may be tested, but always with `gl_compatibility`/`opengl3`. Never launch Forward+/Vulkan/D3D12 unless the user explicitly asks; they caused GPU crashes before.
 
 - Godot 4.7.2 (Steam build): `C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
 - Every launch:
@@ -34,7 +34,7 @@ The user wants every test run in low graphics. Never launch Forward+/Vulkan/D3D1
 
 ## 3. Repo state
 
-- Branch `wip/game-recovery`. `master`/`main` is untouched.
+- Work happened on branch `wip/game-recovery` (this session: `7a23488`). As of 2026-10-10 the checkout is on `main` with newer commits from another tool (see §4b); verify with `git branch` before working.
 - Commits this session:
 
   | Commit | Contents |
@@ -87,20 +87,56 @@ What was done this session:
   - Redesigned menu, HUD, pause, settings, journal, death screen and story cards.
   - Screenshots in `screenshots/ui/`.
 
+## 4b. Session 2026-10-09/10: five-agent pass (commit `7a23488`)
+
+The user asked for the work to be split into subagents by category, with wind animation, control customization and character customization included and every graphics preset optimized. Five agents ran in parallel, each owning separate files:
+
+| Agent | Built | Report(s) |
+|---|---|---|
+| Character | Straight-knee breathing idle, turn-in-place stepping, hip-drop landing, hit reaction (`take_damage(.., from_dir)`), interact reach, climb/mantle hand contact, slope foot tilt, shorter run arm reach. `Player.get_skeleton()`, `get_visual_root()`, group `"player"`. Camera: invert Y and gamepad stick look via `InputRemap` | `CHARACTER_BASELINE_AUDIT.md`, `CHARACTER_RIGGING_REPORT.md`, `ANIMATION_INTEGRATION_REPORT.md`, `CHARACTER_PHYSICS_REPORT.md` |
+| Wind & nature | `WindSystem.set_preset(Preset.CALM/BREEZE/MODERATE/STRONG/STORM/CAVE, blend, dir)`, turbulence/storm uniforms, `wind_changed` signal; rooted height-weighted tree sway, branch bend, leaf flutter; grass/bush/fern/vine variants; player push within 1.2 m; `systems/nature/FallingLeaves.gd`. Test bed `dev/nature/NatureTest.tscn` | `TREE_WIND_SYSTEM.md`, `FOLIAGE_ANIMATION_REPORT.md`, `ENVIRONMENT_INTERACTION_REPORT.md` |
+| Controls | `systems/InputRemap.gd` autoload (`user://controls.cfg`), `ui/controls/ControlsMenu`: KB + gamepad rebinding, conflict swap/cancel, reset, sensitivity, invert Y, deadzone, hold/toggle, FOV. Opened from Pause → Controls and Main Menu → Settings → Controls | `CONTROLS_REPORT.md` |
+| Customization | `systems/MaraAppearance.gd` autoload (`user://appearance.cfg`), `ui/customize/CustomizeScreen` from the main menu "CUSTOMIZE MARA": 3D preview, outfit palettes, skin/hair recolour by colour mask, hat/headlamp/backpack/satchel on bones, height 0.96–1.01 and build 0.94–1.06 | `CHARACTER_CUSTOMIZATION_REPORT.md` |
+| Graphics | `GraphicsSettings` keys `foliage_density`, `foliage_wind_detail`, `leaf_particles`, `vegetation_interaction`, `character_ik_quality` plus `get_setting(key, default)`. Ch7 worst frame 628 → ~285 ms and Ch9 ~458 → ~290 ms (threaded `CaveBuilder`, spread-out collision in `EnvironmentCollision.gd`). Sweep: `dev/perf/preset_sweep.gd` | `PERFORMANCE_REPORT.md` |
+
+The coordinator then wired a wind preset into every level: CAVE for the Prologue, Ch4, Ch6, Ch7, Ch9 and Ch10; BREEZE for Ch1, Ch5 and the Epilogue; MODERATE for Ch2 and Ch8; STRONG for Ch3; STORM for the Finale (4 s blend). These are the first line of each `levels/*.gd` `_ready()`, plus `Chapter1Dressing.gd:88` and `EpilogueVista.gd:45`.
+
+QA on LOW before `7a23488`:
+
+| Check | Result |
+|---|---|
+| Parse every script | 0 failures |
+| Full campaign | PASS, 828.6 m |
+| Story flow | PASS |
+| `dev/movement_tests.gd` | 54/54 |
+| `dev/character/character_tests.gd` | 27/27 |
+| Controls test | 24/24 |
+| `scripts/qa_foliage_wind.gd` | PASS (its calm→storm blend was lengthened from 1 s to 3 s) |
+
+All presets 0–4 ran without a crash; Ultra hung once and the rerun was clean. No Tripo credits were spent.
+
+**Warning: another tool works in this folder in parallel.** A separate session ("Antigravity Game Director"/Astra) edited files during this session: it wrote `docs/RECOVERY_AUDIT_2026-10-09.md` and `dev/run_recovery_test.ps1`, staged files, and made a `Player.gd` foot-planting edit that caused 2.5 m/s walk slide (reverted). After `7a23488` it added `ed023b1`, `68b4055`, `be45cd7` ("first commit") and `3bb8aed`, and **the checkout is now on `main`, not `wip/game-recovery`.** Before working, run `git status`, `git branch` and `git log`, and coordinate with the user so two tools don't edit at once.
+
 ## 5. Open work (priority order)
 
 1. **Release blockers (user decisions):** the ElevenLabs free tier is non-commercial, so upgrade and regenerate the voices or replace them. Revoke and rotate the leaked keys.
 2. **Ch7 is very dark:** do a lighting pass (Level A ownership).
 3. **Animation:**
-   - The leading arm reaches slightly forward in the run.
-   - The idle clip has a soft knee; a straight stance needs a new idle clip.
-   - There's no true turn in place.
-   - The remaining polish list hasn't been started.
-4. **Visuals:** white flecks on a Ch8 pillar, and flat-looking Ch1 grass.
-5. **Load spikes:** 380–630 ms frames on Ch7/Ch9, from `systems/CampaignEnvironmentArt.gd` (no owner yet) and the cave shell build.
+   - Not built: strafe, slide, ledge hang/shimmy, aim/fire/reload/melee poses, push. Each needs a gameplay state or new clips.
+   - No finger bones, so the hands can't grip or point.
+   - A 180° turn plays only about a quarter step, because the turn takes ~0.3 s. Slowing it changes the movement feel, so it's the user's call.
+   - The landing dip is real but brief (~0.2 s).
+4. **Visuals:**
+   - White flecks on a Ch8 pillar.
+   - Ch1 grass: the black-blade normal fix may have solved the flat look; check it.
+   - The Ch6 camera spawns inside reeds.
+   - Customization: hair recolour leaves brown speckle, the trousers barely recolour, and the accessories are blocky placeholders.
+5. **Load spikes:** about 190–310 ms in the first two frames of every level, almost certainly first-draw shader compiles. It needs a shader warm-up during the loading fade.
 6. **Untested:**
    - 1920x1080
-   - a real gamepad
+   - a real gamepad (rebinding, stick look, customize screen)
+   - the Ultra Low wind frames
+   - the HUD help still shows default keys after rebinding
    - camera pull-in against a wall
    - the Ch6 cistern puzzle played by hand
    - UI sounds by ear
@@ -117,6 +153,10 @@ What was done this session:
   | Level B | `systems/levelb/`; Ch1, Ch5, Ch6, Ch8, Epilogue |
   | Movement | `scripts/Player.gd`, `Ragdoll.gd`, `CameraController.gd`, Mara assets |
   | UI | `ui/**` |
+  | Wind & nature | `systems/nature/**`, `shaders/foliage_wind`/`grass_wind`/`wind_common`, `FoliageWind.gd`, `LBFoliageWind.gd` |
+  | Controls | `systems/InputRemap.gd`, `ui/controls/**` |
+  | Customization | `systems/MaraAppearance.gd`, `ui/customize/**` |
+  | Graphics | `systems/GraphicsSettings.gd`, `CampaignEnvironmentArt.gd`, `dev/perf/**` |
 
   Never let two agents edit the same file.
 - After every change, run on LOW, capture screenshots or frame sequences (`dev/seq_capture.gd`, `dev/ui_capture.gd`, `dev/levela_capture.gd`), look at them at full size, and fix whatever is visibly wrong.
