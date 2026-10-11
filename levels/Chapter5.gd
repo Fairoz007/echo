@@ -16,6 +16,8 @@ var was_detected: bool = false
 
 var transition_started := false
 
+const RegionHandoff := preload("res://systems/world/RegionHandoff.gd")
+
 func _ready() -> void:
 	WindSystem.set_preset(WindSystem.Preset.BREEZE, 0.0)
 	var dressing := preload("res://systems/levelb/Chapter5Dressing.gd").new()
@@ -72,6 +74,8 @@ func _on_drake_observed(body: Node) -> void:
 			AudioManager.play_story_line("Mara", "Past them. They never knew I was here.", 3.0)
 	if enemies_remaining <= 0 or not was_detected:
 		has_seen_drake = true
+		# Unified world: start streaming the Drowned Temple while Mara heads for its entrance.
+		RegionHandoff.prepare("res://levels/Chapter6.tscn")
 		MissionManager.complete_objective("obj_c05_observe_excavation")
 		MissionManager.register_objective("obj_c05_enter_temple", "Enter the submerged Drowned Temple aqueduct")
 		if hud:
@@ -83,5 +87,5 @@ func _on_chapter_end(body: Node) -> void:
 		print("[CHAPTER 5] Infiltrated Drowned Temple! Transitioning to Chapter 6.")
 		if hud:
 			AudioManager.play_story_line("Mara", "Water's rushing into the temple basin. Time to dive.", 3.5)
-		await get_tree().create_timer(3.5).timeout
-		GameManager.load_chapter(6, "res://levels/Chapter6.tscn")
+		# Walk straight onto the temple's entry landing: no card, fade or respawn.
+		RegionHandoff.hand_off(self, 6, "res://levels/Chapter6.tscn", Vector3(0.0, 1.0, 22.5))
