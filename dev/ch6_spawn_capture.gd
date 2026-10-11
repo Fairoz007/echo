@@ -19,6 +19,23 @@ func _run() -> void:
 	for i in 90:
 		await process_frame
 	var cam := root.get_viewport().get_camera_3d()
+	# Optional fixed shot: --cam=x,y,z --look=x,y,z (detaches from the follow rig).
+	var cam_at := ""
+	var look_at := ""
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--cam="): cam_at = a.substr(6)
+		if a.begins_with("--look="): look_at = a.substr(7)
+	if cam_at != "":
+		var c := cam_at.split_floats(",")
+		var l := look_at.split_floats(",")
+		var shot := Camera3D.new()
+		lvl.add_child(shot)
+		shot.global_position = Vector3(c[0], c[1], c[2])
+		shot.look_at(Vector3(l[0], l[1], l[2]))
+		shot.current = true
+		for i in 10:
+			await process_frame
+		cam = shot
 	var player := lvl.get_node("Player") as Node3D
 	print("CAM ", cam.global_position, " PLAYER ", player.global_position)
 	# List visual meshes whose AABB contains the camera (foliage has no collision).

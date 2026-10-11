@@ -1,0 +1,151 @@
+{
+ "fern_02": {
+  "name": "Fern 02",
+  "authors": [
+   "Rob Tuytel",
+   "Rico Cilliers"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/fern_02",
+  "polycount": 6232
+ },
+ "calathea_orbifolia_01": {
+  "name": "Calathea Orbifolia 01",
+  "authors": [
+   "Rob Tuytel",
+   "Rico Cilliers"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/calathea_orbifolia_01",
+  "polycount": 16688
+ },
+ "pachira_aquatica_01": {
+  "name": "Pachira Aquatica 01",
+  "authors": [
+   "Rob Tuytel",
+   "Rico Cilliers"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/pachira_aquatica_01",
+  "polycount": 76914
+ },
+ "rock_moss_set_01": {
+  "name": "Rock Moss Set 01",
+  "authors": [
+   "Kless Gyzen"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/rock_moss_set_01",
+  "polycount": 63127
+ },
+ "boulder_01": {
+  "name": "Boulder 01",
+  "authors": [
+   "Rico Cilliers"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/boulder_01",
+  "polycount": 123976
+ },
+ "root_cluster_01": {
+  "name": "Root Cluster 01",
+  "authors": [
+   "Jenelle van Heerden",
+   "Rico Cilliers"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/root_cluster_01",
+  "polycount": 225261
+ },
+ "dead_tree_trunk_02": {
+  "name": "Dead Tree Trunk 02",
+  "authors": [
+   "Jenelle van Heerden",
+   "Rico Cilliers"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/dead_tree_trunk_02",
+  "polycount": 155864
+ },
+ "metal_jerrycan_green": {
+  "name": "Metal Jerrycan Green",
+  "authors": [
+   "Ulan Cabanilla"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/metal_jerrycan_green",
+  "polycount": 9636
+ },
+ "metal_toolbox": {
+  "name": "Metal Toolbox",
+  "authors": [
+   "Mateusz Sadek"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/metal_toolbox",
+  "polycount": 14228
+ },
+ "Lantern_01": {
+  "name": "Lantern 01",
+  "authors": [
+   "Rajil Jose Macatangay"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/Lantern_01",
+  "polycount": 33902
+ },
+ "rusted_spade_01": {
+  "name": "Rusted Spade 01",
+  "authors": [
+   "Blemonade"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/rusted_spade_01",
+  "polycount": 11436
+ },
+ "portable_searchlight": {
+  "name": "Portable Searchlight",
+  "authors": [
+   "Elijah Cragg"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/portable_searchlight",
+  "polycount": 18802
+ },
+ "ammo_box": {
+  "name": "Ammo Box",
+  "authors": [
+   "DanKit"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/ammo_box",
+  "polycount": 4382
+ },
+ "medical_box": {
+  "name": "Medical Box",
+  "authors": [
+   "Ulan Cabanilla"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/medical_box",
+  "polycount": 3718
+ },
+ "portable_generator": {
+  "name": "Portable Generator",
+  "authors": [
+   "James Ray Cock"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/portable_generator",
+  "polycount": 26419
+ },
+ "cement_bag": {
+  "name": "Cement Bag",
+  "authors": [
+   "PierreB3D"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/cement_bag",
+  "polycount": 844
+ }
+}

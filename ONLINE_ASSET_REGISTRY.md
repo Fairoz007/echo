@@ -20,6 +20,30 @@ Not yet checked: Quaternius, Kenney, Sketchfab (per-model licenses), Fab. Don't 
 | Quaternius Universal Animation Library (120+ clips, CC0) | https://quaternius.com/packs/universalanimationlibrary.html | Quaternius | CC0 (license page) | — | **Blocked: needs a manual download.** The itch.io "name your own price" flow requires the browser. | Would cover strafe, push, crawl, combat and death clips for retargeting |
 | Mixamo | https://www.mixamo.com/ | Adobe | Adobe terms (royalty-free in games) | — | **Blocked: needs an Adobe login** | — |
 
+
+## Poly Haven 3D models: integrated in the Ch1 Expedition Camp (`Chapter1Dressing._photo_props`, `_ph`)
+| Model | Polys | Use |
+|---|---:|---|
+| [Lantern 01](https://polyhaven.com/a/Lantern_01) | 33902 | workbench lantern with light |
+| [Ammo Box](https://polyhaven.com/a/ammo_box) | 4382 | stacks by the truck and command tent |
+| [Boulder 01](https://polyhaven.com/a/boulder_01) | 123976 | boulders |
+| [Calathea Orbifolia 01](https://polyhaven.com/a/calathea_orbifolia_01) | 16688 | broadleaf understorey |
+| [Cement Bag](https://polyhaven.com/a/cement_bag) | 844 | sandbag/supply pile |
+| [Dead Tree Trunk 02](https://polyhaven.com/a/dead_tree_trunk_02) | 155864 | fallen trunk on the trail side |
+| [Fern 02](https://polyhaven.com/a/fern_02) | 6232 | understorey |
+| [Medical Box](https://polyhaven.com/a/medical_box) | 3718 | command tent |
+| [Metal Jerrycan Green](https://polyhaven.com/a/metal_jerrycan_green) | 9636 | fuel cans by the generator (replaced box stand-ins) |
+| [Metal Toolbox](https://polyhaven.com/a/metal_toolbox) | 14228 | workbench |
+| [Pachira Aquatica 01](https://polyhaven.com/a/pachira_aquatica_01) | 76914 | small tropical trees |
+| [Portable Generator](https://polyhaven.com/a/portable_generator) | 26419 | camp generator (replaced the yellow box) |
+| [Portable Searchlight](https://polyhaven.com/a/portable_searchlight) | 18802 | camp floodlight |
+| [Rock Moss Set 01](https://polyhaven.com/a/rock_moss_set_01) | 63127 | clearing-edge rocks |
+| [Root Cluster 01](https://polyhaven.com/a/root_cluster_01) | 225261 | exposed roots |
+| [Rusted Spade 01](https://polyhaven.com/a/rusted_spade_01) | 11436 | leaning by a tent |
+
+Rejected after download as too heavy for real-time use: Island Tree 01 (3.7M polys), Island Tree 02 (1.8M), Jacaranda (210 MB). Old Military Crate was also rejected: its lids lie open and read as floating boards.
+Evidence: `docs/visual_benchmark/camp_gear.jpg`, `camp_edge.jpg`. Fetch script: `scripts/fetch_polyhaven_models.py`.
+
 ## Candidates for the next art pass (license OK, not downloaded)
 - Poly Haven `rock_wall_10`, `cliff_side`: cave and cliff variety for Ch4 and Ch7.
 - Poly Haven and ambientCG ground, moss and wet-stone sets for the Ch6 hall and the Ch7 plaza.

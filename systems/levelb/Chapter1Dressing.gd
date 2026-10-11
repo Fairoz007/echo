@@ -77,6 +77,7 @@ func build(level: Node3D) -> void:
 	_discoveries()
 	_sky(level)
 	_path_no_grass()
+	_photo_props()
 	var grass := preload("res://systems/nature/GrassScatter.tscn").instantiate()
 	grass.name = "GrassScatter"
 	grass.set("area_size", Vector2(120, 130))
@@ -343,12 +344,12 @@ func _camp(level: Node3D) -> void:
 	var gen_mat := KIT.std_mat(Color(0.55, 0.42, 0.12), 0.55, 0.3)
 	var gen := BoxMesh.new()
 	gen.size = Vector3(0.9, 0.6, 0.6)
-	KIT.mesh(camp, gen, Transform3D(Basis(Vector3.UP, 0.4), Vector3(8.5, 0.3, 5.5)), gen_mat, "Generator")
+	# Poly Haven portable_generator (CC0) replaces the box stand-in; the collision box stays.
+	_ph(camp, "portable_generator", Vector3(8.5, 0, 5.5), 0.62, 0.4 + PI * 0.5, "none")
 	KIT.box_body(camp, Vector3(8.5, 0.3, 5.5), Vector3(0.9, 0.6, 0.6), 0.4, "GeneratorBody")
-	var can := BoxMesh.new()
-	can.size = Vector3(0.18, 0.45, 0.32)
+	# Fuel cans by the generator: Poly Haven metal_jerrycan_green (CC0), replaces box stand-ins.
 	for k in 3:
-		KIT.mesh(camp, can, Transform3D(Basis(Vector3.UP, k * 0.3), Vector3(9.3 + k * 0.22, 0.225, 6.2)), KIT.std_mat(Color(0.12, 0.28, 0.12), 0.6, 0.2))
+		_ph(camp, "metal_jerrycan_green", Vector3(9.3 + k * 0.34, 0, 6.2 + (k % 2) * 0.12), 0.47, k * 0.3 + 0.1, "convex")
 	# Camp lanterns: timber post, crossarm and a hurricane lantern hanging from a hook.
 	var wood := KIT.std_mat(Color(0.3, 0.22, 0.14), 0.9)
 	var post := BoxMesh.new()
@@ -427,6 +428,60 @@ func _process(delta: float) -> void:
 			l.light_energy = 1.6 + sin(_t * 13.0) * 0.18 + sin(_t * 7.3) * 0.22
 
 # ---------------------------------------------------------------- vegetation
+
+const PH := "res://assets/polyhaven/models/"
+
+## Places a Poly Haven CC0 model (assets/polyhaven/models/<id>/<id>.gltf) on the terrain.
+func _ph(parent: Node, id: String, at: Vector3, height: float, yaw: float, collision := "none", fit_height := true) -> Node3D:
+	var ground := Vector3(at.x, terrain.height_at(at.x, at.z) + at.y, at.z)
+	var n := KIT.place(parent, PH + id + "/" + id + ".gltf", ground, height, yaw, Vector3.ONE, fit_height, id)
+	if n:
+		n.set_meta("collision", collision)
+	return n
+
+## Benchmark dressing with real photo-scanned CC0 props and plants (Poly Haven).
+## Sources/licences: assets/polyhaven/models/SOURCES.json, ASSET_LICENSE_REGISTER.md.
+func _photo_props() -> void:
+	var root := Node3D.new()
+	root.name = "PhotoScannedDressing"
+	add_child(root)
+	# Expedition gear: crate stacks by the truck and command tent, toolbox and lantern on the bench.
+	for c in [[Vector3(12.4, 0, 6.0), 0.4, 0.2], [Vector3(13.2, 0, 6.5), 0.4, -0.4], [Vector3(12.7, 0.4, 6.2), 0.4, 1.4],
+			[Vector3(-7.4, 0, -2.6), 0.4, 1.1]]:
+		_ph(root, "ammo_box", c[0], c[1], c[2], "convex")
+	_ph(root, "medical_box", Vector3(-6.6, 0, -1.8), 0.32, 0.4, "convex")
+	for k in 3:
+		_ph(root, "cement_bag", Vector3(-8.2 + k * 0.5, k / 2 * 0.18, -1.2), 0.18, 0.2 * k, "none", false)
+	_ph(root, "metal_toolbox", Vector3(5.2, 0.8, 9.5), 0.26, 0.35, "none")
+	var lantern := _ph(root, "Lantern_01", Vector3(6.1, 0.8, 9.2), 0.34, 1.0, "none")
+	if lantern:
+		KIT.omni(root, lantern.global_position + Vector3(0, 0.22, 0), Color(1.0, 0.7, 0.4), 0.9, 4.0)
+	_ph(root, "rusted_spade_01", Vector3(-8.4, 0, 9.6), 1.05, 2.4, "none")
+	_ph(root, "portable_searchlight", Vector3(6.4, 0, 1.2), 1.1, -2.6, "convex")
+	# Jungle floor: ferns and broadleaf understorey around the clearing edge, off every route.
+	var rng2 := RandomNumberGenerator.new()
+	rng2.seed = 7141
+	var plants := ["fern_02", "fern_02", "calathea_orbifolia_01", "pachira_aquatica_01"]
+	var placed := 0
+	for i in 220:
+		if placed >= 70:
+			break
+		var a := rng2.randf() * TAU
+		var r := rng2.randf_range(17.0, 34.0)
+		var p := Vector2(cos(a) * r, 7.0 + sin(a) * r * 0.85)
+		if _near_route(p, 1.5):
+			continue
+		var id: String = plants[rng2.randi() % plants.size()]
+		var h := rng2.randf_range(0.7, 1.3) * (1.6 if id == "pachira_aquatica_01" else 1.0)
+		_ph(root, id, Vector3(p.x, -0.05, p.y), h, rng2.randf() * TAU, "none")
+		placed += 1
+	# Mossy rock sets and boulders anchoring the clearing edge; roots and a fallen trunk on the trail side.
+	for r in [[Vector3(-17, 0, 19), 1.6, 0.4], [Vector3(18, 0, 21), 1.3, 2.0], [Vector3(-15, 0, -12), 1.8, 1.1], [Vector3(19, 0, -8), 1.4, 3.0]]:
+		_ph(root, "rock_moss_set_01", r[0] + Vector3(0, -0.15, 0), r[1], r[2], "convex", false)
+	for b in [[Vector3(-21, 0, 6), 2.4, 0.3], [Vector3(22, 0, 12), 2.0, 1.9]]:
+		_ph(root, "boulder_01", b[0] + Vector3(0, -0.3, 0), b[1], b[2], "convex")
+	_ph(root, "root_cluster_01", Vector3(-19, -0.1, 14), 1.2, 0.8, "none", false)
+	_ph(root, "dead_tree_trunk_02", Vector3(-12.5, -0.1, 24.5), 7.0, 1.35, "convex", false)
 
 func _near_route(p: Vector2, margin: float) -> bool:
 	for c in corridors:
