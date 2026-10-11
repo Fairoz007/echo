@@ -12,6 +12,7 @@ func _ready() -> void:
 	WindSystem.set_preset(WindSystem.Preset.STORM, 4.0)
 	preload("res://systems/environment/EnvironmentCollision.gd").attach(self)
 	preload("res://systems/environment/PhotoDressing.gd").apply(self, 11)
+	preload("res://systems/environment/RelicHunt.gd").apply(self, 11)
 	preload("res://systems/environment/BlockoutDresser.gd").apply(self)
 	var campaign_dialogue := preload("res://systems/CampaignDialogue.gd").new()
 	add_child(campaign_dialogue)

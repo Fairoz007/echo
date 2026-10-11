@@ -42,6 +42,7 @@ func _ready() -> void:
 		await get_tree().process_frame
 		_t = Time.get_ticks_msec()
 	preload("res://systems/environment/EnvironmentCollision.gd").attach(self)
+	preload("res://systems/environment/RelicHunt.gd").apply(self, 6)
 	if staged:
 		print("[REGION] Ch6 collision %d ms" % (Time.get_ticks_msec() - _t))
 		await get_tree().process_frame

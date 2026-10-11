@@ -25,6 +25,7 @@ func _ready() -> void:
 	add_child(dressing)
 	dressing.build(self)
 	preload("res://systems/environment/EnvironmentCollision.gd").attach(self)
+	preload("res://systems/environment/RelicHunt.gd").apply(self, 5)
 	preload("res://systems/environment/BlockoutDresser.gd").apply(self)
 	var exploration := preload("res://systems/CampaignExploration.gd").new()
 	add_child(exploration)

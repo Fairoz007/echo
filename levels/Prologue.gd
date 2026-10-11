@@ -17,6 +17,7 @@ func _ready() -> void:
 	soundscape = preload("res://systems/PrologueSoundscape.gd").new()
 	add_child(soundscape)
 	preload("res://systems/environment/PhotoDressing.gd").apply(self, 0)
+	preload("res://systems/environment/RelicHunt.gd").apply(self, 0)
 	# Register Prologue Objective
 	MissionManager.register_objective("obj_prologue_explore", "Navigate the collapsed subterranean tunnel")
 	
