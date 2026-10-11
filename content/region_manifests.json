@@ -32,6 +32,8 @@
   "res://assets/models/optimized/prop_vaelor_key_LOD0.glb",
   "res://assets/models/optimized/ruin_pillar_vaelor_LOD0.glb",
   "res://assets/props/equipment/climbing_pick.glb",
+  "res://assets/textures/polyhaven/forest_ground_04_diff_1k.jpg",
+  "res://assets/textures/polyhaven/rocky_terrain_02_diff_1k.jpg",
   "res://audio/ambience/jungle/AMB_DAYLIGHT_RIDGE_WIND.ogg",
   "res://audio/ambience/jungle/AMB_JUNGLE_BIRDS_INSECTS.ogg",
   "res://audio/ambience/jungle/AMB_JUNGLE_CANOPY.wav",

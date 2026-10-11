@@ -1,5 +1,5 @@
 extends SceneTree
-## Captures the Chapter 6 opening frame and reports what the camera ray hits.
+## Captures a level's opening frame (default Chapter 6; --level=res://...) and reports what the camera ray hits.
 ## Usage: godot --path . --rendering-method gl_compatibility -s res://dev/ch6_spawn_capture.gd -- --out=<png>
 
 func _init() -> void:
@@ -10,7 +10,11 @@ func _run() -> void:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--out="):
 			out = a.substr(6)
-	var lvl: Node = load("res://levels/Chapter6.tscn").instantiate()
+	var level := "res://levels/Chapter6.tscn"
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--level="):
+			level = a.substr(8)
+	var lvl: Node = load(level).instantiate()
 	root.add_child(lvl)
 	for i in 90:
 		await process_frame

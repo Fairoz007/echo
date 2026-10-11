@@ -67,6 +67,7 @@ func build(level: Node3D) -> void:
 	add_child(terrain)
 	terrain.build(Vector2(-110, -130), Vector2(220, 220), 1.6, _height, _mask)
 	terrain.material.set_shader_parameter("path_grit", 1.0)
+	_photo_ground(terrain.material)
 	_lift_ridge(level)
 	_cliffs()
 	_camp(level)
@@ -149,6 +150,16 @@ func _mask(x: float, z: float) -> Color:
 	wet = maxf(wet, 1.0 - smoothstep(2.5, 4.5, _seg(p, wf + Vector2(0, 6.0), wf + Vector2(0, 22.0)).x))
 	var litter := clampf(noise.get_noise_2d(x * 3.0, z * 3.0) + 0.3, 0.0, 1.0)
 	return Color(path, 0.0, wet * 0.8, litter)
+
+## Visual benchmark: photo-scanned CC0 ground and rock layers (Poly Haven forest_ground_04,
+## rocky_terrain_02) over the procedural zoning, and a less saturated, humid-forest grass tone.
+func _photo_ground(m: ShaderMaterial) -> void:
+	m.set_shader_parameter("ground_albedo", load("res://assets/textures/polyhaven/forest_ground_04_diff_1k.jpg"))
+	m.set_shader_parameter("ground_mix", 0.85)
+	m.set_shader_parameter("rock_albedo", load("res://assets/textures/polyhaven/rocky_terrain_02_diff_1k.jpg"))
+	m.set_shader_parameter("rock_mix", 0.75)
+	m.set_shader_parameter("grass_a", Vector3(0.11, 0.16, 0.06))
+	m.set_shader_parameter("grass_b", Vector3(0.17, 0.22, 0.09))
 
 func _disable_blockout_floor(level: Node3D) -> void:
 	var floor_body := level.get_node_or_null("ValleyTerrain/Floor")

@@ -21,6 +21,13 @@ uniform float slope_rock_start = 0.30;
 uniform float wet_global = 0.0;
 // Crisp gravel/pebble breakup on paths (smooth noise alone reads blurry at grazing angles).
 uniform float path_grit = 0.0;
+// Optional photo-scanned layers (CC0 Poly Haven, see ASSET_LICENSES.md). 0 = procedural only.
+uniform sampler2D ground_albedo : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform float ground_mix = 0.0;
+uniform float ground_scale = 0.22; // 1 tile per ~4.5 m
+uniform sampler2D rock_albedo : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform float rock_mix = 0.0;
+uniform float rock_albedo_scale = 0.08;
 
 varying vec3 wpos;
 varying vec3 wnrm;
@@ -96,6 +103,19 @@ void fragment() {
 	vec3 rc = mix(rock_tint * 0.32, rock_tint * 0.72, tone) * (0.85 + 0.3 * n3);
 	rc = mix(rc, grass * 0.8, smoothstep(0.55, 0.8, n2) * up * 0.6);
 	col = mix(col, rc, rm);
+	if (ground_mix > 0.0) {
+		// Two scales of the scan break up tiling; procedural hue keeps grass/soil zoning readable.
+		vec3 g = mix(texture(ground_albedo, wpos.xz * ground_scale).rgb,
+			texture(ground_albedo, wpos.xz * ground_scale * 0.29 + vec2(0.37, 0.11)).rgb, 0.4);
+		float gl = dot(g, vec3(0.333));
+		float soilish = max(pm, lit);
+		vec3 tinted = mix(col * (0.55 + gl * 1.2), g * (0.5 + 0.25 * n3), soilish);
+		col = mix(col, tinted, ground_mix * (1.0 - rm));
+	}
+	if (rock_mix > 0.0) {
+		vec3 r = triplanar(rock_albedo, wpos, wnrm, rock_albedo_scale);
+		col = mix(col, r * (0.7 + 0.5 * tone), rock_mix * rm);
+	}
 	float wet = clamp(COLOR.b + wet_global, 0.0, 1.0);
 	col = mix(col, col * 0.55, wet);
 	col = mix(col, mud, wet * pm * 0.5);
