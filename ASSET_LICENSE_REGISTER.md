@@ -20,3 +20,14 @@
 | `assets/polyhaven/models/rock_moss_set_01/` | https://polyhaven.com/a/rock_moss_set_01 | Kless Gyzen | CC0 1.0 | No | 2026-10-11 |
 | `assets/polyhaven/models/root_cluster_01/` | https://polyhaven.com/a/root_cluster_01 | Jenelle van Heerden, Rico Cilliers | CC0 1.0 | No | 2026-10-11 |
 | `assets/polyhaven/models/rusted_spade_01/` | https://polyhaven.com/a/rusted_spade_01 | Blemonade | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/Barrel_01/` | https://polyhaven.com/a/Barrel_01 | Jorge Camacho | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/barrel_03/` | https://polyhaven.com/a/barrel_03 | Serhii Khromov | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/dead_tree_trunk/` | https://polyhaven.com/a/dead_tree_trunk | Rob Tuytel | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/dry_branches_medium_01/` | https://polyhaven.com/a/dry_branches_medium_01 | Rico Cilliers | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/old_military_compressor/` | https://polyhaven.com/a/old_military_compressor | Brian Speight | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/picke_dirty_01/` | https://polyhaven.com/a/picke_dirty_01 | Dennis Halbeck | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/plastic_crate_03/` | https://polyhaven.com/a/plastic_crate_03 | Pacific Penguin | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/rock_07/` | https://polyhaven.com/a/rock_07 | Jenelle van Heerden | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/rock_09/` | https://polyhaven.com/a/rock_09 | Jenelle van Heerden | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/rock_moss_set_02/` | https://polyhaven.com/a/rock_moss_set_02 | Kless Gyzen | CC0 1.0 | No | 2026-10-11 |
+| `assets/polyhaven/models/wooden_crate_01/` | https://polyhaven.com/a/wooden_crate_01 | James Ray Cock | CC0 1.0 | No | 2026-10-11 |

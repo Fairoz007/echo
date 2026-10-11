@@ -17,6 +17,7 @@ func _ready() -> void:
 	var exploration := preload("res://systems/CampaignExploration.gd").new()
 	add_child(exploration)
 	exploration.configure(9)
+	preload("res://systems/environment/PhotoDressing.gd").apply(self, 9)
 	var campaign_dialogue := preload("res://systems/CampaignDialogue.gd").new()
 	add_child(campaign_dialogue)
 	campaign_dialogue.configure("C09", hud)

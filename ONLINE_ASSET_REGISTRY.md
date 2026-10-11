@@ -44,6 +44,15 @@ Not yet checked: Quaternius, Kenney, Sketchfab (per-model licenses), Fab. Don't 
 Rejected after download as too heavy for real-time use: Island Tree 01 (3.7M polys), Island Tree 02 (1.8M), Jacaranda (210 MB). Old Military Crate was also rejected: its lids lie open and read as floating boards.
 Evidence: `docs/visual_benchmark/camp_gear.jpg`, `camp_edge.jpg`. Fetch script: `scripts/fetch_polyhaven_models.py`.
 
+## Campaign-wide dressing (`systems/environment/PhotoDressing.gd`)
+Added 2026-10-11 for Prologue, Ch2, Ch3, Ch4, Ch7, Ch9, Ch10 and the Finale (Ch1, 5, 6 and 8 already have hand-built dressing).
+- **Sets:** jungle (Ch2), ruins (Ch3, Ch7, Ch9), cave (Prologue, Ch4, Ch10, Finale), and Meridian supply clusters.
+- **Placement:** raycast against real floor collision. It avoids spawn points, triggers and the central corridor, and prefers lit ground in dark levels. Every Meridian cluster brings its own lantern and work lamp.
+- **No collision:** nothing it places has collision, so it can't block progression.
+- **New models:** rock_07, rock_09, rock_moss_set_02, dry_branches_medium_01, dead_tree_trunk, old_military_compressor, plastic_crate_03, wooden_crate_01, Barrel_01, barrel_03, picke_dirty_01.
+- **Placement counts** (`dev/photo_dressing_probe.gd`): Prologue 26+1 cluster, Ch2 46+1, Ch3 34, Ch4 34+3, Ch7 40+2, Ch9 36+3, Ch10 18+1, Finale 40.
+- **Visual result:** clear in Ch3 (ferns flank the bridge-gate approach; same-camera before/after). Limited in the darkest levels (Ch4, Ch7, Prologue), where most of each level is unlit. Those need a lighting pass to show the dressing.
+
 ## Candidates for the next art pass (license OK, not downloaded)
 - Poly Haven `rock_wall_10`, `cliff_side`: cave and cliff variety for Ch4 and Ch7.
 - Poly Haven and ambientCG ground, moss and wet-stone sets for the Ch6 hall and the Ch7 plaza.

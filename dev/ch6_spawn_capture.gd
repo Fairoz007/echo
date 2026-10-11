@@ -25,6 +25,17 @@ func _run() -> void:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--cam="): cam_at = a.substr(6)
 		if a.begins_with("--look="): look_at = a.substr(7)
+	# --aim=PhotoDressing: frame the nth placed dressing prop (verifies what scatter put where).
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--aim="):
+			var parts := a.substr(6).split(":")
+			var holder := lvl.get_node_or_null(parts[0])
+			if holder and holder.get_child_count() > 0:
+				var target := holder.get_child(int(parts[1]) % holder.get_child_count()) as Node3D
+				var tp := target.global_position
+				cam_at = "%f,%f,%f" % [tp.x + 3.5, tp.y + 2.2, tp.z + 3.5]
+				look_at = "%f,%f,%f" % [tp.x, tp.y + 0.5, tp.z]
+				print("AIM ", target.name, " at ", tp)
 	if cam_at != "":
 		var c := cam_at.split_floats(",")
 		var l := look_at.split_floats(",")

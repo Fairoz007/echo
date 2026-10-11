@@ -16,6 +16,7 @@ func _ready() -> void:
 	WindSystem.set_preset(WindSystem.Preset.CAVE, 0.0)
 	soundscape = preload("res://systems/PrologueSoundscape.gd").new()
 	add_child(soundscape)
+	preload("res://systems/environment/PhotoDressing.gd").apply(self, 0)
 	# Register Prologue Objective
 	MissionManager.register_objective("obj_prologue_explore", "Navigate the collapsed subterranean tunnel")
 	

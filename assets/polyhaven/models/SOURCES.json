@@ -147,5 +147,104 @@
   "license": "CC0 1.0",
   "url": "https://polyhaven.com/a/cement_bag",
   "polycount": 844
+ },
+ "rock_07": {
+  "name": "Rock 07",
+  "authors": [
+   "Jenelle van Heerden"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/rock_07",
+  "polycount": 27830
+ },
+ "rock_09": {
+  "name": "Rock 09",
+  "authors": [
+   "Jenelle van Heerden"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/rock_09",
+  "polycount": 23280
+ },
+ "rock_moss_set_02": {
+  "name": "Rock Moss Set 02",
+  "authors": [
+   "Kless Gyzen"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/rock_moss_set_02",
+  "polycount": 57647
+ },
+ "dry_branches_medium_01": {
+  "name": "Dry Branches Medium 01",
+  "authors": [
+   "Rico Cilliers"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/dry_branches_medium_01",
+  "polycount": 16803
+ },
+ "dead_tree_trunk": {
+  "name": "Dead Tree Trunk",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/dead_tree_trunk",
+  "polycount": 101802
+ },
+ "old_military_compressor": {
+  "name": "Old Military Compressor",
+  "authors": [
+   "Brian Speight"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/old_military_compressor",
+  "polycount": 79042
+ },
+ "plastic_crate_03": {
+  "name": "Plastic Crate 03",
+  "authors": [
+   "Pacific Penguin"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/plastic_crate_03",
+  "polycount": 21740
+ },
+ "wooden_crate_01": {
+  "name": "Wooden Crate 01",
+  "authors": [
+   "James Ray Cock"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/wooden_crate_01",
+  "polycount": 6576
+ },
+ "Barrel_01": {
+  "name": "Barrel_01",
+  "authors": [
+   "Jorge Camacho"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/Barrel_01",
+  "polycount": 2682
+ },
+ "barrel_03": {
+  "name": "Barrel 03",
+  "authors": [
+   "Serhii Khromov"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/barrel_03",
+  "polycount": 1473
+ },
+ "picke_dirty_01": {
+  "name": "Picke Dirty 01",
+  "authors": [
+   "Dennis Halbeck"
+  ],
+  "license": "CC0 1.0",
+  "url": "https://polyhaven.com/a/picke_dirty_01",
+  "polycount": 6196
  }
 }
