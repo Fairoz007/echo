@@ -14,8 +14,9 @@ const ROUTES = {
 	2: [["HydraulicPuzzle/SluiceLever/Interactable3D", true], ["Sanctuary/InscriptionTablet/Interactable3D", true], ["QA_TabletBypass", false], ["Sanctuary/AbyssTrigger", false]],
 	3: [["BridgeStructure/CollapseTrigger", false], ["FissureAbyssTrigger", false]],
 	4: [["AbandonedCamp/FieldRadio/Interactable3D", true], ["QA_CampBypass", false], ["ExitTunnel/ExitTrigger", false]],
-	5: [["ObservationPerch/DrakeTrigger", false], ["TempleEntrance/ChapterEndTrigger", false]],
-	6: [["TempleMechanisms/SluiceWheel/Interactable3D", true], ["QA_RampFootGuide", false], ["TempleSanctum/ExitTrigger", false]],
+	# Unified world: Ch6 is staged beyond the gate; walk the aqueduct to its activation volume.
+	5: [["ObservationPerch/DrakeTrigger", false], ["TempleEntrance/ChapterEndTrigger", false], ["/root/Chapter6/Ch5Ch6Aqueduct/QA_AqA", false], ["/root/Chapter6/Ch5Ch6Aqueduct/QA_AqB", false], ["/root/Chapter6/Ch5Ch6Aqueduct/RegionActivation", false]],
+	6: [["Ch5Ch6Aqueduct/QA_Landing", false], ["TempleMechanisms/SluiceWheel/Interactable3D", true], ["QA_RampFootGuide", false], ["TempleSanctum/ExitTrigger", false]],
 	7: [["QA_MonumentBypass", false], ["CentralPlaza/HistoryMural/Interactable3D", true], ["OptionalTomb/TombTrigger", false], ["RoyalCauseway/CausewayExitTrigger", false]],
 	8: [["SurvivorCamp/InjuredElias/Interactable3D", true], ["Passage/AdrianConfrontationTrigger", false]],
 	9: [["CollapsingRoute/TremorTrigger", false], ["VaultThreshold/VaultGateTrigger", false]],

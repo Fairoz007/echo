@@ -20,6 +20,7 @@ const RegionHandoff := preload("res://systems/world/RegionHandoff.gd")
 
 func _ready() -> void:
 	WindSystem.set_preset(WindSystem.Preset.BREEZE, 0.0)
+	RegionHandoff.prepare("res://levels/Chapter6.tscn") # background-loads the temple during Ch5
 	var dressing := preload("res://systems/levelb/Chapter5Dressing.gd").new()
 	add_child(dressing)
 	dressing.build(self)
@@ -74,18 +75,42 @@ func _on_drake_observed(body: Node) -> void:
 			AudioManager.play_story_line("Mara", "Past them. They never knew I was here.", 3.0)
 	if enemies_remaining <= 0 or not was_detected:
 		has_seen_drake = true
-		# Unified world: start streaming the Drowned Temple while Mara heads for its entrance.
-		RegionHandoff.prepare("res://levels/Chapter6.tscn")
+		# Unified world: the Drowned Temple builds beyond the gate while Mara heads for it.
+		_stage_temple()
 		MissionManager.complete_objective("obj_c05_observe_excavation")
 		MissionManager.register_objective("obj_c05_enter_temple", "Enter the submerged Drowned Temple aqueduct")
 		if hud:
 			AudioManager.play_story_line("Drake (Below)", "\"Vale's team found the door. Secure the subterranean aqueduct immediately.\"", 5.0)
 
+var temple: Node3D
+
+## Adds Ch6 beyond the gate, joined by the Meridian aqueduct (Ch5Ch6Aqueduct). Mara walks
+## through; Ch6 activates mid-aqueduct and this region fades out behind her.
+func _stage_temple() -> void:
+	if temple:
+		return
+	# Ch5's painted temple vista beyond the gate is replaced by the real temple.
+	for n in ["LevelBDressing/TempleOverlook", "LevelBDressing/TempleBasinVista"]:
+		var v := get_node_or_null(n) as Node3D
+		if v:
+			v.visible = false
+	var gate := $TempleEntrance as Node3D
+	var hit := get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(gate.global_position + Vector3.UP * 8.0, gate.global_position + Vector3.DOWN * 20.0, 2))
+	var gate_floor: Vector3 = hit.position if hit else gate.global_position
+	const AQUEDUCT := preload("res://systems/world/connectors/Ch5Ch6Aqueduct.gd")
+	temple = RegionHandoff.stage(self, "res://levels/Chapter6.tscn", gate_floor, AQUEDUCT.GATE)
+	temple.built.connect(func():
+		temple.aqueduct.activation_area.body_entered.connect(func(body: Node):
+			if body is Player:
+				# Deferred: activation adds/removes physics objects, not allowed inside this callback.
+				RegionHandoff.activate.call_deferred(self, temple, 6)), CONNECT_ONE_SHOT)
+
+var gate_reached := false
+
 func _on_chapter_end(body: Node) -> void:
-	if body is Player and has_seen_drake and not transition_started:
-		transition_started = true
-		print("[CHAPTER 5] Infiltrated Drowned Temple! Transitioning to Chapter 6.")
+	if body is Player and has_seen_drake and not gate_reached:
+		gate_reached = true
+		print("[CHAPTER 5] Infiltrated Drowned Temple! Entering the aqueduct to Chapter 6.")
 		if hud:
 			AudioManager.play_story_line("Mara", "Water's rushing into the temple basin. Time to dive.", 3.5)
-		# Walk straight onto the temple's entry landing: no card, fade or respawn.
-		RegionHandoff.hand_off(self, 6, "res://levels/Chapter6.tscn", Vector3(0.0, 1.0, 22.5))
+		_stage_temple() # no-op if already staged (e.g. resumed from a save past the perch)

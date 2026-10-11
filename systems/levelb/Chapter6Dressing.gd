@@ -30,8 +30,22 @@ var _spin_target := 0.0
 var cistern_raised := false
 var sc: Node
 
+## Set by Chapter6 when staged by RegionHandoff: build() yields a frame between steps.
+var step_yield := false
+var aqueduct_stone: Material
+
 func _init() -> void:
 	name = "LevelBDressing"
+
+var _step_t := 0
+
+func _step() -> void:
+	if step_yield and is_inside_tree():
+		var now := Time.get_ticks_msec()
+		if _step_t > 0:
+			print("[REGION] Ch6 dressing step %d ms" % (now - _step_t))
+		await get_tree().process_frame
+		_step_t = Time.get_ticks_msec()
 
 func build(level: Node3D) -> void:
 	rng.seed = 606
@@ -48,7 +62,9 @@ func build(level: Node3D) -> void:
 	terrain = TERRAIN.new()
 	terrain.name = "TempleFloor"
 	add_child(terrain)
+	await _step()
 	terrain.build(Vector2(-40, -45), Vector2(85, 80), 0.8, _height, _mask)
+	await _step()
 	var m := terrain.material
 	m.set_shader_parameter("grass_a", Vector3(0.24, 0.26, 0.22))
 	m.set_shader_parameter("grass_b", Vector3(0.3, 0.31, 0.27))
@@ -58,16 +74,26 @@ func build(level: Node3D) -> void:
 	m.set_shader_parameter("rock_tint", Vector3(0.45, 0.46, 0.44))
 	terrain.mesh_instance.add_to_group("wettable")
 	_water()
+	await _step()
 	_architecture()
+	await _step()
 	_machinery(level)
+	await _step()
 	_cistern()
+	await _step()
 	_underwater()
+	await _step()
 	_discoveries()
+	await _step()
 	_lighting(level)
+	await _step()
 	_hero_props()
+	await _step()
 
 func _height(x: float, z: float) -> float:
 	var h := FLOOR_Y
+	if absf(x) < 3.6 and z > 24.0:
+		return FLOOR_Y # trench for the Ch5 aqueduct ramp (roofed by Ch5Ch6Aqueduct)
 	# Flagstone steps rising to dry terraces outside the hall.
 	var outside := maxf(smoothstep(23.0, 26.0, absf(x - 0.0)), smoothstep(25.0, 28.0, z))
 	if CISTERN.x - 6.0 < x and x < CISTERN.x + 6.0 and absf(z - CISTERN.z) < 6.0:
@@ -153,6 +179,8 @@ func _architecture() -> void:
 	for x in [-20.0, -12.0, -4.0, 4.0, 12.0, 20.0]:
 		spans.append([Vector3(x, FLOOR_Y - 0.5, 25.5), -PI / 2])
 	for i in spans.size():
+		if absf(spans[i][0].z - 25.5) < 0.1 and absf(spans[i][0].x) < 5.0:
+			continue # centre south spans replaced by the aqueduct doorway below
 		# Wall model: long axis Z (1.0), height 0.42, thin X; fit 8.2 m long, stretch to ~11 m tall.
 		var w := KIT.place(root, WALL, spans[i][0], 8.2, spans[i][1], Vector3(1.0, 3.2, 1.0), false, "HallWall%02d" % i)
 		if w:
@@ -161,17 +189,32 @@ func _architecture() -> void:
 			w.add_to_group("wettable")
 	# The wall trimesh is one-sided from the hall, so the camera spring arm passed
 	# through it at spawn. Back the south wall with a solid box on the world layer.
-	var south_back := StaticBody3D.new()
-	south_back.name = "SouthWallBacking"
-	south_back.collision_layer = 2
-	south_back.collision_mask = 0
-	root.add_child(south_back)
-	south_back.position = Vector3(0, 1.2, 25.6)
-	var south_shape := CollisionShape3D.new()
-	var south_box := BoxShape3D.new()
-	south_box.size = Vector3(48.0, 11.0, 1.2)
-	south_shape.shape = south_box
-	south_back.add_child(south_shape)
+	# Leaves a 5 m doorway (x -2.5..2.5, up to y 5.0) for the Meridian aqueduct from Ch5.
+	for seg in [[Vector3(-13.25, 1.2, 25.6), Vector3(21.5, 11.0, 1.2)], [Vector3(13.25, 1.2, 25.6), Vector3(21.5, 11.0, 1.2)], [Vector3(0, 5.9, 25.6), Vector3(5.0, 1.8, 1.2)]]:
+		var south_back := StaticBody3D.new()
+		south_back.name = "SouthWallBacking"
+		south_back.collision_layer = 2
+		south_back.collision_mask = 0
+		root.add_child(south_back)
+		south_back.position = seg[0]
+		var south_shape := CollisionShape3D.new()
+		var south_box := BoxShape3D.new()
+		south_box.size = seg[1]
+		south_shape.shape = south_box
+		south_back.add_child(south_shape)
+	# Door frame: carved stone infill either side of the opening, Vaelor pillars and a lintel.
+	for x in [-5.25, 5.25]:
+		var infill := BoxMesh.new()
+		infill.size = Vector3(5.5, 11.0, 1.2)
+		KIT.mesh(root, infill, Transform3D(Basis(), Vector3(x, 1.2, 25.5)), stone, "DoorInfill").add_to_group("wettable")
+	var lintel := BoxMesh.new()
+	lintel.size = Vector3(6.0, 1.8, 1.4)
+	KIT.mesh(root, lintel, Transform3D(Basis(), Vector3(0, 5.9, 25.5)), stone, "DoorLintel").add_to_group("wettable")
+	for x in [-2.9, 2.9]:
+		var p := KIT.place(root, PILLAR, Vector3(x, 1.0, 24.9), 4.6, 0.0, Vector3.ONE, true, "DoorPillar")
+		if p:
+			KIT.override_material(p, stone)
+	aqueduct_stone = stone
 	# Dry entry landing (spawn) at the south wall: Mara starts on stone, steps into the flood.
 	var landing := BoxMesh.new()
 	landing.size = Vector3(8.0, 4.8, 5.0)

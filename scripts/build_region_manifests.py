@@ -9,13 +9,19 @@ import json, re, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ASSET = re.compile(r'"(res://[^"]+\.(?:glb|gltf|png|jpg|jpeg|webp|tres|res|tscn|gdshader|ogg|wav|mp3))"')
 SCRIPT = re.compile(r'"(res://[^"]+\.gd)"')
+DIR_CONST = re.compile(r'const\s+(\w+)\s*(?::=|=)\s*"(res://[^"]*/)"')
+CONCAT = r'\b{name}\s*\+\s*"([^"]+\.(?:glb|gltf|png|jpg|jpeg|webp|tres|res|tscn|gdshader|ogg|wav|mp3))"' 
 
 def scan(gd: pathlib.Path, seen: set, assets: set) -> None:
     if gd in seen or not gd.exists():
         return
     seen.add(gd)
     text = gd.read_text(encoding="utf-8", errors="ignore")
-    for a in ASSET.findall(text):
+    found = list(ASSET.findall(text))
+    # Directory constants joined with file names, e.g. H6 + "ch6_statue_LOD0.glb".
+    for name, prefix in DIR_CONST.findall(text):
+        found += [prefix + f for f in re.findall(CONCAT.format(name=name), text)]
+    for a in found:
         if (ROOT / a[6:]).exists():
             assets.add(a)
     for s in SCRIPT.findall(text):

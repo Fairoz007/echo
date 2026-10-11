@@ -14,14 +14,43 @@ var is_reservoir_drained: bool = false
 var transition_started := false
 
 var dressing
+var aqueduct
+
+## Unified world: set by RegionHandoff.stage() before _ready. The world is then built over
+## several frames while Mara is still in Ch5, and gameplay (objectives, audio, wind, dialogue)
+## waits for activate(), which the aqueduct's RegionActivation area triggers out of sight.
+var staged := false
+var is_active := false
+var is_built := false
+signal activated
+signal built
 
 func _ready() -> void:
-	WindSystem.set_preset(WindSystem.Preset.CAVE, 0.0)
+	if not staged:
+		WindSystem.set_preset(WindSystem.Preset.CAVE, 0.0)
 	dressing = preload("res://systems/levelb/Chapter6Dressing.gd").new()
+	dressing.step_yield = staged
 	add_child(dressing)
-	dressing.build(self)
+	await dressing.build(self)
+	var _t := Time.get_ticks_msec()
+	aqueduct = preload("res://systems/world/connectors/Ch5Ch6Aqueduct.gd").new()
+	add_child(aqueduct)
+	aqueduct.build(dressing.aqueduct_stone)
+	aqueduct.open_to_previous_region(staged)
+	if staged:
+		print("[REGION] Ch6 aqueduct %d ms" % (Time.get_ticks_msec() - _t))
+		await get_tree().process_frame
+		_t = Time.get_ticks_msec()
 	preload("res://systems/environment/EnvironmentCollision.gd").attach(self)
+	if staged:
+		print("[REGION] Ch6 collision %d ms" % (Time.get_ticks_msec() - _t))
+		await get_tree().process_frame
+		_t = Time.get_ticks_msec()
 	preload("res://systems/environment/BlockoutDresser.gd").apply(self)
+	if staged:
+		print("[REGION] Ch6 blockout %d ms" % (Time.get_ticks_msec() - _t))
+		await get_tree().process_frame
+		_t = Time.get_ticks_msec()
 	var exploration := preload("res://systems/CampaignExploration.gd").new()
 	add_child(exploration)
 	exploration.configure(6)
@@ -42,6 +71,13 @@ func _ready() -> void:
 	ramp_shape.shape = ramp_box
 	ramp.add_child(ramp_shape)
 	exploration._place_model(ramp, "res://assets/environment/cave/cave_floor_sediment.glb", Vector3(5, 0.25, 24), Vector3.ZERO)
+	is_built = true
+	if staged:
+		print("[REGION] Ch6 exploration+misc %d ms" % (Time.get_ticks_msec() - _t))
+		built.emit()
+		await activated
+		WindSystem.set_preset(WindSystem.Preset.CAVE, 6.0) # eases in while walking the aqueduct
+	is_active = true
 	var campaign_dialogue := preload("res://systems/CampaignDialogue.gd").new()
 	add_child(campaign_dialogue)
 	campaign_dialogue.configure("C06", hud)
