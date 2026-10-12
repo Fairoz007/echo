@@ -114,3 +114,17 @@ Also checked:
 xvfb-run godot --path . --rendering-method gl_compatibility -s res://dev/map_bake.gd [-- --only=<chapter> --stats]
 godot --headless --path . --import
 ```
+
+## Regression (after the map integration)
+
+| Suite | Result |
+|---|---|
+| `dev/map_test.gd` | 162 passed / 0 failed |
+| `dev/movement_tests.gd` | 54 / 0 failures |
+| `dev/boundary_test.gd` | exit 0 |
+| `dev/region_handoff_test.gd` | exit 0 |
+| `dev/ch7_city_test.gd` | exit 0 |
+| `dev/ch5_stealth_test.gd` | exit 0 |
+| `scripts/qa_story_flow.gd` | exit 0 |
+| `dev/relic_reach_test.gd` | RESULT PASS. Run headless: under xvfb it exceeded my 900 s cap rather than failing. |
+| `scripts/qa_campaign_physical.gd` | **QA PASS**: continuous physical campaign through credits and Main Menu, 1301.6 m |
