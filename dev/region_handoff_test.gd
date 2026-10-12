@@ -95,6 +95,7 @@ func _run() -> void:
 		if e.has_method("die"):
 			e.die()
 	player.current_health = 63.0
+	player.set("_since_hit", -1.0e9) # measure preservation, not regeneration
 	player.set("ammunition", 7)
 	var player_id: int = player.get_instance_id()
 	var hud_id: int = ch5.hud.get_instance_id() if ch5.hud else 0

@@ -1354,6 +1354,7 @@ func _camera_relative(input_dir: Vector2) -> Vector3:
 	return dir.limit_length(1.0)
 
 func _physics_process(delta: float) -> void:
+	_regen(delta)
 	if current_state == State.DEAD:
 		return
 	_refresh_interactable()
@@ -1913,7 +1914,22 @@ func _sfx(sound: String, at: Vector3) -> void:
 	if audio and audio.has_method("play_sfx"):
 		audio.play_sfx(sound, at)
 
+## Out-of-combat recovery: health persists across the connected world, so it regenerates
+## after a quiet spell instead of being refilled at every chapter start.
+const REGEN_DELAY := 6.0
+const REGEN_RATE := 8.0
+var _since_hit := 999.0
+
+func _regen(delta: float) -> void:
+	_since_hit += delta
+	if current_state == State.DEAD or current_health >= max_health or _since_hit < REGEN_DELAY:
+		return
+	current_health = minf(max_health, current_health + REGEN_RATE * delta)
+	health_changed.emit(current_health, max_health)
+
 func take_damage(amount: float, from_dir := Vector3.ZERO) -> void:
+	if amount > 0.0:
+		_since_hit = 0.0
 	if amount >= 1.0 and current_state != State.DEAD:
 		play_hit_reaction(from_dir, clampf(amount / 25.0, 0.7, 1.0))
 	current_health = max(0.0, current_health - amount)
@@ -1967,9 +1983,17 @@ func fire_weapon() -> void:
 	if not camera:
 		return
 	var center := get_viewport().get_visible_rect().size * 0.5
-	var ray_start := camera.project_ray_origin(center)
-	var ray_end := ray_start + camera.project_ray_normal(center) * 90.0
-	var query := PhysicsRayQueryParameters3D.create(ray_start, ray_end, 3, [get_rid()])
+	var ray_origin := camera.project_ray_origin(center)
+	var ray_dir := camera.project_ray_normal(center)
+	# Third-person aim: start the crosshair ray level with Mara, so walls between the camera
+	# and her (camera tucked behind a pillar) don't eat the shot; then fire from her chest to
+	# the aimed point, so what she physically can't see she can't hit either.
+	var chest := global_position + Vector3.UP * 1.3
+	var ray_start := ray_origin + ray_dir * maxf(0.0, (chest - ray_origin).dot(ray_dir))
+	var ray_end := ray_origin + ray_dir * 90.0
+	var aim := get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(ray_start, ray_end, 3, [get_rid()]))
+	var aim_point: Vector3 = aim.position if not aim.is_empty() else ray_end
+	var query := PhysicsRayQueryParameters3D.create(chest, chest + (aim_point - chest).normalized() * (chest.distance_to(aim_point) + 0.2), 3, [get_rid()])
 	var hit := get_world_3d().direct_space_state.intersect_ray(query)
 	if not hit.is_empty():
 		var target = hit.collider

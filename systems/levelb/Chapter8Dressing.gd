@@ -289,8 +289,12 @@ func _spawn_wave(points: Array) -> void:
 		enemies.add_child(e)
 		e.global_position = points[i]
 		e.rotation.y = 0.0
+		# Balanced for the connected world: health now carries over from earlier chapters
+		# (regenerating out of combat) instead of refilling at the chapter start.
 		if "sight_range" in e:
-			e.sight_range = 16.0 + wave * 3.0
+			e.sight_range = 13.0 + wave * 3.0
+		if "attack_damage" in e:
+			e.attack_damage = 10.0
 		alive += 1
 		preload("res://systems/levelb/LBMeridianGear.gd").equip(e, ["rifleman", "heavy", "radio"][(i + wave) % 3])
 		if e.has_signal("enemy_died"):

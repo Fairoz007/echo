@@ -154,3 +154,147 @@ static func _swap_persistent(from: Node3D, next: Node3D) -> void:
 			next.move_child(moving, mini(index, next.get_child_count() - 1))
 		if moving is Node3D:
 			moving.global_transform = xform
+
+## --- In-world chapter progression (no story card, no scene reload, no new Mara) ---------
+const PASSAGE := preload("res://systems/world/SeamlessPassage.gd")
+
+## Walkable boundary: the previous region has an exit passage; when Mara reaches its middle
+## leg the next region is built with an identical entry passage behind its spawn, the old
+## region is rebased so both passages coincide, and the old region is released.
+static func hand_off_passage(from: Node3D, exit_passage: Node3D, chapter: int, scene_path: String) -> Node3D:
+	var tree := from.get_tree()
+	var t0 := Time.get_ticks_usec()
+	prepare(scene_path)
+	var packed := ResourceLoader.load_threaded_get(scene_path) as PackedScene
+	var next := packed.instantiate() as Node3D
+	var own := next.get_node_or_null("Player") as Node3D
+	var spawn: Transform3D = own.transform if own else Transform3D()
+	var t_next := PASSAGE.entry_transform(spawn)
+	# Rebase the old region (rotation included) so its exit passage lands on the entry copy.
+	var delta := t_next * exit_passage.global_transform.affine_inverse()
+	var detached: Array[Node3D] = []
+	for n in from.find_children("*", "Node3D", true, false):
+		if (n as Node3D).top_level:
+			detached.append(n)
+	from.global_transform = delta * from.global_transform
+	for n in detached:
+		n.global_transform = delta * n.global_transform
+	var cam := from.get_node_or_null("CameraController")
+	if cam and "yaw" in cam:
+		cam.yaw += delta.basis.get_euler().y
+	_swap_persistent(from, next)
+	var t1 := Time.get_ticks_usec()
+	tree.root.add_child(next)
+	var t2 := Time.get_ticks_usec()
+	var entry := PASSAGE.create(next, t_next, "EntryPassage")
+	PASSAGE.clear_volume(next, entry, spawn.origin)
+	_finish(from, next, chapter, true)
+	print("[REGION] passage handoff to %s: instantiate %.1f ms, enter+ready %.1f ms, total %.1f ms" % [scene_path, (t1 - t0) / 1000.0, (t2 - t1) / 1000.0, (Time.get_ticks_usec() - t0) / 1000.0])
+	# Late-built region art (deferred dressing) gets the same clearance a moment later.
+	tree.create_timer(1.5).timeout.connect(func(): if is_instance_valid(entry): PASSAGE.clear_volume(next, entry, spawn.origin))
+	return next
+
+## Scripted boundary (a fall, a cinematic, a flashback): short fade on the same Mara.
+static func hand_off_fade(from: Node3D, chapter: int, scene_path: String) -> void:
+	var tree := from.get_tree()
+	prepare(scene_path)
+	var fade := _fade_layer(tree)
+	# Freeze Mara for the fade: a scripted fall would otherwise keep falling (to the kill plane).
+	var frozen := from.get_node_or_null("Player") as Node3D
+	if frozen:
+		frozen.set_physics_process(false)
+		if "velocity" in frozen:
+			frozen.velocity = Vector3.ZERO
+	var tw := fade.create_tween()
+	tw.tween_property(fade.get_child(0), "color:a", 1.0, 0.6)
+	await tw.finished
+	var t0 := Time.get_ticks_usec()
+	var packed := ResourceLoader.load_threaded_get(scene_path) as PackedScene
+	var next := packed.instantiate() as Node3D
+	var own := next.get_node_or_null("Player") as Node3D
+	var spawn: Transform3D = own.transform if own else Transform3D()
+	_swap_persistent(from, next)
+	tree.root.add_child(next)
+	var player := next.get_node_or_null("Player") as Node3D
+	if player:
+		player.global_transform = spawn
+		if "velocity" in player:
+			player.velocity = Vector3.ZERO
+		# A scripted fall ends at the next spawn: forget the fall so landing doesn't hurt.
+		if "_air_peak_fall_speed" in player:
+			player.set("_air_peak_fall_speed", 0.0)
+		player.set_physics_process(true)
+		var cam := next.get_node_or_null("CameraController")
+		if cam:
+			if "yaw" in cam:
+				cam.yaw = spawn.basis.get_euler().y
+			if cam.has_method("snap_to_target"):
+				cam.snap_to_target()
+	_finish(from, next, chapter, false)
+	print("[REGION] fade handoff to %s in %.1f ms" % [scene_path, (Time.get_ticks_usec() - t0) / 1000.0])
+	await tree.process_frame
+	var tw2 := fade.create_tween()
+	tw2.tween_property(fade.get_child(0), "color:a", 0.0, 0.8)
+	tw2.tween_callback(fade.queue_free)
+
+static func _finish(from: Node3D, next: Node3D, chapter: int, keep_old_briefly: bool) -> void:
+	var tree := next.get_tree()
+	GameManager.current_chapter = chapter
+	MissionManager.active_objectives.clear()
+	tree.current_scene = next
+	if keep_old_briefly:
+		for l in from.find_children("*", "DirectionalLight3D", true, false):
+			l.visible = false
+		var tw := next.create_tween().set_parallel(true)
+		for a in from.find_children("*", "AudioStreamPlayer*", true, false):
+			tw.tween_property(a, "volume_db", -60.0, 1.0)
+		tw.chain().tween_callback(from.queue_free)
+	else:
+		from.queue_free()
+	GameManager.chapter_changed.emit(chapter)
+	var player := next.get_node_or_null("Player") as Node3D
+	if player:
+		MissionManager.set_checkpoint("chapter_%02d_start" % chapter, player.global_transform)
+	show_title(tree, chapter)
+
+static func _fade_layer(tree: SceneTree) -> CanvasLayer:
+	var layer := CanvasLayer.new()
+	layer.layer = 90
+	layer.process_mode = Node.PROCESS_MODE_ALWAYS
+	var rect := ColorRect.new()
+	rect.color = Color(0, 0, 0, 0)
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(rect)
+	tree.root.add_child(layer)
+	return layer
+
+## Non-blocking chapter title: fades in over gameplay and out again; no input needed.
+static func show_title(tree: SceneTree, chapter: int) -> void:
+	var cards: Dictionary = load("res://ui/StoryTransition.gd").CARDS
+	var card: Array = cards.get(chapter, [])
+	if card.is_empty():
+		return
+	var layer := CanvasLayer.new()
+	layer.layer = 80
+	layer.name = "ChapterTitle"
+	var box := VBoxContainer.new()
+	box.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	box.position = Vector2(-300, 90)
+	box.custom_minimum_size = Vector2(600, 0)
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for t in [[card[0], 18], [card[1], 40], [card[2], 18]]:
+		var l := Label.new()
+		l.text = t[0]
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		l.add_theme_font_size_override("font_size", t[1])
+		l.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+		box.add_child(l)
+	box.modulate.a = 0.0
+	layer.add_child(box)
+	tree.root.add_child(layer)
+	var tw := box.create_tween()
+	tw.tween_property(box, "modulate:a", 1.0, 0.8)
+	tw.tween_interval(3.0)
+	tw.tween_property(box, "modulate:a", 0.0, 1.2)
+	tw.tween_callback(layer.queue_free)

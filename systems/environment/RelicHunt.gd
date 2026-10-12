@@ -30,12 +30,16 @@ func _place(level: Node3D) -> void:
 	# builds incrementally when staged); validate placement only against the finished world.
 	if "is_built" in level:
 		while is_instance_valid(level) and not level.is_built:
+			if not is_inside_tree():
+				return
 			await get_tree().process_frame
 	# Wait until the level's collision stops changing (procedural rock masses, cave shells and
 	# dressing are added over many frames), up to 10 s.
 	var last := -1
 	var stable := 0
 	for i in 600:
+		if not is_inside_tree():
+			return # region released before placement finished
 		await get_tree().physics_frame
 		if not is_instance_valid(level):
 			return

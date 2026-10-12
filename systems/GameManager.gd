@@ -24,6 +24,7 @@ signal chapter_changed(chapter_num: int)
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().scene_changed.connect(_on_scene_changed)
+	chapter_changed.connect(func(_c): _advancing = false)
 	_pause_menu = preload("res://ui/PauseMenu.gd").new()
 	add_child(_pause_menu)
 	transition = preload("res://ui/StoryTransition.gd").new()
@@ -59,7 +60,25 @@ func start_new_game() -> void:
 		SaveManager.reset_data()
 	_transition_to(0, "res://levels/Prologue.tscn")
 
+## Walkable chapter exits: the S-bend passage starts at this node in the current region.
+## Chapters not listed (falls, cinematics, the flashback) advance with a short fade instead.
+const IN_WORLD_EXITS := {1: "RidgeArea/ChapterEndTrigger", 4: "ExitTunnel/ExitTrigger", 6: "TempleSanctum/ExitTrigger",
+	7: "RoyalCauseway/CausewayExitTrigger", 9: "VaultThreshold/VaultGateTrigger"}
+const RegionHandoff := preload("res://systems/world/RegionHandoff.gd")
+const SeamlessPassage := preload("res://systems/world/SeamlessPassage.gd")
+var _advancing := false
+
 func load_chapter(chapter_num: int, scene_path: String) -> void:
+	# A dead Mara never advances the story: death goes through the checkpoint menu instead
+	# (previously a death during a chapter-ending scene showed the game-over menu and then
+	# loaded the next chapter anyway).
+	if current_state == GameState.GAME_OVER and chapter_num == current_chapter + 1:
+		print("[GAME_MANAGER] Ignored chapter advance while dead")
+		return
+	# During play, finishing a chapter continues in the same world with the same Mara:
+	# no story card, no scene reload, no respawn at a chapter start.
+	if _advance_in_world(chapter_num, scene_path):
+		return
 	_restoring_scene = SaveManager.restore_pending
 	if not _restoring_scene:
 		MissionManager.active_objectives.clear()
@@ -79,6 +98,49 @@ func _transition_to(chapter_num: int, scene_path: String) -> void:
 	change_state(GameState.CREDITS if chapter_num == 12 else GameState.GAMEPLAY)
 	get_tree().paused = false
 
+## A region loaded on its own (new chapter from the menu, continue, checkpoint) still gets the
+## entry passage its predecessor would have joined, sealed at the far end, so the geography
+## and any save position inside the passage stay valid.
+func _ensure_entry_passage(scene: Node) -> void:
+	var prev := current_chapter - 1
+	if not IN_WORLD_EXITS.has(prev) or scene.get_node_or_null("EntryPassage") or not scene is Node3D:
+		return
+	var packed := load(scene.scene_file_path) as PackedScene
+	var spawn := SeamlessPassage.authored_spawn(packed)
+	var entry := SeamlessPassage.create(scene, SeamlessPassage.entry_transform(spawn), "EntryPassage", true)
+	SeamlessPassage.clear_volume(scene, entry, spawn.origin)
+
+func _advance_in_world(chapter_num: int, scene_path: String) -> bool:
+	var scene := get_tree().current_scene as Node3D
+	# Mid-game only: gameplay, or a story cinematic that ends the chapter (e.g. the betrayal).
+	if _advancing or SaveManager.restore_pending or not current_state in [GameState.GAMEPLAY, GameState.CINEMATIC] or transition.is_active():
+		return false
+	if chapter_num != current_chapter + 1 or chapter_num >= 12 or scene == null or scene.get_node_or_null("Player") == null:
+		return false
+	_advancing = true
+	print("[GAME_MANAGER] In-world advance %d -> %d (%s)" % [current_chapter, chapter_num, "passage" if IN_WORLD_EXITS.has(current_chapter) else "fade"])
+	RegionHandoff.prepare(scene_path)
+	var anchor := scene.get_node_or_null(IN_WORLD_EXITS.get(current_chapter, "")) as Node3D if IN_WORLD_EXITS.has(current_chapter) else null
+	if anchor:
+		var at := anchor.global_position
+		# Mara has just stepped on the exit trigger: her floor is the reliable mouth height
+		# (a ray from above can land on raised gates or the level below).
+		var player := scene.get_node("Player") as Node3D
+		if Vector2(player.global_position.x - at.x, player.global_position.z - at.z).length() < 8.0:
+			at.y = player.global_position.y
+		else:
+			var q := PhysicsRayQueryParameters3D.create(at + Vector3.UP * 0.5, at + Vector3.DOWN * 8.0, 3, [(player as CollisionObject3D).get_rid()])
+			var hit := scene.get_world_3d().direct_space_state.intersect_ray(q)
+			if not hit.is_empty():
+				at.y = hit.position.y
+		var passage := SeamlessPassage.create(scene, SeamlessPassage.exit_transform(at, 0.0), "ExitPassage")
+		print("[GAME_MANAGER] exit passage at %s (player %s, scene %s at %s)" % [at, player.global_position, scene.name, scene.global_position])
+		SeamlessPassage.clear_volume(scene, passage, at + Vector3.UP * 0.3)
+		passage.swap_entered.connect(func(): RegionHandoff.hand_off_passage.call_deferred(scene, passage, chapter_num, scene_path), CONNECT_ONE_SHOT)
+	else:
+		RegionHandoff.hand_off_fade(scene, chapter_num, scene_path)
+	return true
+
 func _on_scene_changed() -> void:
 	var scene = get_tree().current_scene
 	if scene and scene.scene_file_path == "res://levels/Epilogue.tscn":
@@ -89,6 +151,7 @@ func _on_scene_changed() -> void:
 					transition.play(13, ""), CONNECT_ONE_SHOT)
 	if not scene or not scene.scene_file_path.begins_with("res://levels/") or current_chapter > 11:
 		return
+	_ensure_entry_passage(scene)
 	if _restoring_scene:
 		_restoring_scene = false
 		return

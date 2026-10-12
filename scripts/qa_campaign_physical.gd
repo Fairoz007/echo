@@ -19,7 +19,7 @@ const ROUTES = {
 	6: [["Ch5Ch6Aqueduct/QA_Landing", false], ["TempleMechanisms/SluiceWheel/Interactable3D", true], ["QA_RampFootGuide", false], ["TempleSanctum/ExitTrigger", false]],
 	# City of Echoes main path: mural, three seals, temple trial, camp fuse, causeway.
 	7: [["QA_MonumentBypass", false], ["CentralPlaza/HistoryMural/Interactable3D", true], ["QA_MonumentBypass", false], ["QA_ScholarCourt", false], ["CityOfEchoes/ScholarsQuarter/Collectible_c07_scholar_1/Interactable3D", true], ["QA_ScholarCourt", false], ["CityOfEchoes/ScholarsQuarter/Collectible_c07_scholar_2/Interactable3D", true], ["QA_ScholarCourt", false], ["CityOfEchoes/ScholarsQuarter/Collectible_c07_scholar_3/Interactable3D", true], ["CityOfEchoes/ScholarsQuarter/LecternUse/Interactable3D", true], ["CityOfEchoes/EchoGardens/Strike_mid/Interactable3D", true], ["CityOfEchoes/EchoGardens/Strike_low/Interactable3D", true], ["CityOfEchoes/EchoGardens/Strike_high/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier0/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier1/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier2/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier3/Interactable3D", true], ["QA_TempleSE", false], ["QA_SanctumDoor", false], ["CityOfEchoes/TempleDistrict/AltarUse/Interactable3D", true], ["QA_SanctumDoor", false], ["QA_TempleNorth", false], ["QA_PlazaSE", false], ["QA_CampNorth", false], ["CityOfEchoes/MeridianForwardCamp/FuseUse/Interactable3D", true], ["QA_GateFront", false], ["RoyalCauseway/CausewayExitTrigger", false]],
-	8: [["SurvivorCamp/InjuredElias/Interactable3D", true], ["Passage/AdrianConfrontationTrigger", false]],
+	8: [["SurvivorCamp/InjuredElias/Interactable3D", true], ["@fight_group:Enemies", false], ["Passage/AdrianConfrontationTrigger", false]],
 	9: [["CollapsingRoute/TremorTrigger", false], ["VaultThreshold/VaultGateTrigger", false]],
 	10: [["QA_NodeSouthBypass", false], ["CentralPlatform/DrakeTrigger", false], ["ResonanceChamber/NodeSouth/Interactable3D", true], ["ResonanceChamber/NodeEast/Interactable3D", true], ["ResonanceChamber/NodeNorth/Interactable3D", true], ["ResonanceChamber/NodeWest/Interactable3D", true], ["CentralPlatform/EscapeTrigger", false]],
 	11: [["DaylightRidge/DaylightExitTrigger", false]]
@@ -79,6 +79,12 @@ func _run() -> void:
 			await _fail("Expected chapter %d before route" % chapter)
 			return
 		print("PHYSICAL ROUTE chapter ", chapter)
+		# Arrived through a seamless passage: walk out of it into the region first.
+		var entry = current_scene.get_node_or_null("EntryPassage")
+		if entry and entry.get_node_or_null("Q7") and player_in_passage(entry):
+			for qi in range(4, 8):
+				if not await _visit("EntryPassage/Q%d" % qi, false):
+					return
 		if chapter == 6:
 			var waypoint = Node3D.new()
 			waypoint.name = "QA_RampFootGuide"
@@ -108,6 +114,20 @@ func _run() -> void:
 			var steps: Array = ROUTES[chapter]
 			var reloaded := false
 			for si in steps.size():
+				if str(steps[si][0]).begins_with("@fight_group:"):
+					if not await _fight_group(str(steps[si][0]).substr(13)):
+						return
+					continue
+				if str(steps[si][0]).begins_with("@fight:"):
+					# Encounter that spawns mid-route (e.g. the Ch8 breach): wait for it, then fight.
+					var epath: String = str(steps[si][0]).substr(7)
+					for w in 900:
+						if current_scene.get_node_or_null(epath):
+							break
+						await physics_frame
+					if current_scene.get_node_or_null(epath) and not await _fight(epath):
+						return
+					continue
 				if not await _visit(steps[si][0], steps[si][1]):
 					return
 				# Leaving the scene after the last step is the normal chapter exit.
@@ -135,6 +155,17 @@ func _run() -> void:
 				current_scene.add_child(wp)
 				wp.position = Vector3(0, -3.5, -11)
 		_stop_moving()
+		# Walkable exits open an S-bend passage once the chapter's exit fires; walk to its
+		# middle leg, where the next region takes over without a scene change.
+		var exit_scene = current_scene
+		for wait in 900:
+			if current_scene != exit_scene or current_scene.get_node_or_null("ExitPassage/Q3"):
+				break
+			await physics_frame
+		if current_scene == exit_scene and current_scene.get_node_or_null("ExitPassage/Q3"):
+			for qi in range(0, 4):
+				if current_scene != exit_scene or not await _visit("ExitPassage/Q%d" % qi, false):
+					break
 		for frame in range(1800):
 			await physics_frame
 			if root.get_node("GameManager").current_chapter == chapter + 1:
@@ -176,6 +207,10 @@ func _visit(path: String, interact: bool, radius: float = 0.9) -> bool:
 	for frame in range(1800):
 		if not is_instance_valid(target) or current_scene != scene:
 			return true
+		# The chapter exit already fired and opened its passage: head for the passage instead.
+		if not interact and target is Area3D and current_scene.get_node_or_null("ExitPassage") and not path.begins_with("ExitPassage"):
+			_stop_moving()
+			return true
 		if player.current_health <= 0.0:
 			await _fail("Mara died while approaching " + path)
 			return false
@@ -215,11 +250,68 @@ func _visit(path: String, interact: bool, radius: float = 0.9) -> bool:
 	await _fail("Cannot physically reach " + path + "; position=" + str(player.global_position))
 	return false
 
-func _fight(path: String) -> bool:
+func player_in_passage(entry: Node3D) -> bool:
+	var player = get_first_node_in_group("player")
+	var local: Vector3 = entry.to_local(player.global_position)
+	return local.z < 0.5 and local.z > -25.0 and local.x > -2.0 and local.x < 6.5
+
+var _shot_clear := true
+
+## Fights every enemy under `parent_path` as they appear (waves), always taking the one Mara
+## can actually see first. Returns once the group stays empty for ~4 s after spawning.
+func _fight_group(parent_path: String) -> bool:
+	var player = get_first_node_in_group("player")
+	var quiet := 0
+	var seen_any := false
+	var stale := 0
+	var last_hp: float = player.current_health
+	for guard in 120:
+		var group = current_scene.get_node_or_null(parent_path)
+		var alive: Array = []
+		if group:
+			alive = group.get_children().filter(func(e): return e is CharacterBody3D and e.current_health > 0.0)
+		if alive.is_empty():
+			quiet += 1
+			if (seen_any and quiet > 4) or quiet > 12:
+				return true
+			await create_timer(1.0).timeout
+			continue
+		quiet = 0
+		seen_any = true
+		var camera = root.get_camera_3d()
+		var space = player.get_world_3d().direct_space_state
+		alive.sort_custom(func(a, b):
+			var va := _visible(space, camera, player, a)
+			var vb := _visible(space, camera, player, b)
+			if va != vb:
+				return va
+			return a.global_position.distance_to(player.global_position) < b.global_position.distance_to(player.global_position))
+		# Enemies that are out of sight and not hurting Mara (e.g. stuck behind a wall) don't
+		# block progress: a player would move on.
+		if not _visible(space, camera, player, alive[0]):
+			stale += 1
+			if stale >= 6 and player.current_health >= last_hp:
+				print("PHYSICAL group: remaining enemies out of sight and harmless, moving on")
+				return true
+		else:
+			stale = 0
+		last_hp = player.current_health
+		# Short bursts, then re-pick: whoever is visible right now is the threat.
+		if not await _fight(str(current_scene.get_path_to(alive[0])), 120, false, 45.0):
+			return false
+	return true
+
+func _visible(space, camera, player, e) -> bool:
+	var q = PhysicsRayQueryParameters3D.create(player.global_position + Vector3.UP * 1.3, e.global_position + Vector3(0, 1.2, 0))
+	q.exclude = [player.get_rid()]
+	var c = space.intersect_ray(q).get("collider")
+	return c == null or c == e or (c is Node and e.is_ancestor_of(c))
+
+func _fight(path: String, max_frames := 600, fail_on_timeout := true, approach := 12.0) -> bool:
 	var enemy = current_scene.get_node_or_null(path)
 	if not enemy:
 		return true
-	if not await _visit(path, false, 12.0):
+	if not await _visit(path, false, approach):
 		return false
 	var player = get_first_node_in_group("player")
 	var pivot = player.camera_pivot
@@ -227,7 +319,7 @@ func _fight(path: String) -> bool:
 		# Mouse look only applies while captured; --headless cannot capture, so aim never moves.
 		await _fail("Mouse not captured (headless?); combat aim cannot be driven. Run with a window (e.g. xvfb-run).")
 		return false
-	for frame in range(600):
+	for frame in range(max_frames):
 		if not is_instance_valid(enemy) or enemy.current_health <= 0.0:
 			_stop_moving()
 			return true
@@ -254,16 +346,25 @@ func _fight(path: String) -> bool:
 		# Ch5 cover (sandbags/crates) can block the shot from the 12 m stop: advance toward
 		# the enemy while line of sight is blocked instead of emptying the magazine into cover.
 		if frame % 10 == 0:
-			var los = PhysicsRayQueryParameters3D.create(camera.global_position, enemy.global_position + Vector3(0, 1.2, 0))
+			var los = PhysicsRayQueryParameters3D.create(player.global_position + Vector3.UP * 1.3, enemy.global_position + Vector3(0, 1.2, 0))
 			los.exclude = [player.get_rid()]
 			var blocker = player.get_world_3d().direct_space_state.intersect_ray(los).get("collider")
 			var clear: bool = blocker == null or blocker == enemy or (blocker is Node and enemy.is_ancestor_of(blocker))
 			Input.action_release("move_forward")
 			if not clear and player.global_position.distance_to(enemy.global_position) > 3.0:
 				Input.action_press("move_forward")
+			_shot_clear = clear
 		Input.action_press("aim")
-		Input.action_press("fire")
+		# Hold fire while cover blocks the shot instead of emptying the magazine into it.
+		if _shot_clear:
+			Input.action_press("fire")
+		else:
+			Input.action_release("fire")
 		await physics_frame
+	if not fail_on_timeout:
+		_stop_moving()
+		Input.action_release("fire")
+		return true
 	await _fail("Patrol enemy could not be defeated using aim/fire input " + path)
 	return false
 
