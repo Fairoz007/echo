@@ -30,6 +30,7 @@ const ACTIONS := [
 	["interact", "Interact", "Actions"],
 	["flashlight", "Flashlight", "Actions"],
 	["journal", "Field journal", "Actions"],
+	["map", "World map", "Actions"],
 	["aim", "Aim", "Combat"],
 	["fire", "Fire", "Combat"],
 	["reload", "Reload", "Combat"],
@@ -43,6 +44,7 @@ const TOGGLEABLE := ["sprint", "crouch", "aim"]
 const RUNTIME_KBM := {
 	"reload": KEY_R, "melee": KEY_Q, "walk": KEY_ALT, "dive": KEY_C,
 	"fire": -MOUSE_BUTTON_LEFT, "aim": -MOUSE_BUTTON_RIGHT, "journal": KEY_J,
+	"map": KEY_M,
 }
 ## Gamepad defaults (Xbox layout). Ints are buttons; [axis, sign] are stick / trigger motions.
 const PAD_DEFAULTS := {
@@ -53,6 +55,7 @@ const PAD_DEFAULTS := {
 	"flashlight": JOY_BUTTON_DPAD_UP, "aim": [JOY_AXIS_TRIGGER_LEFT, 1],
 	"fire": [JOY_AXIS_TRIGGER_RIGHT, 1], "reload": JOY_BUTTON_Y,
 	"melee": JOY_BUTTON_RIGHT_SHOULDER, "journal": JOY_BUTTON_BACK,
+	"map": JOY_BUTTON_DPAD_RIGHT,
 }
 
 var config_path := CONFIG_PATH

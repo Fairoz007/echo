@@ -29,6 +29,7 @@ var _ammo_box: Control
 var _vitals_active_until := 0.0
 var _ammo_active_until := 0.0
 var _player: Node
+var minimap: Control
 
 func _ready() -> void:
 	var root_theme := GameTheme.get_theme()
@@ -142,6 +143,21 @@ func _ready() -> void:
 	(subtitle_label.get_theme_stylebox("normal") as StyleBoxFlat).content_margin_right = 22
 	(subtitle_label.get_theme_stylebox("normal") as StyleBoxFlat).content_margin_top = 10
 	(subtitle_label.get_theme_stylebox("normal") as StyleBoxFlat).content_margin_bottom = 10
+
+	# Mini-map top-right; the objective toast sits to its left so neither covers the other.
+	minimap = preload("res://ui/map/MiniMap.gd").new()
+	minimap.name = "MiniMap"
+	minimap.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	minimap.offset_left = -40.0 - MiniMap.DIAMETER
+	minimap.offset_right = -40.0
+	minimap.offset_top = 30.0
+	minimap.offset_bottom = 30.0 + MiniMap.DIAMETER + 70.0
+	minimap.theme = root_theme
+	add_child(minimap)
+	minimap.attach_nav_overlay(self)
+	move_child(minimap.get_parent().get_node("NavIndicator"), 0)
+	$TopRightMargin.add_theme_constant_override("margin_right", 40 + int(MiniMap.DIAMETER) + 22)
+	$TopRightMargin.offset_left -= MiniMap.DIAMETER + 22.0
 
 	prompt_label.visible = false
 	subtitle_label.visible = false

@@ -1,0 +1,338 @@
+{
+	"bridge": {
+		"layers": [
+			{
+				"cells": 5212.0,
+				"height": "bridge_main_h.png",
+				"id": "main",
+				"image": "bridge_main.png",
+				"kind": "ruins",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Cyclopean Bridge",
+				"y_max": 15.9325857162476,
+				"y_min": -21.7663269042969
+			}
+		],
+		"origin": [
+			-52.3688087463379,
+			-52.0
+		],
+		"res": 0.5,
+		"size": [
+			210.0,
+			208.0
+		],
+		"water": []
+	},
+	"camp_ridge": {
+		"layers": [
+			{
+				"cells": 188465.0,
+				"height": "camp_ridge_main_h.png",
+				"id": "main",
+				"image": "camp_ridge_main.png",
+				"kind": "surface",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Expedition Camp & Eastern Ridge",
+				"y_max": 51.9488487243652,
+				"y_min": -2.19999694824219
+			}
+		],
+		"origin": [
+			-129.0,
+			-129.0
+		],
+		"res": 0.5,
+		"size": [
+			516.0,
+			516.0
+		],
+		"water": []
+	},
+	"caves": {
+		"layers": [
+			{
+				"cells": 57522.0,
+				"height": "caves_main_h.png",
+				"id": "main",
+				"image": "caves_main.png",
+				"kind": "caves",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Cave Network",
+				"y_max": 10.7122573852539,
+				"y_min": -0.0000004768371582
+			}
+		],
+		"origin": [
+			-64.0,
+			-64.0
+		],
+		"res": 0.5,
+		"size": [
+			256.0,
+			256.0
+		],
+		"water": []
+	},
+	"city": {
+		"layers": [
+			{
+				"cells": 129308.0,
+				"height": "city_main_h.png",
+				"id": "main",
+				"image": "city_main.png",
+				"kind": "city",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "City of Echoes",
+				"y_max": 21.9348659515381,
+				"y_min": -0.00000190734863281
+			}
+		],
+		"origin": [
+			-94.0,
+			-94.0
+		],
+		"res": 0.5,
+		"size": [
+			376.0,
+			376.0
+		],
+		"water": []
+	},
+	"escape": {
+		"layers": [
+			{
+				"cells": 57531.0,
+				"height": "escape_main_h.png",
+				"id": "main",
+				"image": "escape_main.png",
+				"kind": "surface",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Final Escape Route",
+				"y_max": 6.31037044525146,
+				"y_min": -0.0000004768371582
+			}
+		],
+		"origin": [
+			-64.0,
+			-64.0
+		],
+		"res": 0.5,
+		"size": [
+			256.0,
+			256.0
+		],
+		"water": []
+	},
+	"heart_road": {
+		"layers": [
+			{
+				"cells": 78189.0,
+				"height": "heart_road_main_h.png",
+				"id": "main",
+				"image": "heart_road_main.png",
+				"kind": "vault",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Heart Road",
+				"y_max": 13.4577379226685,
+				"y_min": -0.0000009536743164
+			}
+		],
+		"origin": [
+			-74.0,
+			-74.0
+		],
+		"res": 0.5,
+		"size": [
+			296.0,
+			296.0
+		],
+		"water": []
+	},
+	"heart_vault": {
+		"layers": [
+			{
+				"cells": 102271.0,
+				"height": "heart_vault_main_h.png",
+				"id": "main",
+				"image": "heart_vault_main.png",
+				"kind": "vault",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Heart Vault",
+				"y_max": 12.0000019073486,
+				"y_min": -0.0000009536743164
+			}
+		],
+		"origin": [
+			-84.0,
+			-84.0
+		],
+		"res": 0.5,
+		"size": [
+			336.0,
+			336.0
+		],
+		"water": []
+	},
+	"meridian": {
+		"layers": [
+			{
+				"cells": 30131.0,
+				"height": "meridian_plateau_h.png",
+				"id": "plateau",
+				"image": "meridian_plateau.png",
+				"kind": "surface",
+				"max": 1000.0,
+				"min": 2.0,
+				"name": "Meridian Plateau",
+				"y_max": 38.2784156799316,
+				"y_min": 2.0
+			},
+			{
+				"cells": 35526.0,
+				"height": "meridian_pit_h.png",
+				"id": "pit",
+				"image": "meridian_pit.png",
+				"kind": "ruins",
+				"max": 2.0,
+				"min": -1000.0,
+				"name": "Excavation Pit",
+				"y_max": 1.99999988079071,
+				"y_min": -10.329833984375
+			}
+		],
+		"origin": [
+			-74.0,
+			-84.5
+		],
+		"res": 0.5,
+		"size": [
+			296.0,
+			317.0
+		],
+		"water": []
+	},
+	"prologue": {
+		"layers": [
+			{
+				"cells": 39929.0,
+				"height": "prologue_main_h.png",
+				"id": "main",
+				"image": "prologue_main.png",
+				"kind": "caves",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Collapsed Tunnel (72 h later)",
+				"y_max": 5.79515647888184,
+				"y_min": -0.25000011920929
+			}
+		],
+		"origin": [
+			-54.0,
+			-54.0
+		],
+		"res": 0.5,
+		"size": [
+			216.0,
+			216.0
+		],
+		"water": []
+	},
+	"ruins": {
+		"layers": [
+			{
+				"cells": 89845.0,
+				"height": "ruins_main_h.png",
+				"id": "main",
+				"image": "ruins_main.png",
+				"kind": "ruins",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Ancient Ruins",
+				"y_max": 17.5027122497559,
+				"y_min": -0.0000009536743164
+			}
+		],
+		"origin": [
+			-79.0,
+			-79.0
+		],
+		"res": 0.5,
+		"size": [
+			316.0,
+			316.0
+		],
+		"water": []
+	},
+	"sanctuary": {
+		"layers": [
+			{
+				"cells": 37650.0,
+				"height": "sanctuary_main_h.png",
+				"id": "main",
+				"image": "sanctuary_main.png",
+				"kind": "city",
+				"max": 1000.0,
+				"min": -1000.0,
+				"name": "Forward Sanctuary",
+				"y_max": 31.8298587799072,
+				"y_min": -0.00000762939453125
+			}
+		],
+		"origin": [
+			-64.0,
+			-74.5
+		],
+		"res": 0.5,
+		"size": [
+			256.0,
+			277.0
+		],
+		"water": []
+	},
+	"temple": {
+		"layers": [
+			{
+				"cells": 15140,
+				"height": "temple_galleries_h.png",
+				"id": "galleries",
+				"image": "temple_galleries.png",
+				"kind": "ruins",
+				"max": 1000.0,
+				"min": 4.0,
+				"name": "Upper Galleries",
+				"y_max": 17.0,
+				"y_min": 4.01156997680664
+			},
+			{
+				"cells": 78206,
+				"height": "temple_submerged_h.png",
+				"id": "submerged",
+				"image": "temple_submerged.png",
+				"kind": "temple",
+				"max": 4.0,
+				"min": -1000.0,
+				"name": "Submerged Halls",
+				"y_max": 3.99999618530273,
+				"y_min": -3.80000305175781
+			}
+		],
+		"origin": [
+			-74.0,
+			-74.0
+		],
+		"res": 0.5,
+		"size": [
+			296,
+			316
+		],
+		"water": []
+	}
+}

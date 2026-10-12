@@ -44,6 +44,8 @@ func reset_data() -> void:
 	game_data.erase("custom_level_state")
 	game_data.erase("enemy_states")
 	game_data.erase("persistent_world")
+	game_data.erase("map")
+	WorldMapManager.reset()
 	MissionManager.active_objectives.clear()
 	MissionManager.completed_objectives.clear()
 	MissionManager.current_checkpoint_id = "cp_start"
@@ -108,6 +110,7 @@ func load_game(slot: int = 0) -> bool:
 		return false
 	game_data = parsed
 	restore_pending = true
+	WorldMapManager.deserialize(parsed.get("map", {}))
 	print("[SAVE] Loaded game slot", slot)
 	return true
 
@@ -144,7 +147,7 @@ func _valid_save(data: Dictionary) -> bool:
 	for coordinate in pos:
 		if not (coordinate is int or coordinate is float) or not is_finite(float(coordinate)):
 			return false
-	for field in ["mission", "progression", "level_state", "mechanisms", "custom_level_state", "enemy_states", "persistent_world"]:
+	for field in ["mission", "progression", "level_state", "mechanisms", "custom_level_state", "enemy_states", "persistent_world", "map"]:
 		if data.has(field) and not data[field] is Dictionary:
 			return false
 	for field in ["health", "stamina", "rotation_y"]:
@@ -200,6 +203,7 @@ func capture_live_state() -> bool:
 		for field in ["current_oxygen", "ammunition", "reserve_ammunition"]:
 			if player.get(field) != null:
 				game_data["player"][field] = player.get(field)
+	game_data["map"] = WorldMapManager.serialize()
 	game_data["mission"] = {"active": MissionManager.active_objectives.duplicate(true), "completed": MissionManager.completed_objectives.duplicate(), "checkpoint": MissionManager.current_checkpoint_id}
 	game_data["progression"] = {"xp": SkillManager.current_xp, "points": SkillManager.available_skill_points, "unlocked": SkillManager.unlocked_skills.duplicate()}
 	var scene = get_tree().current_scene

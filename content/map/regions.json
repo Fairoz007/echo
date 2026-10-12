@@ -1,0 +1,278 @@
+{
+	"layer_kinds": [
+		{
+			"id": "surface",
+			"name": "Surface",
+			"depth": 0
+		},
+		{
+			"id": "ruins",
+			"name": "Upper Ruins",
+			"depth": 1
+		},
+		{
+			"id": "caves",
+			"name": "Cave Network",
+			"depth": 2
+		},
+		{
+			"id": "temple",
+			"name": "Submerged Temple",
+			"depth": 3
+		},
+		{
+			"id": "city",
+			"name": "Lost City",
+			"depth": 4
+		},
+		{
+			"id": "vault",
+			"name": "Heart Vault",
+			"depth": 5
+		}
+	],
+	"regions": [
+		{
+			"id": "prologue",
+			"chapter": 0,
+			"scene": "res://levels/Prologue.tscn",
+			"name": "Collapsed Tunnel (72 h later)",
+			"kind": "caves"
+		},
+		{
+			"id": "camp_ridge",
+			"chapter": 1,
+			"scene": "res://levels/Chapter1.tscn",
+			"name": "Expedition Camp & Eastern Ridge",
+			"kind": "surface",
+			"landmarks": [
+				{
+					"path": "CampArea",
+					"name": "Expedition Camp"
+				},
+				{
+					"path": "RidgeArea",
+					"name": "Eastern Ridge"
+				}
+			]
+		},
+		{
+			"id": "ruins",
+			"chapter": 2,
+			"scene": "res://levels/Chapter2.tscn",
+			"name": "Ancient Ruins",
+			"kind": "ruins",
+			"landmarks": [
+				{
+					"path": "HydraulicPuzzle",
+					"name": "Hydraulic Works"
+				},
+				{
+					"path": "Sanctuary",
+					"name": "Inner Sanctuary"
+				}
+			]
+		},
+		{
+			"id": "bridge",
+			"chapter": 3,
+			"scene": "res://levels/Chapter3.tscn",
+			"name": "Cyclopean Bridge",
+			"kind": "ruins"
+		},
+		{
+			"id": "caves",
+			"chapter": 4,
+			"scene": "res://levels/Chapter4.tscn",
+			"name": "Cave Network",
+			"kind": "caves",
+			"landmarks": [
+				{
+					"path": "AbandonedCamp",
+					"name": "Abandoned Camp"
+				},
+				{
+					"path": "ExitTunnel",
+					"name": "Upper Tunnels"
+				}
+			]
+		},
+		{
+			"id": "meridian",
+			"chapter": 5,
+			"scene": "res://levels/Chapter5.tscn",
+			"name": "Meridian Territory",
+			"kind": "surface",
+			"landmarks": [
+				{
+					"path": "ObservationPerch",
+					"name": "Observation Ledge"
+				},
+				{
+					"path": "TempleEntrance",
+					"name": "Temple Aqueduct"
+				}
+			],
+			"layers": [
+				{
+					"id": "plateau",
+					"name": "Meridian Plateau",
+					"kind": "surface",
+					"min": 2.0,
+					"max": 1000.0
+				},
+				{
+					"id": "pit",
+					"name": "Excavation Pit",
+					"kind": "ruins",
+					"min": -1000.0,
+					"max": 2.0
+				}
+			]
+		},
+		{
+			"id": "temple",
+			"chapter": 6,
+			"scene": "res://levels/Chapter6.tscn",
+			"name": "Drowned Temple",
+			"kind": "temple",
+			"layers": [
+				{
+					"id": "galleries",
+					"name": "Upper Galleries",
+					"kind": "ruins",
+					"min": 4.0,
+					"max": 1000.0
+				},
+				{
+					"id": "submerged",
+					"name": "Submerged Halls",
+					"kind": "temple",
+					"min": -1000.0,
+					"max": 4.0
+				}
+			],
+			"landmarks": [
+				{
+					"path": "TempleMechanisms",
+					"name": "Sluice Turbine"
+				},
+				{
+					"path": "TempleSanctum",
+					"name": "Temple Sanctum"
+				}
+			]
+		},
+		{
+			"id": "city",
+			"chapter": 7,
+			"scene": "res://levels/Chapter7.tscn",
+			"name": "City of Echoes",
+			"kind": "city",
+			"landmarks": [
+				{
+					"path": "CityOfEchoes/PlazaDistrict",
+					"name": "Central Plaza"
+				},
+				{
+					"path": "CityOfEchoes/ScholarsQuarter",
+					"name": "Scholar's Quarter"
+				},
+				{
+					"path": "CityOfEchoes/EchoGardens",
+					"name": "Echo Gardens"
+				},
+				{
+					"path": "CityOfEchoes/TempleDistrict",
+					"name": "Temple District"
+				},
+				{
+					"path": "CityOfEchoes/CollapsedAqueduct",
+					"name": "Collapsed Aqueduct"
+				},
+				{
+					"path": "CityOfEchoes/MeridianForwardCamp",
+					"name": "Meridian Forward Camp"
+				},
+				{
+					"path": "RoyalCauseway",
+					"name": "Royal Causeway"
+				}
+			],
+			"tombs": [
+				{
+					"path": "CityOfEchoes/HallOfWeights",
+					"name": "Hall of Weights"
+				},
+				{
+					"path": "CityOfEchoes/SunkenArchive",
+					"name": "Sunken Archive"
+				},
+				{
+					"path": "CityOfEchoes/ResonantChamber",
+					"name": "Resonant Chamber"
+				}
+			]
+		},
+		{
+			"id": "sanctuary",
+			"chapter": 8,
+			"scene": "res://levels/Chapter8.tscn",
+			"name": "Forward Sanctuary",
+			"kind": "city",
+			"landmarks": [
+				{
+					"path": "SurvivorCamp",
+					"name": "Survivor Camp"
+				}
+			]
+		},
+		{
+			"id": "heart_road",
+			"chapter": 9,
+			"scene": "res://levels/Chapter9.tscn",
+			"name": "Heart Road",
+			"kind": "vault",
+			"landmarks": [
+				{
+					"path": "CollapsingRoute",
+					"name": "Seismic Fractures"
+				},
+				{
+					"path": "VaultThreshold",
+					"name": "Vault Threshold"
+				}
+			]
+		},
+		{
+			"id": "heart_vault",
+			"chapter": 10,
+			"scene": "res://levels/Chapter10.tscn",
+			"name": "Heart Vault",
+			"kind": "vault",
+			"landmarks": [
+				{
+					"path": "CentralPlatform",
+					"name": "Harmonic Platform"
+				},
+				{
+					"path": "ResonanceChamber",
+					"name": "Resonance Chamber"
+				}
+			]
+		},
+		{
+			"id": "escape",
+			"chapter": 11,
+			"scene": "res://levels/Finale.tscn",
+			"name": "Final Escape Route",
+			"kind": "surface",
+			"landmarks": [
+				{
+					"path": "DaylightRidge",
+					"name": "Daylight"
+				}
+			]
+		}
+	]
+}

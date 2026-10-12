@@ -25,6 +25,7 @@ SkillManager="*res://systems/SkillManager.gd"
 GraphicsSettings="*res://systems/GraphicsSettings.gd"
 MaraAppearance="*res://systems/MaraAppearance.gd"
 InputRemap="*res://systems/InputRemap.gd"
+WorldMapManager="*res://systems/map/WorldMapManager.gd"
 
 [display]
 

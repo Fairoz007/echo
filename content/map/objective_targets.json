@@ -1,0 +1,97 @@
+{
+	"_note": "Objective id -> level-relative node paths the objective points at. Several paths = several markers (each hidden once its node is gone or disabled). Empty = objective has no physical location (e.g. a radio call).",
+	"obj_prologue_explore": [
+		"ExitTrigger"
+	],
+	"obj_prologue_exit": [
+		"ExitTrigger"
+	],
+	"obj_c01_meet_team": [
+		"CampArea/EliasNPC"
+	],
+	"obj_c01_inspect_map": [
+		"CampArea/SurveyTable"
+	],
+	"obj_c01_reach_ridge": [
+		"RidgeArea/SealedPortal"
+	],
+	"obj_c01_investigate_gate": [],
+	"obj_c02_open_gate": [
+		"HydraulicPuzzle/SluiceLever"
+	],
+	"obj_c02_explore_sanctuary": [
+		"Sanctuary/InscriptionTablet"
+	],
+	"obj_c02_investigate_abyss": [
+		"Sanctuary/AbyssTrigger"
+	],
+	"obj_c03_cross_bridge": [
+		"FissureAbyssTrigger"
+	],
+	"obj_c04_find_way": [
+		"AbandonedCamp/FieldRadio"
+	],
+	"obj_c04_reach_outpost": [
+		"ExitTunnel/ExitTrigger"
+	],
+	"obj_c05_neutralize_patrol": [
+		"ObservationPerch/DrakeTrigger"
+	],
+	"obj_c05_observe_excavation": [
+		"ObservationPerch/DrakeTrigger"
+	],
+	"obj_c05_enter_temple": [
+		"TempleEntrance/ChapterEndTrigger"
+	],
+	"obj_c06_drain_temple": [
+		"TempleMechanisms/SluiceWheel"
+	],
+	"obj_c06_reach_city_passage": [
+		"TempleSanctum/ExitTrigger"
+	],
+	"obj_c07_explore_city": [
+		"CentralPlaza/HistoryMural"
+	],
+	"obj_c08_reunite_expedition": [
+		"SurvivorCamp/InjuredElias"
+	],
+	"obj_c08_pursue_adrian": [
+		"Passage/AdrianConfrontationTrigger"
+	],
+	"obj_c09_cross_heart_road": [
+		"VaultThreshold/VaultGateTrigger"
+	],
+	"obj_c10_confront_drake": [
+		"CentralPlatform/DrakeTrigger"
+	],
+	"obj_c10_disable_nodes": [
+		"ResonanceChamber/NodeSouth/Interactable3D",
+		"ResonanceChamber/NodeEast/Interactable3D",
+		"ResonanceChamber/NodeNorth/Interactable3D",
+		"ResonanceChamber/NodeWest/Interactable3D"
+	],
+	"obj_c10_escape_mountain": [
+		"CentralPlatform/EscapeTrigger"
+	],
+	"obj_finale_escape": [
+		"DaylightRidge/DaylightExitTrigger"
+	],
+	"obj_c07_seal_scholar": [
+		"CityOfEchoes/ScholarsQuarter/LecternUse"
+	],
+	"obj_c07_seal_garden": [
+		"CityOfEchoes/EchoGardens/Strike_mid"
+	],
+	"obj_c07_seal_temple": [
+		"CityOfEchoes/TempleDistrict/AltarUse"
+	],
+	"obj_c07_cut_fuse": [
+		"CityOfEchoes/MeridianForwardCamp/FuseUse"
+	],
+	"obj_c07_cross_causeway": [
+		"RoyalCauseway/CausewayExitTrigger"
+	],
+	"obj_c08_hold_refuge": [
+		"Passage/AdrianConfrontationTrigger"
+	]
+}

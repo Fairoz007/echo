@@ -18,6 +18,7 @@ var _pause_menu: CanvasLayer
 var transition: CanvasLayer
 var journal_screen: CanvasLayer
 
+var world_map: CanvasLayer
 signal state_changed(new_state: GameState)
 signal chapter_changed(chapter_num: int)
 
@@ -31,6 +32,8 @@ func _ready() -> void:
 	add_child(transition)
 	journal_screen = preload("res://ui/JournalScreen.gd").new()
 	add_child(journal_screen)
+	world_map = preload("res://ui/map/WorldMap.gd").new()
+	add_child(world_map)
 	print("[GAME_MANAGER] Initialized. Engine version:", Engine.get_version_info().string)
 
 func change_state(new_state: GameState) -> void:
