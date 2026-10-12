@@ -62,6 +62,12 @@ func _run() -> void:
 		await _swim()
 		quit()
 		return
+	if "--only-walk" in OS.get_cmdline_user_args():
+		await _idle()
+		await _gait("walk", "side")
+		await _gait("walk", "front")
+		quit()
+		return
 	if "--only-run" in OS.get_cmdline_user_args():
 		await _gait("run", "side")
 		quit()
@@ -94,6 +100,8 @@ func _gait(gait: String, view: String) -> void:
 	Input.action_press("move_forward")
 	if gait == "sprint":
 		Input.action_press("sprint")
+	elif gait == "walk":
+		Input.action_press("walk")
 	await _frames(40)
 	# Camera: front = looking back at her face, side = from her left.
 	view_off = Vector3(4.0, 0.2, 0) if view == "front" else Vector3(0, 0.2, 4.0)
@@ -131,6 +139,18 @@ func _gait(gait: String, view: String) -> void:
 		+ " at_min: " + min_info)
 	_release()
 	await _frames(30)
+
+func _idle() -> void:
+	_release()
+	p.global_position = course.lane_start("flat") + Vector3(-34, 0, 0)
+	p.velocity = Vector3.ZERO
+	p.facing_yaw = -PI * 0.5
+	await _frames(60)
+	view_off = Vector3(2.4, 0.4, 2.4)
+	for i in 10:
+		await _frames(30)
+		_track()
+		await _shot("idle_q_f%02d" % i)
 
 func _uneven() -> void:
 	_release()

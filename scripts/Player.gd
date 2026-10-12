@@ -753,6 +753,14 @@ func _apply_crouch_pose() -> void:
 @export var hit_reaction_deg := 18.0
 @export var turn_lead_deg := 22.0 ## max upper-body lead into a standing turn
 var _breath_t := 0.0
+var _idle_life_t := 0.0
+var _walk_w := 0.0
+var _walk_peak := 0.1
+@export var idle_sway_deg := 1.6 ## slow weight shift of the pelvis/torso (idle clip is fully static)
+@export var walk_arm_swing_deg := 14.0 ## extra arm swing on top of the walk clip's ~20 deg
+@export var walk_elbow_bend_deg := 20.0
+@export var walk_torso_twist_deg := 5.0
+@export var arm_relax_deg := 12.0
 var _land_squash := 0.0
 var _land_squash_t := 9.0
 var _hit_t := 9.0
@@ -843,6 +851,63 @@ func _apply_body_layers() -> void:
 		hp2.origin += push * 0.04 * hw * inv_scale
 		hp2.origin.y -= 0.03 * hw * inv_scale
 		_set_global_pose(hip, hp2)
+	# 5. Idle life: the idle clip has zero motion on every bone, so add a slow weight shift
+	# (pelvis roll + counter torso), a drifting head and relaxed arm sway on incommensurate periods.
+	_idle_life_t += dt
+	if calm > 0.01:
+		var t := _idle_life_t
+		var shift := sin(t * TAU / 7.3) * 0.7 + sin(t * TAU / 3.1) * 0.3
+		var sway := deg_to_rad(idle_sway_deg) * calm
+		_rotate_bone_global(hip, Vector3(1, 0, 0), shift * sway)
+		var hp3 := _skeleton.get_bone_global_pose(hip)
+		hp3.origin.z += shift * 0.012 * calm * inv_scale
+		_set_global_pose(hip, hp3)
+		_rotate_bone_global(spine, Vector3(1, 0, 0), -shift * sway * 1.4)
+		var head3 := _skeleton.find_bone("Head")
+		if head3 >= 0:
+			_rotate_bone_global(head3, Vector3.UP, deg_to_rad(4.0) * sin(t * TAU / 9.7) * calm)
+			_rotate_bone_global(head3, lateral, deg_to_rad(1.5) * sin(t * TAU / 5.3 + 1.0) * calm)
+		for side in ["L_", "R_"]:
+			var ua := _skeleton.find_bone(side + "Upperarm")
+			var fa := _skeleton.find_bone(side + "Forearm")
+			var sg := 1.0 if side == "L_" else -1.0
+			if ua >= 0:
+				_rotate_bone_global(ua, lateral, deg_to_rad(2.0) * sin(t * TAU / 4.1 + sg) * calm)
+			if fa >= 0:
+				_rotate_bone_global(fa, lateral, deg_to_rad(8.0 + 2.0 * sin(t * TAU / 6.1 + sg)) * calm)
+	# 5b. Relax the arms in from the rig's A-pose toward the thighs (idle and walk).
+	var relax := maxf(calm, _walk_w)
+	if relax > 0.01:
+		for side in ["L_", "R_"]:
+			var ua3 := _skeleton.find_bone(side + "Upperarm")
+			if ua3 < 0:
+				continue
+			var out3 := 1.0 if _skeleton.get_bone_global_pose(ua3).origin.z > 0.0 else -1.0
+			_rotate_bone_global(ua3, Vector3(1, 0, 0), out3 * deg_to_rad(arm_relax_deg) * relax)
+	# 6. Walk: the walk clip swings arms only ~20 deg with a 4 deg spine; add a leg-phase-locked
+	# swing with a soft elbow and a shoulder/pelvis counter-twist. Fades out as the run posture takes over.
+	var walking := is_on_floor() and current_state in [State.WALK, State.RUN, State.CROUCH] and horizontal_speed > 0.4
+	_walk_w = move_toward(_walk_w, clampf((horizontal_speed - 0.4) / 0.6, 0.0, 1.0) * (1.0 - _posture_w) if walking else 0.0, dt * 4.0)
+	var lf2 := _skeleton.find_bone("L_Foot")
+	var rf2 := _skeleton.find_bone("R_Foot")
+	if _walk_w > 0.01 and lf2 >= 0 and rf2 >= 0:
+		var diff2 := _skeleton.get_bone_global_pose(rf2).origin.x - _skeleton.get_bone_global_pose(lf2).origin.x
+		_walk_peak = maxf(maxf(absf(diff2), _walk_peak - dt * 0.05), _leg_length * 0.15)
+		var ph := clampf(diff2 / _walk_peak, -1.0, 1.0)
+		var ww := _walk_w
+		if spine2 >= 0:
+			_rotate_bone_global(spine2, Vector3.UP, -deg_to_rad(walk_torso_twist_deg) * ph * ww)
+		_rotate_bone_global(hip, Vector3.UP, deg_to_rad(walk_torso_twist_deg) * 0.6 * ph * ww)
+		for side in ["L_", "R_"]:
+			var ua2 := _skeleton.find_bone(side + "Upperarm")
+			var fa2 := _skeleton.find_bone(side + "Forearm")
+			var sg2 := 1.0 if side == "L_" else -1.0
+			var sw := deg_to_rad(walk_arm_swing_deg) * ph * sg2 * ww
+			# Positive rotation about +Z (lateral) pitches the arm forward (+X) in skeleton space.
+			if ua2 >= 0:
+				_rotate_bone_global(ua2, lateral, sw * (0.45 if sw > 0.0 else 1.0))
+			if fa2 >= 0:
+				_rotate_bone_global(fa2, lateral, deg_to_rad(walk_elbow_bend_deg) * (1.0 + 0.6 * maxf(ph * sg2, 0.0)) * ww)
 	# 4. Turn in place: the upper body leads into the turn (head, then chest, then hips).
 	if _turn_w > 0.01:
 		var lead := clampf(_turn_diff, -deg_to_rad(turn_lead_deg), deg_to_rad(turn_lead_deg)) * _turn_w
