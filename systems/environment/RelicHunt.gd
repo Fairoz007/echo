@@ -141,7 +141,7 @@ func _floor(space: PhysicsDirectSpaceState3D, from: Vector3, bottom: float) -> D
 		q.from = hit.position + Vector3.DOWN * 0.05
 		hit = space.intersect_ray(q)
 		guard += 1
-	if hit.is_empty() or hit.normal.y < 0.85 or hit.collider is CharacterBody3D:
+	if hit.is_empty() or hit.normal.y < 0.85 or hit.collider is CharacterBody3D or hit.collider.get_meta("no_dressing", false):
 		return {}
 	return hit
 

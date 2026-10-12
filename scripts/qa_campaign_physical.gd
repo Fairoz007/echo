@@ -17,7 +17,8 @@ const ROUTES = {
 	# Unified world: Ch6 is staged beyond the gate; walk the aqueduct to its activation volume.
 	5: [["ObservationPerch/DrakeTrigger", false], ["TempleEntrance/ChapterEndTrigger", false], ["/root/Chapter6/Ch5Ch6Aqueduct/QA_AqA", false], ["/root/Chapter6/Ch5Ch6Aqueduct/QA_AqB", false], ["/root/Chapter6/Ch5Ch6Aqueduct/RegionActivation", false]],
 	6: [["Ch5Ch6Aqueduct/QA_Landing", false], ["TempleMechanisms/SluiceWheel/Interactable3D", true], ["QA_RampFootGuide", false], ["TempleSanctum/ExitTrigger", false]],
-	7: [["QA_MonumentBypass", false], ["CentralPlaza/HistoryMural/Interactable3D", true], ["OptionalTomb/TombTrigger", false], ["RoyalCauseway/CausewayExitTrigger", false]],
+	# City of Echoes main path: mural, three seals, temple trial, camp fuse, causeway.
+	7: [["QA_MonumentBypass", false], ["CentralPlaza/HistoryMural/Interactable3D", true], ["QA_MonumentBypass", false], ["QA_ScholarCourt", false], ["CityOfEchoes/ScholarsQuarter/Collectible_c07_scholar_1/Interactable3D", true], ["QA_ScholarCourt", false], ["CityOfEchoes/ScholarsQuarter/Collectible_c07_scholar_2/Interactable3D", true], ["QA_ScholarCourt", false], ["CityOfEchoes/ScholarsQuarter/Collectible_c07_scholar_3/Interactable3D", true], ["CityOfEchoes/ScholarsQuarter/LecternUse/Interactable3D", true], ["CityOfEchoes/EchoGardens/Strike_mid/Interactable3D", true], ["CityOfEchoes/EchoGardens/Strike_low/Interactable3D", true], ["CityOfEchoes/EchoGardens/Strike_high/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier0/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier1/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier2/Interactable3D", true], ["CityOfEchoes/TempleDistrict/Brazier3/Interactable3D", true], ["QA_TempleSE", false], ["QA_SanctumDoor", false], ["CityOfEchoes/TempleDistrict/AltarUse/Interactable3D", true], ["QA_SanctumDoor", false], ["QA_TempleNorth", false], ["QA_PlazaSE", false], ["QA_CampNorth", false], ["CityOfEchoes/MeridianForwardCamp/FuseUse/Interactable3D", true], ["QA_GateFront", false], ["RoyalCauseway/CausewayExitTrigger", false]],
 	8: [["SurvivorCamp/InjuredElias/Interactable3D", true], ["Passage/AdrianConfrontationTrigger", false]],
 	9: [["CollapsingRoute/TremorTrigger", false], ["VaultThreshold/VaultGateTrigger", false]],
 	10: [["QA_NodeSouthBypass", false], ["CentralPlatform/DrakeTrigger", false], ["ResonanceChamber/NodeSouth/Interactable3D", true], ["ResonanceChamber/NodeEast/Interactable3D", true], ["ResonanceChamber/NodeNorth/Interactable3D", true], ["ResonanceChamber/NodeWest/Interactable3D", true], ["CentralPlatform/EscapeTrigger", false]],
@@ -84,14 +85,18 @@ func _run() -> void:
 			current_scene.add_child(waypoint)
 			waypoint.position = Vector3(0, -3.5, -11)
 		# Guides steer around solid props that now sit on straight-line routes.
-		var guides := {10: [["QA_NodeSouthBypass", Vector3(2.6, 0, 18)]], 2: [["QA_TabletBypass", Vector3(2.4, 0, -26.5)]], 4: [["QA_CampBypass", Vector3(2.8, 0, -1.5)]], 7: [["QA_MonumentBypass", Vector3(3.8, 0, 0.5)]]}
+		var guides := {10: [["QA_NodeSouthBypass", Vector3(2.6, 0, 18)]], 2: [["QA_TabletBypass", Vector3(2.4, 0, -26.5)]], 4: [["QA_CampBypass", Vector3(2.8, 0, -1.5)]], 7: [["QA_MonumentBypass", Vector3(3.8, 0, 0.5)], ["QA_ScholarCourt", Vector3(-13, 0, 21)], ["QA_TempleSE", Vector3(-6.3, 0, -18.5)], ["QA_SanctumDoor", Vector3(-7.0, 0, -12)], ["QA_CampNorth", Vector3(6.6, 0, -12)], ["QA_TempleNorth", Vector3(-7, 0, -9.2)], ["QA_PlazaSE", Vector3(6.6, 0, -9.2)], ["QA_GateFront", Vector3(0, 0, -23.5)], ["QA_CampFight", Vector3(3.5, 0, -10.0)]]}
 		for g in guides.get(chapter, []):
 			var guide = Node3D.new()
 			guide.name = g[0]
 			current_scene.add_child(guide)
 			guide.position = g[1]
-		if chapter == 5:
-			for enemy_path in ["Enemies/EnemyMercenary1", "Enemies/EnemyMercenary2"]:
+		var fights := {5: ["Enemies/EnemyMercenary1", "Enemies/EnemyMercenary2"],
+			7: ["CityOfEchoes/MeridianForwardCamp/CampMercenary1", "CityOfEchoes/MeridianForwardCamp/CampMercenary2", "CityOfEchoes/MeridianForwardCamp/CampMercenary3"]}
+		if chapter == 7 and not (await _visit("QA_MonumentBypass", false) and await _visit("QA_CampFight", false)):
+			return # engage the camp from open ground, not across the plaza mural
+		if fights.has(chapter):
+			for enemy_path in fights[chapter]:
 				if not await _fight(enemy_path):
 					return
 		# If the chapter scene is reloaded mid-route (quick-load / checkpoint restart), _visit

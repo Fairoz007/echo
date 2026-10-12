@@ -15,7 +15,8 @@
 | Optional dial tombs (30 across Ch1–Ch10) | 0.5–1 h | Same template every time, 1–2 min each |
 | Collectibles (Ch1, 5, 6, 8 documents) | 0.1–0.2 h | 2 per dressed chapter |
 | **Resonance shards (new, 57 across 12 chapters)** | **0.5–1 h** | A 5–36 m detour each, 30–60 s including reading |
-| **Total** | **≈ 2.3–4 h** | **About 16–18 hours short of 20** |
+| **Ch7 City of Echoes expansion (new): 6 districts, 3 seals, camp, 3 tombs, aqueduct** | **0.8–1.5 h** | Not measured. Rough per-activity guesses: investigation 8–12 min, hymn 5–8, brazier trial 5–10, camp 5–10, three tombs 6–12 each, aqueduct 4–6, plus exploration. **PlaytimeTracker now records real per-district active time, to `user://playtime_c07.json`.** |
+| **Total** | **≈ 3–5.5 h** | **About 15–17 hours short of 20** |
 
 ## Resonance shards (added 2026-10-11)
 - **System:** `systems/environment/RelicHunt.gd`. Lore is in `content/relic_shards.json`: five fragments per chapter that tell the Vaelor story in order.
@@ -26,7 +27,7 @@
 ## Plan toward 20 hours (content, not padding)
 | Priority | Work | Est. added play |
 |---|---|---|
-| 1 | **Ch7 City of Echoes hub:** 6 districts, each with an objective, a puzzle or encounter, and a landmark | 2–3 h |
+| 1 | ~~Ch7 City of Echoes hub~~: **first pass done 2026-10-12** (`CHAPTER7_CITY_REPORT.md`). Next: visual polish, more encounters and a human playtest | — |
 | 2 | **Replace the 30 identical dial tombs** with 5 distinct mechanics (water level, counterweight, pressure sequence, resonance tuning, light beam), 2–4 min each | 1.5–2.5 h |
 | 3 | **Combat and stealth encounters in Ch4, 7, 8, 9 and 10** (EnemyBase and takedowns already exist), 2–3 per chapter | 1.5–2.5 h |
 | 4 | **Seamless world:** convert the remaining 11 chapter boundaries into walkable connectors with small encounters | 1–1.5 h |

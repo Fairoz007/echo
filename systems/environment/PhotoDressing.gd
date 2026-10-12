@@ -160,7 +160,7 @@ static func _probe(space: PhysicsDirectSpaceState3D, bounds: AABB, avoid: Array[
 		q.from = hit.position + Vector3.DOWN * 0.05
 		hit = space.intersect_ray(q)
 		guard += 1
-	if hit.is_empty() or hit.normal.y < 0.82:
+	if hit.is_empty() or hit.normal.y < 0.82 or hit.collider.get_meta("no_dressing", false):
 		return {}
 	for a in avoid:
 		if Vector2(a.x - x, a.z - z).length() < 4.0:
